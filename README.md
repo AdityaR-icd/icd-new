@@ -21,7 +21,21 @@ To run the Next Application in Production mode run the command\
 
 1. To create new pages in your application go to create pages inside /pages folder
 
-2. In /lib/api.js change api url and bearer token with your api and token for this following steps are written in backend documents
+2. In /lib/api.js change api url and bearer token with your api and token to get access
+
+3. open wordpress admin with 
+    username : admin
+    password : icd123
+
+4. To obtain graphql endpoint open GrahQL settings you can get graphql endpoint from their
+
+5. To obtain auth token open graphql playground and run the following mutation
+    mutation MyMutation {
+        login(input: {password: "{wordpress-password}", username: "{wordpress-username}"}) {
+        authToken
+        refreshToken
+    }
+}
     
 
 
