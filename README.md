@@ -27,7 +27,7 @@ To run the Next Application in Production mode run the command\
     username : admin
     password : icd123
 
-4. To obtain graphql endpoint open GrahQL settings you can get endpoint from their
+4. To obtain graphql endpoint open GrahQL settings you can get graphql endpoint from their
 
 5. To obtain auth token open graphql playground and run the following mutation
     mutation MyMutation {
