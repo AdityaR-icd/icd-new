@@ -2,21 +2,17 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import parse from 'html-react-parser';
-import { Contact, getServicePage } from '../lib/api'
-import { getJobs } from '../lib/api'
-import  Enquiry  from '../components/enquiry/enquiry'
+import { getOurteamPage , getTeam } from '../lib/api'
 import { join } from 'lodash';
 
 
-export default function careers({data : { pages } , jobs : { edges } }) {
-
-
+export default function careers({data : { pages } , team : {edges}}) {
     return (
         <><>
         <div>
             {(pages.edges).map(({ node }) => (
                 <>
-                    {/* <h4>{node.name}</h4> */}
+                    <h4>{node.title}</h4>
                     {parse(node.content)}
                 </>
             ))}
@@ -29,18 +25,18 @@ export default function careers({data : { pages } , jobs : { edges } }) {
                 </>
             ))}
             </div>
-        </><Enquiry /></>
+        </></>
     )
 }
 
 
 export async function getStaticProps() {
-    const data = await getServicePage()
-    const jobs = await getJobs()
+    const data = await getOurteamPage()
+    const team = await getTeam()
     return {
         props: { 
         data,
-        jobs
+        team
         },
         revalidate: 1, 
     }

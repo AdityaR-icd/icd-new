@@ -2,7 +2,7 @@
 /* Global Fonts */
 /* Global Colors */
  header {
-	 position: fixed;
+	 /* position: fixed; */
 	 margin: auto;
 	 left: 0;
 	 right: 0;
@@ -171,8 +171,16 @@
 }
  @media (max-width: 991px) {
 	 header .logo {
-		 max-width: 48px;
+		 /* max-width: 48px; */
 		 margin: 18px 0 0 0 !important;
+	}
+
+	.nav-menu{
+		display: none;
+	}
+
+	.nav-menu.is-active{
+		display: block;
 	}
 }
  header .expand {

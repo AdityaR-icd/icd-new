@@ -99,7 +99,15 @@ $overlaybg-color: rgba(31,31,31,0.5);
   @media (min-width: 1600px) { @content; }
 }
 
+.d-block{
+  display: block;
+}
 
+@media (min-width: 992px){
+  .d-lg-none {
+    display: none!important;
+  }
+}
 
 // // for container width 1920px and 80px padding on sides
 // @mixin for-extra-large-desktop-up {
@@ -620,6 +628,7 @@ input::-ms-clear {
   // for mobile and tablet (upto 1280px)
     margin-right: -16px;
     margin-left: -16px;
+    overflow: hidden;
 
   // for tablet horizontal
   @include for-tablet-landscape-up {
@@ -830,6 +839,19 @@ a{
 .bg-yellow , 
 .bg-yellow .menu-cont{
   background: $color-yellow;
+}
+
+.menu-cont{
+
+  .col-10{
+    width: 50%;
+    float: left;
+  }
+
+  .col-2{
+    width: 30%;
+    float: right;
+  }
 }
 
 .bg-yellow{

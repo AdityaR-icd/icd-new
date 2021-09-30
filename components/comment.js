@@ -23,7 +23,7 @@ export default function Contact({ postId , comment_data }) {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault()
-    const data = await comment (message , post_id)
+    const data = await comment (message , post_id , name , email)
 
     if (data) {
       window.location.reload(false);
@@ -33,7 +33,7 @@ export default function Contact({ postId , comment_data }) {
   return (
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>Contact us</h1>
+          <h1 className={styles.title}>Leave a comment</h1>
           <hr />
 
           <form onSubmit={handleSubmit}>

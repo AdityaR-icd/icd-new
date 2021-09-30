@@ -19,7 +19,8 @@ export default function contact() {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        const data = await Contact(firstName, lastName, enquiryAbout, email, number, linkedin, designation, company, message, companyWebsite)
+        var applyingFor = document.getElementById('applying-for').value
+        const data = await Contact(firstName, lastName, applyingFor , email, number, linkedin, designation, company, message, companyWebsite)
     
         if (data) {
           window.location.reload(false);
@@ -34,7 +35,7 @@ export default function contact() {
 
           <form onSubmit={handleSubmit}>
             <div>
-              <select value={enquiryAbout} onChange={(e) => setenquiryAbout(e.target.value)}>
+              <select id="applying-for" value={enquiryAbout} onChange={(e) => setenquiryAbout(e.target.value)}>
                 <option value="Branding">Branding</option>
                 <option value="Packaging Design">Packaging Design</option>
                 <option value="UX/UI Projects">UX/UI Projects</option>

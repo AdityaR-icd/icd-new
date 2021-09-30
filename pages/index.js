@@ -6,14 +6,11 @@ import { getHighlightedProject } from '../lib/api'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo';
 
-import Nav from '../components/header/header';
-
 
 
 export default function Index({ project: { edges }}) {
   return (
     <>
-    <Nav></Nav>
       {edges.map(({ node }) => (
        
          <>
