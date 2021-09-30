@@ -1,7 +1,6 @@
 import parse from 'html-react-parser';
-import {getAllProjectsWithSlug , getProject} from '../../lib/api'
+import { getAllNewsletterWithSlug , getArticle } from '../../lib/api'
 import { useRouter } from 'next/router'
-import Like from '../../components/like';
 import Seo from '../../components/seo';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
@@ -10,10 +9,10 @@ import ErrorPage from 'next/error'
 
 
 
-export default function Projects({ project }) {
-  const router = useRouter()
-  const seo = project ? ( project?.seo ?? {} ) : ( {} );
-	const uri = project ? ( project?.uri ?? {} ) : (  {} );
+export default function newsletterss({ newsletter }) {
+    const router = useRouter()
+    const seo = newsletter ? ( newsletter?.seo ?? {} ) : ( {} );
+    const uri = newsletter ? ( newsletter?.uri ?? {} ) : (  {} );
 
 
   
@@ -34,30 +33,37 @@ export default function Projects({ project }) {
                 />
               ) : null}
             </Head>
-           {/* <Image src={heroPost.featuredImage?.node.sourceUrl} alt="Picture of the author" /> */}
-            <h1>{project.title}</h1>
-            {parse(project.content)}
-            <Like count={project.likes?.likes}  id={project.id} type={'project'} />
-            {/* <Comment postId={post.postId} /> */}
-
+            <h1>{newsletter.title}</h1>
+            {parse(newsletter.content)}
+            
+            {(newsletter.yellowEnvelope.newsletterArticles).map( data  => (  
+                <>
+                    <h3>
+                        {data.title}
+                    </h3>
+                        <div>
+                            {parse(data.content)}
+                        </div>
+                    </>
+            ))}
       </>
     )
   }
   
   export async function getStaticProps({ params }) {
-    const data = await getProject(params.slug)
+    const data = await getArticle(params.slug)
     return {
       props: { 
-        project: data.project,
+        newsletter: data.newsletter,
       },
       revalidate: 1, 
     }
   }
 
   export async function getStaticPaths() {
-    const allProjects = await getAllProjectsWithSlug() 
+    const allnewsletters = await getAllNewsletterWithSlug()
     return {
-      paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
+      paths: allnewsletters.edges.map(({ node }) => `/yellow-envelope/${node.slug}`) || [],
       fallback: true,
     }
     

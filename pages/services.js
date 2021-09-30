@@ -2,11 +2,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import parse from 'html-react-parser';
-import { getPages } from '../lib/api'
+import { getPages , getService } from '../lib/api'
 
 
 
-export default function services({data : {pages} }) {
+export default function services({data : {pages} , service : {edges} }) {
     return (
             <>
             {(pages.edges).map(({ node }) => (     
@@ -22,9 +22,11 @@ export default function services({data : {pages} }) {
 
 export async function getStaticProps() {
     const data = await getPages()
+    const service = await getService()
     return {
         props: { 
-        data
+        data,
+        service
         },
         revalidate: 1, 
     }

@@ -13,12 +13,13 @@ export default function Enquiry() {
     const [number, setNumber] = useState('')
     const [city, setcity] = useState('')
     const [qualification, setQualification] = useState('')
-    const [message, setMessage] = useState('')
+    const [experience, setexperience] = useState('')
     const [Website, setWebsite] = useState('')
 
     const handleSubmit = async (evt) => {
         evt.preventDefault()
-        const data = await careerContact(firstName, lastName, enquiryAbout, email, number, city, qualification, message, Website)
+        var applyingFor = document.getElementById('applying-for').value
+        const data = await careerContact(applyingFor , firstName, lastName, qualification ,experience, number, city ,email , Website)
     
         if (data) {
           window.location.reload(false);
@@ -96,12 +97,21 @@ export default function Enquiry() {
                 required />
             </div>
             <div>
-              <label className='label'>Your message</label>
-              <textarea
-                className='textarea'
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              ></textarea>
+              <label className='label'>Your experience</label>
+              <input
+                 className='text'
+                 value={experience}
+                 onChange={(e) => setexperience(e.target.value)}
+                required />
+            </div>
+            <div>
+              <label className='label'>Your webiste</label>
+              <input
+                className='input'
+                type='text'
+                value={Website}
+                onChange={(e) => setWebsite(e.target.value)}
+                required />
             </div>
 
             <button>Send</button>
