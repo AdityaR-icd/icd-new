@@ -364,3 +364,56 @@
 .likeBtn{
 	cursor: pointer;
 }
+
+.cards__box {
+    font-family: "Berthold Akzidenz Grotesk Bold",sans-serif;
+    background-color: #fff;
+    background-size: 100%;
+    position: relative;
+    height: 0;
+    width: 100%;
+    padding-top: 66.81%;
+}
+
+.background-yellow {
+    background-size: 100%;
+    background-color: #ffe300;
+}
+
+.featured-card{
+	width:600px
+}
+
+.cards__box .card__link, .cards__box .card__tag, .cards__box .card__text {
+    left: 9%;
+}
+
+.cards__box .card__link {
+    line-height: 1;
+    display: block;
+    margin: 0;
+    position: absolute;
+    bottom: 12%;
+}
+
+.cards__box .card__text {
+    display: block;
+    position: absolute;
+    top: 22%;
+}
+
+.cards__box .card__tag {
+    padding: 17px 16px;
+    background: #ffe300;
+    position: absolute;
+    top: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-transform: lowercase;
+}
+
+.background-yellow .card__tag {
+    background: #fff;
+}

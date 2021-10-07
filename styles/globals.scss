@@ -109,6 +109,10 @@ $overlaybg-color: rgba(31,31,31,0.5);
   }
 }
 
+figure{
+  margin: 0;
+}
+
 // // for container width 1920px and 80px padding on sides
 // @mixin for-extra-large-desktop-up {
 //     @media (min-width: 2080px) { @content; }
