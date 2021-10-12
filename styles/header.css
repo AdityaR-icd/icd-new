@@ -168,6 +168,7 @@
 	 margin: 28px 0 13.5px;
 	 width: 172px;
 	 transition: ease all 0.3s;
+	 cursor: pointer;
 }
  @media (max-width: 991px) {
 	 header .logo {
