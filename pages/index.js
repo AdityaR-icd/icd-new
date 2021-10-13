@@ -45,7 +45,11 @@ export default function Index({ project: { edges } , home: { pages }}) {
                               <div className="container textContainer">
                                   <div className="row">
                                       <div className="col-md-10 offset-md-1">
-                                          {parse(data.homePage.featuredText[i]?.content)}
+                                          <div className="textContent introText homeLeadText">
+                                            <span className="homeText">
+                                              {parse(data.homePage.featuredText[i]?.content)}
+                                            </span>
+                                          </div>
                                       </div>
                                   </div>
                               </div>
@@ -58,10 +62,32 @@ export default function Index({ project: { edges } , home: { pages }}) {
                     return home_text;
                 })([], 0, 10)}
               </div>
-            <section className="highlighted_project">
-              <video src={project_video} autoPlay playsInline loop muted></video>
-              <span>{node.title} / <em>{client}</em></span>
-              {text}
+            <section className="mB__150 projectlead">
+                <div className="container"> 
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Link href={`/projects/${node.slug}`}>
+                              <a className="project_link">
+                                  <div className="project__section" >
+                                      <div className="Tilt">
+                                          <div className="Tilt-inner">
+                                              <div className="project__leadimage video-container d-none d-lg-block">
+                                                <video src={project_video} autoPlay playsInline loop muted></video>
+                                              </div>
+                                          </div>
+                                      </div>   
+                                          
+                                  </div>
+                                  <div className="project__name">
+                                      <span>{node.title}</span>
+                                      <span className="font__grey project__type"> / {client}</span> 
+                                  </div>
+                              </a>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                {text}        
             </section>
          </>
       ))}
