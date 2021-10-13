@@ -1,6 +1,7 @@
 import { getMenus } from '../../lib/api'
 import Link from 'next/link'
 import {NextSeo} from 'next-seo'
+import { useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
@@ -12,16 +13,21 @@ import React from 'react'
 export default function header() {
 
     // Onclick expand paragraph
-  const hamburgerToggle = () => {
+    const hamburgerToggle = () => {
         $('body').toggleClass('hamburger-open');
         $('.hamburger, .nav-menu').toggleClass("is-active");
     } 
 
-  const hamburgerClose = () => {
+    const hamburgerClose = () => {
         $('body').removeClass('hamburger-open');
         $('.hamburger, .nav-menu').removeClass("is-active");
     } 
 
+    useEffect(() => {
+        $(window).on('load', function(){
+           $('.loader').addClass('hideLoader')
+        });
+    });
 
     return (
         <>

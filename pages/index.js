@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import parse from 'html-react-parser';
 import { getHighlightedProject , getHome } from '../lib/api'
 import Link from 'next/link'
@@ -17,10 +16,22 @@ export default function Index({ project: { edges } , home: { pages }}) {
   let text = ""
   let card = ""
   let bg = ""
+  var src = data.content
+  var src_1 = src.split('\"')
+  var home_hero = src_1[19].split('?')
+  var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
   return (
     <>
-    <section className="crousel-banner">
-        {parse(data.content)}
+    <section className="heroCarousel mB__150">
+      <div className="homelead-thumbnail">
+        <div>
+            {/* <SnowStorm flakesMax="180" flakesMaxActive="84" followMouse="false" animationInterval="8003" vMaxY="2" vMaxX="1" snowStick="true" excludeMobile="false"  useMeltEffect="false" snowCharacter="❄"  /> */}
+        </div>
+        <span className="loading">loading</span>
+        <div className="lead-video-cont" >
+            <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+        </div>
+      </div>
     </section>
       {edges.map(({ node }) => (
         project_video = node.highlightedImage.video.mediaItemUrl,
@@ -48,7 +59,7 @@ export default function Index({ project: { edges } , home: { pages }}) {
                 })([], 0, 10)}
               </div>
             <section className="highlighted_project">
-              <video src={project_video} autoPlay playsInline loop></video>
+              <video src={project_video} autoPlay playsInline loop muted></video>
               <span>{node.title} / <em>{client}</em></span>
               {text}
             </section>

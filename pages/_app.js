@@ -1,6 +1,7 @@
 import '../styles/globals.scss'
-import '../styles/header.css'
+import '../styles/header.scss'
 import '../styles/variables.scss'
+import '../styles/carousel-home.scss'
 import Nav from '../components/header/header';
 
 
