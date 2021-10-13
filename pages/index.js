@@ -29,7 +29,7 @@ export default function Index({ project: { edges } , home: { pages }}) {
         </div>
         <span className="loading">loading</span>
         <div className="lead-video-cont" >
-            <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+            <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block"></iframe>
         </div>
       </div>
     </section>

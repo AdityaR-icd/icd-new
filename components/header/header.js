@@ -30,69 +30,75 @@ export default function header() {
     });
 
     return (
-        <>
-             <header id="header">
-                <div className="menu-cont">
-                    <span className="yellowLine">
-                        <span className="loader"></span>
-                    </span>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-10 col-md-2">
-                                <Link href="/" aria-label="logo">
-                                    <img loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />                        
-                                </Link>
-                            </div>
-                            <div className="col-2 col-md-10">
-                                <div className="d-block d-lg-none">
+            <>
+            <Head>
+                <link rel="preconnect" href="https://player.vimeo.com" />
+                <link rel="preconnect" href="https://i.vimeocdn.com" />
+                <link rel="preconnect" href="https://f.vimeocdn.com" />  
+            </Head>
+            <>
+                <header id="header">
+                    <div className="menu-cont">
+                        <span className="yellowLine">
+                            <span className="loader"></span>
+                        </span>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-10 col-md-2">
+                                    <Link href="/" aria-label="logo">
+                                        <img loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
+                                    </Link>
+                                </div>
+                                <div className="col-2 col-md-10">
+                                    <div className="d-block d-lg-none">
 
-                                    <div className="hamburger hamburger--spring js-hamburger" onClick={ hamburgerToggle } >
-                                        <div className="hamburger-box">
-                                        <div className="hamburger-inner"></div>
+                                        <div className="hamburger hamburger--spring js-hamburger" onClick={hamburgerToggle}>
+                                            <div className="hamburger-box">
+                                                <div className="hamburger-inner"></div>
+                                            </div>
                                         </div>
+
                                     </div>
+                                    <div className="nav-menu">
+                                        <div className="container">
+                                            <div className="row">
+                                                <ul>
+                                                    <li className="mobile__menu--items">
+                                                        <form className="global-search">
+                                                            <input type="search" className="searchInput" placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
+                                                            {/* <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" /> */}
+                                                        </form>
+                                                    </li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/projects">projects</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/clients">clients</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/services">services</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/blogs">posts</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/contact">contact</Link></li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
+                                                    <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
+                                                    {/* <li className="search-icon d-lg-block d-none" onClick={ this.searchToggle }><span className="searchIcon"></span></li> */}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div> {/* nav-menu end */}
 
                                 </div>
-                                <div className="nav-menu">
-                                    <div className="container">
-                                        <div className="row">
-                                            <ul>
-                                                <li className="mobile__menu--items">
-                                                    <form className="global-search">
-                                                        <input type="search" className="searchInput" placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
-                                                        {/* <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" /> */}
-                                                    </form>
-                                                </li>
-                                                <li className="mobile__menu--items" onClick={ hamburgerClose }><Link href="/">home</Link></li>
-                                                <li onClick={ hamburgerClose }><Link href="/projects">projects</Link></li>
-                                                <li onClick={ hamburgerClose }><Link href="/clients">clients</Link></li> 
-                                                <li onClick={ hamburgerClose }><Link href="/services">services</Link></li>
-                                                <li onClick={ hamburgerClose }><Link href="/blogs">posts</Link></li>
-                                                <li onClick={ hamburgerClose }><Link href="/contact">contact</Link></li>
-                                                <li className="mobile__menu--items" onClick={ hamburgerClose }><Link href="/our-team">team</Link></li>
-                                                <li className="mobile__menu--items" onClick={ hamburgerClose }><Link href="/careers">careers</Link></li>
-                                                <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
-                                                {/* <li className="search-icon d-lg-block d-none" onClick={ this.searchToggle }><span className="searchIcon"></span></li> */}
-                                            </ul> 
-                                        </div>               
-                                    </div>
-                                </div> {/* nav-menu end */}
-
                             </div>
                         </div>
                     </div>
-                </div> 
-                {/* <div className="search-form ignore-react-onclickoutside" id="searchID">
-                    <Search></Search>
-                    <div id="close">
-                        <span className="close-wrap" onClick={this.searchToggle}> 
-                            <span className="close-line close-line1"></span> 
-                            <span className="close-line close-line2"></span> 
-                        </span>				 
-                    </div>
-                </div> */}
-            </header>
-        </>
+                    {/* <div className="search-form ignore-react-onclickoutside" id="searchID">
+        <Search></Search>
+        <div id="close">
+            <span className="close-wrap" onClick={this.searchToggle}>
+                <span className="close-line close-line1"></span>
+                <span className="close-line close-line2"></span>
+            </span>
+        </div>
+    </div> */}
+                </header>
+            </></>
     )
 }
 
