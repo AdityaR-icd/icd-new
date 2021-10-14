@@ -3,7 +3,8 @@ import Image from 'next/image'
 import parse from 'html-react-parser';
 import { getHighlightedProject , getHome  } from '../lib/api'
 import Link from 'next/link'
-import { NextSeo } from 'next-seo';
+import Seo from '../components/seo';
+
 
 
 
@@ -20,14 +21,23 @@ export default function Index({ project: { edges } , home: { pages } }) {
   // var src_1 = src.split('\"')
   // var home_hero = src_1[19].split('?')
   // var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
+  const seo = data ? ( data?.seo ?? {} ) : ( {} );
+	const uri = data ? ( data?.uri ?? {} ) : (  {} );
   return (
     <>
+    <Seo seo={seo} uri={uri}/>
+      <Head>
+        {seo?.schema ? (
+          <script
+            type='application/ld+json'
+            className='yoast-schema-graph'
+            key='yoastSchema'
+            dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
+          />
+        ) : null}
+      </Head>
     <section className="heroCarousel mB__150">
       <div className="homelead-thumbnail">
-        <div>
-            {/* <SnowStorm flakesMax="180" flakesMaxActive="84" followMouse="false" animationInterval="8003" vMaxY="2" vMaxX="1" snowStick="true" excludeMobile="false"  useMeltEffect="false" snowCharacter="❄"  /> */}
-        </div>
-        {/* <span className="loading">loading</span> */}
         <div className="lead-video-cont" >
             {parse(data.content)}
         </div>
