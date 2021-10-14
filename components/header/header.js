@@ -32,7 +32,7 @@ export default function header() {
     return (
             <>
             <Head>
-                
+
             </Head>
             <>
                 <header id="header">
@@ -42,10 +42,10 @@ export default function header() {
                         </span>
                         <div className="container">
                             <div className="row">
-                                <div className="col-10 col-md-2">
-                                    <Link href="/" aria-label="logo">
-                                        <img loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
-                                    </Link>
+                                <div className="col-10 col-md-2 logo-container">
+                                    <a href="/" aria-label="logo">
+                                        <Image loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
+                                    </a>
                                 </div>
                                 <div className="col-2 col-md-10">
                                     <div className="d-block d-lg-none">

@@ -8,13 +8,95 @@ import '../styles/carousel-home.scss'
 import '../styles/project-lead.scss'
 import '../styles/home.scss'
 import '../styles/intro-text.scss'
-import Nav from '../components/header/header';
+import '../styles/subscribe.scss'
+import '../styles/footer.scss'
+import Nav from '../components/header/header'
+import Link from 'next/link'
+import Subscribe from '../components/subscribe/subscribe'
+import { getFooter } from '../lib/api' 
 
 
-function MyApp({ Component, pageProps }) {
+
+export default function MyApp({ Component, pageProps , data }){
   return (
-    <><Nav></Nav><Component {...pageProps} /></>
+    <>
+      <Nav></Nav>
+      <Component {...pageProps} />
+      <footer>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-7 col-lg-5 col-xl-5">
+                        <Subscribe /> 
+                    </div>
+                    <div className="col-md-4 col-lg-3 col-xl-3">
+                        <div className="footer__talk-padding paddingLeft">
+                            <span className="footerHead">let’s talk</span>
+                            <span className="footerText">
+                                <p><strong>business</strong>&nbsp;<a href="mailto:abhishek@icdindia.com">{data?.email}</a></p>
+                            </span>
+                            <span className="footerText">
+                                <p><strong>jobs</strong>&nbsp;<a href="mailto:work@icdindia.com">{data?.job}</a></p>
+                            </span>
+                            <span className="footerText">
+                                <p><strong>call</strong>&nbsp;<a href="tel:{}">{data?.call}</a></p>
+                            </span>
+                        </div>
+                    </div>
+                
+                    <div className="col-md-2 col-lg-2 d-lg-block d-none">
+                        <div className="paddingLeft footer__connect--wrapper">
+                            <span className="footerHead d-md-block d-none">connect</span>
+                            <div className="row footer__connect">
+                                <div className="col-6 m-fl-right">
+                                    <span className="footerText facebook-link"><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></span>
+                                    <span className="footerText twitter-link"><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></span>
+                                    <span className="footerText linkedin-link"><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></span>
+                                </div>
+                                <div className="col-6 m-fl-left">
+                                    <span className="footerText instagram-link"><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></span>
+                                    <span className="footerText vimeo-link"><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></span>
+                                    <span className="footerText behance-link"><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-lg-2 d-lg-block d-none">
+                        <div className="quickLinks paddingLeft">
+                            <span className="footerHead text-right">quickly</span>
+                            <span className="footerText"><Link href="/contact">contact</Link></span>
+                            <span className="footerText"><Link href="/our-team">team</Link></span>
+                            <span className="footerText"><Link href="/careers">careers</Link></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="row  d-lg-block d-none">
+                    <div className="col-md-12">
+                        <span className="copyright">© 1990-{(new Date().getFullYear())} itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from ICD</span>
+                    </div>
+                </div>
+
+                {/* connect buttons for mobile */}     
+            </div>
+            <div className="footer__connect d-lg-none d-block">
+                <span className="footerText facebook-link"><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></span>
+                <span className="footerText twitter-link"><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></span>
+                <span className="footerText linkedin-link"><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></span>
+                <span className="footerText instagram-link"><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></span>
+                <span className="footerText vimeo-link"><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></span>
+                <span className="footerText behance-link"><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></span>
+            </div>
+        </footer>
+    </>
   )
 }
 
-export default MyApp
+
+
+MyApp.getInitialProps = async () =>{
+  const data = await getFooter()
+  return {
+      data
+  }
+}

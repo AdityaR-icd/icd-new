@@ -182,6 +182,11 @@ header {
         }
     }
 
+    .logo-container{
+        display: flex;
+        align-items: center;
+    }
+
     .expand {
         height: 400px;
     }

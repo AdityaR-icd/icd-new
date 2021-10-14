@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { getHighlightedProject , getHome } from '../lib/api'
+import { getHighlightedProject , getHome  } from '../lib/api'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo';
 
 
 
-export default function Index({ project: { edges } , home: { pages }}) {
+export default function Index({ project: { edges } , home: { pages } }) {
   const data = pages.edges[0]?.node
   let client = ""
   let project_video = ""
@@ -27,7 +27,7 @@ export default function Index({ project: { edges } , home: { pages }}) {
         <div>
             {/* <SnowStorm flakesMax="180" flakesMaxActive="84" followMouse="false" animationInterval="8003" vMaxY="2" vMaxX="1" snowStick="true" excludeMobile="false"  useMeltEffect="false" snowCharacter="❄"  /> */}
         </div>
-        <span className="loading">loading</span>
+        {/* <span className="loading">loading</span> */}
         <div className="lead-video-cont" >
             {parse(data.content)}
         </div>

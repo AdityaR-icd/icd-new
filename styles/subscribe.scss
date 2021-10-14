@@ -1,0 +1,91 @@
+@import "variables.scss";
+
+.subscribe__field{
+    display: block;
+    .form-control-placeholder{
+        font-size: 16px;
+    }
+
+    .form-control:focus{
+        border: none;
+        border-bottom: 1.2px solid #9b9b9b;
+        border-radius: 0;
+    }
+
+    .two-col-field{
+        float: left;
+        width: 29%;
+        margin-right: 20px;
+        padding: 0 0 6px 0;
+        // width: 32%;
+        margin-bottom: 0;
+        margin-top: 20px;
+        margin-right: 30px;
+        @include for-tablet-horizontal-to-laptop {
+            width: 27%;
+            margin-right: 10px;
+        }
+
+        @include for-upto-tablet-portrait {
+            margin-top: 2px;
+            width: 100%;
+            margin-right: 4px !important;
+        }
+        width: 29.87% !important;
+        @include for-upto-tablet-landscape {
+            width: 45% !important;
+            &:last-child{
+                float: right;
+                margin-right: 0 !important;
+            }
+        }
+        @include for-low-end-laptop {
+            margin-right: 20px;
+        }
+    }
+
+    input[type=text],
+    input[type=email]{
+        
+        opacity: 1;
+        color: $color-black;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 21px;
+        outline: none;
+        border: none;
+        border-bottom: 1.2px solid $color-brown-grey;
+        margin-bottom: 20px;
+        background: transparent;
+        padding-left : 0 !important;
+        border-radius: 0 !important;
+        
+        
+
+    }      
+    input[type=text] {
+        
+    }
+}
+
+// new design 12 feb 2020: to be merged with css above after final approval
+
+.subscribe__field input[type=email] {
+    width: 100% !important;
+    margin-bottom: 19px !important;
+    margin-top: 0 !important;
+}
+
+// footer .footerHead {
+//     margin-bottom: 33px;
+//     letter-spacing: -0.04em;
+//     word-spacing: -0.04em;
+// }
+
+.subscribe__field input[type=text], 
+.subscribe__field input[type=email] {
+    font-size: 16px !important;
+    
+}
+
+
