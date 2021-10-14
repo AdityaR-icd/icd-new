@@ -16,10 +16,10 @@ export default function Index({ project: { edges } , home: { pages }}) {
   let text = ""
   let card = ""
   let bg = ""
-  var src = data.content
-  var src_1 = src.split('\"')
-  var home_hero = src_1[19].split('?')
-  var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
+  // var src = data.content
+  // var src_1 = src.split('\"')
+  // var home_hero = src_1[19].split('?')
+  // var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
   return (
     <>
     <section className="heroCarousel mB__150">
@@ -29,7 +29,7 @@ export default function Index({ project: { edges } , home: { pages }}) {
         </div>
         <span className="loading">loading</span>
         <div className="lead-video-cont" >
-            <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block"></iframe>
+            {parse(data.content)}
         </div>
       </div>
     </section>
@@ -105,17 +105,30 @@ export default function Index({ project: { edges } , home: { pages }}) {
                   backgroundImage: 'url(' + cardImg + ')'
                 }
                 card = (
-                    <div className={bg}  style={bgImage}  >
-                      <span className="card__tag">
-                          {data.homePage.featuredCards[k]?.cardCategories.edges[0]?.node.name}
-                      </span>
-                      <span className="card__text">
-                        {parse(data.homePage.featuredCards[k]?.content)}
-                      </span>
-                      <span className="card__link">
-                        <a href="/careers"><button>apply now</button></a>
-                      </span>
-                    </div>
+                    // <div className={bg}  style={bgImage}  >
+                    //   <span className="card__tag">
+                    //       {data.homePage.featuredCards[k]?.cardCategories.edges[0]?.node.name}
+                    //   </span>
+                    //   <span className="card__text">
+                    //     {parse(data.homePage.featuredCards[k]?.content)}
+                    //   </span>
+                    //   <span className="card__link">
+                    //     <a href="/careers"><button>apply now</button></a>
+                    //   </span>
+                    // </div>
+                    <section className="home__section--cards">
+                      <div className="container">
+                          <div className="row">
+                              <div className='col-lg-4 home-cards'>
+                                <div className={bg} style={bgImage}>
+                                    <span className="card__tag">{ data.homePage.featuredCards[k]?.cardCategories.edges[0]?.node.name }</span>
+                                    <span className="card__text">{ parse(data.homePage.featuredCards[k]?.content) }</span>
+                                    <span className="card__link"><a href="/careers"><button>apply now</button></a></span>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                    </section>
                 );
               }
               return featuredCard;
