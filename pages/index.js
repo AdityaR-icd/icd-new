@@ -92,6 +92,9 @@ export default function Index({ project: { edges } , home: { pages }}) {
          </>
       ))}
       <section className="featured-card">
+        <section className="home__section--cards">
+            <div className="container">
+              <div className="row">
           {(
             function(featuredCard){
               for (let k = 0; k < (data.homePage.featuredCards).length; k++) {  
@@ -104,36 +107,21 @@ export default function Index({ project: { edges } , home: { pages }}) {
                 let bgImage = {
                   backgroundImage: 'url(' + cardImg + ')'
                 }
-                card = (
-                    // <div className={bg}  style={bgImage}  >
-                    //   <span className="card__tag">
-                    //       {data.homePage.featuredCards[k]?.cardCategories.edges[0]?.node.name}
-                    //   </span>
-                    //   <span className="card__text">
-                    //     {parse(data.homePage.featuredCards[k]?.content)}
-                    //   </span>
-                    //   <span className="card__link">
-                    //     <a href="/careers"><button>apply now</button></a>
-                    //   </span>
-                    // </div>
-                    <section className="home__section--cards">
-                      <div className="container">
-                          <div className="row">
-                              <div className='col-lg-4 home-cards'>
-                                <div className={bg} style={bgImage}>
-                                    <span className="card__tag">{ data.homePage.featuredCards[k]?.cardCategories.edges[0]?.node.name }</span>
-                                    <span className="card__text">{ parse(data.homePage.featuredCards[k]?.content) }</span>
-                                    <span className="card__link"><a href="/careers"><button>apply now</button></a></span>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-                    </section>
-                );
-              }
+                featuredCard.push( 
+                    <div className='col-lg-4 home-cards'>
+                        <div className={bg} style={bgImage}>
+                            <span className="card__tag">{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
+                            <span className="card__text">{ parse(data.homePage.featuredCards[k].content) }</span>
+                            <span className="card__link"><a href="/careers"><button>apply now</button></a></span>
+                        </div>
+                    </div>
+                  )
+                }
               return featuredCard;
             })([], 0, 10)}
-          {card}
+              </div>
+            </div>
+          </section>
       </section>
     </>
   )
