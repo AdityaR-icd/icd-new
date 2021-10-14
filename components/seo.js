@@ -11,19 +11,21 @@ const Seo = ( {seo, uri} ) => {
 		opengraphDescription,
 		opengraphTitle,
 		opengraphImage,
-		opengraphSiteName
+		opengraphSiteName,
+		twitterImage
 	} = seo;
 
 	const currentLocation = process.browser ? window.location.origin : null;
 	const opengraphUrl = ( process.env.NEXT_PUBLIC_NEXTJS_SITE_URL ? process.env.NEXT_PUBLIC_NEXTJS_SITE_URL : currentLocation ) + uri;
 
 	return (
+		console.log(seo),
 		<NextSeo
 			title={title}
 			description={opengraphDescription || metaDesc}
 			canonical={opengraphUrl}
-			robots={metaRobotsNoindex}
-			googlebot={metaRobotsNofollow}
+			robots={metaRobotsNoindex || metaRobotsNofollow}
+			googlebot={metaRobotsNofollow || metaRobotsNoindex }
 			openGraph={{
 				type: 'website',
 				locale: 'en_US',
@@ -32,11 +34,12 @@ const Seo = ( {seo, uri} ) => {
 				description: opengraphDescription,
 				images: [
 					{
-						url: opengraphImage?.sourceUrl,
+						url: twitterImage?.sourceUrl,
 						width: 1280,
 						height: 720
 					}
 				],
+
 				/* eslint-disable */
 				site_name: opengraphSiteName
 				/* eslint-enable */
@@ -44,7 +47,8 @@ const Seo = ( {seo, uri} ) => {
 			twitter={{
 				handle: '@Codeytek',
 				site: '@Codeytek',
-				cardType: 'summary_large_image'
+				cardType: 'summary_large_image',
+				image : twitterImage?.sourceUrl
 			}}
 		/>
 	);
@@ -65,6 +69,9 @@ Seo.defaultProps = {
 		opengraphTitle: '',
 		opengraphImage: {
 			sourceUrl: ''
+		},
+		twitterImage: {
+			sourceUrl:''
 		},
 		opengraphUrl: '',
 		opengraphSiteName: ''

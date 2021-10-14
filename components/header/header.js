@@ -31,9 +31,6 @@ export default function header() {
 
     return (
             <>
-            <Head>
-
-            </Head>
             <>
                 <header id="header">
                     <div className="menu-cont">
