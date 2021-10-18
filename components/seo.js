@@ -37,7 +37,7 @@ const Seo = ( {seo, uri} ) => {
 				description: opengraphDescription,
 				images: [
 					{
-						url: twitterImage?.sourceUrl,
+						url: opengraphImage?.sourceUrl,
 						width: 1280,
 						height: 720,
 						type: 'image/jpeg',
