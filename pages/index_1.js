@@ -1,0 +1,151 @@
+import Head from 'next/head'
+import Image from 'next/image'
+import parse from 'html-react-parser';
+import { getHighlightedProject , getHome  } from '../lib/api'
+import Link from 'next/link'
+import Seo from '../components/seo';
+
+
+
+
+export default function Index({ project: { edges } , home: { pages } }) {
+  const data = pages.edges[0]?.node
+  let client = ""
+  let project_video = ""
+  let i = 0
+  let j = 0
+  let text = ""
+  let card = ""
+  let bg = ""
+  // var src = data.content
+  // var src_1 = src.split('\"')
+  // var home_hero = src_1[19].split('?')
+  // var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
+  const seo = data ? ( data?.seo ?? {} ) : ( {} );
+	const uri = data ? ( data?.uri ?? {} ) : (  {} );
+  return (
+    <>
+    <Seo seo={seo} uri={uri}/>
+      <Head>
+        {seo?.schema ? (
+          <script
+            type='application/ld+json'
+            className='yoast-schema-graph'
+            key='yoastSchema'
+            dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
+          />
+        ) : null}
+      </Head>
+    <section className="heroCarousel mB__150">
+      <div className="homelead-thumbnail">
+        <div className="lead-video-cont" >
+            {parse(data.content)}
+        </div>
+      </div>
+    </section>
+      {edges.map(({ node }) => (
+        project_video = node.highlightedImage.video.mediaItemUrl,
+        client = node.clients.edges[0]?.node.name,
+            <>
+              <div>
+                  {(
+                    function (home_text) {
+                      if ( j % 2 !== 0 && j > 0 ) {
+                          text = (
+                              <div className="container textContainer">
+                                  <div className="row">
+                                      <div className="col-md-10 offset-md-1">
+                                          <div className="textContent introText homeLeadText">
+                                            <span className="homeText">
+                                              {parse(data.homePage.featuredText[i]?.content)}
+                                            </span>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          );
+                          i = i + 1;
+                      } else{
+                      text = '';
+                      }
+                      j = j + 1;
+                    return home_text;
+                })([], 0, 10)}
+              </div>
+            <section className="mB__150 projectlead">
+                <div className="container"> 
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Link href={`/projects/${node.slug}`}>
+                              <a className="project_link">
+                                  <div className="project__section" >
+                                      <div className="Tilt">
+                                          <div className="Tilt-inner">
+                                              <div className="project__leadimage video-container d-none d-lg-block">
+                                                <video src={project_video} autoPlay playsInline loop muted></video>
+                                              </div>
+                                          </div>
+                                      </div>   
+                                          
+                                  </div>
+                                  <div className="project__name">
+                                      <span>{node.title}</span>
+                                      <span className="font__grey project__type"> / {client}</span> 
+                                  </div>
+                              </a>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                {text}        
+            </section>
+         </>
+      ))}
+      <section className="featured-card">
+        <section className="home__section--cards">
+            <div className="container">
+              <div className="row">
+          {(
+            function(featuredCard){
+              for (let k = 0; k < (data.homePage.featuredCards).length; k++) {  
+                  if (data.homePage.featuredCards[k]?.designOptions.darkBg) {
+                   bg = 'cards__box background-grey';
+                  }else{
+                    bg = 'cards__box background-yellow';
+                  }
+                let cardImg = data.homePage.featuredCards[k]?.featuredImage.node?.sourceUrl
+                let bgImage = {
+                  backgroundImage: 'url(' + cardImg + ')'
+                }
+                featuredCard.push( 
+                    <div className='col-lg-4 home-cards'>
+                        <div className={bg} style={bgImage}>
+                            <span className="card__tag">{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
+                            <span className="card__text">{ parse(data.homePage.featuredCards[k].content) }</span>
+                            <span className="card__link"><a href="/careers"><button>apply now</button></a></span>
+                        </div>
+                    </div>
+                  )
+                }
+              return featuredCard;
+            })([], 0, 10)}
+              </div>
+            </div>
+          </section>
+      </section>
+    </>
+  )
+}
+
+export async function getStaticProps() {
+  const project = await getHighlightedProject()
+  const home = await getHome()
+  return {
+    props: { 
+      project,
+      home
+    },
+    revalidate: 1, 
+  }
+}
+

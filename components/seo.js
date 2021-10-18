@@ -1,5 +1,6 @@
 import {NextSeo} from 'next-seo';
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 
 
 const Seo = ( {seo, uri} ) => {
@@ -15,17 +16,19 @@ const Seo = ( {seo, uri} ) => {
 		twitterImage
 	} = seo;
 
+	const { asPath } = useRouter();
+
+
 	const currentLocation = process.browser ? window.location.origin : null;
-	const opengraphUrl = ( process.env.NEXT_PUBLIC_NEXTJS_SITE_URL ? process.env.NEXT_PUBLIC_NEXTJS_SITE_URL : currentLocation ) + uri;
+	const opengraphUrl = (currentLocation ) + asPath;
 
 	return (
-		console.log(seo),
 		<NextSeo
 			title={title}
 			description={opengraphDescription || metaDesc}
 			canonical={opengraphUrl}
-			robots={metaRobotsNoindex || metaRobotsNofollow}
-			googlebot={metaRobotsNofollow || metaRobotsNoindex }
+			// robots={metaRobotsNoindex || metaRobotsNofollow}
+			// googlebot={metaRobotsNofollow || metaRobotsNoindex }
 			openGraph={{
 				type: 'website',
 				locale: 'en_US',
@@ -36,7 +39,8 @@ const Seo = ( {seo, uri} ) => {
 					{
 						url: twitterImage?.sourceUrl,
 						width: 1280,
-						height: 720
+						height: 720,
+						type: 'image/jpeg',
 					}
 				],
 
@@ -45,10 +49,11 @@ const Seo = ( {seo, uri} ) => {
 				/* eslint-enable */
 			}}
 			twitter={{
-				handle: '@Codeytek',
-				site: '@Codeytek',
+				site: opengraphUrl,
 				cardType: 'summary_large_image',
-				image : twitterImage?.sourceUrl
+				image : twitterImage?.sourceUrl,
+				title:  {title},
+				description: {metaDesc}
 			}}
 		/>
 	);
