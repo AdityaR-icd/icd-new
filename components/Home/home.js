@@ -18,12 +18,13 @@ export default function Index({ project: { edges } , home: { pages } }) {
     // var src_1 = src.split('\"')
     // var home_hero = src_1[19].split('?')
     // var videosrc = home_hero[0]+"?background=1&quality=1080p&playsinline=1"; 
-    const seo = data ? ( data?.seo ?? {} ) : ( {} );
-    const uri = data ? ( data?.uri ?? {} ) : (  {} );
-    console.log(uri)
+    // const seo = data ? ( data?.seo ?? {} ) : ( {} );
+    // const uri = data ? ( data?.uri ?? {} ) : (  {} );
       return (
         <>
-        <Seo seo={seo} />
+       <Head>
+       {parse(data.seo.fullHead)}
+       </Head>
         <section className="heroCarousel mB__150">
           <div className="homelead-thumbnail">
             <div className="lead-video-cont" >
