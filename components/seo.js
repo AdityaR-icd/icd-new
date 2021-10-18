@@ -20,13 +20,15 @@ const Seo = ( {seo, uri} ) => {
 
 
 	const currentLocation = process.browser ? window.location.origin : null;
-	const opengraphUrl = (currentLocation ) + asPath;
+	const opengraphUrl = "https://icd-v3-vercel.vercel.app"+ asPath;
+	const image = opengraphImage?.sourceUrl;
+	const twitterImag = twitterImage?.sourceUrl
 
 	return (
 		<NextSeo
 			title={title}
 			description={opengraphDescription || metaDesc}
-			canonical={opengraphUrl}
+			canonical= {opengraphUr}
 			// robots={metaRobotsNoindex || metaRobotsNofollow}
 			// googlebot={metaRobotsNofollow || metaRobotsNoindex }
 			openGraph={{
@@ -37,7 +39,7 @@ const Seo = ( {seo, uri} ) => {
 				description: opengraphDescription,
 				images: [
 					{
-						url: opengraphImage?.sourceUrl,
+						url: image,
 						width: 1280,
 						height: 720,
 						type: 'image/jpeg',
@@ -51,7 +53,7 @@ const Seo = ( {seo, uri} ) => {
 			twitter={{
 				site: opengraphUrl,
 				cardType: 'summary_large_image',
-				image : twitterImage?.sourceUrl,
+				image : twitterImag,
 				title:  {title},
 				description: {metaDesc}
 			}}

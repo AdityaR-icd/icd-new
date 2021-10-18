@@ -24,16 +24,6 @@ export default function Projects({ project }) {
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-            <Head>
-              {seo?.schema ? (
-                <script
-                  type='application/ld+json'
-                  className='yoast-schema-graph'
-                  key='yoastSchema'
-                  dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
-                />
-              ) : null}
-            </Head>
            {/* <Image src={heroPost.featuredImage?.node.sourceUrl} alt="Picture of the author" /> */}
             <h1>{project.title}</h1>
             {parse(project.content)}

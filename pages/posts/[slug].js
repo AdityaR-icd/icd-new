@@ -25,7 +25,7 @@ export default function Post({ post, posts, preview , tokken }) {
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-            <Head>
+            {/* <Head>
               {seo?.schema ? (
                 <script
                   type='application/ld+json'
@@ -34,7 +34,7 @@ export default function Post({ post, posts, preview , tokken }) {
                   dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
                 />
               ) : null}
-            </Head>
+            </Head> */}
            {/* <Image src={heroPost.featuredImage?.node.sourceUrl} alt="Picture of the author" /> */}
          <h1>{post.title}</h1> 
           {parse(post.content)} 
