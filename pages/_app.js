@@ -6,7 +6,7 @@ import '../styles/header.scss'
 import '../styles/variables.scss'
 import '../styles/subscribe.scss'
 import '../styles/footer.scss'
-import Layout from '../components/Layout/layout'
+import Layout from '../components/layout/layout'
 
 
 
