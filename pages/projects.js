@@ -1,7 +1,7 @@
 
 import { getAllProjectsForHome , getFooter , getProjectTypes } from '../lib/api'
 
-import Layout from '../components/Project/project'
+import Layout from '../components/project/project'
 
 
 

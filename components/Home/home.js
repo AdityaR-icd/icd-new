@@ -6,7 +6,7 @@ import Seo from '../seo';
 import Crousel from '../carousel/carousel-home'
 import ProjectLead from "../project-lead/project-lead";
 
-import styles from './home.module.scss'
+import home from './home.module.scss'
 
 export default function Index({ project: { edges } , home: { pages } }) {
     const data = pages.edges[0]?.node
@@ -20,7 +20,7 @@ export default function Index({ project: { edges } , home: { pages } }) {
         <Crousel content={data.content} />
         <ProjectLead edges={edges} data={data}/>
           <section className="featured-card">
-            <section className={ `${styles.home_section__cards}`}>
+            <section className={ `${home.home_section__cards}`}>
                 <div className="container">
                   <div className="row">
               {(
@@ -36,7 +36,7 @@ export default function Index({ project: { edges } , home: { pages } }) {
                       backgroundImage: 'url(' + cardImg + ')'
                     }
                     featuredCard.push( 
-                        <div className={ ` col-lg-4 ${styles.home_cards}`}>
+                        <div className={ ` col-lg-4 ${home.home_cards}`}>
                             <div className={bg} style={bgImage}>
                                 <span className="card__tag">{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
                                 <span className="card__text">{ parse(data.homePage.featuredCards[k].content) }</span>
