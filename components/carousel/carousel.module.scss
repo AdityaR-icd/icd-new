@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "../../assets/scss/variables.scss";
 .heroCarousel {
     position: relative;
     max-width: 100vw;
@@ -96,7 +96,7 @@
         z-index: 0;
     }
 
-    .lead-video-cont{
+    .lead_video_cont{
         position: relative;
         padding-bottom: 95vh;
         overflow: hidden;
@@ -114,7 +114,7 @@
         }
     }
 
-    .homelead-thumbnail{
+    .homelead_thumbnail{
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 50%;
@@ -165,7 +165,7 @@
         }
     }
 
-    video{
+    iframe{
         width: 100vw;
         // height: 95vh;
         min-height: 110vh;

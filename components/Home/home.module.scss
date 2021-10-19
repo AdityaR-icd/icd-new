@@ -1,5 +1,5 @@
-@import "variables.scss";
-.home__section--cards {
+@import "../../assets/scss/variables.scss";
+.home__section__cards {
     margin-bottom: 220px;
     // margin-bottom: 150px;
 
@@ -42,7 +42,7 @@
 }
 
 @include for-upto-tablet-portrait {
-    .home-cards:last-child{
+    .home_cards:last-child{
         .cards__box{
             margin:  0 0 10px 0;
         }
