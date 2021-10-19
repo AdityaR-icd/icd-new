@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import parse from 'html-react-parser';
 import { getOurteamPage , getTeam } from '../lib/api'
 import { join } from 'lodash';

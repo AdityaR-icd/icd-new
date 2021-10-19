@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import styles from '../styles/Home.module.css'
 import { Contact } from '../lib/api'
 
 
@@ -28,9 +27,9 @@ export default function contact() {
     }
 
     return (
-        <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>Contact us</h1>
+        <div className="container">
+        <main className="main">
+          <h1 className="title">Contact us</h1>
           <hr />
 
           <form onSubmit={handleSubmit}>

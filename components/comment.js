@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { comment } from '../lib/api'
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
-import styles from '../styles/Home.module.css'
 
 
 export default function Contact({ postId , comment_data }) {
@@ -31,9 +30,9 @@ export default function Contact({ postId , comment_data }) {
   }
 
   return (
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>Leave a comment</h1>
+    <div className="container">
+    <main className="main">
+      <h1 className="title">Leave a comment</h1>
           <hr />
 
           <form onSubmit={handleSubmit}>

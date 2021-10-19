@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import parse from 'html-react-parser';
 import { getAllArticleForHome } from '../lib/api'
 import Link from 'next/link'
