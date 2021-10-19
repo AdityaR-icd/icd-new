@@ -1,4 +1,4 @@
-import Layout from '../components/Home/home'
+import Layout from '../components/home/home'
 import { getFooter , getHighlightedProject , getHome } from '../lib/api'
 
 export default function Home({data , project , home}){
