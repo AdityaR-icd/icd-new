@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { getOurteamPage , getTeam } from '../lib/api'
+import { getOurteamPage , getTeam , getMenus , getFooter } from '../lib/api'
 import { join } from 'lodash';
 
 
-export default function careers({data : { pages } , team : {edges}}) {
+export default function careers({teamPage : { pages } , team : {edges}}) {
     return (
         <><>
         <div>
@@ -30,12 +30,16 @@ export default function careers({data : { pages } , team : {edges}}) {
 
 
 export async function getStaticProps() {
-    const data = await getOurteamPage()
+    const teamPage = await getOurteamPage()
     const team = await getTeam()
+    const menus = await getMenus()
+    const data = await getFooter()
     return {
         props: { 
-        data,
-        team
+        teamPage,
+        team,
+        menus,
+        data
         },
         revalidate: 1, 
     }

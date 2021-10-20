@@ -1,56 +1,47 @@
-import { data } from "jquery"
 import Head from 'next/head'
 import parse from 'html-react-parser';
-import Link from 'next/link'
-import Seo from '../seo';
+import { NextSeo } from 'next-seo';
 import Crousel from '../carousel/carousel-home'
 import ProjectLead from "../project-lead/project-lead";
+import Cards from "../cards/cards";
 
-import home from './home.module.scss'
 
 export default function Index({ project: { edges } , home: { pages } }) {
     const data = pages.edges[0]?.node
-    let card = ""
-    let bg = ""
       return (
         <>
-       <Head>
-       {parse(data.seo.fullHead)}
-       </Head>
+        <NextSeo 
+            title={data.seo.title}
+            description={data.seo.metaDesc}
+            canonical="https://icd-v3-vercel.vercel.app/"
+            robots={data.metaRobotsNoindex}
+			      googlebot={data.metaRobotsNofollow}
+            openGraph={{
+              url: 'https://icd-v3-vercel.vercel.app/',
+              title: data.seo.title,
+              description: data.seo.metaDesc,
+              images: [
+                {
+                  url: data.featuredImage?.node.sourceUrl,
+                  alt: 'homepage-image',
+                  type: 'image/jpeg',
+                },
+              ],
+              site_name: data.seo.title,
+            }}
+        />
+        <Head>
+        {/* Twitter Cards */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={data.seo.title} />
+          <meta name="twitter:description" content={data.seo.metaDesc} />
+          <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/" />
+          <meta name="twitter:image" content={data.featuredImage?.node.sourceUrl} />
+        {/* end of Twitter Cards */}
+        </Head>
         <Crousel content={data.content} />
         <ProjectLead edges={edges} data={data}/>
-          <section className="featured-card">
-            <section className={ `${home.home_section__cards}`}>
-                <div className="container">
-                  <div className="row">
-              {(
-                function(featuredCard){
-                  for (let k = 0; k < (data.homePage.featuredCards).length; k++) {  
-                      if (data.homePage.featuredCards[k]?.designOptions.darkBg) {
-                       bg = 'cards__box background-grey';
-                      }else{
-                        bg = 'cards__box background-yellow';
-                      }
-                    let cardImg = data.homePage.featuredCards[k]?.featuredImage.node?.sourceUrl
-                    let bgImage = {
-                      backgroundImage: 'url(' + cardImg + ')'
-                    }
-                    featuredCard.push( 
-                        <div className={ ` col-lg-4 ${home.home_cards}`}>
-                            <div className={bg} style={bgImage}>
-                                <span className="card__tag">{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
-                                <span className="card__text">{ parse(data.homePage.featuredCards[k].content) }</span>
-                                <span className="card__link"><a href="/careers"><button>apply now</button></a></span>
-                            </div>
-                        </div>
-                      )
-                    }
-                  return featuredCard;
-                })([], 0, 10)}
-                  </div>
-                </div>
-              </section>
-          </section>
+        <Cards data={data} />
         </>
       )
   }

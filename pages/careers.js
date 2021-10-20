@@ -1,13 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { Contact, getServicePage } from '../lib/api'
-import { getJobs } from '../lib/api'
+import { Contact, getServicePage , getMenus , getFooter , getJobs } from '../lib/api'
 import  Enquiry  from '../components/enquiry/enquiry'
 import { join } from 'lodash';
 
 
-export default function careers({data : { pages } , jobs : { edges } }) {
+export default function careers({service : { pages } , jobs : { edges } }) {
 
 
     return (
@@ -34,12 +33,16 @@ export default function careers({data : { pages } , jobs : { edges } }) {
 
 
 export async function getStaticProps() {
-    const data = await getServicePage()
+    const service = await getServicePage()
     const jobs = await getJobs()
+    const menus = await getMenus()
+    const data = await getFooter()
     return {
         props: { 
-        data,
-        jobs
+        service,
+        jobs,
+        menus,
+        data
         },
         revalidate: 1, 
     }

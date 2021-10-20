@@ -6,7 +6,7 @@ const Layout = ({children}) => {
     const props = children.props
     return(
         <>
-            <Nav />
+            <Nav {...props} />
             {children}
             <Footer {...props}/>
         </>

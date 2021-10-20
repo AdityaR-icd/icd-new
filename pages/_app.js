@@ -1,7 +1,6 @@
 import '../styles/index.scss'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../styles/globals.scss'
-import '../styles/cards.scss'
 import '../styles/header.scss'
 import '../styles/variables.scss'
 import '../styles/subscribe.scss'

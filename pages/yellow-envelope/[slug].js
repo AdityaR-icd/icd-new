@@ -1,11 +1,10 @@
 import parse from 'html-react-parser';
-import { getAllNewsletterWithSlug , getArticle } from '../../lib/api'
+import { getAllNewsletterWithSlug , getArticle , getMenus , getFooter } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 // import Comment from '../../components/comment'
-import ErrorPage from 'next/error'
 
 
 
@@ -51,10 +50,14 @@ export default function newsletterss({ newsletter }) {
   }
   
   export async function getStaticProps({ params }) {
-    const data = await getArticle(params.slug)
+    const article = await getArticle(params.slug)
+    const menus = await getMenus()
+    const data = await getFooter()
     return {
       props: { 
-        newsletter: data.newsletter,
+        newsletter: article.newsletter,
+        menus,
+        data
       },
       revalidate: 1, 
     }

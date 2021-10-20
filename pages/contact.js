@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { Contact } from '../lib/api'
-
+import { getMenus , getFooter } from '../lib/api'
 
 export default function contact() {
     const [firstName, setfirstName] = useState('')
@@ -130,4 +130,16 @@ export default function contact() {
         </main>
   </div>
     )
+}
+
+export async function getStaticProps() {
+  const menus = await getMenus()
+  const data = await getFooter()
+  return {
+    props: { 
+      menus,
+      data
+    },
+    revalidate: 1, 
+  }
 }

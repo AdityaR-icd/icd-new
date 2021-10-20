@@ -1,15 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { getClients } from '../lib/api'
-import { getIndustries } from '../lib/api'
+import { getIndustries , getMenus , getClients , getFooter  } from '../lib/api'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo';
 
 
 
 
-export default function clients({ industries: { nodes } , data : { edges } }  ) {
+export default function clients({ industries: { nodes } , clients : { edges }  }  ) {
     return (
         <>
            {edges.map(({ node }) => (               
@@ -18,9 +17,9 @@ export default function clients({ industries: { nodes } , data : { edges } }  ) 
                  <div>
                  {(
                     function (project) {
-                        const data = node.projects.edges;
+                        const clients = node.projects.edges;
                         for (let i = 0; i < (node.projects.edges).length; i++) {
-                            project.push(<p>{data[i]?.node.title}</p>)
+                            project.push(<p>{clients[i]?.node.title}</p>)
                         }
                         return project;
                 })([], 0, 10)}
@@ -38,9 +37,9 @@ export default function clients({ industries: { nodes } , data : { edges } }  ) 
               <div>
                  {(
                     function (indus) {
-                        const data = industry.projects.edges;
+                        const clients = industry.projects.edges;
                         for (let i = 0; i < (industry.projects.edges).length; i++) {
-                          indus.push(<p>{data[i]?.node.title}</p>)
+                          indus.push(<p>{clients[i]?.node.title}</p>)
                         }
                         return indus;
                   })([], 0, 10)}
@@ -52,12 +51,16 @@ export default function clients({ industries: { nodes } , data : { edges } }  ) 
 }
 
 export async function getStaticProps() {
-    const data = await getClients()
+    const clients = await getClients()
     const industries = await getIndustries()
+    const menus = await getMenus()
+    const data = await getFooter()
     return {
       props: { 
-        data,
-        industries
+        clients,
+        industries,
+        menus,
+        data
       },
       revalidate: 1, 
     }

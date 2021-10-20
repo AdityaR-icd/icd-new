@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "../../assets/scss/variables.scss";
 // $assetPath : "../../assets/images";
 .cards__box{
     // height: 312px;
@@ -104,11 +104,11 @@
     }
 }
 
-.background-white{
+.background_white{
     // box-shadow: inset 0px 0px 0px 2px $border-color-gun-metal;
 }
 
-.background-grey{
+.background_grey{
     // background: url(#{$assetPath}/home/poloroid-camera.jpg) no-repeat;
     background-size: 100%;
     // background-size: cover;
@@ -126,7 +126,7 @@
     }
 }
 
-.background-yellow{
+.background_yellow{
     // background: url(#{$assetPath}/home/chair.jpg) no-repeat;
     background-size: 100%;
     // background-size: cover;

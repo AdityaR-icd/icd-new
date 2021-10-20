@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { getAllArticleForHome } from '../lib/api'
+import { getAllArticleForHome , getMenus , getFooter  } from '../lib/api'
 import Link from 'next/link'
 
 
@@ -28,10 +28,14 @@ export default function Index({ newsletters: { edges } }) {
 
 export async function getStaticProps({ preview = false }) {
   const newsletters = await getAllArticleForHome(preview)
+  const menus = await getMenus()
+  const data = await getFooter()
   return {
     props: { 
         newsletters,
-        preview
+        preview,
+        menus,
+        data
     },
     revalidate: 1, 
   }

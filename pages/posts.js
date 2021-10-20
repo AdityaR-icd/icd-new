@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import parse from 'html-react-parser';
-import { getAllPosts } from '../lib/api'
+import { getAllPosts , getMenus , getFooter } from '../lib/api'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo';
 
@@ -43,9 +43,13 @@ export default function blogs({  posts : { edges } }) {
 
 export async function getStaticProps() {
   const posts = await getAllPosts()
+  const menus = await getMenus()
+  const data = await getFooter()
   return {
     props: { 
       posts,
+      menus,
+      data
     },
     revalidate: 1, 
   }

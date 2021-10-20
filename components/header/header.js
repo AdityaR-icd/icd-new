@@ -10,8 +10,8 @@ import React from 'react'
 
 
 
-export default function header() {
-
+const Header = (props) => {
+    // const list = props.menus
     // Onclick expand paragraph
     const hamburgerToggle = () => {
         $('body').toggleClass('hamburger-open');
@@ -30,7 +30,6 @@ export default function header() {
     });
 
     return (
-            <>
             <>
                 <header id="header">
                     <div className="menu-cont">
@@ -68,8 +67,17 @@ export default function header() {
                                                     <li onClick={hamburgerClose}><Link href="/projects">projects</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/clients">clients</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/services">services</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/blogs">posts</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/posts">posts</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/contact">contact</Link></li>
+                                                    {/* {(
+                                                        function (menu) {
+                                                            for (let i = 0; i < (list).length; i++) {
+                                                                menu.push(
+                                                                    <li onClick={hamburgerClose}><Link href={list[i]?.node.path}>{list[i]?.node.label}</Link></li>
+                                                                )
+                                                            }
+                                                            return menu;
+                                                    })([], 0, 10)} */}
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
                                                     <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
@@ -93,9 +101,8 @@ export default function header() {
         </div>
     </div> */}
                 </header>
-            </></>
+            </>
     )
 }
 
-
-
+export default Header
