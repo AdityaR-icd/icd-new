@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
-import favicon from '../../assets/logo/'
 import $ from 'jquery';
 import React from 'react'
 
