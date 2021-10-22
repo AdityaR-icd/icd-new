@@ -7,7 +7,7 @@ export default function Home({data , project , home , menus}){
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const data = await getFooter()
     const project = await getHighlightedProject()
     const home = await getHome()
