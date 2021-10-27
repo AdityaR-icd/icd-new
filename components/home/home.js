@@ -6,7 +6,7 @@ import ProjectLead from "../project-lead/project-lead";
 import Cards from "../cards/cards";
 
 
-export default function Index({ project: { edges } , home: { pages } }) {
+export default function Index({ home: { pages } }) {
     const data = pages.edges[0]?.node
     const featuredata = pages.edges
       return (
