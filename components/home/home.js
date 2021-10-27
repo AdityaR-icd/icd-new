@@ -8,6 +8,7 @@ import Cards from "../cards/cards";
 
 export default function Index({ project: { edges } , home: { pages } }) {
     const data = pages.edges[0]?.node
+    const featuredata = pages.edges
       return (
         <>
         <NextSeo 
@@ -40,7 +41,7 @@ export default function Index({ project: { edges } , home: { pages } }) {
         {/* end of Twitter Cards */}
         </Head>
         <Crousel content={data.content} />
-        <ProjectLead edges={edges} data={data}/>
+        <ProjectLead edges={featuredata} />
         <Cards data={data} />
         </>
       )
