@@ -81,14 +81,12 @@ export default function Index({ AllProjects: { edges }, preview , projectsTypes 
         {category === true &&
           <>
           {nodes.map( types  => (  
-            console.log(types),
             <>
               <h4>{types.name}</h4>
               <div>
                   {(
                     function (projectType) {
                         const data = types.projects.edges;
-                        console.log(data)
                         for (let i = 0; i < (types.projects.edges).length; i++) {
                           projectType.push(<p>{data[i]?.node.title}</p>)
                         }
