@@ -1,0 +1,105 @@
+@import "../../../assets/scss/variables.scss";
+.projectCarousel{
+    // margin: 0 10px;
+    // &:hover{
+    //   img{
+    //     transform: scale(1.2);
+    //     transition: ease all 3s;
+    //   }
+    // }
+
+    .thumbnail-cont{
+      position: relative;
+    }
+
+    .projectTitle{
+      font-family: $akz-bold;
+      // font-size: 20px !important;
+      // line-height: 22px !important;
+      letter-spacing: -0.7px;
+      color: $color-black;
+      text-transform: lowercase;
+      display: inline-block;
+      // padding-top: 10px;
+
+
+      font-size: 18px !important;
+      line-height: 22px !important;
+      margin-top: 7px;
+
+        @include for-upto-tablet-portrait {
+          // font-size: 24px !important;
+          // line-height: 30px !important;
+          margin-top: 2px;
+        }
+    }
+    .grey__color{
+        letter-spacing: -0.7px;
+        color: $color-grey;
+        text-transform: lowercase;
+    }
+    .projectThumbnail{
+        position: relative;
+        display: block;
+        margin: 5px 0 8px 0 !important;
+        // margin: 5px 0 18px 0 !important;
+        overflow: hidden;
+        height: 0;
+        width: 100%;
+        padding-top: 74.95%;
+        background-size: cover;
+        background-color: $color-silver;
+    }
+    .thumbnail-gif{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%,-50%);
+      height: 100%;
+      video{
+        width: 100%;
+        height: 100%;
+      }
+    }
+    img{
+        // padding: 10px 0 !important;
+        width: 100%;
+        height: 312px;
+        object-fit: cover;
+        transition: ease all 3s;
+    }
+    
+    // Project Tags CSS
+    .project__tag{
+      left: -25px;
+      top: 20px;
+      z-index: 99;
+    }
+
+    .project__tag.new_tag{
+      color: $color-black;
+      background: $color-yellow;
+      &:after{
+        border-top: 28px solid $color-yellow;
+      }
+      &:before{
+        border-bottom: 25px solid $color-yellow;
+      }
+    }
+
+    // Tilt CSS
+    .Tilt{
+      outline: 1px solid transparent;
+      -webkit-backface-visibility: hidden;
+      will-change: transform;
+    }
+  }
+
+
+
+
+  // hover test
+  .projectCarousel .thumbnail-cont a:hover {
+    cursor: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSI0NiIgdmlld0JveD0iMCAwIDI1IDQ2Ij4gIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1IC01KSI+ICAgIDxyZWN0IHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIvPiAgICA8cG9seWxpbmUgc3Ryb2tlPSIjRkZGIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49ImJldmVsIiBzdHJva2Utd2lkdGg9IjMuNSIgcG9pbnRzPSIxOC4yIDguNCAzOC41IDI4LjIwNCAxOC4yIDQ3LjYiLz4gIDwvZz48L3N2Zz4=) 25 26 , auto;
+  }

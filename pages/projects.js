@@ -1,17 +1,19 @@
 
-import { getAllProjectsForHome , getFooter , getProjectTypes , getMenus } from '../lib/api'
+import { getAllProjectsForHome , getFooter , getProjectTypes , getMenus , getProjectPage } from '../lib/api'
 
 import Layout from '../components/project/project'
 
 
 
-export default function Index({ AllProjects , projectsTypes  }) {
+export default function Index({ AllProjects , projectsTypes , meta:{pages} }) {
+  const meta_data = pages.edges[0].node
   return (
-    <Layout AllProjects={AllProjects} projectsTypes={projectsTypes} />
+    <Layout AllProjects={AllProjects} projectsTypes={projectsTypes} meta={meta_data} />
   )
 }
 
 export async function getStaticProps({ preview = false }) {
+  const meta = await getProjectPage()
   const AllProjects = await getAllProjectsForHome(preview)
   const projectsTypes = await getProjectTypes()
   const data = await getFooter()
@@ -22,7 +24,8 @@ export async function getStaticProps({ preview = false }) {
         preview,
         projectsTypes,
         data,
-        menus
+        menus,
+        meta
     },
     revalidate: 1, 
   }

@@ -1,0 +1,177 @@
+@import "~/assets/css/scss/variables.scss";
+.industry__filter {
+    // max-height: 440px;
+    overflow: hidden;  // to fix overflow scroll on mobile
+    margin: -75px 0 75px;  // to offset margin below project tiles
+    padding-top: 75px;
+    // margin: 150px 0;
+
+
+    @include for-upto-tablet-portrait {
+        margin: -50px 0 67px;
+        padding-top: 50x;
+    }
+
+    .projectCarousel {
+        margin: 24px 0 75px 0 ;
+        @include for-upto-tablet-portrait {
+            margin: 12px 0 13px 0;
+        }
+    }
+
+    .project__category{
+        font-family: $akz-bold;
+        font-size: 52px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1;
+        letter-spacing: -2px;
+        color: $color-grey;
+
+        word-spacing: -0.08em;
+        letter-spacing: -0.04em;
+
+        @include for-upto-tablet-portrait {
+            font-size: 32px !important;
+        }
+    }
+
+    .expand__projects{
+        font-family: $akz-regular;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: -0.7px;
+        padding-top: 25px;
+        text-align: right;
+    }
+
+    .moreproject{
+        cursor: pointer;
+        position: relative;
+        padding-right: 50px;
+        padding-top: 8px;
+        filter: invert(.5);
+        &:after{
+            position: absolute;
+            content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj4gICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1saW5lam9pbj0iYmV2ZWwiIHN0cm9rZS13aWR0aD0iNCI+ICAgICAgICA8cGF0aCBkPSJNMjkgMjAuOEwxOS44MDEgMTAgMTEgMjAuOE0xOS44NSAyOC45VjExLjUiLz4gICAgPC9nPjwvc3ZnPg==);
+            right: 0;
+            top: 0;
+            transform: rotateX(180deg);
+            transition: ease all 0.5s;
+        }
+    }
+
+    .rotateArrow{
+        filter: none;
+        &:after{
+            transform: rotateX(0deg);
+            transition: ease all 0.5s;
+        }
+    }
+
+    transition: ease all 0.5s;
+}
+
+.all_filter{
+    .projectCarousel {
+        margin :  0 0 150px 0;
+        @include for-upto-tablet-portrait { 
+            margin :  0 0 80px 0;
+        }
+    }
+    .project__item {
+        @include for-tablet-portrait-only {
+            max-width: 50%;
+            width: 50%;
+            flex: 0 0 50%;
+        }
+    }
+        
+}
+
+.show{
+    max-height: 2000px;
+    transition: ease all 1s;
+}
+
+
+.projectType__filter {
+
+    @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+        // margin: 0;
+    }
+
+    .container {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            padding: 0;
+        }
+    }
+    
+    .project__category {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            padding: 0 16px;
+        }
+        @include for-tablet-portrait-only {
+            padding: 0 32px;
+        }
+    }
+    
+    .see-all {
+        width: 100%;
+        position: absolute;
+        right: 0;
+        text-align: right;
+        padding-right: 10px;
+        @include for-upto-tablet-landscape {  // for scroll on mobile - project category
+            padding: 7px 16px 0 0;
+            
+            padding: 10px 25px;
+        }
+        @include for-tablet-portrait-only {
+            padding: 7px 32px 0 0;
+        }
+    }
+
+    .project__scroll {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            overflow-x: scroll;
+            padding: 0 16px;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+        @include for-tablet-portrait-only {
+            padding: 0 32px;
+        }
+    }
+    
+    .project__row {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            width: 916px;
+            white-space: nowrap;
+        }
+        @include for-tablet-portrait-only {
+            width: 1082px;
+        }
+    }
+    
+    .project__item {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            float: left;
+            white-space: normal;
+            max-width: 300px;
+            padding-right: 0 !important;
+        }
+        @include for-tablet-portrait-only {
+            max-width: 350px;
+        }
+    }
+        
+    .industry__filter .projectCarousel {
+        @include for-upto-tablet-portrait {  // for scroll on mobile - project category
+            margin-bottom: 40px;
+        }
+    }
+
+}
