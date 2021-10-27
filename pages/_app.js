@@ -4,6 +4,7 @@ import '../styles/globals.scss'
 import '../styles/header.scss'
 import '../styles/variables.scss'
 import '../styles/subscribe.scss'
+import '../styles/category-single.scss'
 import '../styles/footer.scss'
 import Layout from '../components/layout/layout'
 
