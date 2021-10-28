@@ -1,8 +1,3 @@
-module.exports = {
-  reactStrictMode: true,
-}
-
-
 const path = require('path')
 
 module.exports = {
@@ -15,4 +10,8 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   optimizeFonts: true,
+  reactStrictMode: true,
+  images: {
+    domains: ['digital.icdindia.com'],
+  },
 }

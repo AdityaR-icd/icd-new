@@ -1,6 +1,8 @@
 import cards from './cards.module.scss'
 import home from '../home/home.module.scss'
 import parse from 'html-react-parser';
+import Image from 'next/image'
+
 
 export default function Cards({data}){
     let card = ""
@@ -25,7 +27,8 @@ export default function Cards({data}){
                     }
                     featuredCard.push( 
                         <div className={ ` col-lg-4 ${home.home_cards}`}>
-                            <div className={bg} style={bgImage}>
+                            <div className={bg}>
+                            <Image  src={cardImg} alt="card-image" layout="fill" className="card__background_image"/>
                                 <span className={ `${cards.card__tag}`}>{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
                                 <span className={ `${cards.card__text}`}>{ parse(data.homePage.featuredCards[k].content) }</span>
                                 <span className={ `${cards.card__link}`}><a href="/careers"><button>apply now</button></a></span>
