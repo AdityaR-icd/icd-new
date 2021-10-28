@@ -52,7 +52,10 @@
 
         &:hover{
             .full_thumb{
-                background-size: 103%;
+                .project_lead{
+                  transform: scale(1.1);
+                  transition: all .3s ease-in!important;
+                }
             }
         }
     }

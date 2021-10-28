@@ -28,7 +28,9 @@ export default function allproject({ edges   }){
                         <div className={carousel.thumbnail_cont}>
                             <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%","background":"url("+loader.src+") no-repeat","backgroundPosition":"center" , "backgroundSize" : "10%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`} style={bgImage}></div>
+                                            <div className={`${carousel.full_thumb} full-thumb`}>
+                                                <Image className={carousel.project_lead} loading="lazy" src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
                                     <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
