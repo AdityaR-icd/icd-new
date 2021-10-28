@@ -67,7 +67,7 @@ export default function Index({ AllProjects: { edges }, preview , projectsTypes 
                 <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-                <a className={ all ? "project__filter marginRight filter__active" : "project__filter marginRight" } onClick={ FilterByAll } >all</a>
+                <a onClick={() => router.push('/type/all' , type/all , { shallow: true })} className={ all ? "project__filter marginRight filter__active" : "project__filter marginRight" } onClick={ FilterByAll } >all</a>
                 <a className={ category ? "project__filter  filter__active" : "project__filter " } onClick={ FilterByType } >category</a>
               </div>
             </div>

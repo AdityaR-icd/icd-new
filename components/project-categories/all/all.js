@@ -1,15 +1,10 @@
-import Link from 'next/link'
-import loader from "../../../assets/images/loader/page-loader.gif";
 import Image from 'next/image'
 import carousel from './all.module.scss'
 import type from '../type/type.module.scss'
 
 export default function allproject({ edges   }){
-    var thumbnailClass = 'projectThumbnail';
     var client = '';
-    var bgImage ='';
     var leadImgSrc  = '';
-    var image = '';
     return(
         <>
         <section className={`${type.industry__filter} ${type.all_filter} `}>
@@ -19,9 +14,6 @@ export default function allproject({ edges   }){
                     {edges.map(({ node }) => (
                         client = node.clients.edges[0].node.name,
                         leadImgSrc = node.featuredImage.node.sourceUrl,
-                        bgImage = {
-                            backgroundImage: 'url(' + leadImgSrc + ')'
-                        },
                     <>
                     <div className="col-md-4 project__item" key={ node.id }>
                         <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
@@ -29,7 +21,7 @@ export default function allproject({ edges   }){
                             <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
-                                                <Image className={carousel.project_lead} priority={true} placeholder="blur" src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                <Image className={carousel.project_lead} priority={true} placeholder="blur" blurDataURL={leadImgSrc} src={leadImgSrc} alt="project-lead" layout="fill" />
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
