@@ -3,6 +3,10 @@ import style from '../home/home.module.scss'
 import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
+import { useMediaQuery } from 'react-responsive';
+
+
+
 
 export default function projectLead({ edges   }){
     let client = ""
@@ -11,6 +15,8 @@ export default function projectLead({ edges   }){
     let j = 0
     let text = ""
     const projects = edges[0].node.projects.highlightedProjects
+    const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 001px)' });
     return(
         <>
         {projects.map(({ highlightedImage , clients } , j ) => (
@@ -54,8 +60,17 @@ export default function projectLead({ edges   }){
                                                 <div className={`${styles.project__section}`} >
                                                     <div className={styles.Tilt}>
                                                         <div className="Tilt-inner">
-                                                            <div className={`${styles.project__leadimage} ${styles.video_container}  d-none d-lg-block`}>
-                                                                <video src={project_video} autoPlay playsInline loop muted></video>
+                                                            <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                            {isDesktop && (
+                                                                <>
+                                                                    <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                </>
+                                                            )}
+                                                            {isMobile && (
+                                                                <>
+                                                                    <div></div>
+                                                                </>
+                                                            )}
                                                             </div>
                                                         </div>
                                                     </div>   
