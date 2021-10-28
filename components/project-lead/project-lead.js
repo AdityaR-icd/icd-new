@@ -74,7 +74,7 @@ export default function projectLead({ edges   }){
                                                             {isMobile && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} d-lg-none d-block`}>
-                                                                        <Image priority={true} src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
+                                                                        <Image placeholder="blur" blurDataURL={project_thumbnail} src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
                                                                     </div>
                                                                 </>
                                                             )}
