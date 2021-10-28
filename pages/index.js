@@ -1,4 +1,5 @@
-import Layout from '../components/home/home'
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("../components/home/home"));
 import { getFooter  , getHome , getMenus } from '../lib/api'
 
 export default function Home({data , project , home , menus}){

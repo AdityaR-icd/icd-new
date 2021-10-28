@@ -1,7 +1,7 @@
 
 import { getAllProjectsForHome , getFooter , getProjectTypes , getMenus , getProjectPage } from '../lib/api'
-
-import Layout from '../components/project/project'
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("../components/project/project"));
 
 
 

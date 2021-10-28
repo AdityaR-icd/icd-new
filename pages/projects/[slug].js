@@ -1,11 +1,10 @@
 import parse from 'html-react-parser';
 import {getAllProjectsWithSlug , getProject , getMenus , getFooter} from '../../lib/api'
 import { useRouter } from 'next/router'
-import Like from '../../components/like';
-import Seo from '../../components/seo';
-import PropTypes from 'prop-types';
-import Head from 'next/head';
-// import Comment from '../../components/comment'
+import dynamic from "next/dynamic";
+const Like = dynamic(() => import("../../components/like"));
+const Seo = dynamic(() => import("../../components/seo"));
+
 
 
 

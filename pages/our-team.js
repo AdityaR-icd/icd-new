@@ -1,8 +1,5 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import parse from 'html-react-parser';
 import { getOurteamPage , getTeam , getMenus , getFooter } from '../lib/api'
-import { join } from 'lodash';
 
 
 export default function careers({teamPage : { pages } , team : {edges}}) {

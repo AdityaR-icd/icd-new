@@ -6,7 +6,8 @@ import '../styles/variables.scss'
 import '../styles/subscribe.scss'
 import '../styles/category-single.scss'
 import '../styles/footer.scss'
-import Layout from '../components/layout/layout'
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("../components/layout/layout"));
 
 
 

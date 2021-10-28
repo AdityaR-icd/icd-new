@@ -1,8 +1,7 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import parse from 'html-react-parser';
-import { Contact, getServicePage , getMenus , getFooter , getJobs } from '../lib/api'
-import  Enquiry  from '../components/enquiry/enquiry'
+import { getServicePage , getMenus , getFooter , getJobs } from '../lib/api'
+import dynamic from "next/dynamic";
+const Enquiry = dynamic(() => import("../components/enquiry/enquiry"));
 import { join } from 'lodash';
 
 
