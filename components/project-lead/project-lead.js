@@ -74,7 +74,7 @@ export default function projectLead({ edges   }){
                                                             {isMobile && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} d-lg-none d-block`}>
-                                                                        <Image loading="lazy" src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
+                                                                        <Image priority={true} src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
                                                                     </div>
                                                                 </>
                                                             )}
