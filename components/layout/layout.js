@@ -1,6 +1,8 @@
 import { Children } from 'react'
-import Nav from '../header/header'
-import Footer from '../footer/footer'
+import dynamic from "next/dynamic";
+const Nav = dynamic(() => import("../header/header"));
+const Footer = dynamic(() => import("../footer/footer"));
+
 
 const Layout = ({children}) => {
     const props = children.props

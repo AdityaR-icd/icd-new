@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
-import Crousel from '../carousel/carousel-home'
-import ProjectLead from "../project-lead/project-lead";
-import Cards from "../cards/cards";
+import dynamic from "next/dynamic";
+const Crousel = dynamic(() => import("../carousel/carousel-home"));
+const ProjectLead = dynamic(() => import("../project-lead/project-lead"));
+const Cards = dynamic(() => import("../cards/cards"));
 
 
 export default function Index({ home: { pages } }) {
