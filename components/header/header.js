@@ -42,9 +42,9 @@ const Header = (props) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-10 col-md-2 logo-container">
-                                    <a href="/" aria-label="logo">
+                                    <Link href="/" aria-label="logo" prefetch={false}>
                                         <Image loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="col-2 col-md-10">
                                     <div className="d-block d-lg-none">
@@ -66,12 +66,12 @@ const Header = (props) => {
                                                             {/* <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" /> */}
                                                         </form>
                                                     </li>
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/projects">projects</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/clients">clients</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/services">services</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/posts">posts</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/contact">contact</Link></li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/" prefetch={false}>home</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/projects" prefetch={false}>projects</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/clients" prefetch={false}>clients</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/services" prefetch={false}>services</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/posts" prefetch={false}>posts</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/contact" prefetch={false}>contact</Link></li>
                                                     {/* {(
                                                         function (menu) {
                                                             for (let i = 0; i < (list).length; i++) {
@@ -81,8 +81,8 @@ const Header = (props) => {
                                                             }
                                                             return menu;
                                                     })([], 0, 10)} */}
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team" prefetch={false}>team</Link></li>
+                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers" prefetch={false}>careers</Link></li>
                                                     <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
                                                     {/* <li className="search-icon d-lg-block d-none" onClick={ this.searchToggle }><span className="searchIcon"></span></li> */}
                                                 </ul>
