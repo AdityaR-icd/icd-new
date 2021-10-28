@@ -3,6 +3,7 @@ import style from '../home/home.module.scss'
 import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
+import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive';
 
 
@@ -11,17 +12,19 @@ import { useMediaQuery } from 'react-responsive';
 export default function projectLead({ edges   }){
     let client = ""
     let project_video = ""
+    let project_thumbnail = ""
     let i = 0
     let j = 0
     let text = ""
     const projects = edges[0].node.projects.highlightedProjects
     const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
-    const isMobile = useMediaQuery({ query: '(max-width: 001px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
     return(
         <>
         {projects.map(({ highlightedImage , clients } , j ) => (
             // console.log(j),
             project_video = highlightedImage.video.mediaItemUrl,
+            project_thumbnail = highlightedImage.highlightedThumbnailMobile.sourceUrl,
             client = clients.edges[0].node.name,
                 <>
                 {edges.map(({ node } ) => (
@@ -60,18 +63,21 @@ export default function projectLead({ edges   }){
                                                 <div className={`${styles.project__section}`} >
                                                     <div className={styles.Tilt}>
                                                         <div className="Tilt-inner">
-                                                            <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                            
                                                             {isDesktop && (
                                                                 <>
-                                                                    <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                    </div>
                                                                 </>
                                                             )}
                                                             {isMobile && (
                                                                 <>
-                                                                    <div></div>
+                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block`}>
+                                                                        <Image src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
+                                                                    </div>
                                                                 </>
                                                             )}
-                                                            </div>
                                                         </div>
                                                     </div>   
                                                         

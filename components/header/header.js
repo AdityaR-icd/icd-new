@@ -60,12 +60,12 @@ const Header = (props) => {
                                         <div className="container">
                                             <div className="row">
                                                 <ul>
-                                                    <li className="mobile__menu--items">
+                                                    {/* <li className="mobile__menu--items">
                                                         <form className="global-search">
                                                             <input type="search" className="searchInput" placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
-                                                            {/* <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" /> */}
+                                                            <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" />
                                                         </form>
-                                                    </li>
+                                                    </li> */}
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/" prefetch={false}>home</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/projects" prefetch={false}>projects</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/clients" prefetch={false}>clients</Link></li>
