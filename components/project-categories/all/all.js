@@ -1,4 +1,5 @@
-import Image from 'next/image'
+import dynamic from "next/dynamic";
+const Image = dynamic(() => import("next/image"));
 import carousel from './all.module.scss'
 import type from '../type/type.module.scss'
 

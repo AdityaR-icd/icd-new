@@ -1,9 +1,9 @@
 import { NextSeo } from 'next-seo';
-import Head from 'next/head'
 import React, { Component } from 'react';
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import dynamic from "next/dynamic";
+const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 
