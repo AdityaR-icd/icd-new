@@ -1,4 +1,6 @@
 const path = require('path')
+const withOptimizedImages = require('next-optimized-images')
+module.exports = withOptimizedImages({})
 
 module.exports = {
   sassOptions: {
@@ -11,8 +13,8 @@ module.exports = {
   },
   optimizeFonts: true,
   reactStrictMode: true,
+
   images: {
     domains: ['digital.icdindia.com'],
-    minimumCacheTTL: 2592000
   },
 }
