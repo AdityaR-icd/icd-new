@@ -7,8 +7,6 @@ import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive';
 
 
-
-
 export default function projectLead({ edges   }){
     let client = ""
     let project_video = ""
@@ -23,6 +21,7 @@ export default function projectLead({ edges   }){
         <>
         {projects.map(({ highlightedImage , clients } , j ) => (
             // console.log(j),
+            
             project_video = highlightedImage.video.mediaItemUrl,
             project_thumbnail = highlightedImage.highlightedThumbnailMobile.sourceUrl,
             client = clients.edges[0].node.name,
@@ -30,12 +29,13 @@ export default function projectLead({ edges   }){
                 {edges.map(({ node } ) => (
                     <>
                         {(
+
                             function (home_text) {
                             if ( j % 2 !== 0 && j > 0 ) {
                                 text = (
                                     <div className={`${style.textContainer} container`}>
                                         <div className="row">
-                                            <div className="col-md-10 offset-md-1">
+                                            <div className="col-md-10 offset-md-1">x
                                                 <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
                                                     <span className={`${style.homeText}`}>
                                                         {parse(node.featuredtext[i]?.content)}

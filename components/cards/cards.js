@@ -7,6 +7,7 @@ import Image from 'next/image'
 export default function Cards({data}){
     let card = ""
     let bg = ""
+    
     return(
         <>
          <section className="featured-card">
