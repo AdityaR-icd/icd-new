@@ -16,5 +16,6 @@ module.exports = {
 
   images: {
     domains: ['digital.icdindia.com'],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
   },
 }
