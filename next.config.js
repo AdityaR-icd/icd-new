@@ -13,6 +13,6 @@ module.exports = {
   reactStrictMode: true,
   images: {
     domains: ['digital.icdindia.com'],
-    minimumCacheTTL: 60
+    minimumCacheTTL: 2592000
   },
 }
