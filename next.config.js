@@ -1,6 +1,5 @@
 const path = require('path')
-const withOptimizedImages = require('next-optimized-images')
-module.exports = withOptimizedImages({})
+
 
 module.exports = {
   sassOptions: {
@@ -16,6 +15,19 @@ module.exports = {
 
   images: {
     domains: ['digital.icdindia.com'],
-    minimumCacheTTL: 60 * 60 * 24 * 365,
+  },
+  async headers() {
+    return [
+      {
+        source: '/:all*(svg|jpg|png|webp|gif|mp4)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=9999999999, must-revalidate',
+          }
+        ],
+      },
+    ]
   },
 }
