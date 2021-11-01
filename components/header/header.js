@@ -67,7 +67,7 @@ const Header = (props) => {
                                                         </form>
                                                     </li> */}
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/" prefetch={false}>home</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/projects" prefetch={false}>projects</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/projects/type/all" prefetch={false}>projects</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/clients" prefetch={false}>clients</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/services" prefetch={false}>services</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/posts" prefetch={false}>posts</Link></li>

@@ -7,25 +7,13 @@ const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 
-export default function Index({ AllProjects: { edges }, preview , projectsTypes : { nodes } , data , meta }) {
-
+export default function Index({ AllProjects: { edges } ,  meta }) {
+// projectsTypes : { nodes }
   const router = useRouter()
-  const [category, setType] = useState(false)
   const [all, setAll] = useState(true)
-  const [active, setActive] = useState('filter__active')
 
   const backButton = () => {
     window.history.back();
-  }
-
-  const FilterByAll = () => {
-    setAll(true)
-    setType(false)
-  }
-
-  const FilterByType = () => {
-    setAll(false)
-    setType(true)
   }
 
 
@@ -67,8 +55,8 @@ export default function Index({ AllProjects: { edges }, preview , projectsTypes 
                 <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-                <a onClick={() => router.push('/type/all' , type/all , { shallow: true })} className={ all ? "project__filter marginRight filter__active" : "project__filter marginRight" } onClick={ FilterByAll } >all</a>
-                <a className={ category ? "project__filter  filter__active" : "project__filter " } onClick={ FilterByType } >category</a>
+                <a href ="/projects/type/all" className="project__filter marginRight filter__active"  >all</a>
+                <a href ="/projects" className="project__filter"  >category</a>
               </div>
             </div>
             <span className="bottom__border"></span>
@@ -79,25 +67,6 @@ export default function Index({ AllProjects: { edges }, preview , projectsTypes 
           <All edges={edges}/>
           </>
         )}
-        {category === true &&
-          <>
-          {nodes.map( types  => (  
-            <>
-              <h4>{types.name}</h4>
-              <div>
-                  {(
-                    function (projectType) {
-                        const data = types.projects.edges;
-                        for (let i = 0; i < (types.projects.edges).length; i++) {
-                          projectType.push(<p>{data[i]?.node.title}</p>)
-                        }
-                        return projectType;
-                  })([], 0, 10)}
-                </div>
-            </>
-          ))}
-          </>
-          }
       </></>
     )
   }
