@@ -15,7 +15,7 @@ module.exports = {
 
   images: {
     domains: ['digital.icdindia.com'],
-    deviceSizes: [640, 750, 828, 1080, 1920],
+    deviceSizes: [640, 750, 828, 1080],
   },
 
   async headers() {
@@ -26,7 +26,7 @@ module.exports = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=9999999999, must-revalidate',
+            value: 'public, max-age=365d, must-revalidate',
           }
         ],
       },
