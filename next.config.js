@@ -21,7 +21,7 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/_next/image',
+        source: '/_next/image(.*)',
         locale: false,
         headers: [
           {
