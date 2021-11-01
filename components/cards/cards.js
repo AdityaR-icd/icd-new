@@ -29,7 +29,7 @@ export default function Cards({data}){
                     featuredCard.push( 
                         <div className={ ` col-lg-4 ${home.home_cards}`}>
                             <div className={bg}>
-                            <img  priority={true} src={cardImg} alt="card-image" layout="fill" className="card__background_image"/>
+                            <Image  priority={true} src={cardImg} alt="card-image" layout="fill" className="card__background_image"/>
                                 <span className={ `${cards.card__tag}`}>{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
                                 <span className={ `${cards.card__text}`}>{ parse(data.homePage.featuredCards[k].content) }</span>
                                 <span className={ `${cards.card__link}`}><a href="/careers"><button>apply now</button></a></span>
