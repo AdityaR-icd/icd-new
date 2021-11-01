@@ -12,6 +12,7 @@ export default function Index({ projectsTypes , meta:{pages} }) {
   )
 }
 
+
 export async function getStaticProps({ preview = false }) {
   const meta = await getProjectPage()
   const projectsTypes = await getProjectTypes()
@@ -27,5 +28,6 @@ export async function getStaticProps({ preview = false }) {
     },
     revalidate: 1, 
   }
+  
 }
 
