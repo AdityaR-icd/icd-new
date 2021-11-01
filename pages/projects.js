@@ -25,7 +25,7 @@ export async function getStaticProps({ preview = false }) {
         menus,
         meta
     },
-    revalidate: 640 * 60, 
+    revalidate: 1, 
   }
 }
 
