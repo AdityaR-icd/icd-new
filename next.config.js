@@ -14,22 +14,10 @@ module.exports = {
   reactStrictMode: true,
 
   images: {
+    images: {
+      minimumCacheTTL: 63072000,
+    },
     domains: ['digital.icdindia.com'],
     deviceSizes: [640, 750, 828, 1080, 1920],
-  },
-
-  async headers() {
-    return [
-      {
-        source: '/:all*(svg|jpg|png|webp|jpeg)',
-        locale: false,
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=63072000, must-revalidate',
-          }
-        ],
-      },
-    ]
   },
 }
