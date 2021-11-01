@@ -2,15 +2,11 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 import dynamic from "next/dynamic";
 const Head = dynamic(() => import('next/head'));
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+const Type = dynamic(() => import("../project-categories/type/type"));
 
 import project from './projects.module.scss'
 
 export default function projectCategory({ meta , projectsTypes : { nodes } }) {
-    const router = useRouter()
-    const [category, setType] = useState(true)
-
     const backButton = () => {
       window.history.back();
     }
@@ -61,9 +57,10 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
               <span className="bottom__border"></span>
             </div>
           </section>
-          {category === true &&
             <>
-            {nodes.map( types  => (  
+            <Type nodes={nodes} />
+            {/* {nodes.map( types  => (  
+              console.log(nodes),
               <>
                 <h4>{types.name}</h4>
                 <div>
@@ -77,9 +74,9 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
                     })([], 0, 10)}
                   </div>
               </>
-            ))}
+            ))} */}
+
             </>
-            }
         </></>
       )
     }

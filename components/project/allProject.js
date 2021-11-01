@@ -8,10 +8,6 @@ const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 
 export default function Index({ AllProjects: { edges } ,  meta }) {
-// projectsTypes : { nodes }
-  const router = useRouter()
-  const [all, setAll] = useState(true)
-
   const backButton = () => {
     window.history.back();
   }
@@ -56,17 +52,15 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
                 <a href ="/projects/type/all" className="project__filter marginRight filter__active"  >all</a>
-                <a href ="/projects" className="project__filter"  >category</a>
+                <a href ="/projects" className="project__filter">category</a>
               </div>
             </div>
             <span className="bottom__border"></span>
           </div>
         </section>
-        {all === true && (
           <>
           <All edges={edges}/>
           </>
-        )}
       </></>
     )
   }
