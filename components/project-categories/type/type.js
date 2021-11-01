@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import projectCategory from "../../project/projectCategory";
 const Image = dynamic(() => import("next/image"));
 import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
