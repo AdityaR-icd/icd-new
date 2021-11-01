@@ -15,8 +15,7 @@ module.exports = {
 
   images: {
     images: {
-      minimumCacheTTL: 63072000,
-      maxAge: "360d",
+      minimumCacheTTL: "365d",
     },
     domains: ['digital.icdindia.com'],
     deviceSizes: [640, 750, 828, 1080, 1920],
