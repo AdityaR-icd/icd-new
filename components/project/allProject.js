@@ -9,8 +9,6 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
   const backButton = () => {
     window.history.back();
   }
-
-
   
   return (
 

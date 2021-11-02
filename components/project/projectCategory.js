@@ -11,8 +11,6 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
       window.history.back();
     }
   
-  
-    
     return (
   
         <>

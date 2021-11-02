@@ -43,7 +43,7 @@ export default function Projects({ project }) {
     const backButton = () => {
         window.history.back();
     }
-
+    
     return (
       <>
         <NextSeo 
