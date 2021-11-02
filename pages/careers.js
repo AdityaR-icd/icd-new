@@ -2,7 +2,6 @@ import parse from 'html-react-parser';
 import { getServicePage , getMenus , getFooter , getJobs } from '../lib/api'
 import dynamic from "next/dynamic";
 const Enquiry = dynamic(() => import("../components/enquiry/enquiry"));
-import { join } from 'lodash';
 
 
 export default function careers({service : { pages } , jobs : { edges } }) {
