@@ -35,7 +35,8 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
           },
         ],
         site_name: meta.seo.title,
-      }} /><Head>
+      }} />
+      <Head>
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.seo.title} />

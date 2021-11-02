@@ -5,6 +5,7 @@ import style from '../../../components/project/category.module.scss'
 
 import dynamic from "next/dynamic";
 const Intro = dynamic(() => import("../../../components/intro-text/intro-text"));
+const All = dynamic(() => import("../../../components/project-categories/all/all"));
 
 
 
@@ -13,6 +14,8 @@ export default function Projects({ project }) {
     const router = useRouter()
     var pageData = project?.edges[0].node
     var projectSubTypes = pageData?.projects?.edges[0].node.projectSubTypes
+    var projects = pageData?.projects.edges
+
 
     if (projectSubTypes?.edges.length > 0) {
         var common = <a className="project__filter marginRight">all</a>
@@ -56,6 +59,9 @@ export default function Projects({ project }) {
         </section>
 
         <Intro description={pageData.description}/>
+
+        <All edges={projects}/>
+        
       </>
     )
   }

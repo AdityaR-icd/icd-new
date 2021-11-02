@@ -4,6 +4,7 @@ import carousel from './all.module.scss'
 import type from '../type/type.module.scss'
 
 export default function allproject({ edges   }){
+
     var client = '';
     var leadImgSrc  = '';
     return(

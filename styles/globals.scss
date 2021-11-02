@@ -250,6 +250,12 @@ p{
   line-height: 32px;
   letter-spacing: 0.4px;
   color: $color-dark-black;
+
+}
+
+em{
+  color: $color-red;
+  font-style: inherit;
 }
 
 select::-ms-expand {
