@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
 const Crousel = dynamic(() => import("../carousel/carousel-home"));

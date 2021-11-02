@@ -1,6 +1,6 @@
 @import "variables.scss";
 
-.project-type-cont{
+.project_type_cont{
     margin-top: 250px;
 
     &.mT__260 {
@@ -84,7 +84,7 @@
 
 }
 
-.categoryIntro--cont {
+.categoryIntro__cont {
     max-height: 800px;
     transition: ease all 0.3s;
     &.hideIntro{

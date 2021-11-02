@@ -40,9 +40,9 @@ const Header = (props) => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-10 col-md-2 logo-container">
-                                    <Link href="/" aria-label="logo" prefetch={false}>
+                                    <a href="/" aria-label="logo">
                                         <Image loading="lazy" decoding="async" width="172" height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
-                                    </Link>
+                                    </a>
                                 </div>
                                 <div className="col-2 col-md-10">
                                     <div className="d-block d-lg-none">

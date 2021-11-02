@@ -59,23 +59,6 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
           </section>
             <>
             <Type nodes={nodes} />
-            {/* {nodes.map( types  => (  
-              console.log(nodes),
-              <>
-                <h4>{types.name}</h4>
-                <div>
-                    {(
-                      function (projectType) {
-                          const data = types.projects.edges;
-                          for (let i = 0; i < (types.projects.edges).length; i++) {
-                            projectType.push(<p>{data[i]?.node.title}</p>)
-                          }
-                          return projectType;
-                    })([], 0, 10)}
-                  </div>
-              </>
-            ))} */}
-
             </>
         </></>
       )
