@@ -3,7 +3,7 @@ const Image = dynamic(() => import("next/image"));
 import carousel from './all.module.scss'
 import type from '../type/type.module.scss'
 
-export default function allproject({ edges   }){
+export default function allproject({ edges }){
 
     var client = '';
     var leadImgSrc  = '';

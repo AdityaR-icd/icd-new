@@ -1,6 +1,9 @@
+import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import { getAllProjectsTypes , getProjectByTypes , getMenus , getFooter} from '../../../lib/api'
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
+import ogimage from '../../../assets/images/seo/og-default.png'
 
 
 import dynamic from "next/dynamic";
@@ -15,6 +18,7 @@ export default function Projects({ project }) {
     var pageData = project?.edges[0].node
     var projectSubTypes = pageData?.projects?.edges[0].node.projectSubTypes
     var projects = pageData?.projects.edges
+    var seo = pageData?.seo
 
 
     if (projectSubTypes?.edges.length > 0) {
@@ -42,6 +46,31 @@ export default function Projects({ project }) {
 
     return (
       <>
+        <NextSeo 
+            title={` ${pageData.name} | Itu Chaudhuri Design ` }
+            description={seo.metaDesc}
+            canonical={`https://icd-v3-vercel.vercel.app/projects/category/${pageData.slug}`}
+            openGraph={{
+              url: `https://icd-v3-vercel.vercel.app/projects/category/${pageData.slug}`,
+              title: pageData.name,
+              description: seo.opengraphDescription,
+              images: [
+                {
+                  url: ogimage.src,
+                  alt: 'project-categories',
+                  type: 'image/jpeg',
+                },
+              ],
+              site_name: pageData.name,
+            }}
+        />
+        <Head>
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={pageData.name} />
+          <meta name="twitter:description" content={seo.opengraphDescription} />
+          <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app/projects/category/${pageData.slug}`} />
+          <meta name="twitter:image" content={ogimage.src} />
+        </Head>
         <section className={`${style.project_type_cont} mT__260 page__header `}>
             <div className="container page__header--container">
               <div className="row">
