@@ -10,12 +10,16 @@ header {
     // -webkit-transform:translate3d(0,0,0);
     // will-change: transform;
     .menu-cont{
-        background: $color-white;
         transform: translateZ(0);
         will-change: transform;
         transition: 0.3s ease all;
         pointer-events: all;
     }
+
+    .header__hide {
+        transform: translateY(-100%);
+    }
+    
     .yellowLine {
         position: relative;
         display: block;
@@ -189,9 +193,6 @@ header {
 
     .expand {
         height: 400px;
-    }
-    .header__hide {
-        transform: translateY(-100%);
     }
 }
 

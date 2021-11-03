@@ -5,6 +5,9 @@ import Image from 'next/image'
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import $ from 'jquery';
 
+import { useState } from 'react'
+
+
 
 
 const Header = (props) => {
@@ -20,11 +23,31 @@ const Header = (props) => {
         $('.hamburger, .nav-menu').removeClass("is-active");
     } 
 
+
     useEffect(() => {
         $(window).on('load', function(){
            $('.loader').addClass('hideLoader')
         });
+
+        var lastScrollTop = 0;
+
+        $(window).on('scroll', function(event){
+            var st = $(this).scrollTop();
+            if(st > 150){
+                if (st > lastScrollTop){
+                    $('.menu-cont').addClass('header__hide');
+                } else {
+                    $('.menu-cont').removeClass('header__hide');
+                }
+                lastScrollTop = st;
+            } else {
+                $('.menu-cont').removeClass('header__hide');
+            }
+           
+        });
+        
     });
+
 
     return (
             <>
