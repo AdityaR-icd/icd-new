@@ -30,9 +30,7 @@ export default function Projects({ project }) {
     const allProjects  = () => {
       setallProject(true)
     }
-
-    console.log(projectSubTypes?.edges.length)
-    if (projectSubTypes.edges.length > 0) {
+    if (projectSubTypes?.edges.length > 0) {
         var common = <a className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
         var slug = 
         
