@@ -35,7 +35,7 @@ export default function projectLead({ edges   }){
                                 text = (
                                     <div className={`${style.textContainer} container`}>
                                         <div className="row">
-                                            <div className="col-md-10 offset-md-1">x
+                                            <div className="col-md-10 offset-md-1">
                                                 <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
                                                     <span className={`${style.homeText}`}>
                                                         {parse(node.featuredtext[i]?.content)}
