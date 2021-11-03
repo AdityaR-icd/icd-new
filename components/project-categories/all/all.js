@@ -23,7 +23,7 @@ export default function allproject({ edges }){
                             <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
-                                                <Image className={carousel.project_lead} priority={true} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                <Image className={carousel.project_lead} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
