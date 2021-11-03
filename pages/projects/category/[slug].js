@@ -4,6 +4,7 @@ import { getAllProjectsTypes , getProjectByTypes , getMenus , getFooter} from '.
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
 import ogimage from '../../../assets/images/seo/og-default.png'
+import { useState } from 'react'
 
 
 import dynamic from "next/dynamic";
@@ -20,15 +21,24 @@ export default function Projects({ project }) {
     var projects = pageData?.projects.edges
     var seo = pageData?.seo
 
+    const [allProject, setallProject] = useState(true)
+
+    const projectCategory  = () => {
+      setallProject(false)
+    }
+
+    const allProjects  = () => {
+      setallProject(true)
+    }
 
     if (projectSubTypes?.edges.length > 0) {
-        var common = <a className="project__filter marginRight">all</a>
+        var common = <a className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
         var slug = 
         
-        projectSubTypes.edges.map((item) => {
+        projectSubTypes?.edges.map((item) => {
             return (
                 <>
-                <a href={ `/projects/category/${item.slug}` } className="project__filter marginRight">{item.node.name}</a>
+                <a className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" } onClick={projectCategory} >{item?.node.name}</a>
                 </>
             )
         }).reverse();
@@ -87,7 +97,11 @@ export default function Projects({ project }) {
             </div>
         </section>
 
-        <Intro description={pageData.description}/>
+
+        {allProject === true && (
+          <Intro description={pageData.description}/>
+        )}
+       
 
         <All edges={projects}/>
         
