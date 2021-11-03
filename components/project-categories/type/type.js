@@ -16,7 +16,7 @@ export default function projectTypes({ nodes }){
         {nodes.map(({ projects } , i , types)  => (      
 
             <section className= {`${type.industry__filter} ${type.projectType__filter}`} >
-                <div className={type.container}>
+                <div className={` container ${type.container}`}>
                     <div className="row">
                         <div className="col-12">
                             <span className={type.project__category}>{types[i].name}</span>
