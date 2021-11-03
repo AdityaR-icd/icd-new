@@ -16,7 +16,7 @@ export default function projectTypes({ nodes }){
         {nodes.map(({ projects } , i , types)  => (      
 
             <section className= {`${type.industry__filter} ${type.projectType__filter}`} >
-                <div className="container">
+                <div className={type.container}>
                     <div className="row">
                         <div className="col-12">
                             <span className={type.project__category}>{types[i].name}</span>
@@ -24,8 +24,8 @@ export default function projectTypes({ nodes }){
                         </div>
                     </div>
     
-                    <div className="project__scroll">
-                        <div className="row project__row">
+                    <div className={type.project__scroll}>
+                        <div className={`row ${type.project__row}`}>
                         {projects.edges.map(({ node }) => (
                             slug = node?.slug,
                             title = node?.title,
@@ -34,7 +34,7 @@ export default function projectTypes({ nodes }){
                             clientsName = client[i]?.node.name,
                             heading = node.projectComponent.heading,                
                                 <>
-                                    <div className="col-md-4 project__item">
+                                    <div className={ `col-md-4 ${type.project__item}` }>
                                         <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                             <div className={carousel.thumbnail_cont}>
                                                 <a href={`/projects/${slug}`}>
@@ -56,7 +56,7 @@ export default function projectTypes({ nodes }){
                                         </div>
                                     </div>  
                                 </> 
-                                ))}
+                                )).slice(0,3)}
                         </div>
                     </div>
                 </div>
