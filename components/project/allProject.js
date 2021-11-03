@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
+import category from './category.module.scss'
 
 export default function Index({ AllProjects: { edges } ,  meta }) {
   const backButton = () => {
@@ -48,7 +49,7 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
                 <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-                <a href ="/projects/type/all" className="project__filter marginRight filter__active"  >all</a>
+                <a href ="/projects/type/all" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}  >all</a>
                 <a href ="/projects" className="project__filter">category</a>
               </div>
             </div>

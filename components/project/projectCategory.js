@@ -5,6 +5,7 @@ const Head = dynamic(() => import('next/head'));
 const Type = dynamic(() => import("../project-categories/type/type"));
 
 import project from './projects.module.scss'
+import category from './category.module.scss'
 
 export default function projectCategory({ meta , projectsTypes : { nodes } }) {
     const backButton = () => {
@@ -49,7 +50,7 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
                 </div>
                 <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
                   <a href ="/projects/type/all" className="project__filter marginRight">all</a>
-                  <a href ="/projects" className="project__filter  filter__active">category</a>
+                  <a href ="/projects" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`} >category</a>
                 </div>
               </div>
               <span className="bottom__border"></span>
