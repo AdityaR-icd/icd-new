@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsTypes , getProjectByTypes , getMenus , getFooter} from '../../../lib/api'
+import { getAllProjectsTypes , getProjectByTypes ,  getProjectSubTypes , getMenus , getFooter} from '../../../lib/api'
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
 import ogimage from '../../../assets/images/seo/og-default.png'
@@ -8,6 +8,7 @@ import { useState } from 'react'
 
 
 import dynamic from "next/dynamic";
+import { node } from 'prop-types'
 const Intro = dynamic(() => import("../../../components/intro-text/intro-text"));
 const All = dynamic(() => import("../../../components/project-categories/all/all"));
 
@@ -20,28 +21,36 @@ export default function Projects({ project }) {
     var projectSubTypes = pageData?.projects?.edges[0].node.projectSubTypes
     var projects = pageData?.projects.edges
     var seo = pageData?.seo
+    var data = ''
 
     const [allProject, setallProject] = useState(true)
+    const [subProject, setsubProject] = useState('')
+    
 
-    const projectCategory  = () => {
-      setallProject(false)
-    }
 
     const allProjects  = () => {
       setallProject(true)
     }
+
     if (projectSubTypes?.edges.length > 0) {
         var common = <a className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
-        var slug = 
-        
-        projectSubTypes?.edges.map((item) => {
+         
+        var slug = projectSubTypes?.edges.map((item) => {
+            const slug = item?.node.slug
+            const projectCategory  = async (evt) => {
+              setallProject(false)
+              data = await getProjectSubTypes(slug)
+              setsubProject(data?.projectSubTypes.edges[0].node.projects.edges)
+            }
             return (
                 <>
                 <a className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" } onClick={projectCategory} >{item?.node.name}</a>
                 </>
+                
             )
         }).reverse();
-    } else {
+      }
+    else {
         var slug = ''
     }
 
@@ -97,12 +106,20 @@ export default function Projects({ project }) {
         </section>
 
 
-        {allProject === true && (
-          <Intro description={pageData.description}/>
+        {allProject  && (
+          <>
+            <Intro description={pageData.description} />
+            <All edges={projects} />
+          </>
         )}
-       
 
-        <All edges={projects}/>
+           
+        {subProject.length > 0  &&  (
+          <>
+            <All edges={subProject} />
+          </>
+        )}
+        
         
       </>
     )
