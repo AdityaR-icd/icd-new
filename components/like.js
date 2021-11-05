@@ -5,6 +5,9 @@ import { updatePostLikes } from '../lib/api'
 import { updateProjectLikes } from '../lib/api'
 
 
+import liked from '../assets/images/like-btn/like.svg';
+import likesFilled from '../assets/images/like-btn/like-filled.svg';
+
 
 export default function Like(count) {
     const like_count = count.count;
@@ -29,9 +32,13 @@ export default function Like(count) {
 
     return (
         <>
-        <div>
-            <span className='likeBtn' onClick={ handleLike } >Likes : {likes}</span>
-        </div>
+            <span className="like-btn icon liked" onClick={ handleLike } >
+                <div className="like-icon">
+                    <img loading="lazy" decoding="async" src={ liked.src } className="icon-img icon-outline" />
+                    <img loading="lazy" decoding="async" src={ likesFilled.src } className="icon-img like-filled" />
+                </div>
+                {likes} likes
+            </span>
         </>
     )
 }

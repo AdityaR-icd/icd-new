@@ -118,6 +118,9 @@ a.disabled{
 }
 
 
+img{
+  vertical-align: middle;
+}
 
 // Remove cross from fields
 
@@ -728,9 +731,6 @@ select::placeholder {
   }
 }
 
-.likeBtn{
-  width: 22px !important;
-}
 
 .like-icon{
   display: inline-block;
@@ -878,7 +878,7 @@ select::placeholder {
   .share-cta{
     margin-right: 13px;
   }
-  span.icon{
+  .icon{
       display: inline-block;
       margin-left: 20px;
       cursor: pointer;
@@ -887,14 +887,11 @@ select::placeholder {
         // margin-right: 13px;
         // padding-right: 8px;
       }
-
-      &.like-btn {
-        .icon-img {
-          width: 20px;
-        }
-      }
   }
-  span.icon.share-icon{
+    .icon-img {
+      width: 20px;
+  }
+  .icon.share-icon{
       margin-left: 30px;
       transition: ease all 0.5s;
       @include for-phone-only{

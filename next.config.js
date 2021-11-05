@@ -15,7 +15,7 @@ module.exports = {
 
   images: {
     domains: ['digital.icdindia.com'],
-    deviceSizes: [640, 750, 828, 1080],
+    deviceSizes: [640, 750, 828, 1080 , 1920],
   },
 
   async headers() {
