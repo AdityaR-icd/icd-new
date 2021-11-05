@@ -65,12 +65,12 @@ export default function Projects({ project , data , menus }) {
                     <div className={style.images_loaded_container}>
                     {isDesktop && (
                       <>
-                        <Image src={leadComponent} priority={true} width="100" height="100" alt="project-lead" layout="fill" />
+                        <Image src={leadComponent} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  alt="project-lead" layout="fill" />
                       </>
                       )}
                       {isMobile && (
                         <>
-                          <Image src={leadComponentMobile} priority={true} width="100" height="100" alt="project-lead" layout="fill" />
+                          <Image src={leadComponentMobile} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" alt="project-lead" layout="fill" />
                         </>
                       )}
                     </div>
@@ -84,7 +84,7 @@ export default function Projects({ project , data , menus }) {
                       <div className="row">
                           <span className={`close-button ${style.close_button}`} onClick={ hideModal }></span>
                           <div className="col-lg-5 col-xl-4">
-                            <span className={style.modal_project_title}>{title}<span class="hidden">Winner</span></span>
+                            <span className={style.modal_project_title}>{title}<span className="hidden">Winner</span></span>
                             <div className={style.projectMeta__cont}>
                               <span className={style.category__title}>project</span>
                               <span className={style.category}>{heading}</span>
