@@ -47,6 +47,7 @@ export default function Projects({ project , data , menus }) {
     var clients = project.clients?.edges[0]?.node?.name;
     var leadComponent = project.leadComponent?.leadComponent?.sourceUrl
     var leadComponentMobile = project.leadComponent?.leadComponentMobile?.sourceUrl
+    var content = project?.content
 
     var shareBtn =  <div className={`${style.social__media} social__media`}>
                       <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
@@ -143,6 +144,12 @@ export default function Projects({ project , data , menus }) {
                       </div>
                     </div>
                 </div>
+              </div>
+              <div className={`container ${style.projectHeading}`}>
+                {content && (
+                  parse(content)
+                )}
+                { shareBtn }
               </div>
           </article>
       </>

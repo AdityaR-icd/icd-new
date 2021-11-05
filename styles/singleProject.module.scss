@@ -91,6 +91,7 @@
         }
     }
 
+
     .project__tag {
         top: 20px;
         @include for-upto-tablet-portrait {
@@ -428,10 +429,18 @@
     .projectHeading {
         padding-bottom: 90px;
 
+        .wp-block-image{
+            margin: 0;
+        }
+
         @include for-upto-tablet-portrait {
             padding-bottom: 0;
             margin-bottom: 10px;
         }
+    }
+
+    .projectWordpress {
+
     }
 
     .project__summary {
@@ -574,7 +583,7 @@
         }
     }
 
-    .section-text {
+    p {
         font-family: $akz-light;    
         font-size: 20px;
         line-height: 30px;
@@ -1087,3 +1096,4 @@
     }
     
 }
+

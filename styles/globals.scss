@@ -3,7 +3,6 @@
   $remSize: $size / 16;
   @return #{$remSize}rem;
 }
-
 // rock salt font
 
 /* Global Fonts */
@@ -88,14 +87,19 @@ $overlaybg-color: rgba(31,31,31,0.5);
   display: block;
 }
 
+
+figure.wp-block-image{
+  margin: 0 0 20px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
 @media (min-width: 992px){
   .d-lg-none {
     display: none!important;
   }
-}
-
-figure{
-  margin: 0;
 }
 
 // Global
