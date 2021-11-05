@@ -429,18 +429,111 @@
     .projectHeading {
         padding-bottom: 90px;
 
-        .wp-block-image{
-            margin: 0;
-        }
 
         @include for-upto-tablet-portrait {
             padding-bottom: 0;
             margin-bottom: 10px;
         }
+
+
     }
 
     .projectWordpress {
+        figure{
+            margin: 0 0 20px;
+            img{
+              width: 100%;
+              height: 100%;
+            }
+        }
 
+        h2 {
+            font-family: $akz-bold;
+            // font-size: 56px;
+            // line-height: 1;
+            letter-spacing: -2px;
+            max-width: 50%;
+            margin-top: 150px;
+            margin-bottom: -130px;
+            margin-left: 33.333333%;
+            position: relative;
+            padding-right: 15px;
+            padding-left: 15px;
+            text-transform: lowercase;
+    
+            font-size: 48px;
+            line-height: 48px;
+    
+            word-spacing: -0.08em;
+            letter-spacing: -0.04em;
+    
+            @include for-tablet-horizontal-to-laptop {
+                max-width: 66.666667%;
+                margin-left: 25%;
+            }
+    
+            @include for-tablet-portrait-only {
+                max-width: 66.666667%;
+                margin-left: 25%;
+                font-size: 46px;
+                line-height: 44px;
+            }
+    
+            // @include for-upto-tablet-portrait {
+            @include for-phone-only {
+                margin: 60px 0 24px 0;
+                padding: 0;
+                font-size: 36px;
+                line-height: 1;
+                letter-spacing: -1px;
+                max-width: 100%;
+            }
+        }
+    
+        p {
+            font-family: $akz-light;    
+            font-size: 20px;
+            line-height: 30px;
+            // letter-spacing: -1px;
+            max-width: 50%;
+            margin-left: 33.333333%;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-top: 150px;
+            margin-bottom: 150px;
+            position: relative;
+    
+            word-spacing: -0.05em;
+            letter-spacing: -0.01em;
+            strong{
+                font-family: $akz-bold;    
+            }
+            @include for-tablet-horizontal-to-laptop {
+                max-width: 66.666667%;
+                margin-left: 25%;
+            }
+    
+            @include for-tablet-portrait-only {
+                max-width: 66.666667%;
+                margin-left: 25%;
+            }
+    
+            // @include for-upto-tablet-portrait {
+            @include for-phone-only {
+                font-size: 22px;
+                line-height: 30px;
+                max-width: 100%;
+                margin: 24px 0 60px 0;
+                padding: 0;
+            }
+            
+            @include for-phone-only {
+                word-break: break-word;
+            }
+        }
+        
     }
 
     .project__summary {
@@ -455,7 +548,8 @@
             font-weight: 300;
             color: $color-dark-black;
             margin: 0;
-
+            max-width: 100%;
+            padding-left: 0;
             font-size: 20px;
             line-height: 30px;
             padding-right: 130px;
@@ -583,49 +677,6 @@
         }
     }
 
-    p {
-        font-family: $akz-light;    
-        font-size: 20px;
-        line-height: 30px;
-        // letter-spacing: -1px;
-        max-width: 50%;
-        margin-left: 33.333333%;
-        position: relative;
-        min-height: 1px;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-top: 150px;
-        margin-bottom: 150px;
-        position: relative;
-
-        word-spacing: -0.05em;
-        letter-spacing: -0.01em;
-        strong{
-            font-family: $akz-bold;    
-        }
-        @include for-tablet-horizontal-to-laptop {
-            max-width: 66.666667%;
-            margin-left: 25%;
-        }
-
-        @include for-tablet-portrait-only {
-            max-width: 66.666667%;
-            margin-left: 25%;
-        }
-
-        // @include for-upto-tablet-portrait {
-        @include for-phone-only {
-            font-size: 22px;
-            line-height: 30px;
-            max-width: 100%;
-            margin: 24px 0 60px 0;
-            padding: 0;
-        }
-        
-        @include for-phone-only {
-            word-break: break-word;
-        }
-    }
 
     .team__block {
         text-align: left;
@@ -758,6 +809,9 @@
                 // display: none;
                 // margin-bottom: 10px;
                 opacity: 0;
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
                 &:first-child{
                     display: block;
                     opacity: 1;
@@ -1089,8 +1143,8 @@
 
 @include for-upto-tablet-portrait{
     .singleProject {
-        .section-heading,
-        .section-text{
+        h2,
+        p{
             display: none;
         }
     }

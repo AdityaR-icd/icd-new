@@ -182,7 +182,7 @@ header {
         transition: ease all 0.3s;
         @include for-upto-tablet-portrait {
             max-width: 48px;
-            margin: 18px 0 0 0 !important;
+            margin: 8px 0 0 0 !important;
         }
     }
 

@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
 
+import { useState } from 'react'
+
 import Share from '../../assets/images/post-buttons/share.svg'
 const Like = dynamic(() => import("../../components/like"));
 const Seo = dynamic(() => import("../../components/seo"));
@@ -40,6 +42,19 @@ export default function Projects({ project , data , menus }) {
     }
 
 
+    const [seeAll, setseeAll] = useState('see all')
+
+    const seeallTeam = () => {
+      if(seeAll === 'see all'){
+        setseeAll('see less');
+        $('.team__content').addClass(`${style.ellipsis}`);
+      } else {
+        setseeAll( 'see all' );
+        $('.team__content').removeClass(`${style.ellipsis}`);
+      }
+    } 
+
+
     var title = project.title;
     var heading = project.projectComponent?.heading;
     var description = project.projectComponent?.description;
@@ -48,6 +63,7 @@ export default function Projects({ project , data , menus }) {
     var leadComponent = project.leadComponent?.leadComponent?.sourceUrl
     var leadComponentMobile = project.leadComponent?.leadComponentMobile?.sourceUrl
     var content = project?.content
+    var team = project.projectComponent?.details
 
     var shareBtn =  <div className={`${style.social__media} social__media`}>
                       <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
@@ -145,11 +161,27 @@ export default function Projects({ project , data , menus }) {
                     </div>
                 </div>
               </div>
-              <div className={`container ${style.projectHeading}`}>
+              <div className={`container ${style.projectWordpress}`}>
                 {content && (
                   parse(content)
                 )}
                 { shareBtn }
+              </div>
+              <div className="container">
+                    <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+                      <div className={style.team__block}>
+                          <span className={style.team}>team</span>
+                          <div className={` team__content ${style.team__content}`}>
+                            <div className={style.team__detail}>
+                            {team && (
+                              parse(team)
+                            )}
+                            </div>
+                          </div>
+                          <a className={style.team__seeAll} onClick={ seeallTeam }>{seeAll}</a>
+                          <button className="collapse__btn" onClick={ showModal }>project detail</button>
+                      </div>
+                    </div>
               </div>
           </article>
       </>
