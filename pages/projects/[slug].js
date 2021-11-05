@@ -66,12 +66,12 @@ export default function Projects({ project , data , menus }) {
                     <div className={style.images_loaded_container}>
                     {isDesktop && (
                       <>
-                        <Image src={leadComponent} priority={true} alt="project-lead" layout="fill" />
+                        <Image src={leadComponent} priority={true} width="100" height="100" alt="project-lead" layout="fill" />
                       </>
                       )}
                       {isMobile && (
                         <>
-                          <Image src={leadComponentMobile} priority={true} alt="project-lead" layout="fill" />
+                          <Image src={leadComponentMobile} priority={true} width="100" height="100" alt="project-lead" layout="fill" />
                         </>
                       )}
                     </div>
