@@ -3,7 +3,6 @@ import {getAllProjectsWithSlug , getProject , getMenus , getFooter} from '../../
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
-import { useState } from 'react'
 
 import Share from '../../assets/images/post-buttons/share.svg'
 const Like = dynamic(() => import("../../components/like"));
@@ -53,7 +52,7 @@ export default function Projects({ project , data , menus }) {
                       <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
-                      <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } className="icon-img shareIcon--main" />share</span>
+                      <span className="icon" onClick={ toggleShareIcons }><Image loading="lazy" decoding="async" src={ Share.src } className="icon-img shareIcon--main" />share</span>
                       <Like count={project.likes?.likes}  id={project.id} type={'project'} />
                     </div>;
     return (

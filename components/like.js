@@ -1,8 +1,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { updatePostLikes } from '../lib/api'
-import { updateProjectLikes } from '../lib/api'
+import { updatePostLikes ,  updateProjectLikes } from '../lib/api'
+import Image from 'next/image'
 
 
 import liked from '../assets/images/like-btn/like.svg';
@@ -34,8 +34,8 @@ export default function Like(count) {
         <>
             <span className="like-btn icon liked" onClick={ handleLike } >
                 <div className="like-icon">
-                    <img loading="lazy" decoding="async" src={ liked.src } className="icon-img icon-outline" />
-                    <img loading="lazy" decoding="async" src={ likesFilled.src } className="icon-img like-filled" />
+                    <Image loading="lazy" decoding="async" src={ liked.src } className="icon-img icon-outline" />
+                    <Image loading="lazy" decoding="async" src={ likesFilled.src } className="icon-img like-filled" />
                 </div>
                 {likes} likes
             </span>
