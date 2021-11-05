@@ -83,7 +83,7 @@ export default function Projects({ project , data , menus }) {
               <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
                   <div className="container">
                       <div className="row">
-                          <span className="close-button" onClick={ hideModal }></span>
+                          <span className={`close-button ${style.close_button}`} onClick={ hideModal }></span>
                           <div className="col-lg-5 col-xl-4">
                             <span className={style.modal_project_title}>{title}<span class="hidden">Winner</span></span>
                             <div className={style.projectMeta__cont}>
