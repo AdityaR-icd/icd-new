@@ -15,6 +15,7 @@ export default function subProject({subTypeProjects , project }){
     var projectSubTypes = pageData?.children?.edges
     var edges = subTypeProjects?.projectTypes?.edges[0]?.node?.children?.edges[0].node?.projects.edges
     var seo = pageData?.seo
+    var activeClass = ''
 
 
     const [allProject, setallProject] = useState(false)
@@ -25,15 +26,22 @@ export default function subProject({subTypeProjects , project }){
         setallProject(true)
     }
 
+
     if (projectSubTypes?.length > 0) {
         var common = <a href={`/projects/category/${pageData?.slug}`}className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
          
         var slug = projectSubTypes?.map((item) => {
+          if(item?.node?.slug == router.query.sub_slug){
+              activeClass = `${style.project__filter} project__filter marginRight ${style.filter__active}`
+          }
+          else{
+              activeClass = `project__filter marginRight`
+          }
             return (
               <>
                 {item?.node?.projects?.edges.length > 0  &&  (
                   <>
-                    <a href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`} className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }>{item?.node?.name}</a>
+                    <a href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`} className={activeClass}>{item?.node?.name}</a>
                   </>
                 )}
               </>
