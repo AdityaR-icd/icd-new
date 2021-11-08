@@ -487,6 +487,7 @@
                 line-height: 1;
                 letter-spacing: -1px;
                 max-width: 100%;
+                display: none;
             }
         }
     
@@ -527,6 +528,7 @@
                 max-width: 100%;
                 margin: 24px 0 60px 0;
                 padding: 0;
+                display: none;
             }
             
             @include for-phone-only {
@@ -1138,16 +1140,5 @@
     .social__media{
         float: right;
     }
-}
-
-
-@include for-upto-tablet-portrait{
-    .singleProject {
-        h2,
-        p{
-            display: none;
-        }
-    }
-    
 }
 
