@@ -1,5 +1,6 @@
 
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import { getAllProjectsSubTypes , getProjectSubTypes , getProjectByTypes , getMenus , getFooter} from '../../../../lib/api'
 import { useState } from 'react'
@@ -20,8 +21,6 @@ export default function subProject({subTypeProjects , project }){
 
     const [allProject, setallProject] = useState(false)
 
-
-
     const allProjects  = () => {
         setallProject(true)
     }
@@ -41,7 +40,9 @@ export default function subProject({subTypeProjects , project }){
               <>
                 {item?.node?.projects?.edges.length > 0  &&  (
                   <>
-                    <a href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`} className={activeClass}>{item?.node?.name}</a>
+                  <Link href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}> 
+                    <a className={activeClass}>{item?.node?.name}</a>
+                  </Link>
                   </>
                 )}
               </>
@@ -119,6 +120,16 @@ export default function subProject({subTypeProjects , project }){
       )
 } 
 
+
+export async function getStaticPaths({params}) {
+  const projectTypes = await getAllProjectsSubTypes() 
+  return {
+    paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/fb`) || [] ,
+    fallback: true,
+  }
+}
+
+
 export async function getStaticProps({ params }) {
     const gProject = await getProjectByTypes(params.slug)
     const subTypeProjects = await getProjectSubTypes(params.slug ,params.sub_slug);
@@ -134,11 +145,4 @@ export async function getStaticProps({ params }) {
         revalidate: 1, 
     }
 }
-    
-export async function getStaticPaths({params}) {
-  const projectTypes = await getAllProjectsSubTypes() 
-  return {
-    paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/fb`) || [] ,
-    fallback: true,
-  }
-}
+  

@@ -40,7 +40,9 @@ export default function Projects({ project }) {
             <>
               {item?.node?.projects?.edges.length > 0  &&  (
                 <>
-                  <a href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`} className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }>{item?.node?.name}</a>
+                  <Link href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}> 
+                    <a className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }>{item?.node?.name}</a>
+                  </Link>
                 </>
               )}
             </>
