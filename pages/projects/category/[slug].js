@@ -1,6 +1,7 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsTypes , getProjectByTypes ,  getProjectSubTypes , getMenus , getFooter} from '../../../lib/api'
+import { getAllProjectsTypes , getProjectByTypes , getMenus , getFooter} from '../../../lib/api'
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
 import ogimage from '../../../assets/images/seo/og-default.png'
@@ -8,7 +9,6 @@ import { useState } from 'react'
 
 
 import dynamic from "next/dynamic";
-import { node } from 'prop-types'
 const Intro = dynamic(() => import("../../../components/intro-text/intro-text"));
 const All = dynamic(() => import("../../../components/project-categories/all/all"));
 
@@ -18,13 +18,12 @@ const All = dynamic(() => import("../../../components/project-categories/all/all
 export default function Projects({ project }) {
     const router = useRouter()
     var pageData = project?.edges[0].node
-    var projectSubTypes = pageData?.projects?.edges[0].node.projectSubTypes
-    var projects = pageData?.projects.edges
+    var projectSubTypes = pageData?.children?.edges
+    var projects = pageData?.projects?.edges
     var seo = pageData?.seo
-    var data = ''
 
     const [allProject, setallProject] = useState(true)
-    const [subProject, setsubProject] = useState('')
+    const [subTypeSlug, setsubTypeSlug] = useState(router.query.slug)
     
 
 
@@ -32,23 +31,21 @@ export default function Projects({ project }) {
       setallProject(true)
     }
 
-    if (projectSubTypes?.edges.length > 0) {
+
+    if (projectSubTypes?.length > 0) {
         var common = <a className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
          
-        var slug = projectSubTypes?.edges.map((item) => {
-            const slug = item?.node.slug
-            const projectCategory  = async (evt) => {
-              setallProject(false)
-              data = await getProjectSubTypes(slug)
-              setsubProject(data?.projectSubTypes.edges[0].node.projects.edges)
-            }
-            return (
+        var slug = projectSubTypes?.map((item) => {
+          return (
+            <>
+              {item?.node?.projects?.edges.length > 0  &&  (
                 <>
-                <a className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" } onClick={projectCategory} >{item?.node.name}</a>
+                  <a href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`} className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }>{item?.node?.name}</a>
                 </>
-                
-            )
-        }).reverse();
+              )}
+            </>
+          )
+        })
       }
     else {
         var slug = ''
@@ -111,15 +108,7 @@ export default function Projects({ project }) {
             <Intro description={pageData.description} />
             <All edges={projects} />
           </>
-        )}
-
-           
-        {subProject.length > 0  &&  (
-          <>
-            <All edges={subProject} />
-          </>
-        )}
-        
+        )}        
         
       </>
     )
@@ -138,7 +127,6 @@ export default function Projects({ project }) {
       revalidate: 1, 
     }
   }
-
   export async function getStaticPaths() {
     const allProjects = await getAllProjectsTypes() 
     return {
