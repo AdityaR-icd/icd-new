@@ -89,6 +89,7 @@ export default function clients({meta , edges}) {
                                 } else {
                                     projectletter = '';
                                 }
+                                
                                 return (
                                      projectletter   
                                 );
