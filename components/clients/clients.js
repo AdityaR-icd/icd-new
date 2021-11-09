@@ -79,7 +79,7 @@ export default function clients({meta , edges}) {
         <div className="container">
             <div className="row">
                 {arrays.map((data)  => ( 
-                    console.log(data),
+                    // console.log(data),
                     <div className="col-md-4 clientGrid--item">
                         <div className="clients-alpha-cont">
                             {data.map((data) => {
