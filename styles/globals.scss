@@ -307,7 +307,7 @@ button , a , button:focus , a:focus{
   padding-top: 22px;
   cursor: pointer;
   @include for-upto-tablet-portrait {
-      float: right;
+      float: left;
       font-family: $akz-light;
       padding: 7px 0 0 0;
   }
