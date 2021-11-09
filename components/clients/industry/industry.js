@@ -15,6 +15,8 @@ import industries from './industry.module.scss'
 export default function industry({meta , edges}) {
 
   const [expand, setExpand] = useState(false)
+  const [projectCount, setItem] = useState('3')
+
   var projects = ''
   var projectLength = ''
   var projectData = ''
@@ -25,10 +27,18 @@ export default function industry({meta , edges}) {
     window.history.back();
   }
 
-  // Onclick expand 
+  // Onclick expand
   const toggleClass = () => {
-    setExpand( true );
+    const currentState = expand;
+    setExpand(!currentState );
   } 
+
+  if(expand){
+    var sectionClass = `${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`
+  }else{
+    var sectionClass = `${industries.industry_type_cont} ${type.industry__filter}`
+  }
+
 return(
       <>
         <NextSeo
@@ -77,55 +87,63 @@ return(
           projects = industry.projects,
           projectLength = projects?.edges.length,
         <div key={industry.id}>
-          <section className={`${industries.industry_type_cont} ${type.industry__filter}`} id={industry.slug}>
+          <section className={sectionClass} id={industry.slug}>
               <div className="container">
                   <div className="row">
                       <div className="col-md-12">
                           <span className={type.project__category}>{industry.name}</span>
-                          <span className={`d-md-block d-none ${industries.project__category__seeAll}`}>
-                            <span className="see-all"><span className={industries.expand_btn}></span>{ expand ? 'less '+industry.name: 'more '+industry.name }</span>
-                          </span>
+                          {projectLength > 3 &&  (
+                            <>
+                            <span className={`d-md-block d-none ${industries.project__category__seeAll}`}>
+                              <span className="see-all" onClick = { toggleClass }><span className={industries.expand_btn}></span>{ expand ? 'less '+industry.name: 'more '+industry.name }</span>
+                            </span>
+                            </>
+                          )}
                       </div>
                   </div>
                   <div className="row">
-                  {projectLength > 0  &&  (
+                    {projectLength > 0  &&  (
+                      <>
+                      {projects.edges.map(({ node }) => (
+                          client = node.clients.edges[0].node.name,
+                          leadImgSrc = node.featuredImage.node.sourceUrl,
+                      <>
+                      <div className={`col-md-4 ${industries.project__tile}`} key={ node.id }>
+                          <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                            <div className={carousel.thumbnail_cont}>
+                                <a href={`/projects/${node.slug}`}>
+                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                        <div className={`${carousel.full_thumb} full-thumb`}>
+                                            <Image className={carousel.project_lead} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
+                                        </div>
+                                        <span className="thumbnail-gif"></span>
+                                    </span>
+                                  <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                </a>
+                            </div>
+                            <a href={`/projects/${node.slug}`}>
+                                <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                    <span className={carousel.grey__color}>  / {client}</span>
+                                </span>
+                            </a>
+                        </div>
+                      </div> 
+                      </>
+                      ))}
+                      </>
+                    )}
+                  </div>
+                  {projectLength > 3 &&  (
                     <>
-                    {projects.edges.map(({ node }) => (
-                        client = node.clients.edges[0].node.name,
-                        leadImgSrc = node.featuredImage.node.sourceUrl,
-                    <>
-                    <div className="col-md-4 project__item" key={ node.id }>
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                          <div className={carousel.thumbnail_cont}>
-                              <a href={`/projects/${node.slug}`}>
-                                  <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                      <div className={`${carousel.full_thumb} full-thumb`}>
-                                          <Image className={carousel.project_lead} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
-                                      </div>
-                                      <span className="thumbnail-gif"></span>
-                                  </span>
-                                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
-                              </a>
-                          </div>
-                          <a href={`/projects/${node.slug}`}>
-                              <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                  <span className={carousel.grey__color}>  / {client}</span>
-                              </span>
-                          </a>
-                      </div>
-                    </div> 
-                    </>
-                    ))}
+                    <span className="d-block d-md-none m-expand">
+                      <span className="see-all" onClick = { toggleClass }><span className={industries.expand_btn}></span>{ expand ? 'less '+industry.name: 'more '+industry.name }</span>
+                    </span>
                     </>
                   )}
-                  </div>
-                  <span className="d-block d-md-none m-expand">
-                    <span className="see-all"><span className={industries.expand_btn}></span>{ expand ? 'less '+industry.name: 'more '+industry.name}</span>
-                  </span>
-              </div>
-          </section>
-        </div>
+                </div>
+            </section>
+          </div>
         ))}
       </>
-)
+    )
 }
