@@ -19,7 +19,6 @@ export default function subProject({subTypeProjects , project }){
     var activeClass = ''
 
 
-
     const [allProject, setallProject] = useState(false)
 
     const allProjects  = () => {
@@ -122,16 +121,16 @@ export default function subProject({subTypeProjects , project }){
 } 
 
 
-// export async function getStaticPaths({params}) {
-//   const projectTypes = await getAllProjectsSubTypes() 
-//   return {
-//     paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/fb`) || [] ,
-//     fallback: true,
-//   }
-// }
+export async function getStaticPaths({params}) {
+  const projectTypes = await getAllProjectsSubTypes() 
+  return {
+    paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/fb`) || [] ,
+    fallback: true,
+  }
+}
 
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     const gProject = await getProjectByTypes(params.slug)
     const subTypeProjects = await getProjectSubTypes(params.slug ,params.sub_slug);
     const menus = await getMenus()
@@ -143,7 +142,7 @@ export async function getServerSideProps({ params }) {
             data,
             subTypeProjects,
         },
-        // revalidate: 1, 
+        revalidate: 1, 
     }
 }
   
