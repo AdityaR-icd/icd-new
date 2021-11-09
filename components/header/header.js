@@ -6,7 +6,6 @@ import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';
 
-import { useState } from 'react'
 
 
 
@@ -67,7 +66,7 @@ const Header = (props) => {
                                         <Image decoding="async" width="172" priority={true} height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
                                     </a>
                                     <a href="/" aria-label="logo" className="logo d-block d-lg-none">
-                                        <img decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
+                                        <Image decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
                                     </a>
                                 </div>
                                 <div className="col-2 col-md-10">
