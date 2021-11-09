@@ -124,8 +124,6 @@ export default function subProject({subTypeProjects , project }){
 export async function getStaticPaths({params}) {
   const projectTypes = await getAllProjectsSubTypes() 
   return {
-    // paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/fb`) || [] ,
-    // paths: projectTypes.edges.map(({ node }) => `/projects/category/packaging/cosmetics`) || [] ,
     paths: [
       { params: { slug: 'packaging', sub_slug: 'fb' }},
       { params: { slug: 'packaging' , sub_slug: 'cosmetics' }},

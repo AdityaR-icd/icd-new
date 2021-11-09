@@ -1,10 +1,17 @@
+import React from 'react';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import dynamic from "next/dynamic";
 const Head = dynamic(() => import('next/head'));
+const Image = dynamic(() => import("next/image"));
+
+
+import loader from '../../assets/images/loader/page-loader.gif'
 
 
 import style from './client.module.scss'
 import category from '../project/category.module.scss'
+import alphabet from './alphabetically.module.scss'
 
 
 export default function clients({meta , edges}) {
@@ -81,24 +88,60 @@ export default function clients({meta , edges}) {
                 {arrays.map((data)  => ( 
                     // console.log(data),
                     <div className="col-md-4 clientGrid--item">
-                        <div className="clients-alpha-cont">
+                        <div className={`${alphabet.clients_alpha_cont} ${style.clients_alpha_cont}`}>
                             {data.map((data) => {
                                 var letter = data.name.charAt(0);
+                                var projectData = data.projects?.edges[0]?.node
+                                var leadImgSrc = projectData?.featuredImage?.node?.sourceUrl
+                                var ProjectLink = projectData?.slug
                                 if(letter != currletter){
-                                    projectletter = <h2 className="alpha-letter">{letter}</h2>
+                                    projectletter = <h2 className={alphabet.alpha_letter}>{letter}</h2>
                                 } else {
                                     projectletter = '';
                                 }
-                                
+
+                                if(ProjectLink){
+                                    var projecturl =    
+                                    <p className={`${style.client_name} ${alphabet.client_name}`}>
+                                        <Link href={` projects/${ProjectLink}` }>
+                                            {data.name}
+                                        </Link>
+                                    </p>
+                                }else{
+                                    var projecturl =    
+                                    <p className={`${style.client_name} ${alphabet.client_name}`}>
+                                        <Link href="/projects">
+                                            {data.name}
+                                        </Link>
+                                    </p>
+                                }
+                               
+
+                                if(leadImgSrc){
+                                    var thumbnail = 
+                                    <div class={alphabet.client_thumbnail}>
+                                        <Image placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
+                                    </div>   
+                                }else{
+                                    var thumbnail = 
+                                    <div class={alphabet.client_thumbnail}>
+                                        <Image placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={loader.src} alt="project-lead" layout="fill" />
+                                    </div>   
+                                }
+
                                 return (
-                                     projectletter   
+                                    <React.Fragment>
+                                        {projectletter}
+                                        {projecturl}
+                                        {thumbnail}
+                                    </React.Fragment>
                                 );
                             })}
 
-                            <span className="client-white-bg client-white-bg-1"></span>
-                            <span className="client-white-bg client-white-bg-2"></span>
-                            <span className="client-white-bg client-white-bg-3"></span>
-                            <span className="client-white-bg client-white-bg-4"></span>
+                            <span className={`${alphabet.client_white_bg} ${alphabet.client_white_bg_1}`} />
+                            <span className={`${alphabet.client_white_bg} ${alphabet.client_white_bg_2}`} />
+                            <span className={`${alphabet.client_white_bg} ${alphabet.client_white_bg_3}`} />
+                            <span className={`${alphabet.client_white_bg} ${alphabet.client_white_bg_4}`} />
                         </div>
                     </div>
                 ))}
