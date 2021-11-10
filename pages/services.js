@@ -1,35 +1,32 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import parse from 'html-react-parser';
-import { getPages , getService , getMenus , getFooter } from '../lib/api'
+import dynamic from "next/dynamic";
+import { getPages , getService , getOtherService , getMenus , getFooter } from '../lib/api'
+const Layout = dynamic(() => import("../components/services/services"));
 
 
 
-export default function services({pages : {pages} , service : {edges}   }) {
+export default function services({meta : {pages} , service : {edges} , otherService   }) {
+    const meta_data = pages.edges[0].node
+    const other_service = otherService.edges
     return (
-            <>
-            {(pages.edges).map(({ node }) => (     
-                <div>
-                    {parse(node.content)}
-                    {parse(node.servicesSection2Text?.text)}
-                </div>
-            ))}
-            </>
-    )
+        <Layout meta={meta_data} edges={edges} other_service={other_service} />
+    )   
 }
 
 
 export async function getStaticProps() {
-    const pages = await getPages()
+    const meta = await getPages()
     const service = await getService()
+    const otherService = await getOtherService()
     const data = await getFooter()
     const menus = await getMenus()
     return {
         props: { 
-        pages,
-        service,
-        menus,
-        data
+            meta,
+            service,
+            menus,
+            data,
+            otherService
         },
         revalidate: 1, 
     }
