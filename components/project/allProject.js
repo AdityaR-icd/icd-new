@@ -1,5 +1,4 @@
 import { NextSeo } from 'next-seo';
-import React, { Component } from 'react';
 import dynamic from "next/dynamic";
 const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
@@ -41,7 +40,8 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
         <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/projects" />
         <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
         {/* end of Twitter Cards */}
-      </Head><>
+      </Head>
+      <>
         <section className={`${project.projects__page} mT__260 page__header `}>
           <div className="container page__header--container">
             <div className="row">

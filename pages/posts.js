@@ -1,42 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import parse from 'html-react-parser';
-import { getAllPosts , getMenus , getFooter } from '../lib/api'
-import Link from 'next/link'
-import { NextSeo } from 'next-seo';
+import { getAllPosts , getAllPostsForHome , getPostCategories , getPostPage , getMenus , getFooter } from '../lib/api'
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("../components/posts/posts"));
 
 
 
-export default function blogs({  posts : { edges } }) {
+export default function blogs({  posts : { edges } , meta:{pages} , categories }) {
+  const meta_data = pages.edges[0].node
   return (
     <>
-      { edges.map(({ node }) => (
-          <>
-            <div>
-            <h5>{node.name} - ( Category )</h5>
-                {(
-                  function (projectType) {
-                      const data = node.posts.edges;
-                      for (let i = 0; i < (node.posts.edges).length; i++) {
-                        projectType.push(
-                        <>
-                          <Link href={`/posts/${data[i]?.node.slug}`}>
-                              <a className="hover:underline">
-                                <h3>{data[i]?.node.title}</h3>
-                              </a>
-                          </Link>
-                          <div>
-                            {parse(data[i]?.node.excerpt)}
-                          </div>
-                        </>
-                        )
-                      }
-                      return projectType;
-                })([], 0, 10)}
-              </div>
-              <hr />
-          </>
-        ))}
+    <Layout meta={meta_data} categories={categories} edges={edges} />
     </>
   )
 }
@@ -45,11 +17,15 @@ export async function getStaticProps() {
   const posts = await getAllPosts()
   const menus = await getMenus()
   const data = await getFooter()
+  const meta = await getPostPage()
+  const categories = await getPostCategories()
   return {
     props: { 
       posts,
       menus,
-      data
+      data,
+      meta,
+      categories
     },
     revalidate: 1, 
   }
