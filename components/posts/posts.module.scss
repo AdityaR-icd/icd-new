@@ -1,4 +1,5 @@
 @import "../../assets/scss/variables.scss";
+
 .projects{
     h1{
         margin-bottom: 30px;
@@ -438,8 +439,8 @@ input[type=search].sb_search_input {
 // Search Animation
 
 $size: 24px;
-$tenth: $size / 8;
-$twentieth: $size / 18;
+$tenth: 3px;
+$twentieth: 2px;
 $color: $color-black;
 $ttime: 0.2s;
 

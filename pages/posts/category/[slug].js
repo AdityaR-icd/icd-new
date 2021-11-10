@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import { getAllPostsByCategorySlug , getPostPage , getPostCategories  , getAllPostsByCategory , getMenus , getFooter} from '../../../lib/api'
 import Link from 'next/link'
+import $ from 'jquery'
 const Head = dynamic(() => import('next/head'));
 const PostItem = dynamic(() => import('../../../components/posts-items/posts-items'))
 
@@ -26,6 +27,15 @@ export default function posts({posts , meta , categories }){
     const [seeAll, setseeAll] = useState(false)
     const seeAllProject  = () => {
         setseeAll(true)
+    }
+
+    const postsearch = () => {
+        $('.posts__page').toggleClass(style.post_search__open);
+        if($('.posts__page').hasClass(style.post_search__open)){
+            $('.sb-search-input').focus();
+        } else {
+            $('.sb-search-input').val('');
+        }
     }
 
 
