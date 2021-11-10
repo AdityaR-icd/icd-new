@@ -40,7 +40,7 @@ export default function postItem({data}){
             var postsTags = <span></span>
         }
     return(
-        <div className="col-md-6 grid-item">
+        <div className="col-md-6 col-lg-6 grid-item">
             <div className={`${style.postsItems} animateItems}`}>
                 <Link href={`posts/${data.slug}`}>
                     <div className={style.postLeadImage}>
