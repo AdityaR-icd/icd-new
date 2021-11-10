@@ -69,11 +69,11 @@ export default function posts({posts , meta , categories }){
         <NextSeo
             title={metaData.seo.title}
             description={metaData.seo.metaDesc}
-            canonical="https://icd-v3-vercel.vercel.app/posts"
+            canonical={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`}
             robots={metaData.metaRobotsNoindex}
             googlebot={metaData.metaRobotsNofollow}
             openGraph={{
-            url: 'https://icd-v3-vercel.vercel.app/posts',
+            url: `https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`,
             title: metaData.seo.title,
             description: metaData.seo.metaDesc,
             images: [
@@ -89,7 +89,7 @@ export default function posts({posts , meta , categories }){
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={metaData.seo.title} />
             <meta name="twitter:description" content={metaData.seo.metaDesc} />
-            <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/posts" />
+            <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`} />
             <meta name="twitter:image" content={metaData.featuredImage?.node.sourceUrl} />
             </Head>
 
