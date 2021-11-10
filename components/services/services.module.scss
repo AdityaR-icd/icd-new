@@ -170,11 +170,11 @@
         text-transform: lowercase;
         &:hover {
             .serviceLogo__static {
-                display: none;
+                display: none !important;
             }
 
             .serviceLogo__anim {
-                display: none;
+                display: none !important;
             }
         }
 

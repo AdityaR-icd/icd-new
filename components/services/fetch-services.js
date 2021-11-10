@@ -1,6 +1,8 @@
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import style from "./services.module.scss";
+import dynamic from "next/dynamic";
+const Image = dynamic(() => import("next/image"));
 
 export default function fetchServices({data}) {
     var cardImgSrc = data?.featuredImage?.backgroundImg?.sourceUrl;
@@ -22,8 +24,8 @@ export default function fetchServices({data}) {
         <div className={`col-md-6 col-lg-4 ${style.servicesItem}`}>
             <span className={style.serviceLogo}>
             <span>
-                <img loading="lazy" decoding="async" className={style.serviceLogo__anim} src = { cardGifImgSrc } alt=""/>
-                <img loading="lazy" decoding="async" className={style.serviceLogo__static} src = { cardImgSrc } alt=""/>
+                <Image loading="lazy" decoding="async" className={style.serviceLogo__anim} src = { cardGifImgSrc } layout="fill" alt=""/>
+                <Image loading="lazy" decoding="async" className={style.serviceLogo__static} src = { cardImgSrc } layout="fill" alt=""/>
             </span>
             </span>
             <span className={style.serviceHeader}>{data.title}</span>
