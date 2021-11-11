@@ -168,6 +168,9 @@
         text-transform: lowercase;
     }
     .postContent{
+        figure{
+            margin: 0;
+        }
         position: relative;     
         h2 , h3 , h4 {
             font-family: $akz-bold;
