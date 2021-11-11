@@ -418,13 +418,17 @@ a{
   color: $color-black !important;
 }
 
-.bg-yellow , 
+.bg-yellow 
 .bg-yellow .menu-cont{
   background: $color-yellow;
 }
 
+.bg_yellow{
+  background: $color-yellow;
+}
 
-.bg-yellow{
+.bg-yellow,
+.bg_yellow{
   .form-control-placeholder{
     color: $color-black !important
   }

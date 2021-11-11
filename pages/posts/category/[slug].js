@@ -131,13 +131,13 @@ export async function getStaticProps({ params }) {
     const data = await getFooter()
     const meta = await getPostPage()
     const categories = await getPostCategories()
-    const gPosts = await getAllPostsByCategorySlug(params.slug)
+    const posts = await getAllPostsByCategorySlug(params.slug)
     return {
     props: { 
         menus,
         data,
         meta,
-        posts: gPosts,
+        posts,
         categories
     },
     revalidate: 1, 
