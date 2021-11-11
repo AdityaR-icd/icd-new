@@ -8,7 +8,6 @@ import category from './category.module.scss'
 
 export default function Index({ AllProjects: { edges } ,  meta }) {
   const router = useRouter()
-  console.log(router.route);
   const backButton = () => {
     window.history.back();
   }
