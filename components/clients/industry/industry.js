@@ -1,7 +1,7 @@
 import { NextSeo } from 'next-seo';
-import Link from 'next/link';
 import { useState } from 'react'
 import dynamic from "next/dynamic";
+import { useRouter } from 'next/router'
 const All = dynamic(() => import("../../project-categories/all/all"));
 const Head = dynamic(() => import('next/head'));
 const Image = dynamic(() => import("next/image"));
@@ -13,13 +13,11 @@ import type from '../../project-categories/type/type.module.scss'
 import industries from './industry.module.scss'
 
 export default function industry({meta , edges}) {
-
+  const router = useRouter()
   const [expand, setExpand] = useState(false)
-  const [projectCount, setItem] = useState('3')
 
   var projects = ''
   var projectLength = ''
-  var projectData = ''
   var client = '';
   var leadImgSrc  = '';
 
@@ -44,11 +42,11 @@ return(
         <NextSeo
           title={meta.seo.title}
           description={meta.seo.metaDesc}
-          canonical="https://icd-v3-vercel.vercel.app/clients"
+          canonical={`https://icd-v3-vercel.vercel.app${router.route}`}
           robots={meta.metaRobotsNoindex}
           googlebot={meta.metaRobotsNofollow}
           openGraph={{
-              url: 'https://icd-v3-vercel.vercel.app/clients',
+            url: `https://icd-v3-vercel.vercel.app${router.route}`,
               title: meta.seo.title,
               description: meta.seo.metaDesc,
               images: [
@@ -64,7 +62,7 @@ return(
               <meta name="twitter:card" content="summary_large_image" />
               <meta name="twitter:title" content={meta.seo.title} />
               <meta name="twitter:description" content={meta.seo.metaDesc} />
-              <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/clients" />
+              <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router.route}`} />
               <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
           </Head>
 

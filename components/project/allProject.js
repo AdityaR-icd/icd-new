@@ -1,11 +1,14 @@
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
+import { useRouter } from 'next/router'
 const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 import category from './category.module.scss'
 
 export default function Index({ AllProjects: { edges } ,  meta }) {
+  const router = useRouter()
+  console.log(router.route);
   const backButton = () => {
     window.history.back();
   }
@@ -16,11 +19,11 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
       <NextSeo
       title={meta.seo.title}
       description={meta.seo.metaDesc}
-      canonical="https://icd-v3-vercel.vercel.app/projects"
+      canonical={`https://icd-v3-vercel.vercel.app${router.route}`}
       robots={meta.metaRobotsNoindex}
       googlebot={meta.metaRobotsNofollow}
       openGraph={{
-        url: 'https://icd-v3-vercel.vercel.app/projects',
+        url: `https://icd-v3-vercel.vercel.app${router.route}`,
         title: meta.seo.title,
         description: meta.seo.metaDesc,
         images: [
@@ -37,7 +40,7 @@ export default function Index({ AllProjects: { edges } ,  meta }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.seo.title} />
         <meta name="twitter:description" content={meta.seo.metaDesc} />
-        <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/projects" />
+        <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router.route}`} />
         <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
         {/* end of Twitter Cards */}
       </Head>
