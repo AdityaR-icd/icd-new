@@ -96,7 +96,7 @@ export default function posts({posts , meta , categories }){
             <section className={`${style.posts__page} mT__260 page__header posts__page `}>
                 <div className="container page__header--container">
                     <div className="row">
-                    <div className="col-12 col-md-3 col-lg-4 page__header--title">
+                    <div className="col-12 col-md-3 col-lg-3 page__header--title">
                         <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{metaData.title}</h1></div>
                     </div>
                     <div className="col-12 col-md-8 col-lg-9 page__header--nav bottom__align nav__subPage tags-menu category-names">

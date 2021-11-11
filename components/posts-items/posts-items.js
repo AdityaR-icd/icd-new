@@ -42,7 +42,7 @@ export default function postItem({data}){
     return(
         <div className="col-md-6 col-lg-6 grid-item">
             <div className={`${style.postsItems} animateItems}`}>
-                <Link href={`posts/${data.slug}`}>
+                <Link href={`/posts/${data.slug}`}>
                     <div className={style.postLeadImage}>
                         <div className="images-loaded-container">
                             {imageData}
@@ -50,15 +50,15 @@ export default function postItem({data}){
                         <span className={style.postCategory}>{categories}</span>
                     </div>
                 </Link>
-                <a href={`posts/${data.slug}`}>
+                <a href={`/posts/${data.slug}`}>
                     <h2 className={style.postTitle}>{data.title}</h2>
                     <span className={style.postBy}>  {date} </span>
-                    <p className={style.postInfo}> {parse(data.content)}</p>
+                    <p className={style.postInfo}> {parse(data.excerpt)}</p>
                     <div className="d-none"><span>{categories}</span>{postsTags}</div>
                 </a>
                 <div className="row">
                     <div className="col-6">
-                        <Link href={`posts/${data.slug}`}>
+                        <Link href={`/posts/${data.slug}`}>
                             <button>keep reading</button>
                         </Link>
                     </div>

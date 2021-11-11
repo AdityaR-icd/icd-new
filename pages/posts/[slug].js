@@ -24,24 +24,10 @@ export default function Post({ post, posts, preview , tokken }) {
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-            {/* <Head>
-              {seo?.schema ? (
-                <script
-                  type='application/ld+json'
-                  className='yoast-schema-graph'
-                  key='yoastSchema'
-                  dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
-                />
-              ) : null}
-            </Head> */}
-           {/* <Image src={heroPost.featuredImage?.node.sourceUrl} alt="Picture of the author" /> */}
          <h1>{post.title}</h1> 
           {parse(post.content)} 
             <Like count={post.likes?.likes}  id={post.id} type={'post'} />
             <Comment postId={post.postId} comment_data = {comment_data} />
-
-
-
       </>
     )
   }
