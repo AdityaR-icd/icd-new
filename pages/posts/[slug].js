@@ -6,6 +6,10 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 
+import Share from '../../assets/images/post-buttons/share.svg'
+import Icon from '../../assets/images/logo/mobile-logo-new.png'
+
+
 import style from '../../styles/singlePost.module.scss'
 
 import dynamic from "next/dynamic";
@@ -15,10 +19,10 @@ const Like = dynamic(() => import("../../components/like"));
 
 
 
-export default function Post({ post }) {
-  // console.log(post)
+export default function Post({ post , data }) {
   useEffect(() => {
     document.body.classList.add(style.bg_yellow);
+    document.body.classList.add('bg-yellow');
   });
   const router = useRouter()
   const seo = post ? ( post?.seo ?? {} ) : ( {} );
@@ -26,6 +30,19 @@ export default function Post({ post }) {
   const comment_data = post ? ( post.comments ?? {} ) : ( {} );
 
   var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
+  var categories = post?.categories.edges[0]?.node?.name
+  var checkauthor = post?.postAuthor?.author
+  if(checkauthor){
+    var author = post?.postAuthor?.author[0]?.name
+    var authorImg = post?.postAuthor?.author[0]?.profileImage?.profileImage
+  }
+
+
+  var date = new Date(post?.date).toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
 
 
   if(featuredImage){
@@ -43,12 +60,14 @@ export default function Post({ post }) {
     return <div>Loading...</div>
   }
 
+  const toggleShareIcons = () => {
+    $('.share-icon').toggleClass('icons-hide');
+  }
+
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-         {/* <h1>{post.title}</h1> 
-          {parse(post.content)} 
-            <Like count={post.likes?.likes}  id={post.id} type={'post'} />
+         {/*
             <Comment postId={post.postId} comment_data = {comment_data} /> */}
             <section className={`${style.singlePost} mT__260`} key={ post.id }>  
               <div className="images-loaded-container">
@@ -57,12 +76,40 @@ export default function Post({ post }) {
               <div className={style.postContent_cont}>
                   <div className="container">
                       <div className="row">
-                          <div className="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+                          <div className="col-12 col-lg-10 offset-lg-2 col-xl-8 offset-xl-2">
                               <div className={style.posts__container}>
                                   <div className={style.post__tag}>
                                       <span className={style.yellow__tag}>inside stories</span>
                                   </div>
                                   <h1>{ post.title }</h1>
+                                  <div className={style.post__author}>
+                                      <span className="author__img"><img loading="lazy" decoding="async" src={ authorImg ? authorImg.sourceUrl : Icon.src } ></img></span>
+                                      <span className="post-detail">{ author } / { date } / { categories } </span>
+                                      <div className={` ${style.social__media} ${style.header_socialmedia} social__media d-none d-lg-block `}>
+                                        <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
+                                        <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
+                                        <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
+                                        <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                        <Like count={post.likes?.likes}  id={post.id} type={'post'} />
+                                      </div>
+                                      <div className={` ${style.social__media} ${style.header_socialmedia} ${style.header_socialmedia_mobile} social__media d-block d-lg-none `}>
+                                          <Like count={post.likes?.likes}  id={post.id} type={'post'} />  
+                                          <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
+                                          <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
+                                          <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
+                                          <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                      </div>
+                                  </div>
+                                  <div className={`${style.postContent} postContent`}>
+                                      {parse(post.content)}
+                                  </div>
+                              </div>
+                              <div className={` ${style.social__media} social__media `}>
+                                <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
+                                <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
+                                <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
+                                <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                <Like count={post.likes?.likes}  id={post.id} type={'post'} />
                               </div>
                           </div>
                       </div>
