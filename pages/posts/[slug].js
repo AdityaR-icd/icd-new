@@ -76,7 +76,7 @@ export default function Post({ post , data }) {
               <div className={style.postContent_cont}>
                   <div className="container">
                       <div className="row">
-                          <div className="col-12 col-lg-10 offset-lg-2 col-xl-8 offset-xl-2">
+                          <div className="col-12 col-md-10 offset-md-2">
                               <div className={style.posts__container}>
                                   <div className={style.post__tag}>
                                       <span className={style.yellow__tag}>inside stories</span>
