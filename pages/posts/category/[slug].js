@@ -57,10 +57,10 @@ export default function posts({posts , meta , categories , tags }){
 
 
 
-    const shuffleItems = ({type , original}) => {
+    const shuffleItems = ({name , original}) => {
         setseeAll(false)
         setTag(original)
-        var class_name = '.'+type;
+        var class_name = '.'+name;
         $('.tags-menu li').removeClass(style.active);
         $('.tags-menu').find(class_name).addClass(style.active);
     }
