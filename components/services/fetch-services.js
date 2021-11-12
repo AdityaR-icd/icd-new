@@ -7,7 +7,7 @@ const Image = dynamic(() => import("next/image"));
 export default function fetchServices({data}) {
     var cardImgSrc = data?.featuredImage?.backgroundImg?.sourceUrl;
     var cardGifImgSrc = data?.featuredImage?.gifAnimationImg?.sourceUrl;
-    var projectLink = data?.projectLink?.linkProject?.[0]?.slug;
+    var projectLink = data?.projectLink?.linkProject?.slug;
     if(projectLink){
         var projecturl =    
                 <Link href={` /projects/${projectLink}` }>
