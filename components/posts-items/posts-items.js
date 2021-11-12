@@ -6,7 +6,7 @@ import Image from 'next/image'
 import dynamic from "next/dynamic";
 const Like = dynamic(() => import("../../components/like"));
 
-export default function postItem({data}){
+export default function postItem({data }){
     var categories = data?.categories.edges[0]?.node?.name
     var featuredImage = data?.featuredImage?.node?.sourceUrl
     var tags = data?.tags.edges
@@ -15,6 +15,7 @@ export default function postItem({data}){
         month: 'long',
         year: 'numeric',
     });
+
 
     if(featuredImage){
         var imageData = 
@@ -39,6 +40,7 @@ export default function postItem({data}){
         else {
             var postsTags = <span></span>
         }
+        
     return(
         <div className="col-md-6 col-lg-6 grid-item">
             <div className={`${style.postsItems} animateItems}`}>

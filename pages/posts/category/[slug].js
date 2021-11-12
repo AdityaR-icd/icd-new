@@ -1,8 +1,9 @@
 import { NextSeo } from 'next-seo';
 import { useState } from 'react'
 import dynamic from "next/dynamic";
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getAllPostsByCategorySlug , getPostPage , getPostCategories  , getAllPostsByCategory , getMenus , getFooter} from '../../../lib/api'
+import { getAllPostsByCategorySlug , getPostPage , getPostCategories , getAllTags , getAllPostsByCategory , getMenus , getFooter} from '../../../lib/api'
 import Link from 'next/link'
 import $ from 'jquery'
 const Head = dynamic(() => import('next/head'));
@@ -13,21 +14,21 @@ import style from '../../../components/posts/posts.module.scss'
 import categoryStyle from '../../../components/project/category.module.scss'
 
 
-export default function posts({posts , meta , categories }){
+export default function posts({posts , meta , categories , tags }){
     const router = useRouter()
     if (router.isFallback) {
         return <div>Loading...</div>
     }
+
 
     const metaData = meta.pages?.edges[0].node
     const backButton = () => {
         window.history.back();
     }
 
-    const [seeAll, setseeAll] = useState(false)
-    const seeAllProject  = () => {
-        setseeAll(true)
-    }
+    const [seeAll, setseeAll] = useState(true)
+    const [seetag, setTag] = useState('')
+
 
     const postsearch = () => {
         $('.posts__page').toggleClass(style.post_search__open);
@@ -39,12 +40,45 @@ export default function posts({posts , meta , categories }){
     }
 
 
+    const sideScroll = (direction,speed,distance,step) => {
+        var element = document.getElementById('tags-id') , scrollAmount = 0;
+        var slideTimer = setInterval(function(){
+            if(direction == 'left'){
+                element.scrollLeft -= step;
+            } else {
+                element.scrollLeft += step;
+            }
+            scrollAmount += step;
+            if(scrollAmount >= distance){
+                window.clearInterval(slideTimer);
+            }
+        }, speed);
+    }
+
+
+
+    const shuffleItems = ({type , original}) => {
+        setseeAll(false)
+        setTag(original)
+        var class_name = '.'+type;
+        $('.tags-menu li').removeClass(style.active);
+        $('.tags-menu').find(class_name).addClass(style.active);
+    }
+
+    useEffect(() => {
+        if(router.query.slug === 'deep-design'){
+            $('.tags-cont').addClass('d-block');
+        } else {
+            $('.tags-cont').removeClass('d-block');
+        }
+
+    });
 
     var posts = posts.edges[0]?.node?.posts?.edges
     
 
     var category = categories?.categories.edges;
-    var common = <a href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight `} onClick={seeAllProject} >all</a>
+    var common = <a href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight `}>all</a>
     
     var slug = category?.map((item) => {      
         if(item?.node?.slug == router.query.slug){
@@ -112,12 +146,52 @@ export default function posts({posts , meta , categories }){
                     </div>
                     <span className="bottom__border"></span>
                 </div>
+                <div className={`container ${style.page__header__subNav}`}>
+                    <div className="row">
+                    <div className="col-12">
+                        <div className={` tags-cont ${style.tags_cont} d-none`}>
+                        <span className={` ${style.left_arrow} d-none d-lg-block`} onClick={() => sideScroll('left',5,220,10)}></span>
+                        <ul className="tags-menu" id="tags-id">
+                            {tags.edges.map(({ node }) => {
+                                var name = node.name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+                                var original = node.name;
+                                return (
+                                    <li className={name} onClick={() => shuffleItems({name , original})} ><span className="filterHash">#</span>{ node.name }</li>
+                                )
+                            })}
+                        </ul>
+                        <span className={` ${style.right_arrow} d-none d-lg-block`} onClick={() => sideScroll('right',5,220,10)}></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </section>
             <section>
                 <div className="container">
                     <div className="row infinite-grid">
                         {posts.map(({ node }) => (
-                            <PostItem data={node} key={node.id} />
+                            
+                            <>
+                                {seeAll  && (
+                                    <PostItem data={node} key={node.id}/>
+                                )}
+                                {(
+                                    node.tags.edges?.map((item ) => {
+                                        return (
+                                            <>
+                                                {!seeAll && (
+                                                    <>
+                                                        {seetag == item?.node.name && (
+
+                                                            <PostItem data={node} key={node.id} />
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+                                        )
+                                    })
+                                )}
+                            </>
                         ))}
                     </div>
                 </div>
@@ -132,13 +206,15 @@ export async function getStaticProps({ params }) {
     const meta = await getPostPage()
     const categories = await getPostCategories()
     const posts = await getAllPostsByCategorySlug(params.slug)
+    const tags = await getAllTags()
     return {
     props: { 
         menus,
         data,
         meta,
         posts,
-        categories
+        categories,
+        tags
     },
     revalidate: 1, 
     }
