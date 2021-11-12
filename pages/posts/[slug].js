@@ -32,7 +32,6 @@ export default function Post({ post , data }) {
   var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
   var categories = post?.categories.edges[0]?.node?.name
   var checkauthor = post?.postAuthor?.author
-  console.log(checkauthor)
   if(checkauthor){
     var author = post?.postAuthor?.author[0]?.title
     var authorImg = post?.postAuthor?.author[0]?.profileImage?.profileImage
