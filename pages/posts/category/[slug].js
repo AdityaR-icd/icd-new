@@ -216,7 +216,7 @@ export async function getStaticProps({ params }) {
         categories,
         tags
     },
-    revalidate: 1, 
+    revalidate: 60, 
     }
 }
 
