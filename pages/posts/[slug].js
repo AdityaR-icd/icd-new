@@ -4,18 +4,21 @@ import { useEffect } from 'react'
 import { getAllPostsForHome , getMenus , getFooter , getPostAndMorePosts} from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
+import Link from 'next/link'
 
 import Share from '../../assets/images/post-buttons/share.svg'
 import Icon from '../../assets/images/logo/mobile-logo-new.png'
 
 
 import style from '../../styles/singlePost.module.scss'
+import carousel from '../../components/project-categories/all/all.module.scss'
+import type from '../../components/project-categories/type/type.module.scss'
 
 import dynamic from "next/dynamic";
 const Seo = dynamic(() => import("../../components/seo"));
 const Comment = dynamic(() => import("../../components/comment"));
 const Like = dynamic(() => import("../../components/like"));
+const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
 
 
 
@@ -32,9 +35,119 @@ export default function Post({ post , data }) {
   var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
   var categories = post?.categories.edges[0]?.node?.name
   var checkauthor = post?.postAuthor?.author
+  var checkrelatedpost = post?.relatedPost?.relatedBlog
+  var checkrelatedproject = post?.relatedPost?.relatedProject
   if(checkauthor){
     var author = post?.postAuthor?.author[0]?.title
     var authorImg = post?.postAuthor?.author[0]?.profileImage?.profileImage
+  }
+
+    var client = '';
+    var leadImgSrc  = '';
+
+  if(checkrelatedproject){
+    var relatedProject = 
+       
+        <>
+        <div className={style.relatedProjects__container}>   
+        <span class={style.relatedProjects__head}>related project</span>
+          <section className={`${type.industry__filter} ${type.all_filter} `}>
+                <div className="project__scroll">
+                    <div className="row project__row">
+                    {checkrelatedproject.map(( node ) => (
+                        client = node.clients.edges[0].node.name,
+                        leadImgSrc = node.featuredImage.node.sourceUrl,
+                    <>
+                    <div className="col-md-4 project__item" key={ node.id }>
+                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                        <div className={carousel.thumbnail_cont}>
+                            <a href={`/projects/${node.slug}`}>
+                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                            <div className={`${carousel.full_thumb} full-thumb`}>
+                                                <Image className={carousel.project_lead} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            </div>
+                                            <span className="thumbnail-gif"></span>
+                                    </span>
+                            </a>
+                        </div>
+                        <a href={`/projects/${node.slug}`}>
+                            <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                <span className={carousel.grey__color}>  / {client}</span>
+                            </span>
+                        </a>
+                    </div>
+                       </div> 
+                    </>
+                    )).slice(0,3)}
+                    </div>
+                </div>
+          </section>
+        </div>
+        </>
+        
+  }
+  else{
+    var relatedProject = ''
+  }
+
+
+  if(checkrelatedpost){
+    var relatedPost = 
+       
+        <>
+            {checkrelatedpost.map(( data ) => {
+                var categories = data?.categories.edges[0]?.node?.name
+                var featuredImage = data?.featuredImage?.node?.sourceUrl
+            
+            
+                if(featuredImage){
+                    var imageData = 
+                        <span className={`${carousel.full_thumb} full-thumb`}>
+                                <Image src={featuredImage} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  alt="post-lead" layout="fill" />         
+                        </span>
+                    }else{
+                        imageData = 
+                        <span className={`${carousel.full_thumb} full-thumb`}>
+                                
+                        </span>
+                    }
+                    return (
+                    <>
+                    
+                      <div className={style.relatedProjects__container}>   
+                      <span class={style.relatedProjects__head}>related post</span>
+                        <section className={`${type.industry__filter} ${type.all_filter} `}>
+                              <div className="project__scroll">
+                                  <div className="row project__row">
+                                  <div className="col-md-4 project__item">
+                                      <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                                      <div className={carousel.thumbnail_cont}>
+                                          <a href={`/posts/${data.slug}`}>
+                                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                                {imageData}
+                                              </span> 
+                                          </a>
+                                      </div>
+                                      <a href={`/posts/${data.slug}`}>
+                                          <span className={carousel.projectTitle}>{data.title}
+                                            <span className={carousel.grey__color}>  / {categories}</span>
+                                          </span>
+                                      </a>
+                                  </div>
+                                    </div> 
+                                  </div>
+                              </div>
+                        </section>
+                      </div>
+                    
+                    </>
+                    )
+                  }).slice(0,3)}
+        </>
+        
+  }
+  else{
+    var relatedPost = ''
   }
 
 
@@ -111,11 +224,17 @@ export default function Post({ post , data }) {
                                 <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
                                 <Like count={post.likes?.likes}  id={post.id} type={'post'} />
                               </div>
+
+                                   
+                                {relatedProject}
+                                {relatedPost}
+                             
                           </div>
                       </div>
                   </div>
                 </div>     
             </section>
+    
       </>
     )
   }
