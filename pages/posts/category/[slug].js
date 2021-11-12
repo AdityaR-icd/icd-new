@@ -200,7 +200,7 @@ export default function posts({posts , meta , categories , tags }){
     )
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const menus = await getMenus()
     const data = await getFooter()
     const meta = await getPostPage()
@@ -216,14 +216,13 @@ export async function getStaticProps({ params }) {
         categories,
         tags
     },
-    revalidate: 60, 
     }
 }
 
-export async function getStaticPaths() {
-    const allPosts = await getAllPostsByCategory() 
-    return {
-        paths: allPosts.edges.map(({ node }) => `/posts/category/${node.slug}`) || [] ,
-        fallback: true,
-    }
-}
+// export async function getStaticPaths() {
+//     const allPosts = await getAllPostsByCategory() 
+//     return {
+//         paths: allPosts.edges.map(({ node }) => `/posts/category/${node.slug}`) || [] ,
+//         fallback: true,
+//     }
+// }
