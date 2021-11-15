@@ -16,7 +16,7 @@ import type from '../../components/project-categories/type/type.module.scss'
 
 import dynamic from "next/dynamic";
 const Seo = dynamic(() => import("../../components/seo"));
-const Comment = dynamic(() => import("../../components/comment"));
+const Comment = dynamic(() => import("../../components/comment/comment"));
 const Like = dynamic(() => import("../../components/like"));
 const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
 
@@ -50,7 +50,7 @@ export default function Post({ post , data }) {
        
         <>
         <div className={style.relatedProjects__container}>   
-        <span class={style.relatedProjects__head}>related project</span>
+        <span className={style.relatedProjects__head}>related project</span>
           <section className={`${type.industry__filter} ${type.all_filter} `}>
                 <div className="project__scroll">
                     <div className="row project__row">
@@ -115,7 +115,7 @@ export default function Post({ post , data }) {
                     <>
                     
                       <div className={style.relatedProjects__container}>   
-                      <span class={style.relatedProjects__head}>related post</span>
+                      <span className={style.relatedProjects__head}>related post</span>
                         <section className={`${type.industry__filter} ${type.all_filter} `}>
                               <div className="project__scroll">
                                   <div className="row project__row">
@@ -180,8 +180,6 @@ export default function Post({ post , data }) {
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-         {/*
-            <Comment postId={post.postId} comment_data = {comment_data} /> */}
             <section className={`${style.singlePost} mT__260`} key={ post.id }>  
               <div className="images-loaded-container">
                 {imageData}
@@ -228,7 +226,7 @@ export default function Post({ post , data }) {
                                    
                                 {relatedProject}
                                 {relatedPost}
-                             
+                                <Comment postId={post.postId} comment_data = {comment_data} /> 
                           </div>
                       </div>
                   </div>

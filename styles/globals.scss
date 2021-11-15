@@ -1115,3 +1115,51 @@ select::placeholder {
     }
   }
 }
+.comment_container{
+  max-width: 970px;
+  margin: 0 auto;
+  padding: 0;
+  
+  .comments_section{
+    margin-top: 100px;
+
+    .comments{
+      position: relative;
+      padding-top: 40px;
+      margin-bottom: 80px;
+  
+      &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        height: 2px;
+        width: 100%;
+        background: $color-brown-grey;
+      }
+    }
+  
+    .comment_date{
+      font-size: 24px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: -1px;
+      color: #202020;
+      display: block;
+    }
+  
+    p{
+      font-size: 16px;
+      font-weight: 300;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 2;
+      letter-spacing: 0.2px;
+      color: #202020;
+      margin-top: 10px;
+    }
+  }
+  
+}
+
