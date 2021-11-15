@@ -34,7 +34,7 @@ export default function Contact({ postId , comment_data }) {
     <div className="container comment_container">
           <form onSubmit={handleSubmit} className="custom-form">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-lg-6">
                 <div className="row">
                     <div className="col-md-12">
                           <div className="form-group">
