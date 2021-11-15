@@ -4,6 +4,8 @@ import '../styles/index.scss'
 import '../styles/header.scss'
 import '../styles/footer.scss'
 import '../styles/subscribe.scss'
+import '../styles/fetch-jobs.scss'
+import '../styles/jobs-form.scss'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/layout/layout"));
 

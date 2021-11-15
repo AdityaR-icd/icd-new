@@ -1,0 +1,92 @@
+@import "./variables.scss";
+.careers__page{
+    // margin-bottom: 280px;
+}
+
+.job-cont{
+    margin-bottom: 150px;
+}
+
+.position{
+    display: block;
+    position: relative;
+    background: $color-yellow;
+    padding-top: 74.95%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    // padding: 152px 60px 0 60px;
+    // height: 312px;
+    margin: 0 0 20px 0;
+    .job__title{
+        position: absolute;
+        font-family: $akz-bold;
+        // font-size: 48px;
+        // letter-spacing: -2px;
+        font-size: 24px;
+        letter-spacing: -0.9px;
+        line-height: 1;
+        color: $color-black;
+        bottom: 50px;
+        padding: 0 60px;
+        @include for-tablet-to-laptop{
+            // font-size: 36px;
+            // letter-spacing: -2px;
+            bottom: 25px;
+            padding: 0 30px;
+        }
+        @include for-phone-only{
+            bottom: 30px;
+            padding: 0 30px;
+        }
+    }
+    margin-bottom: 20px;
+}
+
+.job__desc p{
+    margin-bottom: 30px;
+    display: block;
+    font-family: $akz-light;
+    // font-size: 20px;
+    // line-height: 32px;
+    font-size: 16px;
+    line-height: 26px;
+    // letter-spacing: -0.5px;
+    color: $color-dark-black;
+    margin-top: 20px;
+    @include for-tablet-to-laptop{
+        font-size: 16px;
+        line-height: 26px;
+    }
+    @include for-phone-only {
+        font-size: 20px;
+        line-height: 32px;
+    }
+    a{
+        border-bottom: 1px solid #000;
+    }
+}
+
+.jobApply{
+    // margin-bottom: 200px; 
+}
+
+.applying__for{
+    font-family: $akz-bold;
+    font-size: 24px;
+    line-height: 1.38;
+    letter-spacing: -1px;
+    color: $color-dark-black;
+    margin-bottom: 35px;
+    display: block;
+}
+
+.jobForm__container{
+    button{
+        width: 200px;
+        margin-top: 10px;
+    }
+}
+
+.applying__for select{
+    text-transform: lowercase;
+}

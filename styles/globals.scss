@@ -1020,6 +1020,7 @@ select::placeholder {
     width: 100%;
     transition: all 200ms;
     cursor: text;
+    pointer-events: none;
   }
   
   select,
