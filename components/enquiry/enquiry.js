@@ -44,13 +44,13 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" id="first-name" autoComplete="off" value={firstName} onChange={(e) => setfirstName(e.target.value)} className="form-control" placeholder=" " required />
                             <label className="form-control-placeholder" htmlFor="first-name">your first name *</label>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" id="last-name" className="form-control" value={lastName} onChange={(e) => setlastName(e.target.value)} placeholder=" " autoComplete="off" required />
                             <label className="form-control-placeholder" htmlFor="last-name">your surname *</label>
@@ -59,13 +59,13 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" id="qualification" className="form-control" placeholder=" " autoComplete="off" value={qualification} onChange={(e) => setQualification(e.target.value)} required />
                             <label className="form-control-placeholder" htmlFor="qualification">your educational qualification *</label>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" name="experience" id="experience" className="form-control" placeholder=" " autoComplete="off" value={experience} onChange={(e) => setexperience(e.target.value)} required />
                             <label className="form-control-placeholder" htmlFor="experience">your years of experience *</label>
@@ -73,13 +73,13 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="tel" className="form-control" value={number} onChange={(e) => setNumber(e.target.value)} placeholder=" " minLength="10" maxLength="10" id="mobile-no" autoComplete="off" required />
                             <label className="form-control-placeholder" htmlFor="mobile-no">your mobile number *</label>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" id="city" autoComplete="off" value={city} onChange={(e) => setcity(e.target.value)} placeholder=" " className="form-control" required />
                             <label className="form-control-placeholder" htmlFor="city">your current city *</label>
@@ -87,13 +87,13 @@ export default function Enquiry() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="email" id="emailId" value={email}  onChange={(e) => setEmail(e.target.value)}  autoComplete="off" placeholder=" " className="form-control" required/>
                             <label className="form-control-placeholder" htmlFor="emailId">your email id *</label>
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-lg-6">
                         <div className="form-group">
                             <input type="text" id="website" value={Website} onChange={(e) => setWebsite(e.target.value)} pattern="(?:(?:https?:\/\/)?|(?:www\.))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&/=]*)" autoComplete="off" placeholder=" " className="form-control"/>
                             <label className="form-control-placeholder" htmlFor="website">your website/behance/linkedin url (like example.com)</label>
