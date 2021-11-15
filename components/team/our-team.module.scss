@@ -1,0 +1,170 @@
+@import "../../assets/scss/variables.scss";
+
+@font-face {
+    font-family: 'Chalkduster';
+    src: url('../../assets/fonts/chalkduster/chalkduster.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.aboutPage{
+    .textContent{
+        @include for-upto-tablet-portrait{
+            margin-bottom: 65px !important;
+        }
+    }
+}
+
+.team{
+    .profile{
+        padding-top: 100px;
+        margin-bottom: 50px;
+        transition: ease all 0.1s;
+        @include for-upto-tablet-portrait{
+            padding-top: 50px;
+            margin-bottom: 50px;
+        }
+        @include for-tablet-horizontal-to-laptop{
+            padding-top: 60px;
+            margin-bottom: 60px;
+        }
+        .name , .designation{
+            display: block;
+            font-family: $akz-bold;
+            font-size: 24px;
+            letter-spacing: -0.9px;
+            color: $color-black;
+            text-transform: lowercase;
+            line-height: 1;
+        }
+        .name {
+            margin-bottom: 5px;
+        }
+        .designation{
+            letter-spacing: -0.7px;
+            color: $color-grey;
+        }
+        .about{
+            p{
+                display: block;
+                font-family: $akz-light;
+                // font-size: 20px;
+                // line-height: 32px;
+                // letter-spacing: -0.5px;
+                color: $color-dark-black;
+                margin-top: 20px;
+
+
+                padding: 0 40px 0 0;
+
+                font-size: 18px;
+                line-height: 26px;
+                word-spacing: -0.05em;
+                letter-spacing: -0.01em;
+
+                
+                @include for-tablet-to-laptop{
+                    font-size: 16px;
+                    line-height: 26px;
+                }
+                @include for-phone-only {
+                    font-size: 20px;
+                    line-height: 32px;
+                }
+            }
+        }
+        .profileImg{
+            display: block;
+            margin-bottom: 25px;
+            background: $color-silver;
+            padding-top: 66.67%;
+            overflow: hidden;
+            position: relative;
+            transition: inherit;
+            // img{
+            //     height: 312px;
+            // }
+            @include for-upto-tablet-portrait{
+                &:hover{
+                    .profileImg__hover {
+                        opacity: 1 !important;
+                        visibility: visible !important;
+                        transition: inherit !important;
+                    }
+                    
+                    .profileImg__main {
+                        opacity: 0 !important;
+                        visibility: hidden !important;
+                        transition: inherit !important;
+                    }
+                }
+            }
+            
+        }
+        
+        @include for-tablet-landscape-up{
+            &:hover{
+                // max-height: 650px;
+                // overflow: hidden;
+                // .about,
+                // .name,
+                // .designation{
+                //     font-family: 'Chalkduster';
+                //     line-height: 28px;
+                //     font-size: 18px;
+                // }
+                // .name,
+                // .designation{
+                //     font-size: 21px;
+                //     line-height: 21px;
+                // }
+                .profileImg .profileImg__hover {
+                    opacity: 1;
+                    visibility: visible;
+                    transition: inherit;
+                }
+                .profileImg .profileImg__main {
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: inherit;
+                }
+            }
+        }
+        
+        .profileImg__hover,
+        .profileImg__main {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: inherit;
+        }    
+        
+        .profileImg__main {
+            z-index: 100;
+        }
+        
+        .profileImg__hover {
+            z-index: 1;
+        }
+        
+        // .profileImg {
+        //     transition: 0s;
+        // }
+         
+    }
+    // h2 {
+    //     font-family: $akz-bold;
+    //     font-size: 36px;
+    //     line-height: 36px;
+    //     letter-spacing: -1px;
+    //     color: $color-black;
+    //     margin-bottom: 30px;
+    // }
+    .job__desc{
+        display: none;
+    }
+}
+
+

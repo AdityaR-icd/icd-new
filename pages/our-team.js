@@ -1,39 +1,27 @@
-import parse from 'html-react-parser';
 import { getOurteamPage , getTeam , getMenus , getFooter } from '../lib/api'
+import dynamic from "next/dynamic";
+
+const Layout = dynamic(() => import('../components/team/team'));
 
 
-export default function careers({teamPage : { pages } , team : {edges}}) {
+export default function careers({ meta : {pages} , team }) {
+    const meta_data = pages.edges[0].node
     return (
-        <><>
-        <div>
-            {(pages.edges).map(({ node }) => (
-                <>
-                    <h4>{node.title}</h4>
-                    {parse(node.content)}
-                </>
-            ))}
-            {edges.map(({ node }) => (
-                <>
-                    <h4>{node.title}</h4>
-                    <span className="Job_Desc">
-                        {parse(node.content)}
-                    </span>
-                </>
-            ))}
-            </div>
-        </></>
+        <>
+            <Layout meta={meta_data} team={team} />
+        </>
     )
 }
 
 
 export async function getStaticProps() {
-    const teamPage = await getOurteamPage()
+    const meta = await getOurteamPage()
     const team = await getTeam()
     const menus = await getMenus()
     const data = await getFooter()
     return {
         props: { 
-        teamPage,
+        meta,
         team,
         menus,
         data

@@ -1,43 +1,25 @@
 import parse from 'html-react-parser';
-import { getServicePage , getMenus , getFooter , getJobs } from '../lib/api'
+import { getCareerPage , getMenus , getFooter , getJobs } from '../lib/api'
 import dynamic from "next/dynamic";
-const Enquiry = dynamic(() => import("../components/enquiry/enquiry"));
+const Layout = dynamic(() => import("../components/career/careers"));
 
 
-export default function careers({service : { pages } , jobs : { edges } }) {
-
-
+export default function careers({meta : { pages } , jobs }) {
+    const meta_data = pages.edges[0].node
     return (
-        <><>
-        <div>
-            {(pages.edges).map(({ node }) => (
-                <>
-                    {/* <h4>{node.name}</h4> */}
-                    {parse(node.content)}
-                </>
-            ))}
-            {edges.map(({ node }) => (
-                <>
-                    <h4>{node.title}</h4>
-                    <span className="Job_Desc">
-                        {parse(node.content)}
-                    </span>
-                </>
-            ))}
-            </div>
-        </><Enquiry /></>
+        <Layout meta={meta_data} jobs={jobs} />
     )
 }
 
 
 export async function getStaticProps() {
-    const service = await getServicePage()
+    const meta = await getCareerPage()
     const jobs = await getJobs()
     const menus = await getMenus()
     const data = await getFooter()
     return {
         props: { 
-        service,
+        meta,
         jobs,
         menus,
         data

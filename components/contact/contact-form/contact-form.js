@@ -22,6 +22,9 @@ export default function contactForm() {
     
         if (data) {
           window.location.reload(false);
+          $('.success-message').addClass('show-message');
+        }else{
+          $('.error-message').addClass('show-message');
         }
     }
     return(
