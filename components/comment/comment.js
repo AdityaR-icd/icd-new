@@ -36,7 +36,7 @@ export default function Contact({ postId , comment_data }) {
             <div className="row">
               <div className="col-md-6">
                 <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-md-12">
                           <div className="form-group">
                             <textarea className='textarea' value={message} onChange={(e) => setMessage(e.target.value)} autoComplete="off" placeholder=" " style={{ border : '1px solid' , height: '155px' , margin: '6px 0 0 0' }} />
                             <label className="form-control-placeholder" htmlFor="comment" style={{ padding : '16px' }}>please type your comment here *</label>
@@ -44,9 +44,9 @@ export default function Contact({ postId , comment_data }) {
                     </div>
                   </div>
                 </div>
-                <div className="col-md-6">
+                <div className="col-lg-6">
                 <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-md-12">
                         <div className="form-group">
                             <input type="text" id="first-name" autoComplete="off" value={name} onChange={(e) => setName(e.target.value)} className="form-control" placeholder=" " required />
                             <label className="form-control-placeholder" htmlFor="first-name">your name *</label>
@@ -54,7 +54,7 @@ export default function Contact({ postId , comment_data }) {
                     </div>
                 </div>
                 <div className="row">
-                  <div className="col-lg-12">
+                  <div className="col-md-12">
                         <div className="form-group">
                           <input type="email" id="emailId" value={email}  onChange={(e) => setEmail(e.target.value)}  autoComplete="off" placeholder=" " className="form-control" required/>
                           <label className="form-control-placeholder" htmlFor="emailId">your email *</label>
