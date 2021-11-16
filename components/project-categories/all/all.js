@@ -22,7 +22,7 @@ export default function allproject({ edges }){
                 <stop stop-color="#f6f6f6" offset="70%" />
             </linearGradient>
           </defs>
-          <rect width="${w}" height="${h}" fill="#333" />
+          <rect width="${w}" height="${h}" fill="#F6F6F6" />
           <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
           <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
         </svg>`
