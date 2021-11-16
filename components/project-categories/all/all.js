@@ -7,7 +7,7 @@ export default function allproject({ edges }){
 
     var client = '';
     var leadImgSrc  = '';
-    
+
     const toBase64 = (str) =>
     typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
@@ -17,9 +17,9 @@ export default function allproject({ edges }){
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <defs>
             <linearGradient id="g">
-              <stop stop-color="#333" offset="20%" />
-              <stop stop-color="#222" offset="50%" />
-              <stop stop-color="#333" offset="70%" />
+                <stop stop-color="#f6f6f6" offset="20%" />
+                <stop stop-color="#f0f0f0" offset="50%" />
+                <stop stop-color="#f6f6f6" offset="70%" />
             </linearGradient>
           </defs>
           <rect width="${w}" height="${h}" fill="#333" />
