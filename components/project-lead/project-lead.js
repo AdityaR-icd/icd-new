@@ -93,7 +93,7 @@ export default function projectLead({ edges   }){
                                                             )}
                                                             {isMobile && (
                                                                 <>
-                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block fade-in`}>
+                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block`}>
                                                                         <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
                                                                     </div>
                                                                 </>
