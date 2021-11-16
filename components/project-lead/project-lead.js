@@ -17,6 +17,26 @@ export default function projectLead({ edges   }){
     const projects = edges[0].node.projects.highlightedProjects
     const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
     const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
+
+    const toBase64 = (str) =>
+    typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
+
+    const shimmer = (w, h) => `
+        <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <linearGradient id="g">
+                <stop stop-color="#f6f6f6" offset="20%" />
+                <stop stop-color="#f0f0f0" offset="50%" />
+                <stop stop-color="#f6f6f6" offset="70%" />
+            </linearGradient>
+          </defs>
+          <rect width="${w}" height="${h}" fill="#333" />
+          <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+          <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+        </svg>`
+
     return(
         <>
         {projects.map(({ highlightedImage , clients } , j ) => (
@@ -73,8 +93,8 @@ export default function projectLead({ edges   }){
                                                             )}
                                                             {isMobile && (
                                                                 <>
-                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block`}>
-                                                                        <Image src={project_thumbnail} alt="project-lead" height="473" width="632" layout="fill" />
+                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block fade-in`}>
+                                                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
                                                                     </div>
                                                                 </>
                                                             )}
