@@ -13,7 +13,9 @@ export default function IntroText(description) {
                     <div className="row">
                         <div className="col-md-10 offset-md-1">
                             <div className={`${intro.textContent} `}>
-                                {parse(description.description)}
+                                <p>
+                                    {parse(description.description)}
+                                </p>
                             </div>
                         </div>
                     </div>

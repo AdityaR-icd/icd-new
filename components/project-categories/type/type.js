@@ -2,6 +2,9 @@ import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
+// import Shimmer from "react-shimmer-effect";
+import { useState , useEffect } from "react";
+
 
 export default function projectTypes({ nodes }){
     var data = ''
@@ -11,6 +14,17 @@ export default function projectTypes({ nodes }){
     var client = ''
     var clientsName = ''
     var heading = ''
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+
+    });
+
+    // setTimeout(() => {
+    //     setIsLoading(false);
+    // }, 10000);
+
     return(
         <>
         {nodes.map(({ projects } , i , types)  => (      
@@ -40,7 +54,8 @@ export default function projectTypes({ nodes }){
                                                 <a href={`/projects/${slug}`}>
                                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                         <div className={`${carousel.full_thumb} full-thumb`}>
-                                                            <Image className={carousel.project_lead} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="  src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                           
+                                                            <Image className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                         </div>
                                                         <span className="thumbnail-gif"></span>
                                                     </span>
@@ -50,7 +65,7 @@ export default function projectTypes({ nodes }){
                                             <a href={`/projects/${slug}`}>
                                                 <span className={carousel.projectTitle}>
                                                     {heading}
-                                                    <span className={carousel.grey__color}>  / {clientsName}</span>
+                                                    <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>
                                                 </span>
                                             </a>
                                         </div>
