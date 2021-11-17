@@ -11,9 +11,15 @@ export default function fetchNewsletter({data}) {
     });
 
 
-    var htmlString = data.content;
-    var stripedHtml = htmlString.replace(/<[^>]+>/g, ' ');
-    var content = stripedHtml.substr(0,500);
+    var htmlString = data?.content;
+
+    if(htmlString){
+        var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
+        var content = stripedHtml?.substr(0,500);
+    }else{
+        content = "...."
+    }
+    
 
     return (
         <div className="col-md-4 col-lg- grid-item">

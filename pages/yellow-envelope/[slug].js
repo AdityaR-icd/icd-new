@@ -44,6 +44,13 @@ export default function newsletterss({ newsletter }) {
         return <div>Loading...</div>
     }
 
+    var newsletterContent = newsletter?.content
+    if(newsletterContent){
+        var content = newsletterContent
+    }else{
+      content = ''
+    }
+
     return (
       <>
       <Seo seo={seo} uri={uri}/>
@@ -66,8 +73,7 @@ export default function newsletterss({ newsletter }) {
                                 <div style={{borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 15, paddingBottom: 5, paddingRight: 0, paddingLeft: 0}}>
                                   <div style={{color: '#171717', fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', lineHeight: '1.2', paddingTop: 10, paddingRight: 10, paddingBottom: 23, paddingLeft: 10}} className="newsletter-title">
                                     <div style={{fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', fontSize: 12, lineHeight: '1.2', color: '#171717', msoLineHeightAlt: 14}}>
-                                      <p style={{fontSize: 38, lineHeight: 1, msoLineHeightAlt: 46, margin: 0}}><span className="the-yellow-envelope" style={{fontSize: 40, lineHeight: 36+'px', marginBottom: 4}}><strong>the yellow envelope</strong> </span></p>
-                                      <p style={{fontSize: 38, lineHeight: 1.2, msoLineHeightAlt: 46, margin: 0}}><span className="the-yellow-envelope-number" style={{fontSize: 32, lineHeight: 36+'px'}}><strong>{newsletter.title}</strong></span></p>
+                                      <p style={{fontSize: 38, lineHeight: 1.2, msoLineHeightAlt: 46, margin: 0}}><span className="the-yellow-envelope-number" style={{fontSize: 32, lineHeight: 36+'px' , maxWidth: '170px' , display :'block'}}><strong>{newsletter.title}</strong></span></p>
                                     </div>
                                   </div>
                                 </div>
@@ -101,7 +107,7 @@ export default function newsletterss({ newsletter }) {
                                   <p>{ `Dear {{contact.FIRSTNAME }} `}</p>
                                   {/* <span dangerouslySetInnerHTML={{ __html: data.content }}></span> */}
                                   <span>
-                                    {parse(newsletter.content)}
+                                    {parse(content)}
                                   </span>
                                 </div>
                               </div>
@@ -196,7 +202,7 @@ export default function newsletterss({ newsletter }) {
                               <div style={{width: '100% !important'}}>
                                 <div className="lets-talk-btn" style={{borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 5, paddingBottom: 40, paddingRight: 0, paddingLeft: 0}}>
                                   <div align="left" className="button-container" style={{paddingTop: 10, paddingRight: 10, paddingBottom: 10, paddingLeft: 10}}>
-                                    <a href="https://icd-v3-vercel.vercel.app/about-us/" style={{WebkitTextSizeAdjust: 'none', textDecoration: 'none', display: 'inline-block', color: '#171717', backgroundColor: 'transparent', borderRadius: 4, WebkitBorderRadius: 0, MozBorderRadius: 4, width: 'auto', borderTop: '1px solid transparent', borderRight: '1px solid transparent', borderBottom: '1px solid #171717', borderLeft: '1px solid transparent', paddingTop: 0, paddingBottom: 0, fontFamily: 'Merriweather,Times,Times New Roman,serif', textAlign: 'center', msoBorderAlt: 'none', wordBreak: 'keep-all'}} target="_blank">
+                                    <a href="https://icd-v3-vercel.vercel.app/our-team/" style={{WebkitTextSizeAdjust: 'none', textDecoration: 'none', display: 'inline-block', color: '#171717', backgroundColor: 'transparent', borderRadius: 4, WebkitBorderRadius: 0, MozBorderRadius: 4, width: 'auto', borderTop: '1px solid transparent', borderRight: '1px solid transparent', borderBottom: '1px solid #171717', borderLeft: '1px solid transparent', paddingTop: 0, paddingBottom: 0, fontFamily: 'Merriweather,Times,Times New Roman,serif', textAlign: 'center', msoBorderAlt: 'none', wordBreak: 'keep-all'}} target="_blank">
                                       <span style={{paddingLeft: 0, paddingRight: 0, fontSize: 16, display: 'inline-block'}}>
                                         <span style={{fontSize: 28, lineHeight: 32+'px', msoLineHeightAlt: 32}}>Let’s talk.</span>
                                       </span>
