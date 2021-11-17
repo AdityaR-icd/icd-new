@@ -1,8 +1,10 @@
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
+import parse from 'html-react-parser';
+import Link from 'next/link'
 const Head = dynamic(() => import('next/head'));
-const FetchNewsletter = dynamic (() => import("./fetch-newsletter/newsletter"));
+// const FetchNewsletter = dynamic (() => import("./fetch-newsletter/newsletter"));
 
 import $ from 'jquery';
 
@@ -23,6 +25,10 @@ export default function yellowEnvelop({meta , edges}){
           $('.sb-search-input').val('');
         }
     }
+
+    var htmlString = ''
+    var stripedHtml = ''
+    var content = ''
     return(
         <>
             <NextSeo
@@ -78,9 +84,40 @@ export default function yellowEnvelop({meta , edges}){
             <section>
                 <div className="container">
                     <div className="row infinite-grid">
-                        {edges.map(({ node }) => (
-                            <FetchNewsletter data={node} key={node.id}/>
-                        ))}
+                        {edges.map(({ node }) => {
+                            // <FetchNewsletter data={node} key={node.id}/>
+                            var date = new Date(node.date).toLocaleDateString('en-IN', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                            });
+                            htmlString = node?.content
+                            if(htmlString){
+                                var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
+                                var content = stripedHtml?.substr(0,500);
+                            }else{
+                                content = "...."
+                            }
+                            return (
+                                
+                                    <div className="col-md-4 col-lg- grid-item" key={node.id}>
+                                        <div className={`${style.postsItems} animateItems}`}>
+                                            <a href={`/yellow-envelope/${node.slug}`}>
+                                                <h2 className={style.postTitle}>{node.title}</h2>
+                                                <span className={style.postBy}> {date}  </span>
+                                                <div className={style.postInfo}> <p> {parse(content)} </p> </div>
+                                            </a>
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <Link href={`/yellow-envelope/${node.slug}`}>
+                                                        <button>read letter</button>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            )
+                        })}         
                         
                     </div>
                 </div>
