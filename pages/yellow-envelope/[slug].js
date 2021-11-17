@@ -271,6 +271,7 @@ export default function newsletterss({ newsletter }) {
           </div>
           <button value="copy" id="copyBlock" onClick={ copyElem }>copy</button>
           <div className="copyField"></div>
+          
       </>
     )
   }
