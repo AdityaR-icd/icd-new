@@ -34,3 +34,12 @@ export default function fetchNewsletter({data}) {
         </div>
     )
 }
+
+export async function getStaticProps() {
+    return{
+        props: {
+
+        },
+        revalidate: 1,
+    }
+}
