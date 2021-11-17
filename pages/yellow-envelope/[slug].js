@@ -22,28 +22,18 @@ export default function newsletterss({ newsletter }) {
     return (
       <>
       <Seo seo={seo} uri={uri}/>
-            <Head>
-              {seo?.schema ? (
-                <script
-                  type='application/ld+json'
-                  className='yoast-schema-graph'
-                  key='yoastSchema'
-                  dangerouslySetInnerHTML={{__html: ( seo.schema.raw )}}
-                />
-              ) : null}
-            </Head>
             <h1>{newsletter.title}</h1>
             {parse(newsletter.content)}
             
-            {(newsletter.yellowEnvelope.newsletterArticles).map( data  => (  
-                <>
-                    <h3>
-                        {data.title}
-                    </h3>
-                        <div>
-                            {parse(data.content)}
-                        </div>
-                    </>
+            {(newsletter.yellowEnvelope?.newsletterArticles).map( data  => (  
+                <div key={data.id}>
+                  <h3>
+                      {data.title}
+                  </h3>
+                  <div>
+                      {parse(data.content)}
+                  </div>
+                </div>
             ))}
       </>
     )

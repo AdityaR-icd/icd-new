@@ -14,19 +14,6 @@ export default function Index({ newsletters: { edges } , meta:{pages}  }) {
   const meta_data = pages.edges[0].node
  return (
     <>
-      {/* {edges.map(({ node }) => (
-       
-         <>
-         <Link href={`/yellow-envelope/${node.slug}`}>
-          <a
-            className="hover:underline"
-          >
-            <h4>{node.title}</h4>
-          </a>
-        </Link>
-        {parse(node.content)}
-         </>
-      ))} */}
       <Layout meta={meta_data} edges={edges} />
     </>
   )
