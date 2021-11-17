@@ -1,0 +1,276 @@
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    table,
+    td,
+    tr {
+        vertical-align: top;
+        border-collapse: collapse;
+    }
+
+    * {
+        line-height: inherit;
+    }
+
+    a[x-apple-data-detectors=true] {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+    
+    .cfs-hyperlink{
+        font-style: italic !important;
+        font-size: 16px !important;
+        letter-spacing: -0.1px !important;
+        color: #171717 !important;
+    }
+
+    #copyBlock{
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        color: #fff;
+        background: #000;
+    }
+
+    #htmlContent{
+        .newsletter-title p{
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif !important;
+            letter-spacing: normal !important;
+        }
+        .letter-text p{
+            font-family: Merriweather, Times, 'Times New Roman', serif !important;
+            font-size: 16px !important;
+            line-height: 25px !important;
+            color: #171717 !important;
+            letter-spacing: normal !important;
+        }
+        .article-meta p{
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif !important;
+            font-size: 12px !important;
+            line-height: 1.2 !important;
+            color: #828282 !important;
+            font-weight: normal !important;
+        }
+        .article-content p{
+            font-family: Merriweather, Times, 'Times New Roman', serif !important;
+            font-size: 16px !important;
+            line-height: 25px !important;
+            color: #171717 !important;
+            letter-spacing: normal !important;
+        }
+
+        .about-company-text p{
+            font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif !important;
+            letter-spacing: normal !important;
+        }
+
+        .subscribe-cont p{
+            font-family: Merriweather, Times, 'Times New Roman', serif !important;
+            letter-spacing: normal !important;
+        }
+
+        .col {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+
+    main,.nl-container{
+        min-height: 100vh;
+    }
+
+    @media (max-width: 620px) {
+
+        .block-grid,
+        .col {
+            min-width: 320px !important;
+            max-width: 100% !important;
+            display: block !important;
+        }
+
+        .block-grid {
+            width: 100% !important;
+        }
+
+        .col {
+            width: 100% !important;
+        }
+
+        .col>div {
+            margin: 0 auto;
+        }
+
+        img.fullwidth,
+        img.fullwidthOnMobile {
+            max-width: 100% !important;
+        }
+
+        .no-stack .col {
+            min-width: 0 !important;
+            display: table-cell !important;
+        }
+
+        .no-stack.two-up .col {
+            width: 50% !important;
+        }
+
+        .no-stack .col.num4 {
+            width: 33% !important;
+        }
+
+        .no-stack .col.num8 {
+            width: 66% !important;
+        }
+
+        .no-stack .col.num4 {
+            width: 33% !important;
+        }
+
+        .no-stack .col.num3 {
+            width: 25% !important;
+        }
+
+        .no-stack .col.num6 {
+            width: 50% !important;
+        }
+
+        .no-stack .col.num9 {
+            width: 75% !important;
+        }
+
+        .video-block {
+            max-width: none !important;
+        }
+
+        .mobile_hide {
+            min-height: 0px;
+            max-height: 0px;
+            max-width: 0px;
+            display: none;
+            overflow: hidden;
+            font-size: 0px;
+        }
+
+        .desktop_hide {
+            display: block !important;
+            max-height: none !important;
+        }
+
+        .title-cont,
+        .logo-cont{
+            width: 60% !important;
+            min-width: auto !important;
+            float: left;
+        }
+
+        .title-cont p{
+            font-size: 32px !important;
+            font-weight: 900 !important;
+            line-height: 31px !important;
+            letter-spacing: -0.5px !important;
+        }
+
+        .logo-cont{
+            width: 40% !important;
+        }
+
+        .newsletter-container {
+            padding: 0 10px;
+        }
+
+        .newsletter-title{
+            padding-left: 0 !important; 
+            padding-bottom: 17px !important;
+        }
+
+        .article-meta{
+            padding: 20px 10px 0 !important;
+        }
+
+        .article-headline{
+            padding: 0 10px 12px !important;
+        }
+
+        .article-meta p,
+        .article-headline p span{
+            font-size: 12px !important;
+            /*font-weight: bold !important;*/
+            line-height: 28px !important;
+            color: #828282 !important;
+        }
+
+        .article-headline p,
+        .article-headline p span{
+            font-size: 26px !important;
+            line-height: 30px !important;
+            color: #171717 !important;
+        }
+
+        .article-content{
+            padding: 0 10px 25px !important;
+        }
+
+        .about-company{
+            padding: 20px 0 45px !important;
+        }
+
+        .about-company-text{
+            padding: 0 !important;
+        }
+
+        .about-company-text p span{
+            font-size: 16px !important;
+            font-weight: bold !important;
+            line-height: 22px !important;
+            color: #171717 !important;
+        }
+
+        .button-container{
+            padding: 0 !important;
+        }
+
+        .lets-talk-btn{
+            padding: 0 0 45px !important;  
+        }
+
+        .social-icons-cont{
+            padding: 0 0 20px !important;
+        }
+
+        .social-icons{
+            float: left !important;
+            width: 50% !important;
+        }
+
+        .social-icons tr td{
+            padding: 0  30px 0 0 !important;
+        }
+
+        .subscribe-cont{
+            padding: 0 0 40px !important;
+        }
+
+        .subscribe-cont p{
+            font-size: 12px !important;
+            letter-spacing: -0.08px !important;
+            color: #171717 !important;
+        }
+
+        .the-yellow-envelope {
+            font-size: 32px  !important;
+            line-height: 31px  !important;
+            letter-spacing: -0.5px  !important;
+            margin-bottom: 2px  !important;
+        }
+
+        .the-yellow-envelope-number {
+            font-size: 27px  !important; 
+            line-height: 31px  !important;
+        }
+
+
+    }

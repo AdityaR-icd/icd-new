@@ -81,6 +81,7 @@ export default function yellowEnvelop({meta , edges}){
                         {edges.map(({ node }) => (
                             <FetchNewsletter data={node} key={node.id}/>
                         ))}
+                        
                     </div>
                 </div>
             </section>
