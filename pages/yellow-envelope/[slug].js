@@ -2,8 +2,8 @@ import parse from 'html-react-parser';
 import { getAllNewsletterWithSlug , getArticle , getMenus , getFooter } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
-import PropTypes from 'prop-types';
 import Head from 'next/head';
+import $ from 'jquery';
 // import Comment from '../../components/comment'
 
 
@@ -13,7 +13,6 @@ import instagram from '../../assets/images/social-media/instagram@2x.png'
 import linkdin from '../../assets/images/social-media/linkedin@2x.png'
 import website from '../../assets/images/social-media/icd-new.png'
 import behance from '../../assets/images/social-media/behance-new.png'
-import link from 'next/link';
 
 
 
@@ -29,6 +28,15 @@ export default function newsletterss({ newsletter }) {
     var url = ''
     var data_url = ''
   
+    const copyElem = () => {
+      var element =$('#htmlContent');
+      var temp = $("<input>");
+      $(".copyField").append(temp);
+      temp.val($(element).html().replace(/&quot;/g, '')).select();
+      document.execCommand("copy");
+      temp.remove();
+    };
+
     if (router.isFallback) {
         return <div>Loading...</div>
     }
@@ -265,6 +273,8 @@ export default function newsletterss({ newsletter }) {
               </table>
             </body>
           </div>
+          <button value="copy" id="copyBlock" onClick={ copyElem }>copy</button>
+          <div className="copyField"></div>
       </>
     )
   }
