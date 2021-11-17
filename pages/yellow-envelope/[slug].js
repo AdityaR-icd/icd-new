@@ -78,7 +78,7 @@ export default function newsletterss({ newsletter }) {
                                 <div style={{borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 35, paddingBottom: 5, paddingRight: 0, paddingLeft: 0}}>
                                   <div className="mobile_hide">
                                     <div align="right" className="img-container right autowidth" style={{paddingRight: 0, paddingLeft: 0}}>
-                                      <a href="https://www.icdindia.com" tabIndex={-1} target="_blank"> <img loading="lazy" decoding="async" align="right" alt="Image" border={0} className="right autowidth" src={logo.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', width: '100%', maxWidth: 172, float: 'none', display: 'block'}} title="Image" width={172} /></a>
+                                      <a href="https://icd-v3-vercel.vercel.app" tabIndex={-1} target="_blank"> <img loading="lazy" decoding="async" align="right" alt="Image" border={0} className="right autowidth" src={logo.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', width: '100%', maxWidth: 172, float: 'none', display: 'block'}} title="Image" width={172} /></a>
                                     </div>
                                   </div>
                                   <div className="desktop_hide mobile-logo" style={{msoHide: 'all', display: 'none', maxHeight: 0, overflow: 'hidden'}}>
@@ -104,7 +104,7 @@ export default function newsletterss({ newsletter }) {
                                     {parse(newsletter.content)}
                                   </span>
                                 </div>
-                              </div> 
+                              </div>
                             </div> 
                           </div>
                         </div>
@@ -196,7 +196,7 @@ export default function newsletterss({ newsletter }) {
                               <div style={{width: '100% !important'}}>
                                 <div className="lets-talk-btn" style={{borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 5, paddingBottom: 40, paddingRight: 0, paddingLeft: 0}}>
                                   <div align="left" className="button-container" style={{paddingTop: 10, paddingRight: 10, paddingBottom: 10, paddingLeft: 10}}>
-                                    <a href="https://www.icdindia.com/about-us/" style={{WebkitTextSizeAdjust: 'none', textDecoration: 'none', display: 'inline-block', color: '#171717', backgroundColor: 'transparent', borderRadius: 4, WebkitBorderRadius: 0, MozBorderRadius: 4, width: 'auto', borderTop: '1px solid transparent', borderRight: '1px solid transparent', borderBottom: '1px solid #171717', borderLeft: '1px solid transparent', paddingTop: 0, paddingBottom: 0, fontFamily: 'Merriweather,Times,Times New Roman,serif', textAlign: 'center', msoBorderAlt: 'none', wordBreak: 'keep-all'}} target="_blank">
+                                    <a href="https://icd-v3-vercel.vercel.app/about-us/" style={{WebkitTextSizeAdjust: 'none', textDecoration: 'none', display: 'inline-block', color: '#171717', backgroundColor: 'transparent', borderRadius: 4, WebkitBorderRadius: 0, MozBorderRadius: 4, width: 'auto', borderTop: '1px solid transparent', borderRight: '1px solid transparent', borderBottom: '1px solid #171717', borderLeft: '1px solid transparent', paddingTop: 0, paddingBottom: 0, fontFamily: 'Merriweather,Times,Times New Roman,serif', textAlign: 'center', msoBorderAlt: 'none', wordBreak: 'keep-all'}} target="_blank">
                                       <span style={{paddingLeft: 0, paddingRight: 0, fontSize: 16, display: 'inline-block'}}>
                                         <span style={{fontSize: 28, lineHeight: 32+'px', msoLineHeightAlt: 32}}>Let’s talk.</span>
                                       </span>
@@ -232,7 +232,7 @@ export default function newsletterss({ newsletter }) {
                                               <tr align="left" style={{verticalAlign: 'top', display: 'inline-block', textAlign: 'left'}} valign="top">
                                                 <td style={{wordBreak: 'break-word', verticalAlign: 'top', paddingBottom: 18, paddingRight: 30}} valign="top"><a href="https://www.linkedin.com/company/itu-chaudhuri-design" target="_blank"><img loading="lazy" decoding="async" alt="LinkedIn" height={32} src={linkdin.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', display: 'block'}} title="LinkedIn" width={32} /></a></td>
                                                 <td style={{wordBreak: 'break-word', verticalAlign: 'top', paddingBottom: 18, paddingRight: 30}} valign="top"><a href="https://www.behance.net/ituchaudhuridesign" target="_blank"><img loading="lazy" decoding="async" alt="Behance" height={32} src={behance.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', display: 'block'}} title="Custom" width={32} /></a></td>
-                                                <td style={{wordBreak: 'break-word', verticalAlign: 'top', paddingBottom: 18, paddingRight: 30}} valign="top"><a href="https://www.icdindia.com" target="_blank"><img loading="lazy" decoding="async" alt="www.icdindia.com" height={32} src={website.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', display: 'block'}} title="Custom" width={32} /></a></td>
+                                                <td style={{wordBreak: 'break-word', verticalAlign: 'top', paddingBottom: 18, paddingRight: 30}} valign="top"><a href="https://icd-v3-vercel.vercel.app" target="_blank"><img loading="lazy" decoding="async" alt="icd-v3-vercel.vercel.app" height={32} src={website.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', height: 'auto', border: 'none', display: 'block'}} title="Custom" width={32} /></a></td>
                                               </tr>
                                             </tbody>
                                           </table>
