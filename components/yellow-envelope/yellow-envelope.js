@@ -100,22 +100,22 @@ export default function yellowEnvelop({meta , edges}){
                             }
                             return (
                                 
-                                    <div className="col-md-4 col-lg- grid-item" key={node.id}>
-                                        <div className={`${style.postsItems} animateItems}`}>
-                                            <a href={`/yellow-envelope/${node.slug}`}>
-                                                <h2 className={style.postTitle}>{node.title}</h2>
-                                                <span className={style.postBy}> {date}  </span>
-                                                <div className={style.postInfo}> <p> {parse(content)} </p> </div>
-                                            </a>
-                                            <div className="row">
-                                                <div className="col-6">
-                                                    <Link href={`/yellow-envelope/${node.slug}`}>
-                                                        <button>read letter</button>
-                                                    </Link>
-                                                </div>
+                                <div className="col-md-4 col-lg- grid-item" key={node.id}>
+                                    <div className={`${style.postsItems} animateItems}`}>
+                                        <a href={`/yellow-envelope/${node.slug}`}>
+                                            <h2 className={style.postTitle}>{node.title}</h2>
+                                            <span className={style.postBy}> {date}  </span>
+                                            <div className={style.postInfo}> <p> {parse(content)} </p> </div>
+                                        </a>
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <Link href={`/yellow-envelope/${node.slug}`}>
+                                                    <button>read letter</button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             )
                         })}         
                         
