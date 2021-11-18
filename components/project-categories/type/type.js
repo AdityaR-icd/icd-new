@@ -64,7 +64,7 @@ export default function projectTypes({ nodes }){
                             title = node?.title,
                             leadImgSrc = node.featuredImage.node.sourceUrl,
                             client = node?.clients.edges,
-                            clientsName = client[i]?.node.name,
+                            clientsName = client[0]?.node.name,
                             heading = node.projectComponent.heading,                
                                 <>
                                     <div className={ `col-md-4 ${type.project__item}` }>
