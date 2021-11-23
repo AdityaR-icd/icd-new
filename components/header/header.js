@@ -6,6 +6,9 @@ import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';
 
+import dynamic from "next/dynamic";
+const Search = dynamic(() => import("../search/search"));
+
 
 
 
@@ -22,6 +25,15 @@ const Header = (props) => {
         $('body').removeClass('hamburger-open');
         $('.hamburger, .nav-menu').removeClass("is-active");
     } 
+
+    // Search Show and Hide
+
+    const searchToggle = () => {
+        $('body').toggleClass('showSearch');
+        if($('body').hasClass('showSearch')){
+            $('.searchInput').focus();
+        }
+    }
 
 
     useEffect(() => {
@@ -47,6 +59,14 @@ const Header = (props) => {
         });
         
     });
+
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        var search = $('#hamburgerSearch').val();
+        this.hamburgerClose();
+        this.props.history.push('/search/'+search);
+        $('#hamburgerSearch').val('');
+    }
 
 
     return (
@@ -83,31 +103,22 @@ const Header = (props) => {
                                         <div className="container">
                                             <div className="row">
                                                 <ul>
-                                                    {/* <li className="mobile__menu--items">
+                                                    <li className="mobile__menu--items">
                                                         <form className="global-search">
                                                             <input type="search" className="searchInput" placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
-                                                            <input className="searchBtn" onClick={this.onSubmitHandler} type="submit" value="" />
+                                                            <input className="searchBtn" onClick={onSubmitHandler} type="submit" value="" />
                                                         </form>
-                                                    </li> */}
+                                                    </li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/projects">projects</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/clients">clients</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/services">services</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/posts">posts</Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/contact">contact</Link></li>
-                                                    {/* {(
-                                                        function (menu) {
-                                                            for (let i = 0; i < (list).length; i++) {
-                                                                menu.push(
-                                                                    <li onClick={hamburgerClose}><Link href={list[i]?.node.path}>{list[i]?.node.label}</Link></li>
-                                                                )
-                                                            }
-                                                            return menu;
-                                                    })([], 0, 10)} */}
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
                                                     <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
-                                                    {/* <li className="search-icon d-lg-block d-none" onClick={ this.searchToggle }><span className="searchIcon"></span></li> */}
+                                                    <li className="search-icon d-lg-block d-none" onClick={ searchToggle }><span className="searchIcon"></span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -117,15 +128,15 @@ const Header = (props) => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="search-form ignore-react-onclickoutside" id="searchID">
-        <Search></Search>
-        <div id="close">
-            <span className="close-wrap" onClick={this.searchToggle}>
-                <span className="close-line close-line1"></span>
-                <span className="close-line close-line2"></span>
-            </span>
-        </div>
-    </div> */}
+                    <div className="search-form ignore-react-onclickoutside" id="searchID">
+                    <Search></Search>
+                    <div id="close">
+                        <span className="close-wrap" onClick={searchToggle}>
+                            <span className="close-line close-line1"></span>
+                            <span className="close-line close-line2"></span>
+                        </span>
+                    </div>
+                </div>
                 </header>
             </>
     )
