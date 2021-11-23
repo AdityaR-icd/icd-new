@@ -20,12 +20,31 @@ export default function fetchServices({data}) {
             </Link>
         }
 
+    const toBase64 = (str) =>
+    typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
+
+    const shimmer = (w, h) => `
+        <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <linearGradient id="g">
+                <stop stop-color="#f6f6f6" offset="20%" />
+                <stop stop-color="#f0f0f0" offset="50%" />
+                <stop stop-color="#f6f6f6" offset="70%" />
+            </linearGradient>
+          </defs>
+          <rect width="${w}" height="${h}" fill="#F6F6F6" />
+          <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+          <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+        </svg>`
+
     return(
         <div className={`col-md-6 col-lg-4 ${style.servicesItem}`}>
             <span className={style.serviceLogo}>
             <span>
-                <Image loading="lazy" decoding="async" className={style.serviceLogo__anim} src = { cardGifImgSrc } layout="fill" alt=""/>
-                <Image loading="lazy" decoding="async" className={style.serviceLogo__static} src = { cardImgSrc } layout="fill" alt=""/>
+                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={style.serviceLogo__anim} src = { cardGifImgSrc } layout="fill" alt=""/>
+                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={style.serviceLogo__static} src = { cardImgSrc } layout="fill" alt=""/>
             </span>
             </span>
             <span className={style.serviceHeader}>{data.title}</span>
