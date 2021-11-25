@@ -1,10 +1,13 @@
 const path = require('path')
 const withPWA = require("next-pwa");
+const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPWA({
   pwa: {
     dest: "public",
-    swSrc: "service-worker.js",
+    register: false,
+    sw: 'service-worker.js',
+    swSrc: 'service-worker.js',
   },
 
   sassOptions: {
