@@ -3,12 +3,12 @@ const withPWA = require("next-pwa");
 const runtimeCaching = require('next-pwa/cache')
 
 module.exports = withPWA({
-  pwa: {
-    dest: "public",
-    register: false,
-    sw: 'service-worker.js',
-    swSrc: 'service-worker.js',
-  },
+  // pwa: {
+  //   dest: "public",
+  //   register: false,
+  //   sw: 'service-worker.js',
+  //   swSrc: 'service-worker.js',
+  // },
 
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
