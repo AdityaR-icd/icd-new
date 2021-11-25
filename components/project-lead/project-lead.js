@@ -18,6 +18,7 @@ export default function projectLead({ edges   }){
     const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
     const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
 
+
     const toBase64 = (str) =>
     typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
@@ -41,19 +42,18 @@ export default function projectLead({ edges   }){
         <>
         {projects.map(({ highlightedImage , clients } , j ) => (
             // console.log(j),
-            
             project_video = highlightedImage.video.mediaItemUrl,
             project_thumbnail = highlightedImage.highlightedThumbnailMobile.sourceUrl,
             client = clients.edges[0].node.name,
                 <>
-                {edges.map(({ node } ) => (
+                {edges.map(({ node } , i ) => (
                     <>
                         {(
 
                             function (home_text) {
                             if ( j % 2 !== 0 && j > 0 ) {
                                 text = (
-                                    <div className={`${style.textContainer} container`}>
+                                    <div className={`${style.textContainer} container`} key={i}>
                                         <div className="row">
                                             <div className="col-md-10 offset-md-1">
                                                 <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
@@ -74,7 +74,7 @@ export default function projectLead({ edges   }){
                     </>
                     ))}
                         <>
-                            <section className={`mB__150 ${styles.projectlead}`}>
+                            <section className={`mB__150 ${styles.projectlead}`} key={projects[j].id}>
                                 <div className="container"> 
                                     <div className="row">
                                         <div className="col-md-12">

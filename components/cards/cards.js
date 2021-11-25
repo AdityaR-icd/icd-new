@@ -7,7 +7,6 @@ import Image from 'next/image'
 export default function Cards({data}){
     let card = ""
     let bg = ""
-    
     return(
         <>
          <section className="featured-card">
@@ -27,7 +26,7 @@ export default function Cards({data}){
                       backgroundImage: 'url(' + cardImg + ')'
                     }
                     featuredCard.push( 
-                        <div className={ ` col-lg-4 ${home.home_cards}`}>
+                        <div className={ ` col-lg-4 ${home.home_cards}`} key={data.homePage.featuredCards[k].id}>
                             <div className={bg}>
                             <Image priority={true} src={cardImg} alt="card-image" layout="fill" className="card__background_image"/>
                                 <span className={ `${cards.card__tag}`}>{ data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name }</span>
