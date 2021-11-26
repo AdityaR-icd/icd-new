@@ -286,7 +286,7 @@ export default function newsletterss({ newsletter }) {
         menus,
         data
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
   }
 

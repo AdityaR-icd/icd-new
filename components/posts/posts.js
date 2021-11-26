@@ -24,6 +24,8 @@ export default function posts({meta , categories , edges}){
         setseeAll(false)
     }
 
+     const [searchValue, setsearchValue] = useState('')
+
     const postsearch = () => {
         $('.posts__page').toggleClass(style.post_search__open);
         if($('.posts__page').hasClass(style.post_search__open)){

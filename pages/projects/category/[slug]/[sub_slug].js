@@ -151,7 +151,7 @@ export async function getStaticProps({ params }) {
             data,
             subTypeProjects,
         },
-        revalidate: 1, 
+        revalidate: 180, 
     }
 }
   

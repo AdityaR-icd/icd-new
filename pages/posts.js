@@ -27,6 +27,6 @@ export async function getStaticProps() {
       meta,
       categories
     },
-    revalidate: 1, 
+    revalidate: 180, 
   }
 }

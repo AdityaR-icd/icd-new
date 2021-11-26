@@ -198,7 +198,7 @@ export default function Projects({ project , data , menus }) {
         menus,
         data
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
   }
 

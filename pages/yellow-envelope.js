@@ -32,7 +32,7 @@ export async function getStaticProps({ preview = false }) {
         data,
         meta
     },
-    revalidate: 1, 
+    revalidate: 180, 
   }
 }
 

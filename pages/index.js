@@ -18,6 +18,6 @@ export async function getStaticProps() {
         home,
         menus
         },
-        revalidate: 1, 
+        revalidate: 180, 
     }
 }

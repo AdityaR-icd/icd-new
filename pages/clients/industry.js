@@ -22,6 +22,6 @@ export async function getStaticProps() {
         data,
         meta
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
 }

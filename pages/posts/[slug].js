@@ -276,6 +276,6 @@ export default function Post({ post , data }) {
         menus,
         data
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
   }

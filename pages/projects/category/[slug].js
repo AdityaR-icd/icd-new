@@ -126,7 +126,7 @@ export default function Projects({ project }) {
         menus,
         data
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
   }
   export async function getStaticPaths() {
