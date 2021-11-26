@@ -1,0 +1,51 @@
+@import "./variables.scss";
+.error_404{
+    text-align: center;
+    padding-top: 125px;
+    .not_found{
+        display: block;
+        font-family: $tundra-light;
+        font-size: 56px;
+        line-height: 1;
+        letter-spacing: -1px;
+        color: $color-dark-red;
+        margin-bottom: 20px;
+        @include for-upto-tablet-portrait {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        @include for-phone-only {
+            font-size: 24px;
+            margin-bottom: 10px;
+            line-height: 44px;
+        }
+        
+    }
+
+    .error404_anim{
+        max-width: 450px;
+        @include for-phone-only {
+            max-width: 320px;
+        }       
+    }
+
+    .error_subtext{
+        font-family: $akz-light;
+        font-size: 24px;
+        line-height: 1.42;
+        color: $color-light-black;
+
+        @include for-phone-only {
+            font-size: 20px;
+        }
+
+        a,
+        .error_search{
+            font-family: $tundra-mediumitalic;
+            font-style: italic;
+            border-bottom: solid 3px $color-yellow;
+            cursor: pointer;
+        }
+    }
+}
