@@ -43,7 +43,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "/?utm_source=pwa",
+  "start_url": "/",
   "background_color": "#FFE300",
   "theme_color": "#FFE300",
   "display": "standalone"
