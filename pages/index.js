@@ -8,7 +8,7 @@ export default function Home({data , project , home , menus}){
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const data = await getFooter()
     const home = await getHome()
     const menus = await getMenus()
@@ -18,6 +18,6 @@ export async function getStaticProps() {
         home,
         menus
         },
-        revalidate: 180, 
+        // revalidate: 180, 
     }
 }
