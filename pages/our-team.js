@@ -26,6 +26,6 @@ export async function getStaticProps() {
         menus,
         data
         },
-        revalidate: 180, 
+        revalidate: 86400, 
     }
 }

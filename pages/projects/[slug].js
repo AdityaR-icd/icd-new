@@ -3,6 +3,7 @@ import {getAllProjectsWithSlug , getProject , getMenus , getFooter} from '../../
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
+import { useEffect } from 'react';
 
 import { useState } from 'react'
 
@@ -31,17 +32,28 @@ export default function Projects({ project , data , menus }) {
 
     const showModal = () => {
       $('.project_details_modal').removeClass(`${style.hide_popup}`);
+      $('body').addClass(`project_detail_active`);
     } 
 
     const hideModal = () => {
       $('.project_details_modal').addClass(`${style.hide_popup}`);
+      $('body').removeClass(`project_detail_active`);
     }
 
     const toggleShareIcons = () => {
       $('.share-icon').toggleClass('icons-hide');
     }
 
+    useEffect(() => {
 
+      $(document).keydown(function(e) {        
+        if (e.keyCode == 27) {
+          $('.project_details_modal').addClass(`${style.hide_popup}`);
+          $('body').removeClass(`project_detail_active`);
+        }
+      })
+
+    });
     const [seeAll, setseeAll] = useState('see all')
 
     const seeallTeam = () => {

@@ -28,6 +28,6 @@ export async function getStaticProps() {
             data,
             otherService
         },
-        revalidate: 180, 
+        revalidate: 86400, 
     }
 }

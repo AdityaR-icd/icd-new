@@ -19,7 +19,7 @@ export default function Index({ newsletters: { edges } , meta:{pages}  }) {
   )
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   const newsletters = await getAllArticleForHome(preview)
   const menus = await getMenus()
   const data = await getFooter()
@@ -32,7 +32,7 @@ export async function getStaticProps({ preview = false }) {
         data,
         meta
     },
-    revalidate: 180, 
+    revalidate: 86400, 
   }
 }
 

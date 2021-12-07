@@ -7,7 +7,6 @@ export default function search(){
     const handleSearch =  (event)  => {
         event.preventDefault();
         var search = document.getElementById('g-search').value;
-        console.log(search);
         var clean = '/search/'+ search;
         router.push({
             pathname: clean,
