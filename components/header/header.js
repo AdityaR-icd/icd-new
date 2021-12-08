@@ -5,6 +5,8 @@ import Image from 'next/image'
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));
@@ -14,6 +16,7 @@ const Search = dynamic(() => import("../search/search"));
 
 
 const Header = (props) => {
+    const router = useRouter()
     // const list = props.menus
     // Onclick expand paragraph
     const hamburgerToggle = () => {
@@ -26,14 +29,22 @@ const Header = (props) => {
         $('.hamburger, .nav-menu').removeClass("is-active");
     } 
 
+    const [searchValue, setsearchValue] = useState('')
     // Search Show and Hide
 
     const searchToggle = () => {
         $('body').toggleClass('showSearch');
         if($('body').hasClass('showSearch')){
             $('.searchInput').focus();
+        }else{
+            setsearchValue('')
+            console.log(searchValue)
+
         }
+
+
     }
+
 
 
     useEffect(() => {
@@ -57,16 +68,24 @@ const Header = (props) => {
             }
            
         });
-        
+        // $(document).on('click', function() {
+        //     var body = $('body');
+        //     if(body.hasClass('showSearch')){
+        //         body.removeClass('showSearch');
+        //     }       
+        //   }); 
     });
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         var search = $('#hamburgerSearch').val();
-        this.hamburgerClose();
-        this.props.history.push('/search/'+search);
-        $('#hamburgerSearch').val('');
+        var clean = '/search/'+ search;
+        router.push({
+            pathname: clean,
+        })
     }
+   
+
 
 
     return (
@@ -105,7 +124,7 @@ const Header = (props) => {
                                                 <ul>
                                                     <li className="mobile__menu--items">
                                                         <form className="global-search">
-                                                            <input type="search" className="searchInput" placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
+                                                            <input type="search" className="searchInput" value={searchValue} onChange={(e) => setsearchValue(e.target.value)} placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
                                                             <input className="searchBtn" onClick={onSubmitHandler} type="submit" value="" />
                                                         </form>
                                                     </li>

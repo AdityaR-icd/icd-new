@@ -2,6 +2,7 @@ import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { getSearchPosts } from '../../lib/api'
 import Link from 'next/link'
 const Head = dynamic(() => import('next/head'));
 const PostItem = dynamic(() => import('../posts-items/posts-items'))
@@ -10,6 +11,7 @@ import $ from 'jquery';
 
 import style from './posts.module.scss'
 import categoryStyle from '../project/category.module.scss'
+import search from '../../pages/search';
 
 
 export default function posts({meta , categories , edges}){
@@ -25,6 +27,7 @@ export default function posts({meta , categories , edges}){
     }
 
      const [searchValue, setsearchValue] = useState('')
+     const [search, setSearch] = useState('')
 
     const postsearch = () => {
         $('.posts__page').toggleClass(style.post_search__open);
@@ -32,7 +35,16 @@ export default function posts({meta , categories , edges}){
           $('.sb-search-input').focus();
         } else {
           $('.sb-search-input').val('');
+          $('.allPosts').removeClass('d-none')
         }
+    }
+
+
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        setSearch(await getSearchPosts (searchValue))
+
+        $('.allPosts').addClass('d-none')
     }
 
     var category = categories?.categories.edges;
@@ -99,8 +111,10 @@ export default function posts({meta , categories , edges}){
                             {slug}
                         </div>
                         <div id="sb-search" className={style.sb_search}>
-                            <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" type="search" name="post-search" id="postsearch" autoComplete="off"/>
-                            <span className={`${style.sb_icon_search} ${style.magic_icon_search}`} onClick={ () => postsearch() }></span>
+                            <form onSubmit={handleSubmit}>
+                                <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" onChange={(e) => setsearchValue(e.target.value)} type="search" name="post-search" id="postsearch" autoComplete="off"/>
+                                <span className={`${style.sb_icon_search} ${style.magic_icon_search}`}  onClick={postsearch}></span>
+                            </form>
                         </div>
                     </div>
                     </div>
@@ -108,13 +122,30 @@ export default function posts({meta , categories , edges}){
                 </div>
             </section>
             <section>
-                <div className="container">
+                <div className="container allPosts">
                     <div className="row infinite-grid">
                         {edges.map(({ node }) => (
                             <PostItem data={node} key={node.id} />
                         ))}
                     </div>
                 </div>
+
+                {(
+
+                    <>
+                        {search  && (
+                            <>
+                            <div className="container">
+                                <div className="row infinite-grid">
+                                {search.edges.map(({ node }) => (
+                                    <PostItem data={node} key={node.id} />
+                                ))}
+                                </div>
+                            </div>
+                            </>
+                        )}
+                    </>
+                )}
             </section>
         </>
     )

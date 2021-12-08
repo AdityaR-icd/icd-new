@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Autosuggest from 'react-autosuggest';
 
 export default function search(){
      const router = useRouter()
@@ -11,6 +12,13 @@ export default function search(){
         router.push({
             pathname: clean,
         })
+    }
+
+    const handleClickOutside = (evt) => {
+        var body = $('body');
+        if(body.hasClass('showSearch')){
+            body.removeClass('showSearch');
+        }
     }
     
 

@@ -1,29 +1,53 @@
 import clients from '../../components/clients/clients';
-import {  getPosts , getProjects } from '../../lib/api';
-export default function search( {projects , posts } ){
+import {  getFilters , getFooter } from '../../lib/api';
+import { useState } from 'react';
+import { useRouter } from 'next/router'
 
-var clients = ''
-var industries = ''
-var types = ''
-var projectTypes = ''
-var projectSubTypes = ''
-var projectSubType = ''
-projects.edges.map((project) => {
-    clients = project?.node?.clients?.edges[0]?.node.name
-    industries = project?.node?.industries?.edges[0]?.node?.name
-    types = project?.node?.projectTypes?.edges
 
-    types.map((type) =>{
-        projectTypes = type?.node?.name
-        projectSubTypes = type?.node.children?.edges
-        if (projectSubTypes?.length > 0) {
-            projectSubTypes?.map((item) => {
-                projectSubType = item?.node?.name
-                console.log(projectSubType)
-            });
-        }
-    });
-});
+
+export default function search( { filters , data } ){
+    const router = useRouter()
+
+    var clients = []
+    var industries = []
+    var projectTypes = []
+    var projectSubTypes = []
+    var categories = []
+    var tags = []
+    var filter = []
+
+    filters.clients.edges.map((item) => {      
+        clients.push(item.node.name)
+    })
+
+    filters.industries.edges.map((item) => {      
+        industries.push(item.node.name)
+    })
+
+    filters.projectTypes.edges.map((item) => {      
+        projectTypes.push(item.node.name)
+    })
+
+    filters.projectSubTypes.edges.map((item) => {      
+        projectSubTypes.push(item.node.name)
+    })
+
+    filters.categories.edges.map((item) => {      
+        categories.push(item.node.name)
+    })
+
+    filters.tags.edges.map((item) => {      
+        tags.push(item.node.name)
+    })
+
+
+    var allFilters = [...clients, ...industries, ...projectTypes, ...projectSubTypes, ...categories, ...tags]
+
+    allFilters.map((item) => {  
+        filter.push(item)
+    })  
+
+
  return(
   <>
   </>
@@ -31,12 +55,12 @@ projects.edges.map((project) => {
 }
 
 export async function getServerSideProps(){
- const projects = await getProjects()
- const posts = await getPosts()
+ const filters = await getFilters()
+ const data = await getFooter()
  return{
   props:{
-    projects,
-    posts
+    filters,
+    data
   },
  }
 }
