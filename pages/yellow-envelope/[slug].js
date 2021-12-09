@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllNewsletterWithSlug , getArticle , getMenus , getFooter } from '../../lib/api'
+import { getAllNewsletterWithSlug , getArticle , getMenus , getFooter , getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
 import Head from 'next/head';
@@ -280,11 +280,13 @@ export default function newsletterss({ newsletter }) {
     const article = await getArticle(params.slug)
     const menus = await getMenus()
     const data = await getFooter()
+    const filters = await getFilters()
     return {
       props: { 
         newsletter: article.newsletter,
         menus,
-        data
+        data,
+        filters
       },
       revalidate: 180, 
     }

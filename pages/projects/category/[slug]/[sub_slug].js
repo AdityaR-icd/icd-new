@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsSubTypes , getProjectSubTypes , getProjectByTypes , getMenus , getFooter} from '../../../../lib/api'
+import { getAllProjectsSubTypes , getProjectSubTypes , getProjectByTypes , getMenus , getFooter , getFilters } from '../../../../lib/api'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
@@ -10,7 +10,7 @@ const All = dynamic(() => import("../../../../components/project-categories/all/
 import ogimage from '../../../../assets/images/seo/og-default.png'
 import style from '../../../../components/project/category.module.scss'
 
-export default function subProject({subTypeProjects , project }){
+export default function subProject({subTypeProjects , project , filters }){
     const router = useRouter()
     var pageData = project?.edges[0]?.node
     var projectSubTypes = pageData?.children?.edges
@@ -144,12 +144,14 @@ export async function getStaticProps({ params }) {
     const subTypeProjects = await getProjectSubTypes(params.slug ,params.sub_slug);
     const menus = await getMenus()
     const data = await getFooter()
+    const filters = await getFilters()
     return{
         props: {
             project: gProject.projectTypes,
             menus,
             data,
             subTypeProjects,
+            filters
         },
         revalidate: 180, 
     }

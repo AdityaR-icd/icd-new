@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getCareerPage , getMenus , getFooter , getJobs } from '../lib/api'
+import { getCareerPage , getMenus , getFooter , getJobs , getFilters } from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/career/careers"));
 
@@ -17,12 +17,14 @@ export async function getStaticProps() {
     const jobs = await getJobs()
     const menus = await getMenus()
     const data = await getFooter()
+    const filters = await getFilters()
     return {
         props: { 
         meta,
         jobs,
         menus,
-        data
+        data,
+        filters
         },
         revalidate: 86400, 
     }

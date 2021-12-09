@@ -3,7 +3,7 @@ import { useState } from 'react'
 import dynamic from "next/dynamic";
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getAllPostsByCategorySlug , getSearchPostsByCategory , getPostPage , getPostCategories , getAllTags , getAllPostsByCategory , getMenus , getFooter} from '../../../lib/api'
+import { getAllPostsByCategorySlug , getSearchPostsByCategory , getPostPage , getPostCategories , getAllTags , getAllPostsByCategory , getMenus , getFooter , getFilters } from '../../../lib/api'
 import Link from 'next/link'
 import $ from 'jquery'
 const Head = dynamic(() => import('next/head'));
@@ -14,7 +14,7 @@ import style from '../../../components/posts/posts.module.scss'
 import categoryStyle from '../../../components/project/category.module.scss'
 
 
-export default function posts({posts , meta , categories , tags }){
+export default function posts({posts , meta , categories , tags , filters }){
     const router = useRouter()
     if (router.isFallback) {
         return <div>Loading...</div>
@@ -239,6 +239,7 @@ export async function getStaticProps({ params }) {
     const categories = await getPostCategories()
     const posts = await getAllPostsByCategorySlug(params.slug)
     const tags = await getAllTags()
+    const filters = await getFilters()
     return {
     props: { 
         menus,
@@ -246,7 +247,8 @@ export async function getStaticProps({ params }) {
         meta,
         posts,
         categories,
-        tags
+        tags,
+        filters
     },
     revalidate: 180, 
     }

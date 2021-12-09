@@ -2,7 +2,6 @@ import { NextSeo } from 'next-seo';
 import { useState } from 'react'
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
-const All = dynamic(() => import("../../project-categories/all/all"));
 const Head = dynamic(() => import('next/head'));
 const Image = dynamic(() => import("next/image"));
 

@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import {getAllProjectsWithSlug , getProject , getMenus , getFooter} from '../../lib/api'
+import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
@@ -204,11 +204,13 @@ export default function Projects({ project , data , menus }) {
     const gProject = await getProject(params.slug)
     const menus = await getMenus()
     const data = await getFooter()
+    const filters = await getFilters()
     return {
       props: { 
         project: gProject.project,
         menus,
-        data
+        data,
+        filters
       },
       revalidate: 180, 
     }

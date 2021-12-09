@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import $ from 'jquery';
 import { useEffect } from 'react'
-import { getAllPostsForHome , getMenus , getFooter , getPostAndMorePosts} from '../../lib/api'
+import { getAllPostsForHome , getMenus , getFooter , getPostAndMorePosts , getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ const PostItem = dynamic(() => import('../../components/posts-items/posts-items'
 
 
 
-export default function Post({ post , data }) {
+export default function Post({ post , data , filters }) {
   useEffect(() => {
     document.body.classList.add(style.bg_yellow);
     document.body.classList.add('bg-yellow');
@@ -268,13 +268,15 @@ export default function Post({ post , data }) {
     const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
     const menus = await getMenus()
     const data = await getFooter()
+    const filters = await getFilters()
     return {
       props: { 
         post: Moredata.post,
         posts: Moredata.posts,
         preview, 
         menus,
-        data
+        data,
+        filters
       },
       revalidate: 180, 
     }

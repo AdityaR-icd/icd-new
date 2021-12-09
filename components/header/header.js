@@ -16,6 +16,38 @@ const Search = dynamic(() => import("../search/search"));
 
 
 const Header = (props) => {
+
+    var filters = props.filters;
+
+    var clients = []
+    var industries = []
+    var projectTypes = []
+    var categories = []
+    var tags = []
+
+    filters?.clients.edges.map((item) => {      
+        clients.push(item.node.name)
+    })
+
+    filters?.industries.edges.map((item) => {      
+        industries.push(item.node.name)
+    })
+
+    filters?.projectTypes.edges.map((item) => {      
+        projectTypes.push(item.node.name)
+    })
+
+
+    filters?.categories.edges.map((item) => {      
+        categories.push(item.node.name)
+    })
+
+    filters?.tags.edges.map((item) => {      
+        tags.push(item.node.name)
+    })
+
+    var allFilters = [...clients, ...industries, ...projectTypes, ...categories, ...tags]
+
     const router = useRouter()
     // const list = props.menus
     // Onclick expand paragraph
@@ -38,11 +70,7 @@ const Header = (props) => {
             $('.searchInput').focus();
         }else{
             setsearchValue('')
-            console.log(searchValue)
-
         }
-
-
     }
 
 
@@ -68,12 +96,6 @@ const Header = (props) => {
             }
            
         });
-        // $(document).on('click', function() {
-        //     var body = $('body');
-        //     if(body.hasClass('showSearch')){
-        //         body.removeClass('showSearch');
-        //     }       
-        //   }); 
     });
 
     const onSubmitHandler = (e) => {
@@ -148,7 +170,7 @@ const Header = (props) => {
                         </div>
                     </div>
                     <div className="search-form ignore-react-onclickoutside" id="searchID">
-                    <Search></Search>
+                    <Search suggestion={allFilters} ></Search>
                     <div id="close">
                         <span className="close-wrap" onClick={searchToggle}>
                             <span className="close-line close-line1"></span>

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Anim from '../assets/images/404/404.gif'
 import style from '../styles/404.module.scss'
 import $ from 'jquery'
+import { getFilters } from '../lib/api'
 export default function error404() {
 
 const searchToggle = () => {
@@ -26,4 +27,15 @@ const searchToggle = () => {
     </div>
     </>
   )
+}
+
+
+export async function getStaticProps() {
+  const filters = await getFilters()
+  return {
+      props: { 
+      filters
+      },
+      revalidate: 180, 
+  }
 }

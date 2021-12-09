@@ -1,11 +1,11 @@
 
-import { getFooter , getProjectTypes , getMenus , getProjectPage } from '../lib/api'
+import { getFooter , getProjectTypes , getMenus , getFilters , getProjectPage } from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/project/projectCategory"));
 
 
 
-export default function Index({ projectsTypes , meta:{pages} }) {
+export default function Index({ projectsTypes , meta:{pages} , filters }) {
   const meta_data = pages.edges[0].node
   return (
     <Layout projectsTypes={projectsTypes} meta={meta_data} />
@@ -18,13 +18,16 @@ export async function getStaticProps({ preview = false }) {
   const projectsTypes = await getProjectTypes()
   const data = await getFooter()
   const menus = await getMenus()
+  const filters = await getFilters()
   return {
     props: { 
         preview,
         projectsTypes,
         data,
         menus,
-        meta
+        meta,
+        filters
+        
     },
     revalidate: 180, 
   }
