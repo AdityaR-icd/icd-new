@@ -1,6 +1,6 @@
 
 import {  getFilters , getFooter , getFiltersBySlug } from '../../lib/api';
-import { useState , useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
 const Type = dynamic(() => import("../../components/project-categories/type/type"));
@@ -10,7 +10,6 @@ import $ from 'jquery';
 import carousel from '../../components/project-categories/all/all.module.scss'
 import type from '../../components/project-categories/type/type.module.scss'
 import style from '../../styles/singlePost.module.scss'
-import { result } from 'lodash';
 
 
 
@@ -157,9 +156,38 @@ export default function search( { filters , data , filter } ){
             var postsCat = filter?.categories?.edges[0].node.posts
             cN = postsCat.edges.length
 
-            var allposts = postsCat.edges.map(({node}) => {
+            var allposts = postsCat.edges.map((data) => {
+                var categories = data?.node?.categories.edges[0]?.node?.name
+                var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
+
+                if(featuredImage){
+                    var imageData = 
+                        <span className={`${carousel.full_thumb} full-thumb`}>
+                                <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  alt="post-lead" layout="fill" />         
+                        </span>
+                    }else{
+                        imageData = 
+                        <span className={`${carousel.full_thumb} full-thumb`}>
+                                
+                        </span>
+                    }
                 return (
-                    <PostItem data={node} key={node.id}/>
+                    <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                    <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                        <div className={carousel.thumbnail_cont}>
+                            <a href={`/posts/${data.node.slug}`}>
+                                <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                {imageData}
+                                </span> 
+                                <span className="postCategory">{categories}</span>
+                            </a>
+                        </div>
+                        <a href={`/posts/${data.node.slug}`}>
+                            <span className={carousel.projectTitle}>{data.node.title}
+                            </span>
+                        </a>
+                    </div>
+                </div> 
                 )
             })
         }
