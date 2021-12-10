@@ -148,6 +148,41 @@ export default function search( { filters , data , filter } ){
         }
     }
 
+    var kN = 0
+    if(filter?.keywords?.edges != ''){
+        var client = filter?.keywords?.edges[0].node.name
+        if(filter?.keywords?.edges[0].node.projects.edges != ''){
+            var keywordsprojects = filter?.keywords?.edges[0].node.projects
+            kN = keywordsprojects.edges.length
+            var keywordsData = keywordsprojects.edges.map(({node}) => {
+                var leadImgSrc = node.featuredImage.node.sourceUrl
+                return (
+                   <>
+                    <div className="col-md-4 project__item resultItem-cont" key={ node.id }>
+                        <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                            <div className={carousel.thumbnail_cont}>
+                                <a href={`/projects/${node.slug}`}>
+                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                            <div className={`${carousel.full_thumb} full-thumb`}>
+                                                <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            </div>
+                                            <span className="thumbnail-gif"></span>
+                                    </span>
+                                </a>
+                            </div>
+                            <a href={`/projects/${node.slug}`}>
+                                <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                    <span className={carousel.grey__color}>  / {client}</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div> 
+                   </> 
+                )
+            })
+        }
+    }
+
     var cN = 0
     if(filter?.categories?.edges != ''){
         if(filter?.categories?.edges[0].node.posts?.edges != ''){
@@ -233,7 +268,7 @@ export default function search( { filters , data , filter } ){
             }
         }
 
-    var resultCount = clN + StN + iN + tagN + cN
+    var resultCount = clN + StN + iN + tagN + cN + kN
 
     if(resultCount > 0 ){
         var resultText = resultCount + ' results'
@@ -278,6 +313,7 @@ export default function search( { filters , data , filter } ){
             <div className="row">
                 {clientData}
                 {SubTypes}
+                {keywordsData}
                 {industries}
                 {allposts}
                 {allpostsTags}
