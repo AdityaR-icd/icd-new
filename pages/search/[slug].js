@@ -248,7 +248,7 @@ export default function search( { filters , data , filter } ){
     <section className="search-results-cont">
         <div className="container">
             <div className="row">
-                <div className="col-12">
+                <div className="col-12 page__header--title">
                     <div className={router.query.slug}>
                         <div className="back-cta" onClick={backButton}>
                             <span className="backBtn"></span>

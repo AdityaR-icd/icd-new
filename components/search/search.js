@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Autosuggest from 'react-autosuggest';
-import {  getFilters } from '../../lib/api';
+
 
 export default function search({ suggestion }){
      const router = useRouter()
@@ -16,39 +16,20 @@ export default function search({ suggestion }){
         })
     }
 
-    // Teach Autosuggest how to calculate suggestions for any given input value.
-    const getSuggestions = value => {
-        const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-
-        return inputLength === 0 ? [] : suggestion.filter(suggestio =>
-            suggestio.toLowerCase().slice(0, inputLength) === inputValue
-        );
-    };
-
-
     const [value, setValue] = useState('')
     const [suggestions, setSuggestions] = useState([])
 
-    const onChange = (e) => {
-        setValue(e.target.value)
-    }
+    // Teach Autosuggest how to calculate suggestions for any given input value.
+    const getSuggestions = value => {
+        const inputValue = value?.trim().toLowerCase();
+        const inputLength = inputValue.length;
 
-    const getSuggestionValue = (suggestions) =>{
-        setValue(suggestions)
-    }
-
-
-
-
-    const onSuggestionsFetchRequested = ({ value }) => {
-        setSuggestions(getSuggestions(value));
-    }
-
-
-    const onSuggestionsClearRequested = () => {
-        setSuggestions([])
+        return inputLength === 0 ? [] : suggestion.filter(suggestion =>
+            suggestion.toLowerCase().slice(0, inputLength) === inputValue
+        );
     };
+
+    const getSuggestionValue = suggestion => suggestion;
 
     const renderSuggestion = suggestion => (
         <div>
@@ -57,9 +38,28 @@ export default function search({ suggestion }){
     );
 
 
+    const onSuggestionsFetchRequested = ({ value }) => {
+        setSuggestions(getSuggestions(value));
+    };
+
+    const onChange = (event , { newValue }) => {
+        setValue(newValue)
+    };
+
+
+    const onSuggestionsClearRequested = () => {
+        setSuggestions([])
+    };
+
+    // const getSuggestionValue = () =>{
+    //     setValue(getSuggestions(value))
+    // }
+
+
+
     const inputProps = {
         placeholder: 'type an industry, client or keyword',
-        value: value,
+        value,
         onChange: onChange,
         className: 'searchInput',
         id:"g-search",
