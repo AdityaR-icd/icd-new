@@ -63,7 +63,6 @@ export default function search( { filters , data , filter } ){
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                 </a>
                             </div>
                             <a href={`/projects/${node.slug}`}>
@@ -99,7 +98,6 @@ export default function search( { filters , data , filter } ){
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                 </a>
                             </div>
                             <a href={`/projects/${node.slug}`}>
@@ -135,7 +133,6 @@ export default function search( { filters , data , filter } ){
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                 </a>
                             </div>
                             <a href={`/projects/${node.slug}`}>
