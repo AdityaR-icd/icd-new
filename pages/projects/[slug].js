@@ -1,11 +1,14 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters } from '../../lib/api'
+import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters , getAllProjectsNotIn } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
 import { useEffect } from 'react';
 
 import { useState } from 'react'
+
+// Import Slider
+import Slider from "react-slick";
 
 import Share from '../../assets/images/post-buttons/share.svg'
 const Like = dynamic(() => import("../../components/like"));
@@ -19,7 +22,7 @@ import style from '../../styles/singleProject.module.scss'
 
 
 
-export default function Projects({ project , data , menus }) {
+export default function Projects({ project , data , menus  }) {
   const router = useRouter()
   const seo = project ? ( project?.seo ?? {} ) : ( {} );
 	const uri = project ? ( project?.uri ?? {} ) : (  {} );
@@ -44,6 +47,7 @@ export default function Projects({ project , data , menus }) {
       $('.share-icon').toggleClass('icons-hide');
     }
 
+
     useEffect(() => {
 
       $(document).keydown(function(e) {        
@@ -54,6 +58,8 @@ export default function Projects({ project , data , menus }) {
       })
 
     });
+
+
     const [seeAll, setseeAll] = useState('see all')
 
     const seeallTeam = () => {
@@ -67,6 +73,7 @@ export default function Projects({ project , data , menus }) {
     } 
 
 
+
     var title = project.title;
     var heading = project.projectComponent?.heading;
     var description = project.projectComponent?.description;
@@ -76,6 +83,13 @@ export default function Projects({ project , data , menus }) {
     var leadComponentMobile = project.leadComponent?.leadComponentMobile?.sourceUrl
     var content = project?.content
     var team = project.projectComponent?.details
+    var category = project.projectTypes.edges[0]?.node?.name
+    var categorySlug = project.projectTypes.edges[0]?.node?.slug
+    var projectIds = project.projectId
+
+    const [otherProjects, setotherProjects] = useState('see all')
+
+    
 
     var shareBtn =  <div className={`${style.social__media} social__media`}>
                       <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
@@ -195,6 +209,25 @@ export default function Projects({ project , data , menus }) {
                       </div>
                     </div>
               </div>
+
+              <div className='container'>
+                <div className={style.more__projects_block}>
+                  <div className={style.more_cont}>
+                      <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
+                      <span className="see-all">
+                          <a href={` /projects/category/${categorySlug} `}>see all</a>
+                      </span>
+                  </div>
+                  <span className="bottom__border"></span>
+                  <div className="more-projectsCarousel">
+                    <Slider>
+                        {/* {
+                            carouselItems
+                        } */}
+                    </Slider>
+                </div>
+                </div>
+              </div>
           </article>
       </>
     )
@@ -210,7 +243,7 @@ export default function Projects({ project , data , menus }) {
         project: gProject.project,
         menus,
         data,
-        filters
+        filters,
       },
       revalidate: 180, 
     }

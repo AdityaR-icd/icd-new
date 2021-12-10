@@ -862,7 +862,7 @@
         }
     }
 
-    .more-cont {
+    .more_cont {
         position: relative;
         // margin-bottom: 24px;
         margin: 0 0 9px 0;
@@ -890,7 +890,7 @@
         }
     }
 
-    .more__projects-head {
+    .more__projects_head {
         font-family: $akz-bold;
         font-size: 56px;
         // font-size: 72px;
@@ -915,7 +915,7 @@
         }
     }
 
-    .more__projects-block {
+    .more__projects_block {
         padding-bottom: 100px;
         @include for-upto-tablet-portrait {
             padding-bottom: 0px;
