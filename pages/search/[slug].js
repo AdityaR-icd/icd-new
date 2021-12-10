@@ -10,6 +10,7 @@ import $ from 'jquery';
 import carousel from '../../components/project-categories/all/all.module.scss'
 import type from '../../components/project-categories/type/type.module.scss'
 import style from '../../styles/singlePost.module.scss'
+import { NextSeo } from 'next-seo';
 
 
 
@@ -245,6 +246,26 @@ export default function search( { filters , data , filter } ){
 
  return(
   <>    
+    <NextSeo 
+        title={`${router.query.slug} | Itu Chaudhuri Design `}
+        description=''
+        canonical={`https://icd-v3-vercel.vercel.app/search/${router.query.slug}`}
+        robots={data.metaRobotsNoindex}
+                googlebot={data.metaRobotsNofollow}
+        openGraph={{
+            url: `https://icd-v3-vercel.vercel.app/search/${router.query.slug}`,
+            title: router.query.slug,
+            description: '',
+            images: [
+            {
+                url: '',
+                alt: 'homepage-image',
+                type: 'image/jpeg',
+            },
+            ],
+            site_name: `${router.query.slug} | Itu Chaudhuri Design `,
+        }}
+    />
     <section className="search-results-cont">
         <div className="container">
             <div className="row">
