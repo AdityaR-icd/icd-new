@@ -13,11 +13,14 @@ import Slider from "react-slick";
 import Share from '../../assets/images/post-buttons/share.svg'
 const Like = dynamic(() => import("../../components/like"));
 const Seo = dynamic(() => import("../../components/seo"));
-
+const All = dynamic(() => import("../../components/project-categories/all/all"));
+import carousel from '../../components/project-categories/all/all.module.scss'
+import type from '../../components/project-categories/type/type.module.scss'
 
 import $ from 'jquery';
 import { useMediaQuery } from 'react-responsive';
 import style from '../../styles/singleProject.module.scss'
+
 
 
 
@@ -47,7 +50,10 @@ export default function Projects({ project , data , menus  }) {
       $('.share-icon').toggleClass('icons-hide');
     }
 
+    var projectIds = project.projectId
+    var categorySlug = project.projectTypes.edges[0]?.node?.slug
 
+    const [project_slider, setproject_slider] = useState('')
     useEffect(() => {
 
       $(document).keydown(function(e) {        
@@ -57,7 +63,67 @@ export default function Projects({ project , data , menus  }) {
         }
       })
 
-    });
+      async function fetchMyAPI() {
+        const slides_data = await getAllProjectsNotIn( projectIds , categorySlug )
+        setproject_slider(slides_data)
+      }
+
+      fetchMyAPI()
+      
+    },[]);
+
+    const toBase64 = (str) =>
+    typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
+
+    const shimmer = (w, h) => `
+    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <linearGradient id="g">
+            <stop stop-color="#f6f6f6" offset="20%" />
+            <stop stop-color="#f0f0f0" offset="50%" />
+            <stop stop-color="#f6f6f6" offset="70%" />
+        </linearGradient>
+      </defs>
+      <rect width="${w}" height="${h}" fill="#F6F6F6" />
+      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+    </svg>`
+
+    var other_projects = project_slider?.edges
+
+    if(other_projects?.length > 0){
+      other_projects = project_slider?.edges[0]?.node?.projects.edges ?? []
+
+      var other_projects_slider = other_projects.map(({node}) => {
+        var leadImgSrc = node.featuredImage.node.sourceUrl
+        var client = node.clients.edges[0].node.name
+        return (
+          <>
+            <div className="project__item resultItem-cont" key={ node.id }>
+                <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+                    <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
+                        <a href={`/projects/${node.slug}`}>
+                            <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                    <div className={`${carousel.full_thumb} full-thumb`}>
+                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                    </div>
+                                    <span className="thumbnail-gif"></span>
+                            </span>
+                        </a>
+                    </div>
+                    <a href={`/projects/${node.slug}`}>
+                        <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                            <span className={carousel.grey__color}>  / {client}</span>
+                        </span>
+                    </a>
+                </div>
+            </div> 
+          </> 
+        )
+      })
+    }
 
 
     const [seeAll, setseeAll] = useState('see all')
@@ -84,10 +150,8 @@ export default function Projects({ project , data , menus  }) {
     var content = project?.content
     var team = project.projectComponent?.details
     var category = project.projectTypes.edges[0]?.node?.name
-    var categorySlug = project.projectTypes.edges[0]?.node?.slug
-    var projectIds = project.projectId
 
-    const [otherProjects, setotherProjects] = useState('see all')
+
 
     
 
@@ -98,6 +162,85 @@ export default function Projects({ project , data , menus  }) {
                       <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
                       <Like count={project.likes?.likes}  id={project.id} type={'project'} />
                     </div>;
+
+    const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+      // <span onClick ={() => { this.carouselArrowClick(); } } >
+          <button
+              {...props}
+              className={
+                  "slick-prev slick-arrow" +
+                  (currentSlide === 0 ? " slick-disabled" : "")
+              }
+              aria-hidden="true"
+              aria-disabled={currentSlide === 0 ? true : false}
+              type="button"
+          >
+              Previous
+          </button>
+      // </span>
+    );
+
+    const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+      // <span onClick = {() => { this.carouselArrowClick(); } }>
+          <button
+              {...props}
+              className={
+              "slick-next slick-arrow" +
+              (currentSlide === slideCount - 3 ? " slick-disabled" : "")
+              }
+              aria-hidden="true"
+              aria-disabled={currentSlide === slideCount - 3 ? true : false}
+              type="button"
+              slide= {slideCount}
+              currentSlide={currentSlide}
+          >
+              Next
+          </button>
+      // </span>
+    );
+
+    const settings = {
+      dots: false,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      prevArrow: <SlickArrowLeft />,
+      nextArrow: <SlickArrowRight />,
+      afterChange: () => this.carouselArrowClick(),
+      responsive: [
+          {
+              breakpoint: 1023,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                initialSlide: 1,
+              }
+            },
+          {
+              breakpoint: 991,
+              settings: {
+                  slidesToShow: 2.1,
+                  slidesToScroll: 1,
+              }
+          },
+          {
+              breakpoint: 567,
+              settings: {
+                  slidesToShow: 1.8,
+                  slidesToScroll: 1,                    
+              }
+          },
+          {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1.3,
+                  slidesToScroll: 1,                    
+              }
+          }
+
+      ]
+    };
     return (
       <>
       <Seo seo={seo} uri={uri}/>
@@ -121,7 +264,7 @@ export default function Projects({ project , data , menus  }) {
               </section>
             )}
 
-            <article className={style.singleProject}>
+            <article className={` ${style.singleProject} singleProject` }>
               <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
                   <div className="container">
                       <div className="row">
@@ -209,26 +352,25 @@ export default function Projects({ project , data , menus  }) {
                       </div>
                     </div>
               </div>
-
-              <div className='container'>
-                <div className={style.more__projects_block}>
-                  <div className={style.more_cont}>
-                      <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
-                      <span className="see-all">
-                          <a href={` /projects/category/${categorySlug} `}>see all</a>
-                      </span>
-                  </div>
-                  <span className="bottom__border"></span>
-                  <div className="more-projectsCarousel">
-                    <Slider>
-                        {/* {
-                            carouselItems
-                        } */}
-                    </Slider>
-                </div>
-                </div>
-              </div>
-          </article>
+                  {other_projects?.length > 0  &&  (
+                      <div className='container'>
+                        <div className={style.more__projects_block}>
+                          <div className={style.more_cont}>
+                              <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
+                              <span className="see-all">
+                                  <a href={` /projects/category/${categorySlug} `}>see all</a>
+                              </span>
+                          </div>
+                          <span className="bottom__border"></span>
+                            <div className="more-projectsCarousel">
+                              <Slider {...settings}>
+                                  {other_projects_slider}
+                              </Slider>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                </article>
       </>
     )
   }

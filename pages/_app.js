@@ -7,6 +7,7 @@ import '../styles/footer.scss'
 import '../styles/subscribe.scss'
 import '../styles/fetch-jobs.scss'
 import '../styles/jobs-form.scss'
+import '../styles/slick/slick.css';
 import '../styles/search-results.scss';
 
 import dynamic from "next/dynamic";
