@@ -1,17 +1,63 @@
 import dynamic from "next/dynamic";
 const Image = dynamic(() => import("next/image"));
 import carousel from './all.module.scss'
-import type from '../type/type.module.scss'
+import types from '../type/type.module.scss'
+import { useState , useEffect } from 'react'
+
+import { getLatestProject } from '../../../lib/api'
+import { set } from "lodash";
 
 export default function allproject({ edges }){
 
     var client = '';
     var leadImgSrc  = '';
+    var project_id = '';
+
+    
 
     const toBase64 = (str) =>
     typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
     : window.btoa(str)
+
+    const [projects, setProjects] = useState('')
+    
+    var tag = 'false'
+
+    useEffect(() => {
+
+
+      async function fetchMyAPI() {
+        const latestProject = await getLatestProject()
+        setProjects(latestProject)
+      }
+
+      fetchMyAPI()
+      
+    },[]);
+
+    var id = []
+    var project_id = []
+
+    if(projects.edges){
+        projects.edges.map(({ node }) => {
+            id.push(node.id)
+        })
+
+        edges.map(({ node }) => {
+            project_id.push(node.id)
+        })
+    }
+
+    for(var i = 0; i < id.length; i++){
+        if(id[i] === project_id[i]){
+            tag = 'true'
+        }
+    }
+
+    
+
+
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -29,34 +75,40 @@ export default function allproject({ edges }){
 
     return(
         <>
-        <section className={`${type.industry__filter} ${type.all_filter} `}>
+        <section className={`${types.industry__filter} ${types.all_filter} `}>
             <div className="container">
                 <div className="project__scroll">
                     <div className="row project__row">
                     {edges.map(({ node }) => (
                         client = node.clients.edges[0].node.name,
                         leadImgSrc = node.featuredImage.node.sourceUrl,
+                        
                     <>
-                    <div className="col-md-4 project__item" key={ node.id }>
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                        <div className={carousel.thumbnail_cont}>
-                            <a href={`/projects/${node.slug}`}>
-                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
+                        <div className="col-md-4 project__item" key={ node.id }>
+                            <div className={`${carousel.projectCarousel} ${types.projectCarousel}`}>
+                                <div className={carousel.thumbnail_cont}>
+                                    <a href={`/projects/${node.slug}`}>
+                                            <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                                    <div className={`${carousel.full_thumb} full-thumb`}>
+                                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                    </div>
+                                                    <span className="thumbnail-gif"></span>
+                                            </span>
+                                            {node?.awards?.awardsReceived && (
+                                                <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                                            )}
+                                            {tag == 'true' &&  !node?.awards?.awardsReceived && (
+                                                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                            )}
+                                    </a>
+                                </div>
+                                <a href={`/projects/${node.slug}`}>
+                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                        <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
-                                    <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
-                            </a>
-                        </div>
-                        <a href={`/projects/${node.slug}`}>
-                            <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                <span className={carousel.grey__color}>  / {client}</span>
-                            </span>
-                        </a>
-                    </div>
-                       </div> 
+                                </a>
+                            </div>
+                        </div> 
                     </>
                     ))}
                     </div>

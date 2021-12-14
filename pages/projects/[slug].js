@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters , getAllProjectsNotIn } from '../../lib/api'
+import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters , getAllProjectsNotIn , getAllOtherProjects } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
@@ -52,8 +52,9 @@ export default function Projects({ project , data , menus  }) {
 
     var projectIds = project.projectId
     var categorySlug = project.projectTypes.edges[0]?.node?.slug
-
+    var categoryId = project.projectTypes.edges[0]?.node?.databaseId
     const [project_slider, setproject_slider] = useState('')
+    const [project_slider1, setproject_slider1] = useState('')
     useEffect(() => {
 
       $(document).keydown(function(e) {        
@@ -65,7 +66,9 @@ export default function Projects({ project , data , menus  }) {
 
       async function fetchMyAPI() {
         const slides_data = await getAllProjectsNotIn( projectIds , categorySlug )
+        const slides_dat1 = await getAllOtherProjects( categoryId )
         setproject_slider(slides_data)
+        setproject_slider1(slides_dat1)
       }
 
       fetchMyAPI()
@@ -92,19 +95,64 @@ export default function Projects({ project , data , menus  }) {
     </svg>`
 
     var other_projects = project_slider?.edges
+    var other_projects1 = project_slider1?.edges
+    var other_projects2 = []
+    if(other_projects1?.length > 0){
+      other_projects1.map(({node}) => {
+          if(node.projects.edges.length > 0){
+            other_projects2.push(node.projects.edges)
+          }
+      })
+    }
+    var projectData = []
+    var other_projects_slider1 = ''
+    if(other_projects2.length > 0){
+      other_projects2.map((node) => {
+        other_projects_slider1 = node.map(({node}) => {
+          var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+          var client = node?.clients?.edges[0]?.node?.name
+          return (
+            <>
+              <div className="project__item resultItem-cont" key={ node?.id }>
+                  <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+                      <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
+                          <a href={`/projects/${node?.slug}`}>
+                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                      <div className={`${carousel.full_thumb} full-thumb`}>
+                                          <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                      </div>
+                                      <span className="thumbnail-gif"></span>
+                              </span>
+                          </a>
+                      </div>
+                      <a href={`/projects/${node?.slug}`}>
+                          <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
+                              <span className={carousel.grey__color}>  / {client}</span>
+                          </span>
+                      </a>
+                  </div>
+              </div> 
+            </>
+          )
+        })
+      })
+    }
+
 
     if(other_projects?.length > 0){
       other_projects = project_slider?.edges[0]?.node?.projects.edges ?? []
+      other_projects1 = other_projects2
+
 
       var other_projects_slider = other_projects.map(({node}) => {
-        var leadImgSrc = node.featuredImage.node.sourceUrl
-        var client = node.clients.edges[0].node.name
+        var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+        var client = node?.clients?.edges[0]?.node.name
         return (
           <>
-            <div className="project__item resultItem-cont" key={ node.id }>
+            <div className="project__item resultItem-cont" key={ node?.id }>
                 <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                     <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                        <a href={`/projects/${node.slug}`}>
+                        <a href={`/projects/${node?.slug}`}>
                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                     <div className={`${carousel.full_thumb} full-thumb`}>
                                         <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
@@ -113,14 +161,14 @@ export default function Projects({ project , data , menus  }) {
                             </span>
                         </a>
                     </div>
-                    <a href={`/projects/${node.slug}`}>
-                        <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                    <a href={`/projects/${node?.slug}`}>
+                        <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                             <span className={carousel.grey__color}>  / {client}</span>
                         </span>
                     </a>
                 </div>
             </div> 
-          </> 
+          </>
         )
       })
     }
@@ -139,7 +187,6 @@ export default function Projects({ project , data , menus  }) {
     } 
 
 
-
     var title = project.title;
     var heading = project.projectComponent?.heading;
     var description = project.projectComponent?.description;
@@ -150,6 +197,53 @@ export default function Projects({ project , data , menus  }) {
     var content = project?.content
     var team = project.projectComponent?.details
     var category = project.projectTypes.edges[0]?.node?.name
+    var awards = project?.awards?.awardsReceived
+    var awardName = project?.awards?.nameOfTheAwardEgC
+    var relatedProjects = project.projectComponent?.relatedprojects ?? []
+
+
+    var relatedProjects_slider = relatedProjects.map((node) => {
+      var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+      var client = node?.clients?.edges[0]?.node.name
+      return (
+        <>
+          <div className="project__item resultItem-cont" key={ node?.id }>
+              <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+                  <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
+                      <a href={`/projects/${node?.slug}`}>
+                          <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                  <div className={`${carousel.full_thumb} full-thumb`}>
+                                      <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                  </div>
+                                  <span className="thumbnail-gif"></span>
+                          </span>
+                      </a>
+                  </div>
+                  <a href={`/projects/${node?.slug}`}>
+                      <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
+                          <span className={carousel.grey__color}>  / {client}</span>
+                      </span>
+                  </a>
+              </div>
+          </div> 
+        </>
+      )
+    }).slice(0 ,3)
+    
+    if(awards){
+      var leadImgSrc = project?.awards?.awardsImage?.sourceUrl
+      var awardImg =  <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${carousel.project_lead} d-none d-md-block `} src={leadImgSrc} alt="project-lead" layout="fill" />
+    }
+
+    if(project?.awards?.awardsImageMobile){
+      var mobile_image = project?.awards?.awardsImageMobile?.sourceUrl
+      var awardImgMobile =  <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${carousel.project_lead} d-block d-md-none `} src={mobile_image} alt="project-lead" layout="fill" />
+    }
+
+    if(project?.leadVideo?.leadVideo){
+      var leadVideo = project?.leadVideo?.video?.mediaItemUrl
+    }
+
 
 
 
@@ -198,6 +292,24 @@ export default function Projects({ project , data , menus  }) {
           </button>
       // </span>
     );
+      const carouselArrowClick = () => {
+        var curr_slide = $('.more-projectsCarousel .slick-current').find('.projectTitle'),
+        slide_2 = $('.more-projectsCarousel .slick-active').eq(1).find('.projectTitle'),
+        slide_3 = $('.more-projectsCarousel .slick-active').eq(2).find('.projectTitle'),
+        curr_slide_cat = curr_slide.data("type"),
+        slide_2_cat = slide_2.data("type"),
+        slide_3_cat = slide_3.data("type"),
+        more_title = $('#more-projectTitle'),
+        seeall_cta = $('.see-all a');
+        if( curr_slide_cat == slide_2_cat && slide_2_cat == slide_3_cat ){
+            var slug = curr_slide.data("slug");
+            more_title.text("more "+category);
+            seeall_cta.attr( "href" , "/projects/category/"+categorySlug );
+        } else {
+            more_title.text("more projects");
+            seeall_cta.attr("href" , "/projects/");
+        }         
+    }
 
     const settings = {
       dots: false,
@@ -207,7 +319,7 @@ export default function Projects({ project , data , menus  }) {
       slidesToScroll: 3,
       prevArrow: <SlickArrowLeft />,
       nextArrow: <SlickArrowRight />,
-      afterChange: () => this.carouselArrowClick(),
+      afterChange: () => carouselArrowClick(),
       responsive: [
           {
               breakpoint: 1023,
@@ -259,18 +371,33 @@ export default function Projects({ project , data , menus  }) {
                           <Image src={leadComponentMobile} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" alt="project-lead" layout="fill" />
                         </>
                       )}
+                      <video  src={leadVideo} className={style.video} autoPlay loop muted playsInline />
                     </div>
                   </div>
               </section>
             )}
 
-            <article className={` ${style.singleProject} singleProject` }>
+          {leadVideo && (
+              <section className={style.singleProjectLeadCont}>    
+                <div className={style.leadImage}>
+                  <div>
+                    <video  src={leadVideo} className={style.video} autoPlay loop muted playsInline />
+                  </div>
+                </div>
+              </section>
+          )}
+
+            <article className={` ${style.singleProject} ${style.winnerTag} singleProject` }>
               <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
                   <div className="container">
                       <div className="row">
                           <span className={`close-button ${style.close_button}`} onClick={ hideModal }></span>
                           <div className="col-lg-5 col-xl-4">
-                            <span className={style.modal_project_title}>{title}<span className="hidden">Winner</span></span>
+                            <span className={style.modal_project_title}>{title}
+                              {awards && (
+                                <span className="project__tag">Winner</span>
+                              )}
+                            </span>
                             <div className={style.projectMeta__cont}>
                               <span className={style.category__title}>project</span>
                               <span className={style.category}>{heading}</span>
@@ -298,7 +425,11 @@ export default function Projects({ project , data , menus  }) {
                 <div className="row">
                     <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
                       <div className={style.titlePadding}>
-                          <h1 className={style.project__Title}>{title}<span className="hidden">Winner</span></h1>
+                          <h1 className={style.project__Title}>{title}
+                              {awards && (
+                                <span className={`${style.project__tag} project__tag`}>Winner</span>
+                              )}
+                          </h1>
                       </div>
                     </div>
                 </div>
@@ -308,7 +439,7 @@ export default function Projects({ project , data , menus  }) {
                       <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
                       {project.awards.awardsReceived > ''  &&  (
                         <>
-                          <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}></span></div>
+                          <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}>{awardName}</span></div>
                         </>
                       )}
                     </div>
@@ -331,6 +462,15 @@ export default function Projects({ project , data , menus  }) {
                 </div>
               </div>
               <div className={`container ${style.projectWordpress}`}>
+                {awardImg &&(
+                    <div className='col-md-12'>
+                    <span className="awardImg-cont">
+                        {awardImg}
+                        {awardImgMobile}
+                    </span> 
+                  </div>
+                )}
+
                 {content && (
                   parse(content)
                 )}
@@ -352,25 +492,45 @@ export default function Projects({ project , data , menus  }) {
                       </div>
                     </div>
               </div>
-                  {other_projects?.length > 0  &&  (
-                      <div className='container'>
-                        <div className={style.more__projects_block}>
-                          <div className={style.more_cont}>
-                              <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
-                              <span className="see-all">
-                                  <a href={` /projects/category/${categorySlug} `}>see all</a>
-                              </span>
-                          </div>
-                          <span className="bottom__border"></span>
-                            <div className="more-projectsCarousel">
-                              <Slider {...settings}>
-                                  {other_projects_slider}
-                              </Slider>
-                          </div>
-                        </div>
+              {other_projects?.length > 0  &&  (
+                  <div className='container'>
+                    <div className={style.more__projects_block}>
+                      <div className={style.more_cont}>
+                          <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
+                          <span className="see-all">
+                              <a href={` /projects/category/${categorySlug} `}>see all</a>
+                          </span>
                       </div>
-                    )}
-                </article>
+                      <span className="bottom__border"></span>
+                        <div className="more-projectsCarousel">
+                          <Slider {...settings}>
+                              {other_projects_slider}
+                              {other_projects_slider1}
+                          </Slider>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              {relatedProjects_slider?.length > 0  &&  (
+                  <div className={`container ${style.relatedProjects__container}`}>
+                    <div className={style.more__projects_block}>
+                      <div className={style.more_cont}>
+                          <span className={style.more__projects_head} id="more-projectTitle">related projects</span>
+                          {/* <span className="see-all">
+                              <a href={` /projects/category/${categorySlug} `}>see all</a>
+                          </span> */}
+                      </div>
+                      <span className="bottom__border"></span>
+                        <div className="more-projectsCarousel">
+                          <Slider {...settings}>
+                              {relatedProjects_slider}
+                          </Slider>
+                      </div>
+                    </div>
+                  </div>
+                )}
+            </article>
       </>
     )
   }

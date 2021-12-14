@@ -4,6 +4,7 @@ import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
 // import Shimmer from "react-shimmer-effect";
 import { useState , useEffect } from "react";
+import { getLatestProject } from '../../../lib/api'
 
 
 export default function projectTypes({ nodes }){
@@ -16,10 +17,39 @@ export default function projectTypes({ nodes }){
     var heading = ''
 
     const [isLoading, setIsLoading] = useState(true);
-
+    const [projects, setProjects] = useState('')
     useEffect(() => {
 
-    });
+        async function fetchMyAPI() {
+            const latestProject = await getLatestProject()
+            setProjects(latestProject)
+        }
+    
+        fetchMyAPI()
+        
+    },[]);
+
+    var tag = 'false'
+    var id = []
+    var project_id = []
+
+    if(projects.edges){
+        projects.edges.map(({ node }) => {
+            id.push(node.id)
+        })
+
+        nodes.map(({ projects }) => {
+            projects.edges.map(({ node }) => {
+                project_id.push(node.id)
+            })
+        })
+    }
+
+    for(var i = 0; i < id.length; i++){
+        if(id[i] === project_id[i]){
+            tag = 'true'
+        }
+    }
 
     // setTimeout(() => {
     //     setIsLoading(false);
@@ -65,7 +95,8 @@ export default function projectTypes({ nodes }){
                             leadImgSrc = node.featuredImage.node.sourceUrl,
                             client = node?.clients.edges,
                             clientsName = client[0]?.node.name,
-                            heading = node.projectComponent.heading,                
+                            heading = node.projectComponent.heading,  
+                                    
                                 <>
                                     <div className={ `col-md-4 ${type.project__item}` }>
                                         <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
@@ -77,7 +108,13 @@ export default function projectTypes({ nodes }){
                                                         </div>
                                                         <span className="thumbnail-gif"></span>
                                                     </span>
-                                                    <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                    {node?.awards?.awardsReceived !== null  &&  (
+                                                        <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                                                    )}
+                                                    
+                                                    {tag == 'true' &&  !node?.awards?.awardsReceived && (
+                                                        <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                    )}
                                                 </a>
                                             </div>
                                             <a href={`/projects/${slug}`}>

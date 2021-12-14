@@ -409,3 +409,13 @@ header {
 .project_detail_active{
     overflow-y: hidden;
 }
+
+.awardImg-cont{
+    margin-bottom: 20px;
+    min-height: 180px;
+    display: block;
+
+    @include for-phone-only {
+        min-height: 77px;
+    }
+}
