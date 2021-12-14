@@ -242,12 +242,9 @@ export default function Projects({ project , data , menus  }) {
 
     if(project?.leadVideo?.leadVideo){
       var leadVideo = project?.leadVideo?.video?.mediaItemUrl
+      var leadVideo_mobile = project?.leadVideo?.videoMobile?.mediaItemUrl
     }
 
-
-
-
-    
 
     var shareBtn =  <div className={`${style.social__media} social__media`}>
                       <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
@@ -371,7 +368,6 @@ export default function Projects({ project , data , menus  }) {
                           <Image src={leadComponentMobile} placeholder="blur" blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==" alt="project-lead" layout="fill" />
                         </>
                       )}
-                      <video  src={leadVideo} className={style.video} autoPlay loop muted playsInline />
                     </div>
                   </div>
               </section>
@@ -381,7 +377,8 @@ export default function Projects({ project , data , menus  }) {
               <section className={style.singleProjectLeadCont}>    
                 <div className={style.leadImage}>
                   <div>
-                    <video  src={leadVideo} className={style.video} autoPlay loop muted playsInline />
+                    <video  src={leadVideo} className={ `${style.video} d-none d-md-block` } autoPlay loop muted playsInline />
+                    <video  src={leadVideo_mobile} className={ `${style.video} d-block d-md-none` } autoPlay loop muted playsInline />
                   </div>
                 </div>
               </section>
@@ -497,7 +494,7 @@ export default function Projects({ project , data , menus  }) {
                     <div className={style.more__projects_block}>
                       <div className={style.more_cont}>
                           <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
-                          <span className="see-all">
+                          <span className={`${style.see_all} see-all`}>
                               <a href={` /projects/category/${categorySlug} `}>see all</a>
                           </span>
                       </div>
