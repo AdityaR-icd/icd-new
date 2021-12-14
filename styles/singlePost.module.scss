@@ -2,6 +2,7 @@
 
 .bg_yellow{
     background: $color-yellow;
+    
     footer,
     .postContent_cont{
         background: $color-yellow;
@@ -21,9 +22,6 @@
         color: $color-light-black;
     }
 
-    header .nav-menu li a.active::after{
-        background: $color-white;
-    }
 
     .search-form{
         background-color: $color-yellow;

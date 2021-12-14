@@ -18,7 +18,9 @@ export default function search( { filters , data , filter } ){
     const router = useRouter()
 
     useEffect(() => {
-        $('body').addClass('search-page showSearch ignore-react-onclickoutside');
+        if(router.pathname == "/search/[slug]"){
+            $('body').addClass('search-page showSearch ignore-react-onclickoutside');
+        }
     });
     const backButton = () => {
         window.history.back();

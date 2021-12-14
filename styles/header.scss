@@ -419,3 +419,19 @@ header {
         min-height: 77px;
     }
 }
+
+.bg-yellow{
+    header{
+        .nav-menu{
+            li{
+                a{
+                    &.active{
+                        &::after{
+                            background: $color-white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
