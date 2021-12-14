@@ -255,7 +255,6 @@ export default function Projects({ project , data , menus  }) {
                     </div>;
 
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-      // <span onClick ={() => { this.carouselArrowClick(); } } >
           <button
               {...props}
               className={
@@ -268,11 +267,9 @@ export default function Projects({ project , data , menus  }) {
           >
               Previous
           </button>
-      // </span>
     );
 
     const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-      // <span onClick = {() => { this.carouselArrowClick(); } }>
           <button
               {...props}
               className={
@@ -287,7 +284,6 @@ export default function Projects({ project , data , menus  }) {
           >
               Next
           </button>
-      // </span>
     );
       const carouselArrowClick = () => {
         var curr_slide = $('.more-projectsCarousel .slick-current').find('.projectTitle'),
