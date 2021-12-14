@@ -269,7 +269,7 @@ export default function newsletterss({ newsletter }) {
               </table>
             </body>
           </div>
-          <button value="copy" id="copyBlock" onClick={ copyElem }>copy</button>
+          <button value="copy" className="copyBlock" style={{opacity: '0', position: 'fixed', top: '0' , right: '0' , color: '#fff' , background: '#000'}} onClick={ copyElem }>copy</button>
           <div className="copyField"></div>
           
       </>
