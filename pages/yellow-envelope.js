@@ -19,7 +19,7 @@ export default function Index({ newsletters: { edges } , meta:{pages} , filters 
   )
 }
 
-export async function getServerSideProps({ preview = false }) {
+export async function getStaticProps({ preview = false }) {
   const newsletters = await getAllArticleForHome(preview)
   const menus = await getMenus()
   const data = await getFooter()
