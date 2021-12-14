@@ -26,24 +26,24 @@ const Header = (props) => {
     var tags = []
 
     filters?.clients.edges.map((item) => {      
-        clients.push(item.node.name)
+        clients.push(item.node.slug)
     })
 
     filters?.industries.edges.map((item) => {      
-        industries.push(item.node.name)
+        industries.push(item.node.slug)
     })
 
     filters?.projectTypes.edges.map((item) => {      
-        projectTypes.push(item.node.name)
+        projectTypes.push(item.node.slug)
     })
 
 
     filters?.categories.edges.map((item) => {      
-        categories.push(item.node.name)
+        categories.push(item.node.slug)
     })
 
     filters?.tags.edges.map((item) => {      
-        tags.push(item.node.name)
+        tags.push(item.node.slug)
     })
 
     var allFilters = [...clients, ...industries, ...projectTypes, ...categories, ...tags]
@@ -151,11 +151,11 @@ const Header = (props) => {
                                                         </form>
                                                     </li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/projects">projects</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/clients">clients</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/services">services</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/posts">posts</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/contact">contact</Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/projects"><a className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" ? "active" : ""}>projects</a></Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/clients"><a className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</a></Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/services"><a className={router.pathname == "/services" ? "active" : ""}>services</a></Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/posts"><a className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</a></Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/contact"><a className={router.pathname == "/contact" ? "active" : ""}>contact</a></Link></li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
                                                     <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
