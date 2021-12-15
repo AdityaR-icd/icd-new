@@ -4,7 +4,7 @@ import { getFooter  , getHome , getMenus , getFilters } from '../lib/api'
 
 export default function Home({data , project , home , menus , filters}) {
     return(
-       <Layout data={data} project={project} home={home} menus={menus} />
+       <Layout data={data} themes={data} project={project} home={home} menus={menus} />
     )
 }
 

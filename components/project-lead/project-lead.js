@@ -17,6 +17,8 @@ export default function projectLead({ edges   }){
     const projects = edges[0].node.projects.highlightedProjects
     const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
     const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
+    const isTabletH = useMediaQuery({ query: '(min-width: 768px) and (max-width: 991px)' });
+    const isTabletV = useMediaQuery({ query: '(min-width: 992px) and (max-width: 1365px)' });
 
 
     const toBase64 = (str) =>
@@ -84,14 +86,14 @@ export default function projectLead({ edges   }){
                                                     <div className={styles.Tilt}>
                                                         <div className="Tilt-inner">
                                                             
-                                                            {isDesktop && (
+                                                            {isDesktop || isTabletH && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} ${styles.video_container}`}>
                                                                         <video src={project_video} autoPlay playsInline loop muted></video>
                                                                     </div>
                                                                 </>
                                                             )}
-                                                            {isMobile && (
+                                                            {isMobile || isTabletV && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} d-lg-none d-block`}>
                                                                         <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />

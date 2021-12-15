@@ -6,23 +6,31 @@ const Crousel = dynamic(() => import("../carousel/carousel-home"));
 const ProjectLead = dynamic(() => import("../project-lead/project-lead"));
 const Cards = dynamic(() => import("../cards/cards"));
 const Snowflakes = require('magic-snowflakes');
+import { useEffect } from 'react'
 
 
-export default function Index({ home: { pages } }) {
+export default function Index({ home: { pages } , themes }) {
     const data = pages.edges[0]?.node
     const featuredata = pages.edges
 
-    var sf = new Snowflakes({
-      color: "#ffffff",
-      speed: 0.8,
-      minSize: 12, 
-      maxSize: 35,
-      count: 5,
-      rotation: false,
-      wind: false
-    });
+   if(themes.theme == 'on'){ 
+      useEffect(() => {
+        $('body').addClass('home-snowflake')
+      },[]);
 
-    $('body').addClass('home-snowflake');
+    if(typeof window !== 'undefined'){
+        var sf = new Snowflakes({
+          color: "#ffffff",
+          speed: 0.8,
+          minSize: 12, 
+          maxSize: 35,
+          count: 5,
+          rotation: false,
+          wind: false
+        });
+      }
+    }
+
       return (
         <>
         <NextSeo 
