@@ -86,14 +86,28 @@ export default function projectLead({ edges   }){
                                                     <div className={styles.Tilt}>
                                                         <div className="Tilt-inner">
                                                             
-                                                            {isDesktop || isTabletH && (
+                                                            {isDesktop && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} ${styles.video_container}`}>
                                                                         <video src={project_video} autoPlay playsInline loop muted></video>
                                                                     </div>
                                                                 </>
                                                             )}
-                                                            {isMobile || isTabletV && (
+                                                            {isTabletV && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                    </div>
+                                                                </>
+                                                            )}
+                                                            {isMobile && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage} d-lg-none d-block`}>
+                                                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
+                                                                    </div>
+                                                                </>
+                                                            )}
+                                                            {isTabletH && (
                                                                 <>
                                                                     <div className={`${styles.project__leadimage} d-lg-none d-block`}>
                                                                         <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
