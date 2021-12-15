@@ -1,14 +1,28 @@
 import Head from 'next/head'
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
+import $ from 'jquery';
 const Crousel = dynamic(() => import("../carousel/carousel-home"));
 const ProjectLead = dynamic(() => import("../project-lead/project-lead"));
 const Cards = dynamic(() => import("../cards/cards"));
+const Snowflakes = require('magic-snowflakes');
 
 
 export default function Index({ home: { pages } }) {
     const data = pages.edges[0]?.node
     const featuredata = pages.edges
+
+    var sf = new Snowflakes({
+      color: "#ffffff",
+      speed: 0.8,
+      minSize: 12, 
+      maxSize: 35,
+      count: 5,
+      rotation: false,
+      wind: false
+    });
+
+    $('body').addClass('home-snowflake');
       return (
         <>
         <NextSeo 
