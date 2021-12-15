@@ -20,6 +20,6 @@ export async function getStaticProps() {
         menus,
         filters
         },
-        revalidate: 180, 
+        revalidate: 86400, 
     }
 }
