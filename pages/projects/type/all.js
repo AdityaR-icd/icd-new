@@ -23,7 +23,7 @@ export async function getStaticProps({ preview = false }) {
           meta,
           filters
       },
-      revalidate: 1, 
+      revalidate: 180, 
     }
   }
   

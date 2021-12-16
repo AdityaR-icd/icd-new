@@ -151,7 +151,7 @@ const Header = (props) => {
                                                         </form>
                                                     </li>
                                                     <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/projects"><a className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" ? "active" : ""}>projects</a></Link></li>
+                                                    <li onClick={hamburgerClose}><Link href="/projects"><a className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</a></Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/clients"><a className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</a></Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/services"><a className={router.pathname == "/services" ? "active" : ""}>services</a></Link></li>
                                                     <li onClick={hamburgerClose}><Link href="/posts"><a className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</a></Link></li>
