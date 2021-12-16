@@ -192,13 +192,13 @@ export default function Projects({ project , data , menus  }) {
     var description = project.projectComponent?.description;
     var shortDesc = project.shortDescription?.shortDesc;
     var clients = project.clients?.edges[0]?.node?.name;
-    var leadComponent = project.leadComponent?.leadComponent?.sourceUrl
-    var leadComponentMobile = project.leadComponent?.leadComponentMobile?.sourceUrl
+    var leadComponent = project.projectComponent?.leadComponent?.sourceUrl
+    var leadComponentMobile = project.projectComponent?.leadComponentMobile?.sourceUrl
     var content = project?.content
     var team = project.projectComponent?.details
     var category = project.projectTypes.edges[0]?.node?.name
-    var awards = project?.awards?.awardsReceived
-    var awardName = project?.awards?.nameOfTheAwardEgC
+    var awards = project?.projectComponent?.awardsReceived
+    var awardName = project?.projectComponent?.nameOfTheAwardEgC
     var relatedProjects = project.projectComponent?.relatedprojects ?? []
 
 
@@ -231,18 +231,18 @@ export default function Projects({ project , data , menus  }) {
     }).slice(0 ,3)
     
     if(awards){
-      var leadImgSrc = project?.awards?.awardsImage?.sourceUrl
+      var leadImgSrc = project?.projectComponent?.awardsImage?.sourceUrl
       var awardImg =  <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${carousel.project_lead} d-none d-md-block `} src={leadImgSrc} alt="project-lead" layout="fill" />
     }
 
-    if(project?.awards?.awardsImageMobile){
-      var mobile_image = project?.awards?.awardsImageMobile?.sourceUrl
+    if(project?.projectComponent?.awardsImageMobile){
+      var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
       var awardImgMobile =  <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${carousel.project_lead} d-block d-md-none `} src={mobile_image} alt="project-lead" layout="fill" />
     }
 
-    if(project?.leadVideo?.leadVideo){
-      var leadVideo = project?.leadVideo?.video?.mediaItemUrl
-      var leadVideo_mobile = project?.leadVideo?.videoMobile?.mediaItemUrl
+    if(project?.projectComponent?.leadVideo){
+      var leadVideo = project?.projectComponent?.video?.mediaItemUrl
+      var leadVideo_mobile = project?.projectComponent?.videoMobile?.mediaItemUrl
     }
 
 
@@ -430,7 +430,7 @@ export default function Projects({ project , data , menus  }) {
                     <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
                       <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
                       <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
-                      {project.awards.awardsReceived > ''  &&  (
+                      {project?.projectComponent?.awardsReceived > ''  &&  (
                         <>
                           <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}>{awardName}</span></div>
                         </>

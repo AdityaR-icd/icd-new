@@ -108,11 +108,11 @@ export default function projectTypes({ nodes }){
                                                         </div>
                                                         <span className="thumbnail-gif"></span>
                                                     </span>
-                                                    {node?.awards?.awardsReceived !== null  &&  (
+                                                    {node?.projectComponent?.awardsReceived !== null  &&  (
                                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                                     )}
                                                     
-                                                    {tag == 'true' &&  !node?.awards?.awardsReceived && (
+                                                    {tag == 'true' &&  !node?.projectComponent?.awardsReceived && (
                                                         <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                     )}
                                                 </a>

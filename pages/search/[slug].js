@@ -65,7 +65,7 @@ export default function search( { filters , data , filter } ){
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    {node?.awards?.awardsReceived !== null  &&  (
+                                    {node?.projectComponent?.awardsReceived !== null  &&  (
                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                     )}
                                 </a>
@@ -103,7 +103,7 @@ export default function search( { filters , data , filter } ){
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    {node?.awards?.awardsReceived !== null  &&  (
+                                    {node?.projectComponent?.awardsReceived !== null  &&  (
                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                     )}
                                 </a>
