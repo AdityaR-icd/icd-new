@@ -296,11 +296,11 @@ export default function Projects({ project , data , menus  }) {
         seeall_cta = $('.see-all a');
         if( curr_slide_cat == slide_2_cat && slide_2_cat == slide_3_cat ){
             var slug = curr_slide.data("slug");
-            more_title.text("more "+category);
-            seeall_cta.attr( "href" , "/projects/category/"+categorySlug );
-        } else {
             more_title.text("more projects");
             seeall_cta.attr("href" , "/projects/");
+        } else {
+            more_title.text("more "+category);
+            seeall_cta.attr( "href" , "/projects/category/"+categorySlug );
         }         
     }
 
