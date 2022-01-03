@@ -24,6 +24,7 @@ const Header = (props) => {
     var projectTypes = []
     var categories = []
     var tags = []
+    var keywords= []
 
     filters?.clients.edges.map((item) => {      
         clients.push(item.node.slug)
@@ -37,6 +38,10 @@ const Header = (props) => {
         projectTypes.push(item.node.slug)
     })
 
+    filters?.keywords.edges.map((item) => {      
+        keywords.push(item.node.slug)
+    })
+
 
     filters?.categories.edges.map((item) => {      
         categories.push(item.node.slug)
@@ -46,7 +51,7 @@ const Header = (props) => {
         tags.push(item.node.slug)
     })
 
-    var allFilters = [...clients, ...industries, ...projectTypes, ...categories, ...tags]
+    var allFilters = [...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags]
 
     const router = useRouter()
     // const list = props.menus

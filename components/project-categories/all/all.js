@@ -5,7 +5,6 @@ import types from '../type/type.module.scss'
 import { useState , useEffect } from 'react'
 
 import { getLatestProject } from '../../../lib/api'
-import { set } from "lodash";
 
 export default function allproject({ edges }){
 
@@ -40,12 +39,12 @@ export default function allproject({ edges }){
     var project_id = []
 
     if(projects.edges){
-        projects.edges.map(({ node }) => {
-            id.push(node.id)
+        projects?.edges.map(({ node }) => {
+            id.push(node?.id)
         })
 
         edges.map(({ node }) => {
-            project_id.push(node.id)
+            project_id.push(node?.id)
         })
     }
 
@@ -80,17 +79,20 @@ export default function allproject({ edges }){
                 <div className="project__scroll">
                     <div className="row project__row">
                     {edges.map(({ node }) => (
-                        client = node.clients.edges[0].node.name,
-                        leadImgSrc = node.featuredImage.node.sourceUrl,
+                        client = node?.clients?.edges[0]?.node?.name,
+                        leadImgSrc = node?.featuredImage?.node?.sourceUrl,
+                        
                         
                     <>
-                        <div className="col-md-4 project__item" key={ node.id }>
+                        <div className="col-md-4 project__item" key={ node?.id }>
                             <div className={`${carousel.projectCarousel} ${types.projectCarousel}`}>
                                 <div className={carousel.thumbnail_cont}>
-                                    <a href={`/projects/${node.slug}`}>
+                                    <a href={`/projects/${node?.slug}`}>
                                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                                     <div className={`${carousel.full_thumb} full-thumb`}>
-                                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                        {leadImgSrc &&(
+                                                            <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                        )}                  
                                                     </div>
                                                     <span className="thumbnail-gif"></span>
                                             </span>
@@ -102,8 +104,8 @@ export default function allproject({ edges }){
                                             )}
                                     </a>
                                 </div>
-                                <a href={`/projects/${node.slug}`}>
-                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                <a href={`/projects/${node?.slug}`}>
+                                    <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                                         <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
                                 </a>

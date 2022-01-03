@@ -61,7 +61,9 @@ export default function search( { filters , data , filter } ){
                                 <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
+                                            {leadImgSrc &&(
                                                 <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            )} 
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
@@ -99,7 +101,9 @@ export default function search( { filters , data , filter } ){
                                 <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
+                                            {leadImgSrc &&(
                                                 <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            )} 
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
@@ -137,11 +141,13 @@ export default function search( { filters , data , filter } ){
                                 <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
+                                            {leadImgSrc &&(
                                                 <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            )} 
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    {node?.awards?.awardsReceived !== null  &&  (
+                                    {node?.projectComponent?.awardsReceived !== null  &&  (
                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                     )}
                                 </a>
@@ -161,12 +167,14 @@ export default function search( { filters , data , filter } ){
 
     var kN = 0
     if(filter?.keywords?.edges != ''){
-        var client = filter?.keywords?.edges[0].node.name
+       
+
         if(filter?.keywords?.edges[0].node.projects.edges != ''){
             var keywordsprojects = filter?.keywords?.edges[0].node.projects
             kN = keywordsprojects.edges.length
             var keywordsData = keywordsprojects.edges.map(({node}) => {
                 var leadImgSrc = node.featuredImage.node.sourceUrl
+                var client = node.clients.edges[0].node.name
                 return (
                    <>
                     <div className="col-md-4 project__item resultItem-cont" key={ node.id }>
@@ -175,11 +183,13 @@ export default function search( { filters , data , filter } ){
                                 <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
+                                            {leadImgSrc &&(
                                                 <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                            )} 
                                             </div>
                                             <span className="thumbnail-gif"></span>
                                     </span>
-                                    {node?.awards?.awardsReceived !== null  &&  (
+                                    {node?.projectComponent?.awardsReceived !== null  &&  (
                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                     )}
                                 </a>
