@@ -101,8 +101,8 @@ return(
         </section>
 
         {edges.map( industry => (
-          projects = industry.projects,
-          projectLength = projects?.edges.length,
+          projects = industry?.projects,
+          projectLength = projects?.edges?.length,
         <div key={industry.id}>
           <section className={sectionClass} id={industry.slug}>
               <div className="container">
@@ -121,9 +121,9 @@ return(
                   <div className="row">
                     {projectLength > 0  &&  (
                       <>
-                      {projects.edges.map(({ node }) => (
-                          client = node.clients.edges[0].node.name,
-                          leadImgSrc = node.featuredImage.node.sourceUrl,
+                      {projects?.edges.map(({ node }) => (
+                          client = node?.clients?.edges[0]?.node?.name,
+                          leadImgSrc = node?.featuredImage?.node?.sourceUrl,
                       <>
                       <div className={`col-md-4 ${industries.project__tile}`} key={ node.id }>
                           <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
@@ -131,7 +131,9 @@ return(
                                 <a href={`/projects/${node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                         <div className={`${carousel.full_thumb} full-thumb`}>
+                                          {leadImgSrc &&(
                                             <Image className={carousel.project_lead} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  src={leadImgSrc} alt="project-lead" layout="fill" />
+                                          )}
                                         </div>
                                         <span className="thumbnail-gif"></span>
                                     </span>
@@ -139,7 +141,7 @@ return(
                                 </a>
                             </div>
                             <a href={`/projects/${node.slug}`}>
-                                <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                                     <span className={carousel.grey__color}>  / {client}</span>
                                 </span>
                             </a>
