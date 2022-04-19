@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { updatePostLikes ,  updateProjectLikes } from '../lib/api'
+import { updatePostLikes ,  updateProjectLikes , updatekabirLikes } from '../lib/api'
 
 
 import liked from '../assets/images/like-btn/like.svg';
@@ -22,7 +22,10 @@ export default function Like(count) {
 
        if(Type === 'post'){
             const data = await updatePostLikes(post_id , ( likes + 1 ) )
-       }else{
+       }else if(Type == 'kabir'){
+        const data = await updatekabirLikes(post_id , ( likes + 1 ) )
+       }
+       else{
             const data = await updateProjectLikes(post_id , ( likes + 1 ) )
        }
 
