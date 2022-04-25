@@ -13,7 +13,7 @@ export default function Index({ projectsTypes , meta:{pages} , filters }) {
 }
 
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
   const meta = await getProjectPage()
   const projectsTypes = await getProjectTypes()
   const data = await getFooter()
@@ -29,7 +29,7 @@ export async function getStaticProps({ preview = false }) {
         filters
         
     },
-    revalidate: 180, 
+    // revalidate: 180, 
   }
   
 }

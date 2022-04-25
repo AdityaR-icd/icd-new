@@ -542,7 +542,7 @@ export default function Projects({ project , data , menus  }) {
         data,
         filters,
       },
-      revalidate: 180, 
+      revalidate: 2, 
     }
   }
 
