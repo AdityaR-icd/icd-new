@@ -1,6 +1,7 @@
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
 import { useState } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { getSearchPosts } from '../../lib/api'
 import Link from 'next/link'
@@ -34,18 +35,45 @@ export default function posts({meta , categories , edges}){
         if($('.posts__page').hasClass(style.post_search__open)){
           $('.sb-search-input').focus();
         } else {
+        $('.infinite-grid .grid-item').show();
           $('.sb-search-input').val('');
           $('.allPosts').removeClass('d-none')
         }
     }
 
 
-    const handleSubmit = async (evt) => {
-        evt.preventDefault();
-        setSearch(await getSearchPosts (searchValue))
+    // const handleSubmit = async (evt) => {
+    //     evt.preventDefault();
+    //     setSearch(await getSearchPosts (searchValue))
 
-        $('.allPosts').addClass('d-none')
-    }
+    //     $('.allPosts').addClass('d-none')
+    // }
+
+
+    useEffect(() => {
+
+        $(document).ready(function () {
+            $("#postsearch").keyup(function () {
+
+                // Retrieve the input field text and reset the count to zero
+                var filter = $(this).val(), count = 0;
+
+                // Loop through the comment list
+                $(".infinite-grid .grid-item").each(function () {
+
+                    // If the list item does not contain the text phrase fade it out
+                    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                        $(this).fadeOut();
+
+                        // Show the list item if the phrase matches and increase the count by 1
+                    } else {
+                        $(this).show();
+                        count++;
+                    }
+                });
+            });
+        });
+    });
 
     var category = categories?.categories.edges;
     var common = <a href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.active}`} onClick={seeAllProject} >all</a>
@@ -111,7 +139,7 @@ export default function posts({meta , categories , edges}){
                             {slug}
                         </div>
                         <div id="sb-search" className={style.sb_search}>
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" onChange={(e) => setsearchValue(e.target.value)} type="search" name="post-search" id="postsearch" autoComplete="off"/>
                                 <span className={`${style.sb_icon_search} ${style.magic_icon_search}`}  onClick={postsearch}></span>
                             </form>

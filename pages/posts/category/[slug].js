@@ -34,7 +34,9 @@ export default function posts({posts , meta , categories , tags , filters }){
         $('.posts__page').toggleClass(style.post_search__open);
         if($('.posts__page').hasClass(style.post_search__open)){
             $('.sb-search-input').focus();
+        
         } else {
+            $('.infinite-grid .grid-item').show();
             $('.sb-search-input').val('');
             $('.allPosts').removeClass('d-none')
         }
@@ -43,12 +45,12 @@ export default function posts({posts , meta , categories , tags , filters }){
     const [searchValue, setsearchValue] = useState('')
     const [search, setSearch] = useState('')
 
-    const handleSubmit = async (evt) => {
-        evt.preventDefault();
-        setSearch(await getSearchPostsByCategory ( router.query.slug , searchValue))
+    // const handleSubmit = async (evt) => {
+    //     evt.preventDefault();
+    //     setSearch(await getSearchPostsByCategory ( router.query.slug , searchValue))
 
-        $('.allPosts').addClass('d-none')
-    }
+    //     $('.allPosts').addClass('d-none')
+    // }
 
     const sideScroll = (direction,speed,distance,step) => {
         var element = document.getElementById('tags-id') , scrollAmount = 0;
@@ -75,6 +77,7 @@ export default function posts({posts , meta , categories , tags , filters }){
         $('.tags-menu').find(class_name).addClass(style.active);
     }
 
+
     useEffect(() => {
         if(router.query.slug === 'deep-design'){
             $('.tags-cont').addClass('d-block');
@@ -82,6 +85,31 @@ export default function posts({posts , meta , categories , tags , filters }){
             $('.tags-cont').removeClass('d-block');
         }
 
+        router.events.on("routeChangeComplete", (url) => {  
+            setseeAll(true)
+        })
+
+        $(document).ready(function () {
+            $("#postsearch").keyup(function () {
+
+                // Retrieve the input field text and reset the count to zero
+                var filter = $(this).val(), count = 0;
+
+                // Loop through the comment list
+                $(".infinite-grid .grid-item").each(function () {
+
+                    // If the list item does not contain the text phrase fade it out
+                    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                        $(this).fadeOut();
+
+                        // Show the list item if the phrase matches and increase the count by 1
+                    } else {
+                        $(this).show();
+                        count++;
+                    }
+                });
+            });
+        });
     });
 
 
@@ -152,7 +180,7 @@ export default function posts({posts , meta , categories , tags , filters }){
                                 {slug}
                             </div>
                             <div id="sb-search" className={style.sb_search}>
-                                <form onSubmit={handleSubmit}>
+                                <form>
                                     <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" onChange={(e) => setsearchValue(e.target.value)} type="search" name="post-search" id="postsearch" autoComplete="off"/>
                                     <span className={`${style.sb_icon_search} ${style.magic_icon_search}`}  onClick={postsearch}></span>
                                 </form>

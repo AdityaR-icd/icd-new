@@ -68,7 +68,7 @@ export default function Projects({ project , data , menus  }) {
         const slides_data = await getAllProjectsNotIn( projectIds , categorySlug )
         const slides_dat1 = await getAllOtherProjects( categoryId )
         setproject_slider(slides_data)
-        setproject_slider1(slides_dat1)
+        // setproject_slider1(slides_dat1)
       }
 
       fetchMyAPI()
