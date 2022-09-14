@@ -8,14 +8,14 @@ const Layout = dynamic(() => import("../components/kabir/kabir"));
 
 export default function Index({ posts: { edges } , meta:{pages} , filters  }) {
   const meta_data = pages.edges[0].node
- return (
+  return (
     <>
       <Layout meta={meta_data} edges={edges} />
     </>
   )
 }
 
-export async function getServerSideProps({ preview = false }) {
+export async function getStaticProps({ preview = false }) {
   const posts = await getkabirPostsForHome(preview)
   const menus = await getMenus()
   const data = await getFooter()
