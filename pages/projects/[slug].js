@@ -468,6 +468,8 @@ export default function Projects({ project , data , menus  }) {
 
                 {content && (
                   parse(content)
+
+                  // $('.wp-block-video.controls')
                 )}
                 { shareBtn }
               </div>
@@ -487,8 +489,28 @@ export default function Projects({ project , data , menus  }) {
                       </div>
                     </div>
               </div>
-              {other_projects?.length > 0  &&  (
-                  <div className='container'>
+
+                {relatedProjects_slider?.length > 0  &&  (
+                  <div className={`container ${style.relatedProjects__container}`}>
+                    <div className={style.more__projects_block}>
+                      <div className={style.more_cont}>
+                          <span className={style.more__projects_head} id="more-projectTitle">related projects</span>
+                          {/* <span className="see-all">
+                              <a href={` /projects/category/${categorySlug} `}>see all</a>
+                          </span> */}
+                      </div>
+                      <span className="bottom__border"></span>
+                        <div className="more-projectsCarousel">
+                          <Slider {...settings}>
+                              {relatedProjects_slider}
+                          </Slider>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {other_projects?.length > 0  &&  (
+                    <div className='container'>
                     <div className={style.more__projects_block}>
                       <div className={style.more_cont}>
                           <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
@@ -507,24 +529,6 @@ export default function Projects({ project , data , menus  }) {
                   </div>
                 )}
 
-              {relatedProjects_slider?.length > 0  &&  (
-                  <div className={`container ${style.relatedProjects__container}`}>
-                    <div className={style.more__projects_block}>
-                      <div className={style.more_cont}>
-                          <span className={style.more__projects_head} id="more-projectTitle">related projects</span>
-                          {/* <span className="see-all">
-                              <a href={` /projects/category/${categorySlug} `}>see all</a>
-                          </span> */}
-                      </div>
-                      <span className="bottom__border"></span>
-                        <div className="more-projectsCarousel">
-                          <Slider {...settings}>
-                              {relatedProjects_slider}
-                          </Slider>
-                      </div>
-                    </div>
-                  </div>
-                )}
             </article>
       </>
     )
