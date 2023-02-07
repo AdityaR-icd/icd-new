@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import $ from 'jquery';
 import { useEffect } from 'react'
-import { getAllPostsForHome , getMenus , getFooter , getPostAndMorePosts , getFilters } from '../../lib/api'
+import { getAllPostsForHome , getFooter , getPostAndMorePosts , getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -266,7 +266,7 @@ export default function Post({ post , data , filters }) {
   
   export async function getStaticProps({ preview = false , params , previewData }) {
     const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
@@ -274,7 +274,7 @@ export default function Post({ post , data , filters }) {
         post: Moredata.post,
         posts: Moredata.posts,
         preview, 
-        menus,
+        // menus,
         data,
         filters
       },

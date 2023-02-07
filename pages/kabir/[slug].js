@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllkabirWithSlug , kabirArticle , getMenus , getFooter , getFilters } from '../../lib/api'
+import { getAllkabirWithSlug , kabirArticle ,  getFooter , getFilters } from '../../lib/api'
 import $ from 'jquery';
 import Image from 'next/image'
 import { useEffect } from 'react'
@@ -123,13 +123,13 @@ export default function kabir({kabir , data}){
 
 export async function getStaticProps({ params }) {
     const article = await kabirArticle(params.slug)
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
       props: { 
         kabir: article.kabir,
-        menus,
+        // menus,
         data,
         filters
       },

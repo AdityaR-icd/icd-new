@@ -1,4 +1,4 @@
-import { getOurteamPage , getTeam , getMenus , getFooter , getFilters } from '../lib/api'
+import { getOurteamPage , getTeam ,  getFooter , getFilters } from '../lib/api'
 import dynamic from "next/dynamic";
 
 const Layout = dynamic(() => import('../components/team/team'));
@@ -17,14 +17,14 @@ export default function careers({ meta : {pages} , team }) {
 export async function getStaticProps() {
     const meta = await getOurteamPage()
     const team = await getTeam()
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
         props: { 
         meta,
         team,
-        menus,
+        // menus,
         data,
         filters
         },

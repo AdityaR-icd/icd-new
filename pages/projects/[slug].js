@@ -24,11 +24,12 @@ import style from '../../styles/singleProject.module.scss'
 
 
 
-
 export default function Projects({ project , data , menus  }) {
   const router = useRouter()
+
   const seo = project ? ( project?.seo ?? {} ) : ( {} );
 	const uri = project ? ( project?.uri ?? {} ) : (  {} );
+  // console.log(uri)
   const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
   const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
 
@@ -50,9 +51,9 @@ export default function Projects({ project , data , menus  }) {
       $('.share-icon').toggleClass('icons-hide');
     }
 
-    var projectIds = project.projectId
-    var categorySlug = project.projectTypes.edges[0]?.node?.slug
-    var categoryId = project.projectTypes.edges[0]?.node?.databaseId
+    var projectIds = project?.projectId
+    var categorySlug = project?.projectTypes.edges[0]?.node?.slug
+    var categoryId = project?.projectTypes?.edges[0]?.node?.databaseId
     const [project_slider, setproject_slider] = useState('')
     const [project_slider1, setproject_slider1] = useState('')
     useEffect(() => {
@@ -99,35 +100,35 @@ export default function Projects({ project , data , menus  }) {
     var other_projects2 = []
     if(other_projects1?.length > 0){
       other_projects1.map(({node}) => {
-          if(node.projects.edges.length > 0){
-            other_projects2.push(node.projects.edges)
+          if(node.projects?.edges?.length > 0){
+            other_projects2.push(node?.projects?.edges)
           }
       })
     }
     var projectData = []
     var other_projects_slider1 = ''
-    if(other_projects2.length > 0){
-      other_projects2.map((node) => {
-        other_projects_slider1 = node.map(({node}) => {
+    if(other_projects2?.length > 0){
+      other_projects2?.map((node) => {
+        other_projects_slider1 = node?.map(({node}) => {
           var leadImgSrc = node?.featuredImage?.node?.sourceUrl
           var client = node?.clients?.edges[0]?.node?.name
           return (
             <>
               <div className="project__item resultItem-cont" key={ node?.id }>
-                  <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+                  <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                       <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
                           <a href={`/projects/${node?.slug}`}>
-                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                      <div className={`${carousel.full_thumb} full-thumb`}>
-                                          <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                              <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                                      <div className={`${carousel?.full_thumb} full-thumb`}>
+                                          <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel?.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                       </div>
                                       <span className="thumbnail-gif"></span>
                               </span>
                           </a>
                       </div>
                       <a href={`/projects/${node?.slug}`}>
-                          <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
-                              <span className={carousel.grey__color}>  / {client}</span>
+                          <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
+                              <span className={carousel?.grey__color}>  / {client}</span>
                           </span>
                       </a>
                   </div>
@@ -144,7 +145,7 @@ export default function Projects({ project , data , menus  }) {
       other_projects1 = other_projects2
 
 
-      var other_projects_slider = other_projects.map(({node}) => {
+      var other_projects_slider = other_projects?.map(({node}) => {
         var leadImgSrc = node?.featuredImage?.node?.sourceUrl
         var client = node?.clients?.edges[0]?.node.name
         return (
@@ -154,9 +155,9 @@ export default function Projects({ project , data , menus  }) {
                     <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
                         <a href={`/projects/${node?.slug}`}>
                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                    <div className={`${carousel.full_thumb} full-thumb`}>
+                                    <div className={`${carousel?.full_thumb} full-thumb`}>
                                       {leadImgSrc &&(
-                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel?.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                         )} 
                                     </div>
                                     <span className="thumbnail-gif"></span>
@@ -189,22 +190,22 @@ export default function Projects({ project , data , menus  }) {
     } 
 
 
-    var title = project.title;
-    var heading = project.projectComponent?.heading;
-    var description = project.projectComponent?.description;
-    var shortDesc = project.shortDescription?.shortDesc;
-    var clients = project.clients?.edges[0]?.node?.name;
-    var leadComponent = project.projectComponent?.leadComponent?.sourceUrl
-    var leadComponentMobile = project.projectComponent?.leadComponentMobile?.sourceUrl
+    var title = project?.title;
+    var heading = project?.projectComponent?.heading;
+    var description = project?.projectComponent?.description;
+    var shortDesc = project?.shortDescription?.shortDesc;
+    var clients = project?.clients?.edges[0]?.node?.name;
+    var leadComponent = project?.projectComponent?.leadComponent?.sourceUrl
+    var leadComponentMobile = project?.projectComponent?.leadComponentMobile?.sourceUrl
     var content = project?.content
-    var team = project.projectComponent?.details
-    var category = project.projectTypes.edges[0]?.node?.name
+    var team = project?.projectComponent?.details
+    var category = project?.projectTypes?.edges[0]?.node?.name
     var awards = project?.projectComponent?.awardsReceived
     var awardName = project?.projectComponent?.nameOfTheAwardEgC
-    var relatedProjects = project.projectComponent?.relatedprojects ?? []
+    var relatedProjects = project?.projectComponent?.relatedprojects ?? []
 
 
-    var relatedProjects_slider = relatedProjects.map((node) => {
+    var relatedProjects_slider = relatedProjects?.map((node) => {
       var leadImgSrc = node?.featuredImage?.node?.sourceUrl
       var client = node?.clients?.edges[0]?.node.name
       return (
@@ -213,16 +214,16 @@ export default function Projects({ project , data , menus  }) {
               <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                   <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
                       <a href={`/projects/${node?.slug}`}>
-                          <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
+                          <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                   <div className={`${carousel.full_thumb} full-thumb`}>
-                                      <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                      <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel?.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                   </div>
                                   <span className="thumbnail-gif"></span>
                           </span>
                       </a>
                   </div>
                   <a href={`/projects/${node?.slug}`}>
-                      <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
+                      <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
                           <span className={carousel.grey__color}>  / {client}</span>
                       </span>
                   </a>
@@ -253,7 +254,7 @@ export default function Projects({ project , data , menus  }) {
                       <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
                       <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                      <Like count={project.likes?.likes}  id={project.id} type={'project'} />
+                      <Like count={project?.likes?.likes}  id={project.id} type={'project'} />
                     </div>;
 
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -536,13 +537,13 @@ export default function Projects({ project , data , menus  }) {
   
   export async function getStaticProps({ params }) {
     const gProject = await getProject(params.slug)
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
       props: { 
         project: gProject.project,
-        menus,
+        // menus,
         data,
         filters,
       },
@@ -558,3 +559,5 @@ export default function Projects({ project , data , menus  }) {
     }
     
   }
+
+

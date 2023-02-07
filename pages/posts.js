@@ -1,4 +1,4 @@
-import { getAllPosts , getPostCategories , getFilters , getPostPage , getMenus , getFooter } from '../lib/api'
+import { getAllPosts , getPostCategories , getFilters , getPostPage , getFooter } from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/posts/posts"));
 
@@ -15,7 +15,7 @@ export default function blogs({  posts : { edges } , meta:{pages} , categories ,
 
 export async function getStaticProps() {
   const posts = await getAllPosts()
-  const menus = await getMenus()
+  // const menus = await getMenus()
   const data = await getFooter()
   const meta = await getPostPage()
   const categories = await getPostCategories()
@@ -23,7 +23,7 @@ export async function getStaticProps() {
   return {
     props: { 
       posts,
-      menus,
+      // menus,
       data,
       meta,
       categories,
