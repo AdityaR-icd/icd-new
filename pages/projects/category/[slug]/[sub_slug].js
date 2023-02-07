@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsSubTypes , getProjectSubTypes , getProjectByTypes , getMenus , getFooter , getFilters } from '../../../../lib/api'
+import { getAllProjectsSubTypes , getProjectSubTypes , getProjectByTypes ,  getFooter , getFilters } from '../../../../lib/api'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
@@ -142,13 +142,13 @@ export async function getStaticPaths({params}) {
 export async function getStaticProps({ params }) {
     const gProject = await getProjectByTypes(params.slug)
     const subTypeProjects = await getProjectSubTypes(params.slug ,params.sub_slug);
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return{
         props: {
             project: gProject.projectTypes,
-            menus,
+            // menus,
             data,
             subTypeProjects,
             filters

@@ -1,4 +1,4 @@
-import { getAllProjectsForHome , getFooter , getMenus , getProjectPage , getFilters } from '../../../lib/api'
+import { getAllProjectsForHome , getFooter, getProjectPage , getFilters } from '../../../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../../../components/project/allProject"));
 
@@ -12,14 +12,14 @@ export default function All({ AllProjects , meta:{pages}}) {
 export async function getStaticProps({ preview = false }) {
     const AllProjects = await getAllProjectsForHome(preview)
     const data = await getFooter()
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const meta = await getProjectPage()
     const filters = await getFilters()
     return {
       props: { 
           AllProjects,
           data,
-          menus,
+        //   menus,
           meta,
           filters
       },

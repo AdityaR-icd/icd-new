@@ -1,4 +1,4 @@
-import { getIndustries , getClientsPage , getMenus  , getFooter , getFilters } from '../../lib/api'
+import { getIndustries , getClientsPage ,  getFooter , getFilters } from '../../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../../components/clients/industry/industry"));
 
@@ -13,13 +13,13 @@ export default function industry({industries: { nodes } , meta:{pages}}) {
 export async function getStaticProps() {
     const meta = await getClientsPage();
     const industries = await getIndustries()
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
       props: { 
         industries,
-        menus,
+        // menus,
         data,
         meta,
         filters

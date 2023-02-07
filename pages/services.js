@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import dynamic from "next/dynamic";
-import { getPages , getService , getOtherService , getFilters , getMenus , getFooter } from '../lib/api'
+import { getPages , getService , getOtherService , getFilters ,  getFooter } from '../lib/api'
 const Layout = dynamic(() => import("../components/services/services"));
 
 
@@ -19,13 +19,13 @@ export async function getStaticProps() {
     const service = await getService()
     const otherService = await getOtherService()
     const data = await getFooter()
-    const menus = await getMenus()
+    // const menus = await getMenus()
     const filters = await getFilters()
     return {
         props: { 
             meta,
             service,
-            menus,
+            // menus,
             data,
             otherService,
             filters
