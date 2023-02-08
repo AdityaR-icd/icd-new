@@ -42,7 +42,7 @@ const backButton = () => {
         <meta name="twitter:title" content={meta.seo.title} />
         <meta name="twitter:description" content={meta.seo.metaDesc} />
         <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/our-team" />
-        <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
+        <meta name="twitter:image" content={meta.featuredImage?.node?.sourceUrl} />
         </Head>
 
 
@@ -77,8 +77,8 @@ const backButton = () => {
                     </div>
                 </div>                    
                 <div className="row">
-                    {team.edges.map(({ node }) => (
-                        <SingleProfile data={node} key={node.id}/>
+                    {team?.edges.map(({ node }) => (
+                        <SingleProfile data={node} key={node?.id}/>
                     ))}         
                 </div>
             </div>
