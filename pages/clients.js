@@ -6,7 +6,7 @@ const Layout = dynamic(() => import("../components/clients/clients"));
 
 
 export default function clients({ clients: { edges }, meta: { pages } }) {
-  const meta_data = pages.edges[0].node
+  const meta_data = pages?.edges[0]?.node
   return (
     <Layout meta={meta_data} edges={edges} />
   )

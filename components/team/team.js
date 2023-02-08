@@ -19,30 +19,30 @@ const backButton = () => {
     return(
         <>
         <NextSeo
-            title={meta.seo.title}
-            description={meta.seo.metaDesc}
+            title={meta?.seo?.title}
+            description={meta?.seo?.metaDesc}
             canonical="https://icd-v3-vercel.vercel.app/our-team"
-            robots={meta.metaRobotsNoindex}
-            googlebot={meta.metaRobotsNofollow}
+            robots={meta?.metaRobotsNoindex}
+            googlebot={meta?.metaRobotsNofollow}
             openGraph={{
             url: 'https://icd-v3-vercel.vercel.app/our-team',
-            title: meta.seo.title,
-            description: meta.seo.metaDesc,
+            title: meta?.seo?.title,
+            description: meta?.seo?.metaDesc,
             images: [
                 {
-                url: meta.featuredImage?.node.sourceUrl,
+                url: meta?.featuredImage?.node.sourceUrl,
                 alt: 'homepage-image',
                 type: 'image/jpeg',
                 },
             ],
-            site_name: meta.seo.title,
+            site_name: meta?.seo?.title,
         }} />
         <Head>
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.seo.title} />
-        <meta name="twitter:description" content={meta.seo.metaDesc} />
+        <meta name="twitter:title" content={meta?.seo?.title} />
+        <meta name="twitter:description" content={meta?.seo?.metaDesc} />
         <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/our-team" />
-        <meta name="twitter:image" content={meta.featuredImage?.node?.sourceUrl} />
+        <meta name="twitter:image" content={meta?.featuredImage?.node?.sourceUrl} />
         </Head>
 
 
@@ -50,7 +50,7 @@ const backButton = () => {
             <div className="container page__header--container">
               <div className="row">
                 <div className="col-12 col-md-4 page__header--title">
-                  <div className="back-cta" onClick={backButton}><span className={` ${style.backBtn} backBtn` }></span><h1>{meta.title}</h1></div>
+                  <div className="back-cta" onClick={backButton}><span className={` ${style.backBtn} backBtn` }></span><h1>{meta?.title}</h1></div>
                 </div>
                 
                 <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
@@ -69,7 +69,7 @@ const backButton = () => {
         <Intro description={meta?.content} />
 
 
-        <section className={Ourteam.team}>
+        <section className={Ourteam?.team}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">

@@ -5,7 +5,7 @@ const Layout = dynamic(() => import('../components/team/team'));
 
 
 export default function careers({ meta : {pages} , team }) {
-    const meta_data = pages.edges[0].node
+    const meta_data = pages?.edges[0].node
     return (
         <>
             <Layout meta={meta_data} team={team} />
