@@ -85,15 +85,16 @@ export default function posts({meta , categories , edges}){
         else{
             activeClass = `project__filter ${style.project__filter}`
         }
-        return (
-        <>
+        return <>
             <>
-            <Link href={`/posts/category/${item?.node?.slug}`} key={item?.node.id}> 
-                <a className={activeClass}>{item?.node?.name}</a>
+            <Link
+                href={`/posts/category/${item?.node?.slug}`}
+                key={item?.node.id}
+                className={activeClass}> 
+                {item?.node?.name}
             </Link>
             </>
         </>
-        )
     })
 
     return(

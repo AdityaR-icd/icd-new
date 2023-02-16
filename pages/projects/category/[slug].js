@@ -36,17 +36,17 @@ export default function Projects({ project , filters }) {
         var common = <a className={ allProject ?` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} `: "project__filter marginRight" } onClick={allProjects} >all</a>
          
         var slug = projectSubTypes?.map((item) => {
-          return (
-            <>
-              {item?.node?.projects?.edges.length > 0  &&  (
-                <>
-                  <Link href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}> 
-                    <a className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }>{item?.node?.name}</a>
-                  </Link>
-                </>
-              )}
-            </>
-          )
+          return <>
+            {item?.node?.projects?.edges.length > 0  &&  (
+              <>
+                <Link
+                  href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}
+                  className={ !allProject ?` ${style.project__filter} project__filter marginRight ${style.filter__active}  `: "project__filter marginRight" }> 
+                  {item?.node?.name}
+                </Link>
+              </>
+            )}
+          </>;
         })
       }
     else {

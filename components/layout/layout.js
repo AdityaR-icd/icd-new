@@ -6,12 +6,13 @@ const Nav = dynamic(() => import("../header/header"));
 const Footer = dynamic(() => import("../footer/footer"));
 
 
+
 const Layout = ({children}) => {
     const router = useRouter();
 
     const noNav = [`/yellow-envelope/[slug]`];
     const props = children.props
-    
+   
     return(
         <>
             {/* <Nav {...props} /> */}

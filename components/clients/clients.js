@@ -22,7 +22,7 @@ export default function clients({meta , edges}) {
     var currletter = ''
     var projectletter = ''
     var groups = [];
-    edges.map((node) => {
+    edges?.map((node) => {
         var data = node?.node
         const letter = data.name.charAt(0);
         groups[letter] = groups[letter] || [];
@@ -103,14 +103,18 @@ export default function clients({meta , edges}) {
         </section>
         <div className="container">
             <div className="row">
-                {arrays.map((data)  => ( 
+                {arrays?.map((data)  => ( 
                     // console.log(data),
                     <div className="col-md-4 clientGrid--item">
                         <div className={`${alphabet.clients_alpha_cont} ${style.clients_alpha_cont}`}>
-                            {data.map((data) => {
-                                var letter = data.name.charAt(0);
-                                var projectData = data.projects?.edges[0]?.node
-                                var leadImgSrc = projectData?.featuredImage?.node?.sourceUrl
+                            {data?.map((data) => {
+                                // console.log(data);
+                                var letter = data?.name?.charAt(0);
+                                var projectData = data?.projects?.nodes
+                                var leadImgSrc
+                                {projectData?.map((data)  => ( 
+                                    leadImgSrc = data?.featuredImage?.node?.sourceUrl
+                                ))}                       
                                 var ProjectLink = projectData?.slug
                                 if(letter != currletter){
                                     projectletter = <h2 className={alphabet.alpha_letter}>{letter}</h2>

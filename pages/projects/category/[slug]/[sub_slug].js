@@ -36,17 +36,17 @@ export default function subProject({subTypeProjects , project , filters }){
           else{
               activeClass = `project__filter marginRight`
           }
-            return (
-              <>
-                {item?.node?.projects?.edges.length > 0  &&  (
-                  <>
-                  <Link href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}> 
-                    <a className={activeClass}>{item?.node?.name}</a>
-                  </Link>
-                  </>
-                )}
-              </>
-            )
+            return <>
+              {item?.node?.projects?.edges.length > 0  &&  (
+                <>
+                <Link
+                  href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}
+                  className={activeClass}> 
+                  {item?.node?.name}
+                </Link>
+                </>
+              )}
+            </>;
         })
       }
     else {

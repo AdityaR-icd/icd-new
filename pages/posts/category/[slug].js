@@ -115,7 +115,7 @@ export default function posts({posts , meta , categories , tags , filters }){
 
 
 
-    var posts = posts.edges[0]?.node?.posts?.edges
+    var post = posts.edges[0]?.node?.posts?.edges
     
 
     var category = categories?.categories.edges;
@@ -128,136 +128,135 @@ export default function posts({posts , meta , categories , tags , filters }){
         else{
             activeClass = `project__filter ${style.project__filter}`
         }
-        return (
-        <>
+        return <>
             <>
-            <Link href={`/posts/category/${item?.node?.slug}`} key={item?.node.id}> 
-                <a className={activeClass}>{item?.node?.name}</a>
+            <Link
+                href={`/posts/category/${item?.node?.slug}`}
+                key={item?.node.id}
+                className={activeClass}> 
+                {item?.node?.name}
             </Link>
             </>
-        </>
-        )
+        </>;
     })
 
-    return(
-        <>
-        <NextSeo
-            title={metaData.seo.title}
-            description={metaData.seo.metaDesc}
-            canonical={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`}
-            robots={metaData.metaRobotsNoindex}
-            googlebot={metaData.metaRobotsNofollow}
-            openGraph={{
-            url: `https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`,
-            title: metaData.seo.title,
-            description: metaData.seo.metaDesc,
-            images: [
-                {
-                url: metaData.featuredImage?.node.sourceUrl,
-                alt: 'homepage-image',
-                type: 'image/jpeg',
-                },
-            ],
-            site_name: metaData.seo.title,
-            }} />
-            <Head>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={metaData.seo.title} />
-            <meta name="twitter:description" content={metaData.seo.metaDesc} />
-            <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`} />
-            <meta name="twitter:image" content={metaData.featuredImage?.node.sourceUrl} />
-            </Head>
+    return <>
+    <NextSeo
+        title={metaData.seo.title}
+        description={metaData.seo.metaDesc}
+        canonical={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`}
+        robots={metaData.metaRobotsNoindex}
+        googlebot={metaData.metaRobotsNofollow}
+        openGraph={{
+        url: `https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`,
+        title: metaData.seo.title,
+        description: metaData.seo.metaDesc,
+        images: [
+            {
+            url: metaData.featuredImage?.node.sourceUrl,
+            alt: 'homepage-image',
+            type: 'image/jpeg',
+            },
+        ],
+        site_name: metaData.seo.title,
+        }} />
+        <Head>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metaData.seo.title} />
+        <meta name="twitter:description" content={metaData.seo.metaDesc} />
+        <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app/posts/category/${router.query.slug}`} />
+        <meta name="twitter:image" content={metaData.featuredImage?.node.sourceUrl} />
+        </Head>
 
-            <section className={`${style.posts__page} mT__260 page__header posts__page `}>
-                <div className="container page__header--container">
-                    <div className="row">
-                        <div className="col-12 col-md-4  page__header--title">
-                            <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{metaData.title}</h1></div>
+        <section className={`${style.posts__page} mT__260 page__header posts__page `}>
+            <div className="container page__header--container">
+                <div className="row">
+                    <div className="col-12 col-md-4  page__header--title">
+                        <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{metaData.title}</h1></div>
+                    </div>
+                    <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
+                        <div className={style.filter_menu_cont}>
+                            {common}
+                            {slug}
                         </div>
-                        <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
-                            <div className={style.filter_menu_cont}>
-                                {common}
-                                {slug}
-                            </div>
-                            <div id="sb-search" className={style.sb_search}>
-                                <form>
-                                    <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" onChange={(e) => setsearchValue(e.target.value)} type="search" name="post-search" id="postsearch" autoComplete="off"/>
-                                    <span className={`${style.sb_icon_search} ${style.magic_icon_search}`}  onClick={postsearch}></span>
-                                </form>
-                            </div>
+                        <div id="sb-search" className={style.sb_search}>
+                            <form>
+                                <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" onChange={(e) => setsearchValue(e.target.value)} type="search" name="post-search" id="postsearch" autoComplete="off"/>
+                                <span className={`${style.sb_icon_search} ${style.magic_icon_search}`}  onClick={postsearch}></span>
+                            </form>
                         </div>
                     </div>
-                    <span className="bottom__border"></span>
                 </div>
-                <div className={`container ${style.page__header__subNav}`}>
-                    <div className="row">
-                    <div className="col-12">
-                        <div className={` tags-cont ${style.tags_cont} d-none`}>
-                        <span className={` ${style.left_arrow} d-none d-lg-block`} onClick={() => sideScroll('left',5,220,10)}></span>
-                        <ul className="tags-menu" id="tags-id">
-                            {tags.edges.map(({ node }) => {
-                                var name = node.name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
-                                var original = node.name;
-                                return (
-                                    <li className={name} onClick={() => shuffleItems({name , original})} ><span className="filterHash">#</span>{ node.name }</li>
-                                )
-                            })}
-                        </ul>
-                        <span className={` ${style.right_arrow} d-none d-lg-block`} onClick={() => sideScroll('right',5,220,10)}></span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <div className="container allPosts">
-                    <div className="row infinite-grid">
-                        {posts.map(({ node }) => (
-                            
-                            <>
-                                {seeAll  && (
-                                    <PostItem data={node} key={node.id}/>
-                                )}
-                                {(
-                                    node.tags.edges?.map((item ) => {
-                                        return (
-                                            <>
-                                                {!seeAll && (
-                                                    <>
-                                                        {seetag == item?.node.name && (
-
-                                                            <PostItem data={node} key={node.id} />
-                                                        )}
-                                                    </>
-                                                )}
-                                            </>
-                                        )
-                                    })
-                                )}
-                            </>
-                        ))}
+                <span className="bottom__border"></span>
+            </div>
+            <div className={`container ${style.page__header__subNav}`}>
+                <div className="row">
+                <div className="col-12">
+                    <div className={` tags-cont ${style.tags_cont} d-none`}>
+                    <span className={` ${style.left_arrow} d-none d-lg-block`} onClick={() => sideScroll('left',5,220,10)}></span>
+                    <ul className="tags-menu" id="tags-id">
+                        {tags.edges.map(({ node }) => {
+                            var name = node.name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+                            var original = node.name;
+                            return (
+                                <li className={name} onClick={() => shuffleItems({name , original})} ><span className="filterHash">#</span>{ node.name }</li>
+                            )
+                        })}
+                    </ul>
+                    <span className={` ${style.right_arrow} d-none d-lg-block`} onClick={() => sideScroll('right',5,220,10)}></span>
                     </div>
                 </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div className="container allPosts">
+                <div className="row infinite-grid">
+                    {post.map(({ node }) => (
+                        
+                        <>
+                            {seeAll  && (
+                                <PostItem data={node} key={node.id}/>
+                            )}
+                            {(
+                                node.tags.edges?.map((item ) => {
+                                    return (
+                                        <>
+                                            {!seeAll && (
+                                                <>
+                                                    {seetag == item?.node.name && (
 
-                {(
+                                                        <PostItem data={node} key={node.id} />
+                                                    )}
+                                                </>
+                                            )}
+                                        </>
+                                    )
+                                })
+                            )}
+                        </>
+                    ))}
+                </div>
+            </div>
 
-                    <>
-                        {search  && (
-                            <>
-                            <div className="container">
-                                <div className="row infinite-grid">
-                                {search.edges[0]?.node?.posts?.edges.map(({ node }) => (
-                                    <PostItem data={node} key={node.id} />
-                                ))}
-                                </div>
+            {(
+
+                <>
+                    {search  && (
+                        <>
+                        <div className="container">
+                            <div className="row infinite-grid">
+                            {search.edges[0]?.node?.posts?.edges.map(({ node }) => (
+                                <PostItem data={node} key={node.id} />
+                            ))}
                             </div>
-                            </>
-                        )}
-                    </>
-                )}
-            </section>
-        </>
-    )
+                        </div>
+                        </>
+                    )}
+                </>
+            )}
+        </section>
+    </>;
 }
 
 export async function getStaticProps({ params }) {

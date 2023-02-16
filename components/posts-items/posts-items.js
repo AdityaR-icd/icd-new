@@ -60,10 +60,10 @@ export default function postItem({data }){
         }
 
         
-    return(
+    return (
         <div className="col-md-6 col-lg-6 grid-item">
             <div className={`${style.postsItems} animateItems}`}>
-                <Link href={`/posts/${data.slug}`}>
+                <Link href={`/posts/${data.slug}`} legacyBehavior>
                     <div className={style.postLeadImage}>
                         <div className="images-loaded-container">
                             {imageData}
@@ -79,7 +79,7 @@ export default function postItem({data }){
                 </a>
                 <div className="row">
                     <div className="col-6">
-                        <Link href={`/posts/${data.slug}`}>
+                        <Link href={`/posts/${data.slug}`} legacyBehavior>
                             <button>keep reading</button>
                         </Link>
                     </div>
@@ -89,5 +89,5 @@ export default function postItem({data }){
                 </div>
             </div>
         </div>
-    )
+    );
 }

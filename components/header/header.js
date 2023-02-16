@@ -11,13 +11,14 @@ import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));
 
-
+// const FilterLayout = dynamic(() => import("../../app/filterlayout/layout"));
 
 
 
 const Header = (props) => {
 
     var filters = props.filters;
+
 
     var clients = []
     var industries = []
@@ -115,77 +116,85 @@ const Header = (props) => {
 
 
 
-    return (
-            <>
-            <Head>
-                <link rel="shortcut icon" href="/favicon.ico" />
-            </Head>
-                <header id="header">
-                    <div className="menu-cont">
-                        <span className="yellowLine">
-                            <span className="loader"></span>
-                        </span>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-10 col-md-2 logo-container">
-                                    <a href="/" aria-label="logo" className="logo d-none d-lg-block">
-                                        <Image decoding="async" width="172" priority={true} height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
-                                    </a>
-                                    <a href="/" aria-label="logo" className="logo d-block d-lg-none">
-                                        <Image decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
-                                    </a>
-                                </div>
-                                <div className="col-2 col-md-10">
-                                    <div className="d-block d-lg-none">
+    return <>
 
-                                        <div className="hamburger hamburger--spring js-hamburger" onClick={hamburgerToggle}>
-                                            <div className="hamburger-box">
-                                                <div className="hamburger-inner"></div>
-                                            </div>
-                                        </div>
+    <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+    </Head>
+    
+        <header id="header">
+            <div className="menu-cont">
+                <span className="yellowLine">
+                    <span className="loader"></span>
+                </span>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-10 col-md-2 logo-container">
+                            <a href="/" aria-label="logo" className="logo d-none d-lg-block">
+                                <Image decoding="async" width="172" priority={true} height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
+                            </a>
+                            <a href="/" aria-label="logo" className="logo d-block d-lg-none">
+                                <Image decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
+                            </a>
+                        </div>
+                        <div className="col-2 col-md-10">
+                            <div className="d-block d-lg-none">
 
+                                <div className="hamburger hamburger--spring js-hamburger" onClick={hamburgerToggle}>
+                                    <div className="hamburger-box">
+                                        <div className="hamburger-inner"></div>
                                     </div>
-                                    <div className="nav-menu">
-                                        <div className="container">
-                                            <div className="row">
-                                                <ul>
-                                                    <li className="mobile__menu--items">
-                                                        <form className="global-search">
-                                                            <input type="search" className="searchInput" value={searchValue} onChange={(e) => setsearchValue(e.target.value)} placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
-                                                            <input className="searchBtn" onClick={onSubmitHandler} type="submit" value="" />
-                                                        </form>
-                                                    </li>
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/projects"><a className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</a></Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/clients"><a className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</a></Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/services"><a className={router.pathname == "/services" ? "active" : ""}>services</a></Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/posts"><a className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</a></Link></li>
-                                                    <li onClick={hamburgerClose}><Link href="/contact"><a className={router.pathname == "/contact" ? "active" : ""}>contact</a></Link></li>
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
-                                                    <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
-                                                    <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
-                                                    <li className="search-icon d-lg-block d-none" onClick={ searchToggle }><span className="searchIcon"></span></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> {/* nav-menu end */}
-
                                 </div>
+
                             </div>
+                            <div className="nav-menu">
+                                <div className="container">
+                                    <div className="row">
+                                        <ul>
+                                            <li className="mobile__menu--items">
+                                                <form className="global-search">
+                                                    <input type="search" className="searchInput" value={searchValue} onChange={(e) => setsearchValue(e.target.value)} placeholder="type an industry, client or keyword" id="hamburgerSearch" required="" name="search" />
+                                                    <input className="searchBtn" onClick={onSubmitHandler} type="submit" value="" />
+                                                </form>
+                                            </li>
+                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
+                                            <li onClick={hamburgerClose}><Link
+                                                href="/projects"
+                                                className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
+                                            <li onClick={hamburgerClose}><Link
+                                                href="/clients"
+                                                className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
+                                            <li onClick={hamburgerClose}><Link
+                                                href="/services"
+                                                className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
+                                            <li onClick={hamburgerClose}><Link
+                                                href="/posts"
+                                                className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/contact" className={router.pathname == "/contact" ? "active" : ""}>contact</Link></li>
+                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
+                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
+                                            <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
+                                            <li className="search-icon d-lg-block d-none" onClick={ searchToggle }><span className="searchIcon"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> {/* nav-menu end */}
+
                         </div>
                     </div>
-                    <div className="search-form ignore-react-onclickoutside" id="searchID">
-                    <Search suggestion={allFilters} ></Search>
-                    <div id="close">
-                        <span className="close-wrap" onClick={searchToggle}>
-                            <span className="close-line close-line1"></span>
-                            <span className="close-line close-line2"></span>
-                        </span>
-                    </div>
                 </div>
-                </header>
-            </>
-    )
+            </div>
+            <div className="search-form ignore-react-onclickoutside" id="searchID">
+            <Search suggestion={allFilters} ></Search>
+            <div id="close">
+                <span className="close-wrap" onClick={searchToggle}>
+                    <span className="close-line close-line1"></span>
+                    <span className="close-line close-line2"></span>
+                </span>
+            </div>
+        </div>
+        </header>
+    </>;
 }
 
 export default Header

@@ -13,12 +13,11 @@ import '../styles/search-results.scss';
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/layout/layout"));
 
-
-
-export default function MyApp({ Component, pageProps}){
+export default function MyApp({ Component, pageProps }) {
   return (
-        <Layout>
-            <Component {...pageProps} />
-        </Layout>
+    <>
+      <Layout>
+          <Component {...pageProps} />
+      </Layout></>
   )
 }

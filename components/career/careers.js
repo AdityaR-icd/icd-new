@@ -14,82 +14,84 @@ export default function career({meta , jobs}){
     const backButton = () => {
         window.history.back();
     }
-    return (
-        <>
-            <NextSeo
-                title={meta.seo.title}
-                description={meta.seo.metaDesc}
-                canonical="https://icd-v3-vercel.vercel.app/careers"
-                robots={meta.metaRobotsNoindex}
-                googlebot={meta.metaRobotsNofollow}
-                openGraph={{
-                url: 'https://icd-v3-vercel.vercel.app/careers',
-                title: meta.seo.title,
-                description: meta.seo.metaDesc,
-                images: [
-                    {
-                    url: meta.featuredImage?.node.sourceUrl,
-                    alt: 'homepage-image',
-                    type: 'image/jpeg',
-                    },
-                ],
-                site_name: meta.seo.title,
-            }} />
-            <Head>
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={meta.seo.title} />
-            <meta name="twitter:description" content={meta.seo.metaDesc} />
-            <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/careers" />
-            <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
-            </Head>
+    return <>
+        <NextSeo
+            title={meta.seo.title}
+            description={meta.seo.metaDesc}
+            canonical="https://icd-v3-vercel.vercel.app/careers"
+            robots={meta.metaRobotsNoindex}
+            googlebot={meta.metaRobotsNofollow}
+            openGraph={{
+            url: 'https://icd-v3-vercel.vercel.app/careers',
+            title: meta.seo.title,
+            description: meta.seo.metaDesc,
+            images: [
+                {
+                url: meta.featuredImage?.node.sourceUrl,
+                alt: 'homepage-image',
+                type: 'image/jpeg',
+                },
+            ],
+            site_name: meta.seo.title,
+        }} />
+        <Head>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={meta.seo.title} />
+        <meta name="twitter:description" content={meta.seo.metaDesc} />
+        <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/careers" />
+        <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
+        </Head>
 
-            <section className={` careers__page mT__260 `}>
-                <div className="container page__header--container">
+        <section className={` careers__page mT__260 `}>
+            <div className="container page__header--container">
+            <div className="row">
+                <div className="col-12 col-md-4 page__header--title">
+                <div className="back-cta" onClick={backButton}><span className={` ${style.backBtn} backBtn` }></span><h1>{meta.title}</h1></div>
+                </div>
+                
+                <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
+                    <Link
+                        href={`/our-team`}
+                        className={ `${style.project__filter} project__filter marginRight`}> 
+                        team
+                    </Link>
+                    <Link
+                        href={`/careers`}
+                        className={ `${style.project__filter} project__filter marginRight ${style.active} `}> 
+                        careers
+                    </Link>
+                </div>
+            </div>
+            <span className="bottom__border"></span>
+            </div>
+        </section>
+
+        <Intro description={meta?.content} />
+
+        <section className="careers__page">
+            <div className="container">
                 <div className="row">
-                    <div className="col-12 col-md-4 page__header--title">
-                    <div className="back-cta" onClick={backButton}><span className={` ${style.backBtn} backBtn` }></span><h1>{meta.title}</h1></div>
+                    <div className="col-md-12">
+                        <h2 id="team" className="sectionHeading">the positions</h2>
                     </div>
-                    
-                    <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-                        <Link href={`/our-team`}> 
-                            <a className={ `${style.project__filter} project__filter marginRight`}>team</a>
-                        </Link>
-                        <Link href={`/careers`}> 
-                            <a className={ `${style.project__filter} project__filter marginRight ${style.active} `}>careers</a>
-                        </Link>
-                    </div>
+                </div>                    
+                <div className="row">
+                {jobs.edges.map(({ node }) => (
+                    <FetchJobs data={node} key={node.id}/>
+                ))}        
                 </div>
-                <span className="bottom__border"></span>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <Intro description={meta?.content} />
-
-            <section className="careers__page">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <h2 id="team" className="sectionHeading">the positions</h2>
-                        </div>
-                    </div>                    
-                    <div className="row">
-                    {jobs.edges.map(({ node }) => (
-                        <FetchJobs data={node} key={node.id}/>
-                    ))}        
+        <section className="careers__page mB__150" id="careerForm">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-8">
+                        <Enquiry />
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section className="careers__page mB__150" id="careerForm">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-8">
-                            <Enquiry />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </>
-    )
+    </>;
 }

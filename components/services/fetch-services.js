@@ -10,12 +10,12 @@ export default function fetchServices({data}) {
     var projectLink = data?.projectLink?.linkProject?.slug;
     if(projectLink){
         var projecturl =    
-                <Link href={` /projects/${projectLink}` }>
+                <Link href={` /projects/${projectLink}` } legacyBehavior>
                     <button>view project</button>
                 </Link>
     }else{
         projecturl =    
-            <Link href={` projects` }>
+            <Link href={` projects` } legacyBehavior>
                 <button>view project</button>
             </Link>
         }

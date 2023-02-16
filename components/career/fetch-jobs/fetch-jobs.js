@@ -24,17 +24,15 @@ export default function fetchJobs({ data }){
         <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
         </svg>`
 
-    return(
-        <>
-            <div className="col-md-6 col-lg-4">
-                <div className="job-cont">
-                    <span className="position">
-                        <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  src={profileImage} alt={data.title} layout="fill"/>
-                    </span>
-                    <span className="job__desc">{parse(data.content)}</span>
-                    <Link href="/careers"><button className="jobApply">apply</button></Link>
-                </div>
+    return <>
+        <div className="col-md-6 col-lg-4">
+            <div className="job-cont">
+                <span className="position">
+                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  src={profileImage} alt={data.title} layout="fill"/>
+                </span>
+                <span className="job__desc">{parse(data.content)}</span>
+                <Link href="/careers" legacyBehavior><button className="jobApply">apply</button></Link>
             </div>
-        </>
-    )
+        </div>
+    </>;
 }

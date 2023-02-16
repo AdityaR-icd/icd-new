@@ -3,6 +3,7 @@ const Layout = dynamic(() => import("../components/home/home"));
 import { getFooter  , getHome ,  getFilters } from '../lib/api'
 
 export default function Home({data , project , home , menus , filters}) {
+    // console.log(filters)
     return(
        <Layout data={data} themes={data} project={project} home={home} menus={menus} />
     )

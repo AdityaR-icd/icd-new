@@ -31,14 +31,14 @@ export default function fetchNewsletter({data}) {
                 </a>
                 <div className="row">
                     <div className="col-6">
-                        <Link href={`/yellow-envelope/${data.slug}`}>
+                        <Link href={`/yellow-envelope/${data.slug}`} legacyBehavior>
                             <button>read letter</button>
                         </Link>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export async function getStaticProps() {

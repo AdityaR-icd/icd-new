@@ -29,101 +29,96 @@ export default function yellowEnvelop({meta , edges}){
     var htmlString = ''
     var stripedHtml = ''
     var content = ''
-    return(
-        <>
-            <NextSeo
-            title={meta.seo.title}
-            description={meta.seo.metaDesc}
-            canonical={`https://icd-v3-vercel.vercel.app${router.pathname}`}
-            robots={meta.metaRobotsNoindex}
-            googlebot={meta.metaRobotsNofollow}
-            openGraph={{
-            url: `https://icd-v3-vercel.vercel.app${router.pathname}`,
-            title: meta.seo.title,
-            description: meta.seo.metaDesc,
-            images: [
-                {
-                url: meta.featuredImage?.node.sourceUrl,
-                alt: 'homepage-image',
-                type: 'image/jpeg',
-                },
-            ],
-            site_name: meta.seo.title,
-            }} />
-            <Head>
-            {/* Twitter Cards */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={meta.seo.title} />
-            <meta name="twitter:description" content={meta.seo.metaDesc} />
-            <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router.pathname}`} />
-            <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
-            {/* end of Twitter Cards */}
-            </Head>
+    return <>
+        <NextSeo
+        title={meta.seo.title}
+        description={meta.seo.metaDesc}
+        canonical={`https://icd-v3-vercel.vercel.app${router.pathname}`}
+        robots={meta.metaRobotsNoindex}
+        googlebot={meta.metaRobotsNofollow}
+        openGraph={{
+        url: `https://icd-v3-vercel.vercel.app${router.pathname}`,
+        title: meta.seo.title,
+        description: meta.seo.metaDesc,
+        images: [
+            {
+            url: meta.featuredImage?.node.sourceUrl,
+            alt: 'homepage-image',
+            type: 'image/jpeg',
+            },
+        ],
+        site_name: meta.seo.title,
+        }} />
+        <Head>
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={meta.seo.title} />
+        <meta name="twitter:description" content={meta.seo.metaDesc} />
+        <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router.pathname}`} />
+        <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
+        {/* end of Twitter Cards */}
+        </Head>
 
-            <section className={`${style.posts__page} mT__260 page__header posts__page `}>
-                <div className="container page__header--container">
-                    <div className="row">
-                    <div className="col-12 col-md-4 page__header--title">
-                        <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
-                    </div>
-                    <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
-                        <div className={style.filter_menu_cont}>
-                            {/* {common}
-                            {slug} */}
-                        </div>
-                        <div id="sb-search" className={style.sb_search}>
-                            <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" type="search" name="post-search" id="postsearch" autoComplete="off"/>
-                            <span className={`${style.sb_icon_search} ${style.magic_icon_search}`} onClick={ () => postsearch() }></span>
-                        </div>
-                    </div>
-                    </div>
-                    <span className="bottom__border"></span>
+        <section className={`${style.posts__page} mT__260 page__header posts__page `}>
+            <div className="container page__header--container">
+                <div className="row">
+                <div className="col-12 col-md-4 page__header--title">
+                    <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
                 </div>
-            </section>
+                <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
+                    <div className={style.filter_menu_cont}>
+                        {/* {common}
+                        {slug} */}
+                    </div>
+                    <div id="sb-search" className={style.sb_search}>
+                        <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" type="search" name="post-search" id="postsearch" autoComplete="off"/>
+                        <span className={`${style.sb_icon_search} ${style.magic_icon_search}`} onClick={ () => postsearch() }></span>
+                    </div>
+                </div>
+                </div>
+                <span className="bottom__border"></span>
+            </div>
+        </section>
 
-            <section>
-                <div className="container">
-                    <div className="row infinite-grid">
-                        {edges.map(({ node }) => {
-                            // <FetchNewsletter data={node} key={node.id}/>
-                            var date = new Date(node.date).toLocaleDateString('en-IN', {
-                                day: 'numeric',
-                                month: 'long',
-                                year: 'numeric',
-                            });
-                            htmlString = node?.content
-                            if(htmlString){
-                                var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
-                                var content = stripedHtml?.substr(0,500);
-                            }else{
-                                content = "...."
-                            }
-                            return (
-                                
-                                <div className="col-md-4 col-lg- grid-item" key={node.id}>
-                                    <div className={`${style.postsItems} animateItems}`}>
-                                        <a href={`/yellow-envelope/${node.slug}`}>
-                                            <h2 className={style.postTitle}>{node.title}</h2>
-                                            <span className={style.postBy}> {date}  </span>
-                                            <div className={style.postInfo}> <p> {parse(content)} </p> </div>
-                                        </a>
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <Link href={`/yellow-envelope/${node.slug}`}>
-                                                    <button>read letter</button>
-                                                </Link>
-                                            </div>
+        <section>
+            <div className="container">
+                <div className="row infinite-grid">
+                    {edges.map(({ node }) => {
+                        // <FetchNewsletter data={node} key={node.id}/>
+                        var date = new Date(node.date).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                        });
+                        htmlString = node?.content
+                        if(htmlString){
+                            var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
+                            var content = stripedHtml?.substr(0,500);
+                        }else{
+                            content = "...."
+                        }
+                        return (
+                            <div className="col-md-4 col-lg- grid-item" key={node.id}>
+                                <div className={`${style.postsItems} animateItems}`}>
+                                    <a href={`/yellow-envelope/${node.slug}`}>
+                                        <h2 className={style.postTitle}>{node.title}</h2>
+                                        <span className={style.postBy}> {date}  </span>
+                                        <div className={style.postInfo}> <p> {parse(content)} </p> </div>
+                                    </a>
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <Link href={`/yellow-envelope/${node.slug}`} legacyBehavior>
+                                                <button>read letter</button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
-                            )
-                        })}         
-                        
-                    </div>
+                            </div>
+                        );
+                    })}         
+                    
                 </div>
-            </section>
-        </>
-
-
-    )
+            </div>
+        </section>
+    </>;
 }
