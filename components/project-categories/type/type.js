@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 const Image = dynamic(() => import("next/image"));
 import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
@@ -101,7 +102,7 @@ export default function projectTypes({ nodes }){
                                     <div className={ `col-md-4 ${type.project__item}` }>
                                         <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                             <div className={carousel.thumbnail_cont}>
-                                                <a href={`/projects/${slug}`}>
+                                                <Link href={`/projects/${slug}`}>
                                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                         <div className={`${carousel.full_thumb} full-thumb`}>
                                                         {leadImgSrc &&(
@@ -117,14 +118,14 @@ export default function projectTypes({ nodes }){
                                                     {tag == 'true' &&  !node?.projectComponent?.awardsReceived && (
                                                         <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                     )}
-                                                </a>
+                                                </Link>
                                             </div>
-                                            <a href={`/projects/${slug}`}>
+                                            <Link href={`/projects/${slug}`}>
                                                 <span className={carousel.projectTitle}>
                                                     {heading}
                                                     <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>  
                                 </> 

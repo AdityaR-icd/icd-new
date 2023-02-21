@@ -27,6 +27,10 @@ module.exports = ({
     deviceSizes: [640, 750, 828, 1080 , 1920],
   },
 
+  env: {
+    REVALIDATION_TOKEN : 'randomsecrettoken'
+  },
+
   async headers() {
     return [
       {

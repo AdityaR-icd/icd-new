@@ -6,7 +6,7 @@ import Image from 'next/image'
 import dynamic from "next/dynamic";
 const Like = dynamic(() => import("../../components/like"));
 
-export default function postItem({data }){
+export default function postItem({data , ids }){
     var categories = data?.categories.edges[0]?.node?.name
     var featuredImage = data?.featuredImage?.node?.sourceUrl
     var tags = data?.tags.edges

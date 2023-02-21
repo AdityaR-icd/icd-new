@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
 import { useEffect } from 'react';
-
+import Link from 'next/link';
 import { useState } from 'react'
 
 // Import Slider
@@ -117,20 +117,20 @@ export default function Projects({ project , data , menus  }) {
               <div className="project__item resultItem-cont" key={ node?.id }>
                   <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                       <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                          <a href={`/projects/${node?.slug}`}>
+                          <Link href={`/projects/${node?.slug}`}>
                               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                       <div className={`${carousel?.full_thumb} full-thumb`}>
                                           <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel?.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                       </div>
                                       <span className="thumbnail-gif"></span>
                               </span>
-                          </a>
+                          </Link>
                       </div>
-                      <a href={`/projects/${node?.slug}`}>
+                      <Link href={`/projects/${node?.slug}`}>
                           <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
                               <span className={carousel?.grey__color}>  / {client}</span>
                           </span>
-                      </a>
+                      </Link>
                   </div>
               </div> 
             </>
@@ -153,7 +153,7 @@ export default function Projects({ project , data , menus  }) {
             <div className="project__item resultItem-cont" key={ node?.id }>
                 <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                     <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                        <a href={`/projects/${node?.slug}`}>
+                        <Link href={`/projects/${node?.slug}`}>
                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                     <div className={`${carousel?.full_thumb} full-thumb`}>
                                       {leadImgSrc &&(
@@ -162,13 +162,13 @@ export default function Projects({ project , data , menus  }) {
                                     </div>
                                     <span className="thumbnail-gif"></span>
                             </span>
-                        </a>
+                        </Link>
                     </div>
-                    <a href={`/projects/${node?.slug}`}>
+                    <Link href={`/projects/${node?.slug}`}>
                         <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                             <span className={carousel.grey__color}>  / {client}</span>
                         </span>
-                    </a>
+                    </Link>
                 </div>
             </div> 
           </>
@@ -213,20 +213,20 @@ export default function Projects({ project , data , menus  }) {
           <div className="project__item resultItem-cont" key={ node?.id }>
               <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                   <div className={ `${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                      <a href={`/projects/${node?.slug}`}>
+                      <Link href={`/projects/${node?.slug}`}>
                           <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
                                   <div className={`${carousel.full_thumb} full-thumb`}>
                                       <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel?.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                   </div>
                                   <span className="thumbnail-gif"></span>
                           </span>
-                      </a>
+                      </Link>
                   </div>
-                  <a href={`/projects/${node?.slug}`}>
+                  <Link href={`/projects/${node?.slug}`}>
                       <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
                           <span className={carousel.grey__color}>  / {client}</span>
                       </span>
-                  </a>
+                  </Link>
               </div>
           </div> 
         </>
@@ -445,11 +445,9 @@ export default function Projects({ project , data , menus  }) {
                       <div className={style.project__summary}>
                           <div className={style.intro_para}>
                             <div>
-                              <p>
                               {shortDesc && (
                                 parse(shortDesc)
                               )}
-                              </p>
                             </div>
                           </div>
                           <button className={style.collapse__btn} onClick={ showModal }>project detail</button>

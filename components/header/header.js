@@ -130,12 +130,12 @@ const Header = (props) => {
                 <div className="container">
                     <div className="row">
                         <div className="col-10 col-md-2 logo-container">
-                            <a href="/" aria-label="logo" className="logo d-none d-lg-block">
+                            <Link href="/" aria-label="logo" className="logo d-none d-lg-block">
                                 <Image decoding="async" width="172" priority={true} height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
-                            </a>
-                            <a href="/" aria-label="logo" className="logo d-block d-lg-none">
+                            </Link>
+                            <Link href="/" aria-label="logo" className="logo d-block d-lg-none">
                                 <Image decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-2 col-md-10">
                             <div className="d-block d-lg-none">
@@ -158,18 +158,10 @@ const Header = (props) => {
                                                 </form>
                                             </li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                            <li onClick={hamburgerClose}><Link
-                                                href="/projects"
-                                                className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
-                                            <li onClick={hamburgerClose}><Link
-                                                href="/clients"
-                                                className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
-                                            <li onClick={hamburgerClose}><Link
-                                                href="/services"
-                                                className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
-                                            <li onClick={hamburgerClose}><Link
-                                                href="/posts"
-                                                className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/projects" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/clients" className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/services" className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/posts" className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
                                             <li onClick={hamburgerClose}><Link href="/contact" className={router.pathname == "/contact" ? "active" : ""}>contact</Link></li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>

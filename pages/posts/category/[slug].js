@@ -14,7 +14,7 @@ import style from '../../../components/posts/posts.module.scss'
 import categoryStyle from '../../../components/project/category.module.scss'
 
 
-export default function posts({posts , meta , categories , tags , filters }){
+export default function posts({posts , meta , categories , tags  }){
     const router = useRouter()
     if (router.isFallback) {
         return <div>Loading...</div>
@@ -119,7 +119,7 @@ export default function posts({posts , meta , categories , tags , filters }){
     
 
     var category = categories?.categories.edges;
-    var common = <a href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight `}>all</a>
+    var common = <Link href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight `}>all</Link>
     
     var slug = category?.map((item) => {      
         if(item?.node?.slug == router.query.slug){
@@ -128,16 +128,11 @@ export default function posts({posts , meta , categories , tags , filters }){
         else{
             activeClass = `project__filter ${style.project__filter}`
         }
-        return <>
+        return (
             <>
-            <Link
-                href={`/posts/category/${item?.node?.slug}`}
-                key={item?.node.id}
-                className={activeClass}> 
-                {item?.node?.name}
-            </Link>
+                <Link href={`/posts/category/${item?.node?.slug}`} key={item?.node.id} className={activeClass}>  {item?.node?.name} </Link>
             </>
-        </>;
+        )
     })
 
     return <>
@@ -216,7 +211,7 @@ export default function posts({posts , meta , categories , tags , filters }){
                         
                         <>
                             {seeAll  && (
-                                <PostItem data={node} key={node.id}/>
+                                <PostItem data={node} ids={node.id}/>
                             )}
                             {(
                                 node.tags.edges?.map((item ) => {
@@ -226,7 +221,7 @@ export default function posts({posts , meta , categories , tags , filters }){
                                                 <>
                                                     {seetag == item?.node.name && (
 
-                                                        <PostItem data={node} key={node.id} />
+                                                        <PostItem data={node} ids={node.id} />
                                                     )}
                                                 </>
                                             )}
@@ -247,7 +242,7 @@ export default function posts({posts , meta , categories , tags , filters }){
                         <div className="container">
                             <div className="row infinite-grid">
                             {search.edges[0]?.node?.posts?.edges.map(({ node }) => (
-                                <PostItem data={node} key={node.id} />
+                                <PostItem data={node} ids={node.id} />
                             ))}
                             </div>
                         </div>

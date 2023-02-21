@@ -4,12 +4,12 @@ const Layout = dynamic(() => import("../components/posts/posts"));
 
 
 
-export default function blogs({  posts : { edges } , meta:{pages} , categories , filters }) {
+export default function blogs({  posts : { edges } , meta:{pages} , categories }) {
   const meta_data = pages.edges[0].node
   // console.log(edges)
   return (
     <>
-    <Layout meta={meta_data} categories={categories} edges={edges} />
+      <Layout meta={meta_data} categories={categories} edges={edges} />
     </>
   )
 }

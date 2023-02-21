@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getSearchPosts } from '../../lib/api'
 import Link from 'next/link'
 const Head = dynamic(() => import('next/head'));
 const PostItem = dynamic(() => import('../posts-items/posts-items'))
@@ -28,7 +27,7 @@ export default function posts({meta , categories , edges}){
     }
 
      const [searchValue, setsearchValue] = useState('')
-     const [search, setSearch] = useState('')
+    //  const [search, setSearch] = useState('')
 
     const postsearch = () => {
         $('.posts__page').toggleClass(style.post_search__open);
@@ -76,7 +75,7 @@ export default function posts({meta , categories , edges}){
     });
 
     var category = categories?.categories.edges;
-    var common = <a href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.active}`} onClick={seeAllProject} >all</a>
+    var common = <Link href={`/posts`}className={ `${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.active}`} onClick={seeAllProject} >all</Link>
     
     var slug = category?.map((item) => {       
         if(item?.node?.slug == router.query.slug){
@@ -85,14 +84,10 @@ export default function posts({meta , categories , edges}){
         else{
             activeClass = `project__filter ${style.project__filter}`
         }
+
         return <>
             <>
-            <Link
-                href={`/posts/category/${item?.node?.slug}`}
-                key={item?.node.id}
-                className={activeClass}> 
-                {item?.node?.name}
-            </Link>
+                <Link href={`/posts/category/${item?.node?.slug}`} key={item?.node.id} className={activeClass}>  {item?.node?.name} </Link>
             </>
         </>
     })
@@ -154,12 +149,12 @@ export default function posts({meta , categories , edges}){
                 <div className="container allPosts">
                     <div className="row infinite-grid">
                         {edges.map(({ node }) => (
-                            <PostItem data={node} key={node.id} />
+                            <PostItem data={node} ids={node.id} />
                         ))}
                     </div>
                 </div>
 
-                {(
+                {/* {(
 
                     <>
                         {search  && (
@@ -167,14 +162,14 @@ export default function posts({meta , categories , edges}){
                             <div className="container">
                                 <div className="row infinite-grid">
                                 {search.edges.map(({ node }) => (
-                                    <PostItem data={node} key={node.id} />
+                                    <PostItem data={node} ids={node.id} />
                                 ))}
                                 </div>
                             </div>
                             </>
                         )}
                     </>
-                )}
+                )} */}
             </section>
         </>
     )

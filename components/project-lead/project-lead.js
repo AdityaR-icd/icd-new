@@ -74,6 +74,7 @@ export default function projectLead({ edges   }){
                     })([], 0, 10)}
                 </>
                 ))}
+                
                     <>
                         <section className={`mB__150 ${styles.projectlead}`} key={projects[j].id}>
                             <div className="container"> 
