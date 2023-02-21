@@ -1,9 +1,9 @@
 const path = require('path')
-// const withPWA = require("next-pwa");
+const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
 
 module.exports = ({
-  // pwa: {
+  // withPWA: {
   //   dest: "public",
   //   runtimeCaching,
   //   buildExcludes: [/middleware-manifest\.json$/]
@@ -14,6 +14,9 @@ module.exports = ({
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+
+  staticPageGenerationTimeout: 1000,
+  
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
