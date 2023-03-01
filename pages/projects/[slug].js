@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug , getProject , getMenus , getFooter , getFilters , getAllProjectsNotIn , getAllOtherProjects } from '../../lib/api'
+import { getAllProjectsWithSlug , getProject  , getFooter , getFilters , getAllProjectsNotIn , getAllOtherProjects } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import dynamic from "next/dynamic";
@@ -194,6 +194,7 @@ export default function Projects({ project , data , menus  }) {
     var heading = project?.projectComponent?.heading;
     var description = project?.projectComponent?.description;
     var shortDesc = project?.shortDescription?.shortDesc;
+    var projectLink = project?.shortDescription?.siteLink
     var clients = project?.clients?.edges[0]?.node?.name;
     var leadComponent = project?.projectComponent?.leadComponent?.sourceUrl
     var leadComponentMobile = project?.projectComponent?.leadComponentMobile?.sourceUrl
@@ -349,11 +350,17 @@ export default function Projects({ project , data , menus  }) {
 
       ]
     };
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true)
+    }, [])
     return (
       <>
-      <Seo seo={seo} uri={uri}/>
+      {mounted && (
+          <>
+            <Seo seo={seo} uri={uri}/>
 
-           {leadComponent && (
+            {leadComponent && (
               <section className={style.singleProjectLeadCont}>    
                   <div className={style.leadImage}>
                     <div className={style.images_loaded_container}>
@@ -372,16 +379,16 @@ export default function Projects({ project , data , menus  }) {
               </section>
             )}
 
-          {leadVideo && (
-              <section className={style.singleProjectLeadCont}>    
-                <div className={style.leadImage}>
-                  <div>
-                    <video  src={leadVideo} className={ `${style.video} d-none d-md-block` } autoPlay loop muted playsInline />
-                    <video  src={leadVideo_mobile} className={ `${style.video} d-block d-md-none` } autoPlay loop muted playsInline />
+            {leadVideo && (
+                <section className={style.singleProjectLeadCont}>    
+                  <div className={style.leadImage}>
+                    <div>
+                      <video  src={leadVideo} className={ `${style.video} d-none d-md-block` } autoPlay loop muted playsInline />
+                      <video  src={leadVideo_mobile} className={ `${style.video} d-block d-md-none` } autoPlay loop muted playsInline />
+                    </div>
                   </div>
-                </div>
-              </section>
-          )}
+                </section>
+            )}
 
             <article className={` ${style.singleProject} ${style.winnerTag} singleProject` }>
               <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
@@ -433,6 +440,9 @@ export default function Projects({ project , data , menus  }) {
                     <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
                       <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
                       <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
+                      {projectLink && (
+                        <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} target={projectLink?.target}>{projectLink?.title}</a></span></div>
+                      )}
                       {project?.projectComponent?.awardsReceived > ''  &&  (
                         <>
                           <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}>{awardName}</span></div>
@@ -529,6 +539,8 @@ export default function Projects({ project , data , menus  }) {
                 )}
 
             </article>
+          </>
+        )}     
       </>
     )
   }

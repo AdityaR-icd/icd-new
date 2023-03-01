@@ -404,6 +404,11 @@
         float: left;
         width: 80%;
         letter-spacing: -0.3px !important;
+
+        a{
+            text-decoration: underline;
+            color: inherit;
+        }
         
         @include for-upto-tablet-portrait {
             margin-bottom: 20px;
@@ -491,7 +496,7 @@
                 line-height: 1;
                 letter-spacing: -1px;
                 max-width: 100%;
-                display: none;
+                // display: none;
             }
         }
     
@@ -532,7 +537,7 @@
                 max-width: 100%;
                 margin: 24px 0 60px 0;
                 padding: 0;
-                display: none;
+                // display: none;
             }
             
             @include for-phone-only {
