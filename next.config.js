@@ -9,7 +9,7 @@ module.exports = ({
   //   buildExcludes: [/middleware-manifest\.json$/]
   // },
   reactStrictMode: true,
-  // experimental:{appDir: true},
+  experimental:{appDir: true},
   swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

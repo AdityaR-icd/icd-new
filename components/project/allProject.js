@@ -1,12 +1,14 @@
+'use client'
 import { NextSeo } from 'next-seo';
 import dynamic from "next/dynamic";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 const Head = dynamic(() => import('next/head'));
 const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 import category from './category.module.scss'
 
-export default function Index({ AllProjects: { edges } ,  meta }) {
+export default function Index({ AllProjects: { edges } ,  meta_data : { pages } }) {
+  const meta = pages.edges[0].node
   const router = useRouter()
   const backButton = () => {
     window.history.back();

@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import Head from 'next/head'
@@ -6,7 +7,7 @@ import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation';
 
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));

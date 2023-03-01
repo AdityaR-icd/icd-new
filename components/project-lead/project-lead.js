@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive';
 
 
-export default function projectLead({ edges   }){
+export default function projectLead({ edges }){
     let client = ""
     let project_video = ""
     let project_thumbnail = ""
@@ -48,6 +48,7 @@ export default function projectLead({ edges   }){
         client = clients.edges[0].node.name,
             <>
             {edges.map(({ node } , i ) => (
+                // console.log(node),
                 <>
                     {(
 
