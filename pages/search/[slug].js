@@ -52,7 +52,7 @@ export default function search( { filters , data , filter } ){
             var clientsprojects = filter?.clients?.edges[0].node.projects
             clN = clientsprojects.edges.length
             var clientData = clientsprojects.edges.map(({node}) => {
-                var leadImgSrc = node.featuredImage.node.sourceUrl
+                var leadImgSrc = node?.featuredImage?.node?.sourceUrl
                 return (
                    <>
                     <div className="col-md-4 project__item resultItem-cont" key={ node.id }>

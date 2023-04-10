@@ -12,11 +12,11 @@
         @include for-tablet-portrait-only{
             margin-bottom: 75px;
         }
-    video{
+    video , img{
         width: 100%;
         position: absolute;
-        top: 50%;
-        left: 50%;
+        top: 50% !important;
+        left: 50% !important;
         transform: translate(-50% , -50%);
     }
     .project__name{
