@@ -10,7 +10,7 @@ module.exports = ({
   // },
   reactStrictMode: true,
   // experimental:{appDir: true},
-  swcMinify: true,
+  // swcMinify: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
