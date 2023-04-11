@@ -47,14 +47,14 @@ export default function Index({ home: { pages } , themes }) {
                   description={data?.seo?.metaDesc}
                   canonical="https://icd-v3-vercel.vercel.app/"
                   robots={data?.metaRobotsNoindex}
-                  googlebot={data.metaRobotsNofollow}
+                  googlebot={data?.metaRobotsNofollow}
                   openGraph={{
                     url: 'https://icd-v3-vercel.vercel.app/',
                     title: data?.seo?.title,
                     description: data?.seo?.metaDesc,
                     images: [
                       {
-                        url: data.featuredImage?.node?.sourceUrl,
+                        url: data?.featuredImage?.node?.sourceUrl,
                         alt: 'homepage-image',
                         type: 'image/jpeg',
                       },
