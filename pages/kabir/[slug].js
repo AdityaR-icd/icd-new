@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import { getAllkabirWithSlug , kabirArticle ,  getFooter , getFilters } from '../../lib/api'
 import $ from 'jquery';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useEffect } from 'react'
 import Share from '../../assets/images/post-buttons/share.svg'
 import Icon from '../../assets/images/logo/kabir.png'
@@ -57,7 +57,14 @@ export default function kabir({kabir , data}){
     if(featuredImage){
         var imageData = 
             <div className={` ${style.leadImage} fade-in `}>
-                <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className="full-lead-img"   alt="post-lead" layout="fill" />         
+                <Image
+                    src={featuredImage}
+                    placeholder="blur"
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    className="full-lead-img"
+                    alt="post-lead"
+                    fill
+                    sizes="100vw" />         
             </div> 
         }else{
           imageData = 

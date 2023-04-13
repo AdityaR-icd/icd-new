@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo';
 import parse from 'html-react-parser';
 import Link from 'next/link'
-import Image from "next/legacy/image";
+import Image from "next/image";
 const Head = dynamic(() => import('next/head'))
 const Like = dynamic(() => import("../../components/like"));
 
@@ -127,7 +127,13 @@ export default function kanbir({meta , edges}){
                         if(featuredImage){
                             var imageData = 
                                 <span className="postThumbnail fade-in">
-                                        <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  alt="post-lead" layout="fill" />         
+                                        <Image
+                                            src={featuredImage}
+                                            placeholder="blur"
+                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                            alt="post-lead"
+                                            fill
+                                            sizes="100vw" />         
                                 </span>
                             }else{
                                 imageData = 

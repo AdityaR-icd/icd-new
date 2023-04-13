@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
 import Head from 'next/head';
 import $ from 'jquery';
-import Image from "next/legacy/image";
+import Image from "next/image";
 // import Comment from '../../components/comment'
 
 

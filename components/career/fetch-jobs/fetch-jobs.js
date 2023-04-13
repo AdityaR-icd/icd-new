@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link'
 
 export default function fetchJobs({ data }){
@@ -28,7 +28,13 @@ export default function fetchJobs({ data }){
         <div className="col-md-6 col-lg-4">
             <div className="job-cont">
                 <span className="position">
-                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}  src={profileImage} alt={data.title} layout="fill"/>
+                    <Image
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        src={profileImage}
+                        alt={data.title}
+                        fill
+                        sizes="100vw" />
                 </span>
                 <span className="job__desc">{parse(data.content)}</span>
                 <Link href="/careers" legacyBehavior><button className="jobApply">apply</button></Link>

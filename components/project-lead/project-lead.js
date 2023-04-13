@@ -3,7 +3,7 @@ import style from '../home/home.module.scss'
 import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useMediaQuery } from 'react-responsive';
 
 
@@ -103,7 +103,14 @@ export default function projectLead({ edges   }){
                                                                 {!project_video && (
                                                                     <>
                                                                         <div className={`${styles.project__leadimage}`}>
-                                                                            <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
+                                                                            <Image
+                                                                                priority={true}
+                                                                                placeholder="blur"
+                                                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                                src={project_thumbnail}
+                                                                                alt="project-lead"
+                                                                                fill
+                                                                                sizes="100vw" />
                                                                         </div>
                                                                     </>
                                                                 )}
@@ -122,7 +129,14 @@ export default function projectLead({ edges   }){
                                                                 {!project_video && (
                                                                     <>
                                                                         <div className={`${styles.project__leadimage}`}>
-                                                                            <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail} alt="project-lead" layout="fill" />
+                                                                            <Image
+                                                                                priority={true}
+                                                                                placeholder="blur"
+                                                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                                src={project_thumbnail}
+                                                                                alt="project-lead"
+                                                                                fill
+                                                                                sizes="100vw" />
                                                                         </div>
                                                                     </>
                                                                 )}
@@ -131,14 +145,28 @@ export default function projectLead({ edges   }){
                                                         {isMobile && (
                                                             <>
                                                                 <div className={`${styles.project__leadimage}`}>
-                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail_mobile} alt="project-lead" layout="fill" />
+                                                                    <Image
+                                                                        priority={true}
+                                                                        placeholder="blur"
+                                                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                        src={project_thumbnail_mobile}
+                                                                        alt="project-lead"
+                                                                        fill
+                                                                        sizes="100vw" />
                                                                 </div>
                                                             </>
                                                         )}
                                                         {isTabletV && (
                                                             <>
                                                                 <div className={`${styles.project__leadimage}`}>
-                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={project_thumbnail_mobile} alt="project-lead" layout="fill" />
+                                                                    <Image
+                                                                        priority={true}
+                                                                        placeholder="blur"
+                                                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                        src={project_thumbnail_mobile}
+                                                                        alt="project-lead"
+                                                                        fill
+                                                                        sizes="100vw" />
                                                                 </div>
                                                             </>
                                                         )}

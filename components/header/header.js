@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import Head from 'next/head'
-import Image from "next/legacy/image";
+import Image from "next/image";
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';
@@ -131,10 +131,31 @@ const Header = (props) => {
                     <div className="row">
                         <div className="col-10 col-md-2 logo-container">
                             <Link href="/" aria-label="logo" className="logo d-none d-lg-block">
-                                <Image decoding="async" width="172" priority={true} height="43" src={logo.src} className="logo d-none d-lg-block" alt="icd-logo" />
+                                <Image
+                                    decoding="async"
+                                    width="172"
+                                    priority={true}
+                                    height="43"
+                                    src={logo.src}
+                                    className="logo d-none d-lg-block"
+                                    alt="icd-logo"
+                                    style={{
+                                        maxWidth: "100%",
+                                        height: "auto"
+                                    }} />
                             </Link>
                             <Link href="/" aria-label="logo" className="logo d-block d-lg-none">
-                                <Image decoding="async" src={mobileLogo.src} width="48" height="36"  className="logo d-block d-lg-none" alt="icd-logo" />
+                                <Image
+                                    decoding="async"
+                                    src={mobileLogo.src}
+                                    width="48"
+                                    height="36"
+                                    className="logo d-block d-lg-none"
+                                    alt="icd-logo"
+                                    style={{
+                                        maxWidth: "100%",
+                                        height: "auto"
+                                    }} />
                             </Link>
                         </div>
                         <div className="col-2 col-md-10">

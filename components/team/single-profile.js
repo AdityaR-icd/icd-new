@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 import Ourteam from './our-team.module.scss'
 
@@ -27,21 +27,33 @@ export  default function singleProfile({data}) {
         <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
         </svg>`
 
-    return(
-        <>
-         <div className="col-md-6 col-lg-4">
-            <div className={Ourteam.profile}>
-                <div className={` ${Ourteam.profileImg} fade-in `} >
-                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${Ourteam?.profileImg__main} full-lead-img` } src={profileImage} alt={data?.title} layout="fill"/>
-                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={` ${Ourteam?.profileImg__hover} full-lead-img` } src={profileImageOnHover} alt={data?.title} layout="fill"/>
-                </div>
-                <div className="team-info">
-                    <span className={Ourteam.name}>{data.title}</span>
-                    <span className={Ourteam.designation}>{position}</span>
-                    {/* <span className={Ourteam.about}>{parse(data?.content)}</span> */}
-                </div>
+    return <>
+     <div className="col-md-6 col-lg-4">
+        <div className={Ourteam.profile}>
+            <div className={` ${Ourteam.profileImg} fade-in `} >
+                <Image
+                    placeholder="blur"
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    className={` ${Ourteam?.profileImg__main} full-lead-img` }
+                    src={profileImage}
+                    alt={data?.title}
+                    fill
+                    sizes="100vw" />
+                <Image
+                    placeholder="blur"
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    className={` ${Ourteam?.profileImg__hover} full-lead-img` }
+                    src={profileImageOnHover}
+                    alt={data?.title}
+                    fill
+                    sizes="100vw" />
+            </div>
+            <div className="team-info">
+                <span className={Ourteam.name}>{data.title}</span>
+                <span className={Ourteam.designation}>{position}</span>
+                {/* <span className={Ourteam.about}>{parse(data?.content)}</span> */}
             </div>
         </div>
-        </>
-    )
+    </div>
+    </>;
 }
