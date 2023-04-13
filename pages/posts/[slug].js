@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { useEffect } from 'react'
 import { getAllPostsForHome , getFooter , getPostAndMorePosts , getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import Link from 'next/link'
 
 import Share from '../../assets/images/post-buttons/share.svg'

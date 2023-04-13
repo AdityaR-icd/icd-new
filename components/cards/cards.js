@@ -1,7 +1,7 @@
 import cards from './cards.module.scss'
 import home from '../home/home.module.scss'
 import parse from 'html-react-parser';
-import Image from 'next/image'
+import Image from "next/legacy/image";
 
 
 export default function Cards({data}){

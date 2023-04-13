@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import parse from 'html-react-parser';
 import { getAllArticleForHome , getYellowEnvelope , getFilters , getFooter  } from '../lib/api'
 

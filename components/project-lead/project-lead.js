@@ -3,7 +3,7 @@ import style from '../home/home.module.scss'
 import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { useMediaQuery } from 'react-responsive';
 
 

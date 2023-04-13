@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $ from 'jquery';

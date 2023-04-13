@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import { getAllProjectsWithSlug , getProject  , getFooter , getFilters , getAllProjectsNotIn , getAllOtherProjects } from '../../lib/api'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import dynamic from "next/dynamic";
 import { useEffect } from 'react';
 import Link from 'next/link';

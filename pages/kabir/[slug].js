@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import { getAllkabirWithSlug , kabirArticle ,  getFooter , getFilters } from '../../lib/api'
 import $ from 'jquery';
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { useEffect } from 'react'
 import Share from '../../assets/images/post-buttons/share.svg'
 import Icon from '../../assets/images/logo/kabir.png'

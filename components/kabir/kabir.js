@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo';
 import parse from 'html-react-parser';
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 const Head = dynamic(() => import('next/head'))
 const Like = dynamic(() => import("../../components/like"));
 

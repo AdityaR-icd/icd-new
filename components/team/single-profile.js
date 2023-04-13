@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import Image from 'next/image'
+import Image from "next/legacy/image";
 
 import Ourteam from './our-team.module.scss'
 

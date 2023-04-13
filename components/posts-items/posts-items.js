@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import style from '../posts/posts.module.scss'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from "next/legacy/image";
 
 import dynamic from "next/dynamic";
 const Like = dynamic(() => import("../../components/like"));
