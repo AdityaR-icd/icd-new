@@ -1,4 +1,4 @@
-import { getkabirPostsForHome , getkabir , getFilters ,  getFooter  } from '../lib/api'
+import { getkabirPostsForHome, getkabir, getFilters, getFooter } from '../lib/api'
 
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/kabir/kabir"));
@@ -6,8 +6,8 @@ const Layout = dynamic(() => import("../components/kabir/kabir"));
 
 
 
-export default function Index({ posts: { edges } , meta:{pages} , filters  }) {
-  const meta_data = pages.edges[0].node
+export default function Index({ posts: { edges }, meta: { pages } }) {
+  const meta_data = pages?.edges[0]?.node
   return (
     <>
       <Layout meta={meta_data} edges={edges} />
@@ -22,13 +22,13 @@ export async function getStaticProps({ preview = false }) {
   const meta = await getkabir()
   const filters = await getFilters()
   return {
-    props: { 
-        posts,
-        preview,
-        // menus,
-        data,
-        meta,
-        filters
+    props: {
+      posts,
+      preview,
+      // menus,
+      data,
+      meta,
+      filters
     },
     // revalidate: 86400, 
   }

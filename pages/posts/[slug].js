@@ -1,7 +1,8 @@
 import parse from 'html-react-parser';
 import $ from 'jquery';
 import { useEffect } from 'react'
-import { getAllPostsForHome , getFooter , getPostAndMorePosts , getFilters } from '../../lib/api'
+import { useState } from 'react';
+import { getAllPostsForHome, getFooter, getPostAndMorePosts, getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from 'next/link'
@@ -16,150 +17,161 @@ import type from '../../components/project-categories/type/type.module.scss'
 
 import dynamic from "next/dynamic";
 const Seo = dynamic(() => import("../../components/seo"));
-const Comment = dynamic(() => import("../../components/comment/comment"));
+// const Comment = dynamic(() => import("../../components/comment/comment"));
 const Like = dynamic(() => import("../../components/like"));
 const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
+const NextPost = dynamic(() => import('../../components/posts/next-post'))
+const PrevPost = dynamic(() => import('../../components/posts/prev-post'))
 
 
+export default function Post({ post, data, filters }) {
 
-export default function Post({ post , data , filters }) {
-  useEffect(() => {
-    document.body.classList.add(style.bg_yellow);
-    document.body.classList.add('bg-yellow');
-  });
   const router = useRouter()
-  const seo = post ? ( post?.seo ?? {} ) : ( {} );
-	const uri = post ? ( post?.uri ?? {} ) : (  {} );
-  const comment_data = post ? ( post.comments ?? {} ) : ( {} );
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+  // const clientspage = 
+  const seo = post ? (post?.seo ?? {}) : ({});
+  const uri = post ? (post?.uri ?? {}) : ({});
+  // const comment_data = post ? (post.comments ?? {}) : ({});
 
   var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
   var categories = post?.categories.edges[0]?.node?.name
-  var checkauthor = post?.postAuthor?.author
+  var checkauthor = post?.postAuthor?.postAuthor
   var checkrelatedpost = post?.relatedPost?.relatedBlog
   var checkrelatedproject = post?.relatedPost?.relatedProject
-  if(checkauthor){
-    var author = post?.postAuthor?.author[0]?.title
-    var authorImg = post?.postAuthor?.author[0]?.profileImage?.profileImage
+
+
+
+  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + router.asPath
+  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + window.location.origin + router.asPath
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window.location.origin + router.asPath + '"&title=' + post?.title;
+
+  if (checkauthor) {
+    var author = post?.postAuthor?.postAuthor[0]?.title
+    var authorImg = post?.postAuthor?.postAuthor[0]?.profileImage?.profileImage
   }
+  // console.log(post?.postAuthor?.postAuthor[0])
+  var client = '';
+  var leadImgSrc = '';
 
-    var client = '';
-    var leadImgSrc  = '';
+  if (checkrelatedproject) {
+    var relatedProject =
 
-  if(checkrelatedproject){
-    var relatedProject = 
-       
-        <>
-        <div className={style.relatedProjects__container}>   
-        <span className={style.relatedProjects__head}>related project</span>
+      <>
+        <div className={style.relatedProjects__container}>
+          <span className={style.relatedProjects__head}>related project</span>
           <section className={`${type.industry__filter} ${type.all_filter} `}>
-                <div className="project__scroll">
-                    <div className="row project__row">
-                    {checkrelatedproject.map(( node ) => (
-                        client = node.clients.edges[0].node.name,
-                        leadImgSrc = node.featuredImage.node.sourceUrl,
-                    <>
-                    <div className="col-md-4 project__item" key={ node.id }>
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+            <div className="project__scroll">
+              <div className="row project__row">
+                {checkrelatedproject.map((node) => (
+                  client = node.clients.edges[0].node.name,
+                  leadImgSrc = node.featuredImage.node.sourceUrl,
+                  <>
+                    <div className="col-md-4 project__item" key={node.id}>
+                      <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                         <div className={carousel.thumbnail_cont}>
-                            <a href={`/projects/${node.slug}`}>
-                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                <Image
-                                                  className={carousel.project_lead}
-                                                  placeholder="blur"
-                                                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                                                  src={leadImgSrc}
-                                                  alt="project-lead"
-                                                  fill
-                                                  sizes="100vw" />
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
-                                    </span>
-                            </a>
+                          <a href={`/projects/${node.slug}`}>
+                            <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                              <div className={`${carousel.full_thumb} full-thumb`}>
+                                <Image
+                                  className={carousel.project_lead}
+                                  placeholder="blur"
+                                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                                  src={leadImgSrc}
+                                  alt="project-lead"
+                                  fill
+                                  sizes="100vw" />
+                              </div>
+                              <span className="thumbnail-gif"></span>
+                            </span>
+                          </a>
                         </div>
                         <a href={`/projects/${node.slug}`}>
-                            <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                <span className={carousel.grey__color}>  / {client}</span>
-                            </span>
+                          <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                            <span className={carousel.grey__color}>  / {client}</span>
+                          </span>
                         </a>
+                      </div>
                     </div>
-                       </div> 
-                    </>
-                    )).slice(0,3)}
-                    </div>
-                </div>
+                  </>
+                )).slice(0, 3)}
+              </div>
+            </div>
           </section>
         </div>
-        </>
-        
+      </>
+
   }
-  else{
+  else {
     var relatedProject = ''
   }
 
 
-  if(checkrelatedpost){
-    var relatedPost = 
-       
-        <>
-            {checkrelatedpost.map(( data ) => {
-                var categories = data?.categories.edges[0]?.node?.name
-                var featuredImage = data?.featuredImage?.node?.sourceUrl
-            
-            
-                if(featuredImage){
-                    var imageData = 
-                        <span className={`${carousel.full_thumb} full-thumb`}>
-                                <Image
-                                  src={featuredImage}
-                                  placeholder="blur"
-                                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                                  alt="post-lead"
-                                  fill
-                                  sizes="100vw" />         
-                        </span>
-                    }else{
-                        imageData = 
-                        <span className={`${carousel.full_thumb} full-thumb`}>
-                                
-                        </span>
-                    }
-                    return (
-                    <>
-                    
-                      <div className={style.relatedProjects__container}>   
-                      <span className={style.relatedProjects__head}>related post</span>
-                        <section className={`${type.industry__filter} ${type.all_filter} `}>
-                              <div className="project__scroll">
-                                  <div className="row project__row">
-                                  <div className="col-md-4 project__item">
-                                      <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                                      <div className={carousel.thumbnail_cont}>
-                                          <a href={`/posts/${data.slug}`}>
-                                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width":"100%" }}>
-                                                {imageData}
-                                              </span> 
-                                          </a>
-                                      </div>
-                                      <a href={`/posts/${data.slug}`}>
-                                          <span className={carousel.projectTitle}>{data.title}
-                                            <span className={carousel.grey__color}>  / {categories}</span>
-                                          </span>
-                                      </a>
-                                  </div>
-                                    </div> 
-                                  </div>
-                              </div>
-                        </section>
+  if (checkrelatedpost) {
+    var relatedPost =
+
+      <>
+        {checkrelatedpost.map((data) => {
+          var categories = data?.categories.edges[0]?.node?.name
+          var featuredImage = data?.featuredImage?.node?.sourceUrl
+
+
+          if (featuredImage) {
+            var imageData =
+              <span className={`${carousel.full_thumb} full-thumb`}>
+                <Image
+                  src={featuredImage}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  alt="post-lead"
+                  fill
+                  sizes="100vw" />
+              </span>
+          } else {
+            imageData =
+              <span className={`${carousel.full_thumb} full-thumb`}>
+
+              </span>
+          }
+          return (
+            <>
+
+              <div className={style.relatedProjects__container}>
+                <span className={style.relatedProjects__head}>related post</span>
+                <section className={`${type.industry__filter} ${type.all_filter} `}>
+                  <div className="project__scroll">
+                    <div className="row project__row">
+                      <div className="col-md-4 project__item">
+                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                          <div className={carousel.thumbnail_cont}>
+                            <a href={`/posts/${data.slug}`}>
+                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                                {imageData}
+                              </span>
+                            </a>
+                          </div>
+                          <a href={`/posts/${data.slug}`}>
+                            <span className={carousel.projectTitle}>{data.title}
+                              <span className={carousel.grey__color}>  / {categories}</span>
+                            </span>
+                          </a>
+                        </div>
                       </div>
-                    
-                    </>
-                    )
-                  }).slice(0,3)}
-        </>
-        
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+            </>
+          )
+        }).slice(0, 3)}
+      </>
+
   }
-  else{
+  else {
     var relatedPost = ''
   }
 
@@ -171,9 +183,9 @@ export default function Post({ post , data , filters }) {
   });
 
   const toBase64 = (str) =>
-  typeof window === 'undefined'
-  ? Buffer.from(str).toString('base64')
-  : window.btoa(str)
+    typeof window === 'undefined'
+      ? Buffer.from(str).toString('base64')
+      : window.btoa(str)
 
   const shimmer = (w, h) => `
       <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -189,23 +201,23 @@ export default function Post({ post , data , filters }) {
         <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
       </svg>`
 
-  if(featuredImage){
-    var imageData = 
-        <div className={` ${style.leadImage} fade-in `}>
-            <Image
-              src={featuredImage}
-              placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-              className="full-lead-img"
-              alt="post-lead"
-              fill
-              sizes="100vw" />         
-        </div> 
-    }else{
-      imageData = 
-        <div className={style.leadImage}>
-          
-        </div>
+  if (featuredImage) {
+    var imageData =
+      <div className={` ${style.leadImage} fade-in `}>
+        <Image
+          src={featuredImage}
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+          className="full-lead-img"
+          alt="post-lead"
+          fill
+          sizes="100vw" />
+      </div>
+  } else {
+    imageData =
+      <div className={style.leadImage}>
+
+      </div>
   }
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -215,89 +227,102 @@ export default function Post({ post , data , filters }) {
     $('.share-icon').toggleClass('icons-hide');
   }
 
-    return (
-      <>
-      <Seo seo={seo} uri={uri}/>
-            <section className={`${style.singlePost} mT__260`} key={ post.id }>  
-              <div className="images-loaded-container">
-                {imageData}
-              </div>  
-              <div className={style.postContent_cont}>
-                  <div className="container">
-                      <div className="row">
-                          <div className="col-12 col-md-8 offset-md-2">
-                              <div className={style.posts__container}>
-                                  <div className={style.post__tag}>
-                                      <span className={style.yellow__tag}>{ categories }</span>
-                                  </div>
-                                  <h1>{ post.title }</h1>
-                                  <div className={style.post__author}>
-                                      <span className="author__img"><img loading="lazy" decoding="async" src={ authorImg ? authorImg.sourceUrl : Icon.src } ></img></span>
-                                      <span className="post-detail">{ author } / { date } / { categories } </span>
-                                      <div className={` ${style.social__media} ${style.header_socialmedia} social__media d-none d-lg-block `}>
-                                        <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
-                                        <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
-                                        <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
-                                        <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                                        <Like count={post.likes?.likes}  id={post.id} type={'post'} />
-                                      </div>
-                                      <div className={` ${style.social__media} ${style.header_socialmedia} ${style.header_socialmedia_mobile} social__media d-block d-lg-none `}>
-                                          <Like count={post.likes?.likes}  id={post.id} type={'post'} />  
-                                          <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
-                                          <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
-                                          <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
-                                          <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                                      </div>
-                                  </div>
-                                  <div className={`${style.postContent} postContent`}>
-                                      {parse(post.content)}
-                                  </div>
-                              </div>
-                              <div className={` ${style.social__media} social__media `}>
-                                <span className="icon share-icon icons-hide"><a href={data.linkedin} className="linkedin-icon" target="_blank"></a></span>
-                                <span className="icon share-icon icons-hide"><a href={data.twitter} className="twitter-icon" target="_blank"></a></span>
-                                <span className="icon share-icon icons-hide"><a href={data.facebook} className="fb-icon" target="_blank"></a></span>
-                                <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                                <Like count={post.likes?.likes}  id={post.id} type={'post'} />
-                              </div>
-
-                                   
-                                {relatedProject}
-                                {relatedPost}
-                                <Comment postId={post.postId} comment_data = {comment_data} /> 
-                          </div>
+  return (
+    <>
+      {mounted && (
+        <>
+          <Seo seo={seo} uri={uri} />
+          <section className={`${style.singlePost} mT__260`} key={post.id}>
+            <div className="images-loaded-container">
+              {imageData}
+            </div>
+            <div className={style.postContent_cont}>
+              <div className="container">
+                <div className="row">
+                  <div className="col-12 col-md-8 offset-md-2">
+                    <div className={style.posts__container}>
+                      <div className={style.post__tag}>
+                        <span className={style.yellow__tag}>{categories}</span>
                       </div>
+                      <h1>{post.title}</h1>
+                      <div className={style.post__author}>
+                        <div className={style.author_wrapper}>
+                          <span className={`sl ${style.author__img}`}><img loading="lazy" decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
+                          </img></span>
+                          <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
+                        </div>
+
+                        <div className={` ${style.social__media} ${style.header_socialmedia} social__media  `}>
+                          <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
+                          <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
+                          <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
+                          <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                          <Like count={post.likes?.likes} id={post.id} type={'post'} />
+                        </div>
+
+                      </div>
+                      <div className={`${style.postContent} postContent`}>
+                        {parse(post.content)}
+                      </div>
+                    </div>
+                    <div className={` ${style.social__media} social__media `}>
+                      <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
+                      <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
+                      <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
+                      <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                      <Like count={post.likes?.likes} id={post.id} type={'post'} />
+                    </div>
+
+
+                    {relatedProject}
+                    {relatedPost}
+                    <div className="post__navigation">
+                      <div className="row">
+                        <div className="col-md-6 ">
+                          {post?.previous && <PrevPost data={post?.previous} />}
+                        </div>
+                        <div className="col-md-6">
+                          {post?.next && <NextPost data={post?.next} />}
+                        </div>
+                      </div>
+                    </div>
+                    {/* <Comment postId={post.postId} comment_data={comment_data} /> */}
                   </div>
-                </div>     
-            </section>
-    
-      </>
-    )
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+        </>
+      )}
+    </>
+  )
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getAllPostsForHome()
+  return {
+    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
+    fallback: true,
   }
 
-  export async function getStaticPaths() {
-    const allPosts = await getAllPostsForHome()
-    return {
-      paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-      fallback: true,
-    }
-    
+}
+
+export async function getStaticProps({ preview = false, params, previewData }) {
+  const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
+  // const menus = await getMenus()
+  const data = await getFooter()
+  const filters = await getFilters()
+  return {
+    props: {
+      post: Moredata.post,
+      posts: Moredata.posts,
+      preview,
+      // menus,
+      data,
+      filters
+    },
+    revalidate: 180,
   }
-  
-  export async function getStaticProps({ preview = false , params , previewData }) {
-    const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
-    // const menus = await getMenus()
-    const data = await getFooter()
-    const filters = await getFilters()
-    return {
-      props: { 
-        post: Moredata.post,
-        posts: Moredata.posts,
-        preview, 
-        // menus,
-        data,
-        filters
-      },
-      revalidate: 180, 
-    }
-  }
+}

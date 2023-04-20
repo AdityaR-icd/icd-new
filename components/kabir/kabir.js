@@ -10,8 +10,9 @@ const Like = dynamic(() => import("../../components/like"));
 import $ from 'jquery';
 
 import style from '../posts/posts.module.scss'
-;
-export default function kanbir({meta , edges}){
+    ;
+export default function kanbir({ meta, edges }) {
+    // console.log(meta.)
     const router = useRouter()
 
     const backButton = () => {
@@ -20,17 +21,17 @@ export default function kanbir({meta , edges}){
 
     const postsearch = () => {
         $('.posts__page').toggleClass(style.post_search__open);
-        if($('.posts__page').hasClass(style.post_search__open)){
-          $('.sb-search-input').focus();
+        if ($('.posts__page').hasClass(style.post_search__open)) {
+            $('.sb-search-input').focus();
         } else {
-          $('.sb-search-input').val('');
+            $('.sb-search-input').val('');
         }
     }
 
     const toBase64 = (str) =>
-    typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+        typeof window === 'undefined'
+            ? Buffer.from(str).toString('base64')
+            : window.btoa(str)
 
 
     const shimmer = (w, h) => `
@@ -54,31 +55,32 @@ export default function kanbir({meta , edges}){
 
     return <>
         <NextSeo
-            title={meta.seo.title}
-            description={meta.seo.metaDesc}
+            title={meta?.seo?.title}
+            description={meta?.seo?.metaDesc}
             canonical={`https://icd-v3-vercel.vercel.app${router.pathname}`}
-            robots={meta.metaRobotsNoindex}
-            googlebot={meta.metaRobotsNofollow}
+            robots={meta?.metaRobotsNoindex}
+            googlebot={meta?.metaRobotsNofollow}
             openGraph={{
-            url: `https://icd-v3-vercel.vercel.app${router.pathname}`,
-            title: meta.seo.title,
-            description: meta.seo.metaDesc,
-            images: [
-                {
-                url: meta.featuredImage?.node.sourceUrl,
-                alt: 'homepage-image',
-                type: 'image/jpeg',
-                },
-            ],
-            site_name: meta.seo.title,
-        }} />
+                url: `https://icd-v3-vercel.vercel.app${router?.pathname}`,
+                title: meta?.seo?.title,
+                description: meta?.seo?.metaDesc,
+                images: [
+                    {
+                        url: meta?.featuredImage?.node?.sourceUrl,
+                        alt: 'homepage-image',
+                        type: 'image/jpeg',
+                    },
+                ],
+                site_name: meta?.seo?.title,
+            }} />
         <Head>
             {/* Twitter Cards */}
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={meta.seo.title} />
-            <meta name="twitter:description" content={meta.seo.metaDesc} />
-            <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router.pathname}`} />
-            <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
+            <meta name="twitter:title" content={meta?.seo?.title} />
+            <meta name="twitter:description" content={meta?.seo
+                ?.metaDesc} />
+            <meta name="twitter:url" content={`https://icd-v3-vercel.vercel.app${router?.pathname}`} />
+            <meta name="twitter:image" content={meta?.featuredImage?.node?.sourceUrl} />
             {/* end of Twitter Cards */}
         </Head>
 
@@ -86,19 +88,19 @@ export default function kanbir({meta , edges}){
         <section className={`${style.posts__page} mT__260 page__header posts__page `}>
             <div className="container page__header--container">
                 <div className="row">
-                <div className="col-12 col-md-4 page__header--title">
-                    <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
-                </div>
-                <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
-                    <div className={style.filter_menu_cont}>
-                        {/* {common}
+                    <div className="col-12 col-md-4 page__header--title">
+                        <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta?.title}</h1></div>
+                    </div>
+                    <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
+                        <div className={style.filter_menu_cont}>
+                            {/* {common}
                         {slug} */}
+                        </div>
+                        <div id="sb-search" className={style.sb_search}>
+                            <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" type="search" name="post-search" id="postsearch" autoComplete="off" />
+                            <span className={`${style.sb_icon_search} ${style.magic_icon_search}`} onClick={() => postsearch()}></span>
+                        </div>
                     </div>
-                    <div id="sb-search" className={style.sb_search}>
-                        <input className={` sb-search-input ${style.sb_search_input}`} placeholder="Type a term to search" type="search" name="post-search" id="postsearch" autoComplete="off"/>
-                        <span className={`${style.sb_icon_search} ${style.magic_icon_search}`} onClick={ () => postsearch() }></span>
-                    </div>
-                </div>
                 </div>
                 <span className="bottom__border"></span>
             </div>
@@ -117,40 +119,40 @@ export default function kanbir({meta , edges}){
                             year: 'numeric',
                         });
                         htmlString = node?.content
-                        if(htmlString){
+                        if (htmlString) {
                             var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
-                            var content = stripedHtml?.substr(0,500);
-                        }else{
+                            var content = stripedHtml?.substr(0, 500);
+                        } else {
                             content = "...."
                         }
 
-                        if(featuredImage){
-                            var imageData = 
+                        if (featuredImage) {
+                            var imageData =
                                 <span className="postThumbnail fade-in">
-                                        <Image
-                                            src={featuredImage}
-                                            placeholder="blur"
-                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                            alt="post-lead"
-                                            fill
-                                            sizes="100vw" />         
+                                    <Image
+                                        src={featuredImage}
+                                        placeholder="blur"
+                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                        alt="post-lead"
+                                        fill
+                                        sizes="100vw" />
                                 </span>
-                            }else{
-                                imageData = 
+                        } else {
+                            imageData =
                                 <span className="postThumbnail fade-in">
-                                        
+
                                 </span>
-                            }
+                        }
                         return (
                             <div className="col-md-6 col-lg-6 grid-item" key={node.id}>
                                 <div className={`${style.postsItems} animateItems}`}>
-                                <a href={`/kabir/${node.slug}`}>
-                                    <div className={style.postLeadImage}>
-                                        <div className="images-loaded-container">
-                                            {imageData}
+                                    <a href={`/kabir/${node.slug}`}>
+                                        <div className={style.postLeadImage}>
+                                            <div className="images-loaded-container">
+                                                {imageData}
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
                                     <a href={`/kabir/${node.slug}`}>
                                         <h2 className={style.postTitle}>{node.title}</h2>
                                         <span className={style.postBy}> {date}  </span>
@@ -163,14 +165,14 @@ export default function kanbir({meta , edges}){
                                             </Link>
                                         </div>
                                         <div className="col-6 text-right">
-                                            <Like count={node?.likes?.likes}  id={node.id} type={'kabir'} />
+                                            <Like count={node?.likes?.likes} id={node.id} type={'kabir'} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         );
-                    })}         
-                    
+                    })}
+
                 </div>
             </div>
         </section>

@@ -1,25 +1,32 @@
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router';
-
+import { useEffect } from 'react'
 
 const Nav = dynamic(() => import("../header/header"));
 const Footer = dynamic(() => import("../footer/footer"));
 
 
 
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
     const router = useRouter();
-
+    const bg_yellow = [`/posts/[slug]`];
     const noNav = [`/yellow-envelope/[slug]`];
     const props = children.props
-   
-    return(
+    useEffect(() => {
+        if (bg_yellow.includes(router.pathname)) {
+            document.body.classList.add('bg-yellow');
+        }
+        else {
+            document.body.classList.remove('bg-yellow');
+        }
+    })
+    return (
         <>
             {/* <Nav {...props} /> */}
             {noNav.includes(router.pathname) ? null : <Nav {...props} />}
             {children}
             {/* <Footer {...props}/> */}
-            {noNav.includes(router.pathname) ? null : <Footer {...props}/> }
+            {noNav.includes(router.pathname) ? null : <Footer {...props} />}
         </>
     )
 }

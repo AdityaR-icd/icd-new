@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useMediaQuery } from 'react-responsive';
 
 
-export default function projectLead({ edges   }){
+export default function projectLead({ edges }) {
     let client = ""
     let project_video = ""
     let project_thumbnail = ""
@@ -23,9 +23,9 @@ export default function projectLead({ edges   }){
 
 
     const toBase64 = (str) =>
-    typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+        typeof window === 'undefined'
+            ? Buffer.from(str).toString('base64')
+            : window.btoa(str)
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -42,151 +42,149 @@ export default function projectLead({ edges   }){
         </svg>`
 
     return <>
-    {projects.map(({ highlightedImage , clients } , j ) => (
-        // console.log(j),
-        project_video = highlightedImage?.video?.mediaItemUrl,
-        project_thumbnail = highlightedImage?.highlightedThumbnail?.sourceUrl,
-        project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
-        client = clients?.edges[0]?.node?.name,
-
-        console.log(project_thumbnail_mobile),
+        {projects.map(({ highlightedImage, clients }, j) => (
+            // console.log(j),
+            project_video = highlightedImage?.video?.mediaItemUrl,
+            project_thumbnail = highlightedImage?.highlightedThumbnail?.sourceUrl,
+            project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
+            client = clients?.edges[0]?.node?.name,
             <>
-            {edges.map(({ node } , i ) => (
-                <>
-                    {(
+                {edges.map(({ node }, i) => (
+                    <>
+                        {(
 
-                        function (home_text) {
-                        if ( j % 2 !== 0 && j > 0 ) {
-                            text = (
-                                <div className={`${style.textContainer} container`} key={i}>
-                                    <div className="row">
-                                        <div className="col-md-10 offset-md-1">
-                                            <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
-                                                <span className={`${style.homeText}`}>
-                                                    {parse(node.featuredtext[i]?.content)}
-                                                </span>
+                            function (home_text) {
+                                if (j % 2 !== 0 && j > 0) {
+                                    text = (
+                                        <div className={`${style.textContainer} container`} key={i}>
+                                            <div className="row">
+                                                <div className="col-md-10 offset-md-1">
+                                                    <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
+                                                        <span className={`${style.homeText}`}>
+                                                            {parse(node.featuredtext[i]?.content)}
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            );
-                            i = i + 1;
-                        } else{
-                        text = '';
-                        }
-                        return home_text;
-                    })([], 0, 10)}
-                </>
+                                    );
+                                    i = i + 1;
+                                } else {
+                                    text = '';
+                                }
+                                return home_text;
+                            })([], 0, 10)}
+                    </>
                 ))}
-                
-                    <>
-                        <section className={`mB__150 ${styles.projectlead}`} key={projects[j].id}>
-                            <div className="container"> 
-                                <div className="row">
-                                    <div className="col-md-12">
-                                        <Link href={`/projects/${projects[j].slug}`} className="project_link">
 
-                                            <div className={`${styles.project__section}`} >
-                                                <div className={styles.Tilt}>
-                                                    <div className="Tilt-inner">
-                                                        
-                                                        {isDesktop && (
-                                                            <>
-                                                                {project_video && (
-                                                                    <>
-                                                                        <div className={`${styles.project__leadimage} ${styles.video_container}`}>
-                                                                            <video src={project_video} autoPlay playsInline loop muted></video>
-                                                                        </div>
-                                                                    </>
-                                                                )}
+                <>
+                    <section className={`mB__150 ${styles.projectlead}`} key={projects[j].id}>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <Link href={`/projects/${projects[j].slug}`} className="project_link">
 
-                                                                {!project_video && (
-                                                                    <>
-                                                                        <div className={`${styles.project__leadimage}`}>
-                                                                            <Image
-                                                                                priority={true}
-                                                                                placeholder="blur"
-                                                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                                src={project_thumbnail}
-                                                                                alt="project-lead"
-                                                                                fill
-                                                                                sizes="100vw" />
-                                                                        </div>
-                                                                    </>
-                                                                )}
-                                                            </>
-                                                        )}
-                                                        {isTabletH && (
-                                                            <>
-                                                                {project_video && (
-                                                                    <>
-                                                                        <div className={`${styles.project__leadimage} ${styles.video_container}`}>
-                                                                            <video src={project_video} autoPlay playsInline loop muted></video>
-                                                                        </div>
-                                                                    </>
-                                                                )}
+                                        <div className={`${styles.project__section}`} >
+                                            <div className={styles.Tilt}>
+                                                <div className="Tilt-inner">
 
-                                                                {!project_video && (
-                                                                    <>
-                                                                        <div className={`${styles.project__leadimage}`}>
-                                                                            <Image
-                                                                                priority={true}
-                                                                                placeholder="blur"
-                                                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                                src={project_thumbnail}
-                                                                                alt="project-lead"
-                                                                                fill
-                                                                                sizes="100vw" />
-                                                                        </div>
-                                                                    </>
-                                                                )}
-                                                            </>
-                                                        )}
-                                                        {isMobile && (
-                                                            <>
-                                                                <div className={`${styles.project__leadimage}`}>
-                                                                    <Image
-                                                                        priority={true}
-                                                                        placeholder="blur"
-                                                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                        src={project_thumbnail_mobile}
-                                                                        alt="project-lead"
-                                                                        fill
-                                                                        sizes="100vw" />
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                        {isTabletV && (
-                                                            <>
-                                                                <div className={`${styles.project__leadimage}`}>
-                                                                    <Image
-                                                                        priority={true}
-                                                                        placeholder="blur"
-                                                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                        src={project_thumbnail_mobile}
-                                                                        alt="project-lead"
-                                                                        fill
-                                                                        sizes="100vw" />
-                                                                </div>
-                                                            </>
-                                                        )}
-                                                    </div>
-                                                </div>   
-                                                    
-                                            </div>
-                                            <div className={`${styles.project__name}`}>
-                                                <span>{projects[j].title}</span>
-                                                <span className={`font__grey ${styles.project__type}`}> / {client}</span> 
+                                                    {isDesktop && (
+                                                        <>
+                                                            {project_video && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                    </div>
+                                                                </>
+                                                            )}
+
+                                                            {!project_video && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage}`}>
+                                                                        <Image
+                                                                            priority={true}
+                                                                            placeholder="blur"
+                                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                            src={project_thumbnail}
+                                                                            alt="project-lead"
+                                                                            fill
+                                                                            sizes="100vw" />
+                                                                    </div>
+                                                                </>
+                                                            )}
+                                                        </>
+                                                    )}
+                                                    {isTabletH && (
+                                                        <>
+                                                            {project_video && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
+                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
+                                                                    </div>
+                                                                </>
+                                                            )}
+
+                                                            {!project_video && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage}`}>
+                                                                        <Image
+                                                                            priority={true}
+                                                                            placeholder="blur"
+                                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                            src={project_thumbnail}
+                                                                            alt="project-lead"
+                                                                            fill
+                                                                            sizes="100vw" />
+                                                                    </div>
+                                                                </>
+                                                            )}
+                                                        </>
+                                                    )}
+                                                    {isMobile && (
+                                                        <>
+                                                            <div className={`${styles.project__leadimage}`}>
+                                                                <Image
+                                                                    priority={true}
+                                                                    placeholder="blur"
+                                                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                    src={project_thumbnail_mobile}
+                                                                    alt="project-lead"
+                                                                    fill
+                                                                    sizes="100vw" />
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                    {isTabletV && (
+                                                        <>
+                                                            <div className={`${styles.project__leadimage}`}>
+                                                                <Image
+                                                                    priority={true}
+                                                                    placeholder="blur"
+                                                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                    src={project_thumbnail_mobile}
+                                                                    alt="project-lead"
+                                                                    fill
+                                                                    sizes="100vw" />
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
                                             </div>
 
-                                        </Link>
-                                    </div>
+                                        </div>
+                                        <div className={`${styles.project__name}`}>
+                                            <span>{projects[j].title}</span>
+                                            <span className={`font__grey ${styles.project__type}`}> / {client}</span>
+                                        </div>
+
+                                    </Link>
                                 </div>
                             </div>
-                            {text}        
-                        </section>
-                    </>
+                        </div>
+                        {text}
+                    </section>
+                </>
             </>
-      ))}
+        ))}
     </>;
 }

@@ -3,15 +3,15 @@ import Image from "next/image";
 
 import Ourteam from './our-team.module.scss'
 
-export  default function singleProfile({data}) {
+export default function singleProfile({ data }) {
     var position = data?.positions?.edges[0]?.node?.name;
     var profileImage = data?.profileImage?.profileImage?.sourceUrl;
     var profileImageOnHover = data?.profileImage?.profileImageOnHover?.sourceUrl;
 
     const toBase64 = (str) =>
-    typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+        typeof window === 'undefined'
+            ? Buffer.from(str).toString('base64')
+            : window.btoa(str)
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -28,32 +28,32 @@ export  default function singleProfile({data}) {
         </svg>`
 
     return <>
-     <div className="col-md-6 col-lg-4">
-        <div className={Ourteam.profile}>
-            <div className={` ${Ourteam.profileImg} fade-in `} >
-                <Image
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                    className={` ${Ourteam?.profileImg__main} full-lead-img` }
-                    src={profileImage}
-                    alt={data?.title}
-                    fill
-                    sizes="100vw" />
-                <Image
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                    className={` ${Ourteam?.profileImg__hover} full-lead-img` }
-                    src={profileImageOnHover}
-                    alt={data?.title}
-                    fill
-                    sizes="100vw" />
-            </div>
-            <div className="team-info">
-                <span className={Ourteam.name}>{data.title}</span>
-                <span className={Ourteam.designation}>{position}</span>
-                {/* <span className={Ourteam.about}>{parse(data?.content)}</span> */}
+        <div className="col-md-6 col-lg-4" style={{ order: `${data.teamorder.teamorder}` }}>
+            <div className={Ourteam.profile}>
+                <div className={` ${Ourteam.profileImg} fade-in `} >
+                    <Image
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        className={` ${Ourteam?.profileImg__main} full-lead-img`}
+                        src={profileImage}
+                        alt={data?.title}
+                        fill
+                        sizes="100vw" />
+                    <Image
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        className={` ${Ourteam?.profileImg__hover} full-lead-img`}
+                        src={profileImageOnHover}
+                        alt={data?.title}
+                        fill
+                        sizes="100vw" />
+                </div>
+                <div className="team-info">
+                    <span className={Ourteam.name}>{data.title}</span>
+                    <span className={Ourteam.designation}>{position}</span>
+                    <span className={Ourteam.about}>{parse(data?.content)}</span>
+                </div>
             </div>
         </div>
-    </div>
     </>;
 }
