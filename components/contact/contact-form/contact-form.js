@@ -20,7 +20,7 @@ export default function contactForm() {
     evt.preventDefault()
     var applyingFor = document.getElementById('applying-for').value
     const data = await Contact(firstName, lastName, applyingFor, email, number, linkedin, designation, company, message, companyWebsite)
-
+    console.log(data)
     if (data) {
       window.location.reload(false);
       $('.success-message').addClass('show-message');
