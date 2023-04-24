@@ -14,6 +14,8 @@ export default function career({meta , jobs}){
     const backButton = () => {
         window.history.back();
     }
+    var positions = [];
+    var mailid
     return <>
         <NextSeo
             title={meta.seo.title}
@@ -76,7 +78,9 @@ export default function career({meta , jobs}){
                     </div>
                 </div>                    
                 <div className="row">
-                {jobs.edges.map(({ node }) => (
+                {jobs.edges.map(({ node }, index) => (
+                    mailid = node.user?.user ? node?.user?.user : 'work@icdindia.com',
+                    positions[index] = new Array(node.title, mailid),
                     <FetchJobs data={node} key={node.id}/>
                 ))}        
                 </div>
@@ -87,7 +91,7 @@ export default function career({meta , jobs}){
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <Enquiry />
+                        <Enquiry position = { positions } />
                     </div>
                 </div>
             </div>

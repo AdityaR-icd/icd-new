@@ -11,6 +11,10 @@ export default function contact({ meta }){
         window.history.back();
     }
 
+    let contactEmail = meta?.contactEmail?.contactEMail
+
+
+
     return(
     <>
         <NextSeo
@@ -62,7 +66,7 @@ export default function contact({ meta }){
             <div className="container">
                 <div className="row">
                     <div className="col-12">
-                        <ContactForm />
+                        <ContactForm dataEmail={contactEmail} />
                     </div>
                 </div>
             </div>

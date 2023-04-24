@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import { careerContact } from '../../lib/api'
+import $ from 'jquery'
 
-
-export default function Enquiry() {
+export default function Enquiry({ position }) {
     const [firstName, setfirstName] = useState('')
     const [lastName, setlastName] = useState('')
     const [enquiryAbout, setenquiryAbout] = useState('')
@@ -13,15 +12,62 @@ export default function Enquiry() {
     const [qualification, setQualification] = useState('')
     const [experience, setexperience] = useState('')
     const [Website, setWebsite] = useState('')
+    const [submitted, setSubmitted] = useState(false)
 
-    const handleSubmit = async (evt) => {
-        evt.preventDefault()
-        var applyingFor = document.getElementById('applying-for').value
-        const data = await careerContact(applyingFor , firstName, lastName, qualification ,experience, number, city ,email , Website)
-    
-        if (data) {
-          window.location.reload(false);
+    const options = position.map((data , index) => {
+        if(index == 0){
+            return(
+                <option value = { data[0] } data-mail={data[1]}  selected>{ data[0] }</option>
+            );
+        } else {
+            return(
+                <option value = { data[0] } data-mail={data[1]} >{ data[0] }</option>
+            );
         }
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('Sending')
+        var applyingFor = document.getElementById('applying-for').value
+        var sendTo = $('#applying-for').find(':selected').data('mail');
+        var array = sendTo.split(',');
+        let data = {
+            firstName,
+            lastName,
+            applyingFor,
+            email,
+            number,
+            city,
+            qualification,
+            experience,
+            Website,
+            sendTo : array,
+        }
+
+        fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+        }).then((res) => {
+            console.log('Response received')
+            if (res.status === 200) {
+                console.log('Response succeeded!')
+                setSubmitted(true)
+                setenquiryAbout('')
+                setfirstName('')
+                setlastName('') 
+                setEmail('')
+                setNumber('')
+                setcity('')
+                setQualification('')
+                setexperience();
+                setWebsite('')
+            }
+        })
     }
 
     return (
@@ -33,11 +79,7 @@ export default function Enquiry() {
                         <span className="applying__for">you are applying for 
                             <span className="font__red">
                                 <select id="applying-for" value={enquiryAbout} onChange={(e) => setenquiryAbout(e.target.value)}>
-                                  <option value="senior designer">senior designer</option>
-                                  <option value="frontend developer">frontend developer</option>
-                                  <option value="senior ui ux designer">senior ui ux designer</option>
-                                  <option value="business manager">business manager</option>
-                                  <option value="Motion Graphic Designer">Motion Graphic Designer</option>
+                                  { options }
                                 </select>
                             </span>
                         </span>
