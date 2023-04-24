@@ -1,4 +1,4 @@
-export default function (req, res) {
+export default async (req, res) => {
     let nodemailer = require('nodemailer')
     const transporter = nodemailer.createTransport({
       port: 465,     
@@ -41,17 +41,20 @@ export default function (req, res) {
             subject: `Your enquiry for ${applyingFor.toLowerCase()} has been submitted - Itu Chaudhuri Design`,
             html: Usermessage
         }
-        transporter.sendMail(mailData, function (err, info) {
-            if(err)
-            console.log(err)
-            else
-            transporter.sendMail(mailContent, function (err, info) {
+        await new Promise((resolve, reject) => {
+            // verify connection configuration
+            transporter.sendMail(mailData, function (err, info) {
                 if(err)
                 console.log(err)
                 else
-                 console.log('submitted successfully');
+                transporter.sendMail(mailContent, function (err, info) {
+                    if(err)
+                    console.log(err)
+                    else
+                    console.log('submitted successfully');
+                })
             })
-        })
+        });
     }else{
         var firstname = req.body.firstName,
         applyingFor = req.body.applyingFor,
@@ -88,17 +91,21 @@ export default function (req, res) {
             subject: `Your job application for ${applyingFor.toLowerCase()} has been submitted - Itu Chaudhuri Design`,
             html: message
         }
-        transporter.sendMail(mailData, function (err, info) {
-            if(err)
-            console.log(err)
-            else
-            transporter.sendMail(mailContent, function (err, info) {
+        
+        await new Promise((resolve, reject) => {
+        // verify connection configuration
+            transporter.sendMail(mailData, function (err, info) {
                 if(err)
                 console.log(err)
                 else
-                console.log('submitted successfully');
+                transporter.sendMail(mailContent, function (err, info) {
+                    if(err)
+                    console.log(err)
+                    else
+                    console.log('submitted successfully');
+                })
             })
-        })
+        });
     }
   
   
