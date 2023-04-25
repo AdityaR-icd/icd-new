@@ -181,7 +181,7 @@ header {
   }
   .logo {
     // margin: 35px 0 13.5px;
-    // margin: 28px 0 13.5px;
+    margin: 28px 0 13.5px;
     width: 172px;
     transition: ease all 0.3s;
     @include for-upto-tablet-portrait {
@@ -191,8 +191,8 @@ header {
   }
 
   .logo-container {
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
   }
 
   .expand {

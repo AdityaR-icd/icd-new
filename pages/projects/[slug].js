@@ -357,7 +357,7 @@ export default function Projects({ project, data, menus }) {
     slidesToScroll: 3,
     prevArrow: <SlickArrowLeft />,
     nextArrow: <SlickArrowRight />,
-    afterChange: () => carouselArrowClick(),
+    // afterChange: () => carouselArrowClick(),
     responsive: [
       {
         breakpoint: 1023,
@@ -552,9 +552,9 @@ export default function Projects({ project, data, menus }) {
           </div>
 
           {relatedProjects_slider?.length > 0 && (
-            <div className={`container ${style.relatedProjects__container}`}>
+            <div className={`container slider-container ${style.relatedProjects__container}`}>
               <div className={style.more__projects_block}>
-                <div className={style.more_cont}>
+                <div className={`more_cont ${style['more_cont']}`}>
                   <span className={style.more__projects_head} id="more-projectTitle">related</span>
                   {/* <span className="see-all">
                             <a href={` /projects/category/${categorySlug} `}>see all</a>
@@ -571,9 +571,9 @@ export default function Projects({ project, data, menus }) {
           )}
 
           {other_projects?.length > 0 && (
-            <div className='container'>
+            <div className='container slider-container'>
               <div className={style.more__projects_block}>
-                <div className={style.more_cont}>
+                <div className={`more_cont ${style['more_cont']}`}>
                   <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
                   <span className={`${style.see_all} see-all`}>
                     <a href={` /projects/category/${categorySlug} `}>see all</a>

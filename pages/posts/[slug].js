@@ -214,7 +214,7 @@ export default function Post({ post, data, filters }) {
       {mounted && (
         <>
           <Seo seo={seo} uri={uri} />
-          <section className={`${style.singlePost} mT__260`} key={post.id}>
+          <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
             <div className="images-loaded-container">
               {imageData}
             </div>

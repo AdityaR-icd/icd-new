@@ -155,6 +155,14 @@ input::-ms-clear {
 
   @include for-upto-tablet-portrait {
     max-width: 100%; // to enable scroll on project page
+
+    &.slider-container {
+      padding: 0;
+    }
+
+    .more_cont{
+      // padding: 0 16px;
+    }
   }
 
   @include for-tablet-portrait-only {
@@ -578,6 +586,7 @@ button.blackBG {
   // margin-bottom: 75px;
   @include for-upto-tablet-portrait {
     margin-bottom: 32.5px;
+    display: none;
   }
 }
 
@@ -1285,3 +1294,38 @@ figure {
     }
   }
 }
+
+
+// related post scrool
+
+
+  @include for-upto-tablet-portrait {
+
+    .singlePost{
+      .project__scroll{
+        width: 100%;
+        height: 247px;
+
+        .project__row{
+          overflow-x: scroll;
+          flex-wrap: nowrap;
+          width: 100%;
+          display: -webkit-box;
+          margin: 0;
+          position: absolute;
+          left: 0;
+          padding: 0 16px;
+
+          &::-webkit-scrollbar{
+            display: none;
+          }
+
+          .project__item{
+            width: 220px;
+            padding: 0;
+            margin-right: 30px;
+          }
+        }
+      }
+    }
+  }
