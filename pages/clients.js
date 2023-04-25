@@ -12,7 +12,7 @@ export default function clients({ clients: { edges }, meta: { pages } }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const meta = await getClientsPage();
   const clients = await getClients()
   // const menus = await getMenus()
@@ -26,7 +26,7 @@ export async function getStaticProps() {
       meta,
       filters
     },
-    revalidate: 86400,
+    // revalidate: 86400,
   }
 }
 

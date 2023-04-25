@@ -276,7 +276,7 @@ export default function newsletterss({ newsletter }) {
     )
   }
   
-  export async function getStaticProps({ params }) {
+  export async function getServerSideProps({ params }) {
     const article = await getArticle(params.slug)
     // const menus = await getMenus()
     const data = await getFooter()
@@ -288,15 +288,15 @@ export default function newsletterss({ newsletter }) {
         data,
         filters
       },
-      revalidate: 180, 
+      // revalidate: 180, 
     }
   }
 
-  export async function getStaticPaths() {
-    const allnewsletters = await getAllNewsletterWithSlug()
-    return {
-      paths: allnewsletters.edges.map(({ node }) => `/yellow-envelope/${node.slug}`) || [],
-      fallback: true,
-    }
+  // export async function getStaticPaths() {
+  //   const allnewsletters = await getAllNewsletterWithSlug()
+  //   return {
+  //     paths: allnewsletters.edges.map(({ node }) => `/yellow-envelope/${node.slug}`) || [],
+  //     fallback: true,
+  //   }
     
-  }
+  // }

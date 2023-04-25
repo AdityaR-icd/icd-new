@@ -34,8 +34,8 @@ export async function getStaticProps() {
   const filters = await getFilters()
   return {
       props: { 
-      filters
+      // filters
       },
-      revalidate: 180, 
+      // revalidate: 180, 
   }
 }

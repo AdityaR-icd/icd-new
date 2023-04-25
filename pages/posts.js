@@ -14,7 +14,7 @@ export default function blogs({  posts : { edges } , meta:{pages} , categories }
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const posts = await getAllPosts()
   // const menus = await getMenus()
   const data = await getFooter()
@@ -31,6 +31,6 @@ export async function getStaticProps() {
       filters
 
     },
-    revalidate: 180, 
+    // revalidate: 180, 
   }
 }

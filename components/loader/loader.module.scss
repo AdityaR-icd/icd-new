@@ -1,0 +1,18 @@
+
+
+.loader{
+    display: flex;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 99999;
+    background: #ffff;
+    overflow: hidden;
+
+    img{
+        display: inline-block;
+        margin: auto;
+        width: 140px;
+    }
+}

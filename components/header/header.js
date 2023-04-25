@@ -124,9 +124,6 @@ const Header = (props) => {
     
         <header id="header">
             <div className="menu-cont">
-                <span className="yellowLine">
-                    <span className="loader"></span>
-                </span>
                 <div className="container">
                     <div className="row">
                         <div className="col-10 col-md-2 logo-container">

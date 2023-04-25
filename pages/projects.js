@@ -5,8 +5,9 @@ const Layout = dynamic(() => import("../components/project/projectCategory"));
 
 
 
-export default function Index({ projectsTypes, meta: { pages }, filters }) {
+export default function Index({ projectsTypes, meta: { pages } }) {
   const meta_data = pages?.edges[0]?.node
+  
   return (
     <Layout projectsTypes={projectsTypes} meta={meta_data} />
   )

@@ -9,7 +9,7 @@ export default function All({ AllProjects , meta:{pages}}) {
     );
 }
 
-export async function getStaticProps({ preview = false }) {
+export async function getServerSideProps({ preview = false }) {
     const AllProjects = await getAllProjectsForHome(preview)
     const data = await getFooter()
     // const menus = await getMenus()
@@ -23,7 +23,7 @@ export async function getStaticProps({ preview = false }) {
           meta,
           filters
       },
-      revalidate: 180, 
+      // revalidate: 180, 
     }
   }
   
