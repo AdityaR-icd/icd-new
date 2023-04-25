@@ -121,25 +121,25 @@ export default function subProject({subTypeProjects , project , filters }){
 } 
 
 
-export async function getStaticPaths({params}) {
-  const projectTypes = await getAllProjectsSubTypes() 
-  return {
-    paths: [
-      { params: { slug: 'packaging', sub_slug: 'fb' }},
-      { params: { slug: 'packaging' , sub_slug: 'cosmetics' }},
-      { params: { slug: 'packaging' , sub_slug: 'other' }},
-      { params: { slug: 'editorial' , sub_slug: 'newspaper' }},
-      { params: { slug: 'editorial' , sub_slug: 'magazine' }},
-      { params: { slug: 'digital' , sub_slug: 'website' }},
-      { params: { slug: 'digital' , sub_slug: 'application' }},
-      { params: { slug: 'digital' , sub_slug: 'enterprise-product' }},
-     ],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths({params}) {
+//   const projectTypes = await getAllProjectsSubTypes() 
+//   return {
+//     paths: [
+//       { params: { slug: 'packaging', sub_slug: 'fb' }},
+//       { params: { slug: 'packaging' , sub_slug: 'cosmetics' }},
+//       { params: { slug: 'packaging' , sub_slug: 'other' }},
+//       { params: { slug: 'editorial' , sub_slug: 'newspaper' }},
+//       { params: { slug: 'editorial' , sub_slug: 'magazine' }},
+//       { params: { slug: 'digital' , sub_slug: 'website' }},
+//       { params: { slug: 'digital' , sub_slug: 'application' }},
+//       { params: { slug: 'digital' , sub_slug: 'enterprise-product' }},
+//      ],
+//     fallback: true,
+//   }
+// }
 
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const gProject = await getProjectByTypes(params.slug)
     const subTypeProjects = await getProjectSubTypes(params.slug ,params.sub_slug);
     // const menus = await getMenus()

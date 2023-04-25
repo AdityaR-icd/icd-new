@@ -24,6 +24,7 @@ const Seo = ( {seo, uri} ) => {
 	const image = opengraphImage?.sourceUrl;
 	const twitterImag = twitterImage?.sourceUrl
 
+	// console.log(image)
 	return (
 		<NextSeo
 			title={title}
@@ -52,7 +53,7 @@ const Seo = ( {seo, uri} ) => {
 			twitter={{
 				site: opengraphUrl,
 				cardType: 'summary_large_image',
-				image : twitterImag,
+				image : image,
 				title:  {title},
 				description: {metaDesc}
 			}}

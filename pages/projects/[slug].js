@@ -591,7 +591,7 @@ export default function Projects({ project, data, menus }) {
   </>;
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const gProject = await getProject(params.slug)
   // const menus = await getMenus()
   const data = await getFooter()
@@ -603,16 +603,16 @@ export async function getServerSideProps({ params }) {
       data,
       filters,
     },
-    // revalidate: 2,
+    // revalidate: 36000,
   }
 }
 
-// export async function getStaticPaths() {
-//   const allProjects = await getAllProjectsWithSlug()
-//   return {
-//     paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
-//     fallback: true,
-//   }
-// }
+export async function getStaticPaths() {
+  const allProjects = await getAllProjectsWithSlug()
+  return {
+    paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
+    fallback: true,
+  }
+}
 
 

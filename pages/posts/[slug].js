@@ -300,16 +300,15 @@ export default function Post({ post, data, filters }) {
   )
 }
 
-// export async function getStaticPaths() {
-//   const allPosts = await getAllPostsForHome()
-//   return {
-//     paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-//     fallback: true,
-//   }
+export async function getStaticPaths() {
+  const allPosts = await getAllPostsForHome()
+  return {
+    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
+    fallback: true,
+  }
+}
 
-// }
-
-export async function getServerSideProps({ preview = false, params, previewData }) {
+export async function getStaticProps({ preview = false, params, previewData }) {
   const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
   // const menus = await getMenus()
   const data = await getFooter()
@@ -323,6 +322,6 @@ export async function getServerSideProps({ preview = false, params, previewData 
       data,
       filters
     },
-    // revalidate: 180,
+    revalidate: 3600,
   }
 }
