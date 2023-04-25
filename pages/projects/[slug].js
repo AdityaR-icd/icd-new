@@ -330,24 +330,24 @@ export default function Projects({ project, data, menus }) {
       Next
     </button>
   );
-  const carouselArrowClick = () => {
-    var curr_slide = $('.more-projectsCarousel .slick-current').find('.projectTitle'),
-      slide_2 = $('.more-projectsCarousel .slick-active').eq(1).find('.projectTitle'),
-      slide_3 = $('.more-projectsCarousel .slick-active').eq(2).find('.projectTitle'),
-      curr_slide_cat = curr_slide.data("type"),
-      slide_2_cat = slide_2.data("type"),
-      slide_3_cat = slide_3.data("type"),
-      more_title = $('#more-projectTitle'),
-      seeall_cta = $('.see-all a');
-    if (curr_slide_cat == slide_2_cat && slide_2_cat == slide_3_cat) {
-      var slug = curr_slide.data("slug");
-      more_title.text("more projects");
-      seeall_cta.attr("href", "/projects/");
-    } else {
-      more_title.text("more " + category);
-      seeall_cta.attr("href", "/projects/category/" + categorySlug);
-    }
-  }
+  // const carouselArrowClick = () => {
+  //   var curr_slide = $('.more-projectsCarousel .slick-current').find('.projectTitle'),
+  //     slide_2 = $('.more-projectsCarousel .slick-active').eq(1).find('.projectTitle'),
+  //     slide_3 = $('.more-projectsCarousel .slick-active').eq(2).find('.projectTitle'),
+  //     curr_slide_cat = curr_slide.data("type"),
+  //     slide_2_cat = slide_2.data("type"),
+  //     slide_3_cat = slide_3.data("type"),
+  //     more_title = $('#more-projectTitle'),
+  //     seeall_cta = $('.see-all a');
+  //   if (curr_slide_cat == slide_2_cat && slide_2_cat == slide_3_cat) {
+  //     var slug = curr_slide.data("slug");
+  //     more_title.text("more projects");
+  //     seeall_cta.attr("href", "/projects/");
+  //   } else {
+  //     more_title.text("more " + category);
+  //     seeall_cta.attr("href", "/projects/category/" + categorySlug);
+  //   }
+  // }
 
   const settings = {
     dots: false,
