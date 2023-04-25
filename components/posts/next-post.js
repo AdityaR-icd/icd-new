@@ -6,10 +6,8 @@ export default function next_post({ data }) {
                 <div>
                     <Link href={{ pathname: `/posts/${data.slug}/` }} >
                         <div className="prevNext__post-text">next post</div>
-                        <div className="prevNext__post-img d-none d-sm-block ">
-                            <img loading="lazy" decoding="async" className="" src={data?.featuredImage?.node?.sourceUrl}></img>
-                        </div>
-                        <div className="post__title d-none d-sm-block">{data.title}</div>
+                        <div className="post__title ">{data.title}</div>
+                        <button className='d-none d-sm-block'>read post</button>
                     </Link>
                 </div>
             </div>

@@ -118,7 +118,7 @@ export default function Projects({ project, data, menus }) {
           <div className="project__item resultItem-cont" key={node?.id}>
             <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
               <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                <Link href={`/projects/${node?.slug}`}>
+                <Link href={node?.uri}>
                   <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                     <div className={`${carousel?.full_thumb} full-thumb`}>
                       <Image
@@ -135,7 +135,7 @@ export default function Projects({ project, data, menus }) {
                   </span>
                 </Link>
               </div>
-              <Link href={`/projects/${node?.slug}`}>
+              <Link href={node?.uri}>
                 <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
                   <span className={carousel?.grey__color}>  / {client}</span>
                 </span>
@@ -160,7 +160,7 @@ export default function Projects({ project, data, menus }) {
         <div className="project__item resultItem-cont" key={node?.id}>
           <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
             <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-              <Link href={`/projects/${node?.slug}`}>
+              <Link href={node?.uri}>
                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
@@ -179,7 +179,7 @@ export default function Projects({ project, data, menus }) {
                 </span>
               </Link>
             </div>
-            <Link href={`/projects/${node?.slug}`}>
+            <Link href={node?.uri}>
               <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                 <span className={carousel.grey__color}>  / {client}</span>
               </span>
@@ -221,13 +221,18 @@ export default function Projects({ project, data, menus }) {
 
 
   var relatedProjects_slider = relatedProjects?.map((node) => {
+
     var leadImgSrc = node?.featuredImage?.node?.sourceUrl
     var client = node?.clients?.edges[0]?.node.name
+    var categories = node?.categories?.edges[0]?.node.name
+    var url = node?.uri ?? `/posts/${node.slug}`
+
+
     return <>
       <div className="project__item resultItem-cont" key={node?.id}>
         <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
           <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-            <Link href={`/projects/${node?.slug}`}>
+            <Link href={url} >
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
@@ -244,9 +249,9 @@ export default function Projects({ project, data, menus }) {
               </span>
             </Link>
           </div>
-          <Link href={`/projects/${node?.slug}`}>
-            <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
-              <span className={carousel.grey__color}>  / {client}</span>
+            <Link href={url} >
+            <span className={carousel?.projectTitle}>{node?.projectComponent?.heading || node?.title}
+              <span className={carousel.grey__color}>  / {client || categories}</span>
             </span>
           </Link>
         </div>
@@ -550,7 +555,7 @@ export default function Projects({ project, data, menus }) {
             <div className={`container ${style.relatedProjects__container}`}>
               <div className={style.more__projects_block}>
                 <div className={style.more_cont}>
-                  <span className={style.more__projects_head} id="more-projectTitle">related projects</span>
+                  <span className={style.more__projects_head} id="more-projectTitle">related</span>
                   {/* <span className="see-all">
                             <a href={` /projects/category/${categorySlug} `}>see all</a>
                         </span> */}
@@ -603,7 +608,7 @@ export async function getStaticProps({ params }) {
       data,
       filters,
     },
-    // revalidate: 36000,
+    revalidate: 2,
   }
 }
 

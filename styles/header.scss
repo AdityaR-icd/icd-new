@@ -1,10 +1,13 @@
 @import "variables.scss";
 .yellowLine {
-  position: relative;
+  position: fixed;
   display: block;
   height: 12px;
   background: $color-yellow;
   z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
   .loader {
     position: absolute;
     background: url(../assets/loader/loader.gif) repeat-x;
@@ -36,10 +39,12 @@ header {
     transition: 0.3s ease all;
     pointer-events: all;
     background: #fff;
+    // padding-top: 22px;
   }
 
   .header__hide {
     transform: translateY(-100%);
+    padding-top: 0;
   }
 
   .nav-menu {

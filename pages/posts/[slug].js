@@ -61,47 +61,40 @@ export default function Post({ post, data, filters }) {
     var relatedProject =
 
       <>
-        <div className={style.relatedProjects__container}>
-          <span className={style.relatedProjects__head}>related project</span>
-          <section className={`${type.industry__filter} ${type.all_filter} `}>
-            <div className="project__scroll">
-              <div className="row project__row">
-                {checkrelatedproject.map((node) => (
-                  client = node.clients.edges[0].node.name,
-                  leadImgSrc = node.featuredImage.node.sourceUrl,
-                  <>
-                    <div className="col-md-4 project__item" key={node.id}>
-                      <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                        <div className={carousel.thumbnail_cont}>
-                          <a href={`/projects/${node.slug}`}>
-                            <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                              <div className={`${carousel.full_thumb} full-thumb`}>
-                                <Image
-                                  className={carousel.project_lead}
-                                  placeholder="blur"
-                                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                                  src={leadImgSrc}
-                                  alt="project-lead"
-                                  fill
-                                  sizes="100vw" />
-                              </div>
-                              <span className="thumbnail-gif"></span>
-                            </span>
-                          </a>
-                        </div>
-                        <a href={`/projects/${node.slug}`}>
-                          <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                            <span className={carousel.grey__color}>  / {client}</span>
-                          </span>
-                        </a>
+
+        {checkrelatedproject.map((node) => (
+          client = node.clients.edges[0].node.name,
+          leadImgSrc = node.featuredImage.node.sourceUrl,
+          <>
+            <div className="col-md-4 project__item" key={node.id}>
+              <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                <div className={carousel.thumbnail_cont}>
+                  <a href={`/projects/${node.slug}`}>
+                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                      <div className={`${carousel.full_thumb} full-thumb`}>
+                        <Image
+                          className={carousel.project_lead}
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                          src={leadImgSrc}
+                          alt="project-lead"
+                          fill
+                          sizes="100vw" />
                       </div>
-                    </div>
-                  </>
-                )).slice(0, 3)}
+                      <span className="thumbnail-gif"></span>
+                    </span>
+                  </a>
+                </div>
+                <a href={`/projects/${node.slug}`}>
+                  <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                    <span className={carousel.grey__color}>  / {client}</span>
+                  </span>
+                </a>
               </div>
             </div>
-          </section>
-        </div>
+          </>
+        ))}
+
       </>
 
   }
@@ -138,36 +131,25 @@ export default function Post({ post, data, filters }) {
           }
           return (
             <>
-
-              <div className={style.relatedProjects__container}>
-                <span className={style.relatedProjects__head}>related post</span>
-                <section className={`${type.industry__filter} ${type.all_filter} `}>
-                  <div className="project__scroll">
-                    <div className="row project__row">
-                      <div className="col-md-4 project__item">
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                          <div className={carousel.thumbnail_cont}>
-                            <a href={`/posts/${data.slug}`}>
-                              <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                {imageData}
-                              </span>
-                            </a>
-                          </div>
-                          <a href={`/posts/${data.slug}`}>
-                            <span className={carousel.projectTitle}>{data.title}
-                              <span className={carousel.grey__color}>  / {categories}</span>
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+              <div className="col-md-4 project__item">
+                <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                  <div className={carousel.thumbnail_cont}>
+                    <a href={`/posts/${data.slug}`}>
+                      <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                        {imageData}
+                      </span>
+                    </a>
                   </div>
-                </section>
+                  <a href={`/posts/${data.slug}`}>
+                    <span className={carousel.projectTitle}>{data.title}
+                      <span className={carousel.grey__color}>  / {categories}</span>
+                    </span>
+                  </a>
+                </div>
               </div>
-
             </>
           )
-        }).slice(0, 3)}
+        })}
       </>
 
   }
@@ -273,9 +255,17 @@ export default function Post({ post, data, filters }) {
                       <Like count={post.likes?.likes} id={post.id} type={'post'} />
                     </div>
 
-
-                    {relatedProject}
-                    {relatedPost}
+                    <div className={style.relatedProjects__container}>
+                      <span className={style.relatedProjects__head}>related </span>
+                      <section className={`${type.industry__filter} ${type.all_filter} `}>
+                        <div className="project__scroll">
+                          <div className="row project__row">
+                            {relatedProject}
+                            {relatedPost}
+                          </div>
+                        </div>
+                      </section>
+                    </div>
                     <div className="post__navigation">
                       <div className="row">
                         <div className="col-md-6 ">
@@ -322,6 +312,6 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       data,
       filters
     },
-    revalidate: 3600,
+    revalidate: 2,
   }
 }

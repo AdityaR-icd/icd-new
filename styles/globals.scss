@@ -1200,7 +1200,7 @@ figure {
     .row {
       flex-wrap: nowrap;
 
-      div {
+      .col-md-6 {
         display: flex;
 
         .prevNext__post-text {
@@ -1220,6 +1220,7 @@ figure {
     margin: 0 0 0 auto;
     button {
       // width: 172px;
+      margin: 30px 0 0 auto;
     }
   }
   .prev__post,
@@ -1252,20 +1253,28 @@ figure {
   }
 
   @include for-phone-only {
+
+    .prev__post {
+      text-align: end;
+    }
+
+    .next__post{
+      text-align: start;
+    }
     .prevNext__post-img {
       width: 35%;
       float: left;
     }
 
     .post__title {
-      float: left;
-      width: 65%;
-      text-align: left;
-      padding-left: 20px;
-      margin: 0;
+      // float: left;
+      // width: 65%;
+      // text-align: left;
+      // padding-left: 20px;
+      // margin: 0;
     }
     .prevNext__post-text.prevNext__post-text {
-      text-align: left;
+      // text-align: left;
     }
 
     button {
