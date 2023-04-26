@@ -4,8 +4,8 @@ export default async (req, res) => {
       port: 465,     
       host: "smtp.gmail.com",
          auth: {
-                user: 'alok@icdindia.com',
-                pass: 'alokj123',
+                user: 'mail@icdindia.com',
+                pass: 'icdmail@123',
            },
       secure: true,
     });
