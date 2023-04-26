@@ -45,9 +45,9 @@ export default function Post({ post, data, filters }) {
 
 
 
-  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + router.asPath
-  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + window.location.origin + router.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window.location.origin + router.asPath + '"&title=' + post?.title;
+  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
+  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + window?.location.origin + router.asPath
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window?.location.origin + router.asPath + '"&title=' + post?.title;
 
   if (checkauthor) {
     var author = post?.postAuthor?.postAuthor[0]?.title
@@ -255,17 +255,21 @@ export default function Post({ post, data, filters }) {
                       <Like count={post.likes?.likes} id={post.id} type={'post'} />
                     </div>
 
-                    <div className={style.relatedProjects__container}>
-                      <span className={style.relatedProjects__head}>related </span>
-                      <section className={`${type.industry__filter} ${type.all_filter} `}>
-                        <div className="project__scroll">
-                          <div className="row project__row">
-                            {relatedProject}
-                            {relatedPost}
+                    {relatedPost &&
+                      <div className={style.relatedProjects__container}>
+                        <span className={style.relatedProjects__head}>related </span>
+                        <section className={`${type.industry__filter} ${type.all_filter} `}>
+                          <div className="project__scroll">
+                            <div className="row project__row">
+                              {relatedProject}
+                              {relatedPost}
+                            </div>
                           </div>
-                        </div>
-                      </section>
-                    </div>
+                        </section>
+                      </div>
+                    }
+
+
                     <div className="post__navigation">
                       <div className="row">
                         <div className="col-md-6 ">

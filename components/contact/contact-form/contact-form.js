@@ -32,20 +32,21 @@ export default function contactForm({ dataEmail }) {
     console.log('Sending')
     var applyingFor = document.getElementById('applying-for').value
     var sendTo = $('#applying-for').find(':selected').data('mail');
+    $('button').addClass('disable');
     var array = sendTo.split(',');
     let data = {
-        firstName,
-        lastName,
-        applyingFor,
-        email,
-        number,
-        linkedin,
-        designation,
-        company,
-        message,
-        companyWebsite,
-        sendTo : array,
-        page : "contact"
+      firstName,
+      lastName,
+      applyingFor,
+      email,
+      number,
+      linkedin,
+      designation,
+      company,
+      message,
+      companyWebsite,
+      sendTo: array,
+      page: "contact"
     }
 
     fetch('/api/contact', {
@@ -56,21 +57,23 @@ export default function contactForm({ dataEmail }) {
       },
       body: JSON.stringify(data)
     }).then((res) => {
-        console.log('Response received')
-        if (res.status === 200) {
-            console.log('Response succeeded!')
-            setSubmitted(true)
-            setenquiryAbout('')
-            setfirstName('')
-            setlastName('') 
-            setEmail('')
-            setNumber('')
-            setLinkedin('')
-            setDesignation('')
-            setCompany();
-            setcompanyWebsite('')
-            setMessage('')
-        }
+      console.log('Response received')
+      if (res.status === 200) {
+        $('.success-message').addClass('show-message');
+        $('button').removeClass('disable');
+        console.log('Response succeeded!')
+        setSubmitted(true)
+        setenquiryAbout('')
+        setfirstName('')
+        setlastName('')
+        setEmail('')
+        setNumber('')
+        setLinkedin('')
+        setDesignation('')
+        setCompany('');
+        setcompanyWebsite('')
+        setMessage('')
+      } else $('.error-message').addClass('show-message');
     })
   }
   return (

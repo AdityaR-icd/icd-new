@@ -8,6 +8,10 @@ module.exports = ({
   //   runtimeCaching,
   //   buildExcludes: [/middleware-manifest\.json$/]
   // },
+  env: {
+    pass: process.env.pass,
+  },
+
   reactStrictMode: true,
   // experimental:{appDir: true},
   // swcMinify: true,
@@ -16,7 +20,7 @@ module.exports = ({
   },
 
   staticPageGenerationTimeout: 1000,
-  
+
   eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
@@ -27,11 +31,11 @@ module.exports = ({
 
   images: {
     domains: ['digital.icdindia.com'],
-    deviceSizes: [640, 750, 828, 1080 , 1920],
+    deviceSizes: [640, 750, 828, 1080, 1920],
   },
 
   env: {
-    REVALIDATION_TOKEN : 'randomsecrettoken'
+    REVALIDATION_TOKEN: 'randomsecrettoken'
   },
 
   async headers() {
@@ -47,6 +51,6 @@ module.exports = ({
         ],
       },
     ]
-  }, 
+  },
 });
 

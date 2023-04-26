@@ -1,32 +1,34 @@
 export default async (req, res) => {
     let nodemailer = require('nodemailer')
     const transporter = nodemailer.createTransport({
-      port: 465,     
-      host: "smtp.gmail.com",
-         auth: {
-                user: 'mail@icdindia.com',
-                pass: 'icdmail@123',
-           },
-      secure: true,
+        port: 465,
+        host: "smtp.gmail.com",
+        auth: {
+            user: 'mail@icdindia.com',
+            pass: process.env.pass,
+            // user: 'shivani@icdindia.com',
+            // pass: 'shivani123',
+        },
+        secure: true,
     });
 
-    if(req.body.page){
+    if (req.body.page) {
         var firstname = req.body.firstName,
-        applyingFor = req.body.applyingFor,
-        lastname = req.body.lastName,
-        company = req.body.company,
-        mobile = req.body.number,
-        designation = req.body.designation,
-        email = req.body.email,
-        website = req.body.companyWebsite,
-        linkedinwebsite = req.body.linkedin,
-        message = req.body.message
+            applyingFor = req.body.applyingFor,
+            lastname = req.body.lastName,
+            company = req.body.company,
+            mobile = req.body.number,
+            designation = req.body.designation,
+            email = req.body.email,
+            website = req.body.companyWebsite,
+            linkedinwebsite = req.body.linkedin,
+            message = req.body.message
         sendTo = req.body.sendTo;
         var Usermessage = `Dear ${firstname}, <br />
-        We have received your filled-up form. Expect one of our team members to contact you in two working days, to set up a call and explore the possibility of a fit between what we do and what you're seeking. <br /><br />
-        Warmly, <br />
-        ICD`;
-    
+            We have received your filled-up form. Expect one of our team members to contact you in two working days, to set up a call and explore the possibility of a fit between what we do and what you're seeking. <br /><br />
+            Warmly, <br />
+            ICD`;
+
         const mailData = {
             from: 'mail@icdindia.com',
             to: sendTo,
@@ -44,28 +46,29 @@ export default async (req, res) => {
         await new Promise((resolve, reject) => {
             // verify connection configuration
             transporter.sendMail(mailData, function (err, info) {
-                if(err)
-                console.log(err)
-                else
-                transporter.sendMail(mailContent, function (err, info) {
-                    if(err)
+                if (err)
                     console.log(err)
+                else
+                    res.send('success')
+                transporter.sendMail(mailContent, function (err, info) {
+                    if (err)
+                        console.log(err)
                     else
-                    console.log('submitted successfully');
+                        console.log('submitted successfully');
                 })
             })
         });
-    }else{
+    } else {
         var firstname = req.body.firstName,
-        applyingFor = req.body.applyingFor,
-        surname = req.body.lastName,
-        education = req.body.qualification,
-        experience = req.body.experience,
-        mobile = req.body.number,
-        city = req.body.city,
-        email = req.body.email,
-        website = req.body.Website,
-        sendTo = req.body.sendTo;
+            applyingFor = req.body.applyingFor,
+            surname = req.body.lastName,
+            education = req.body.qualification,
+            experience = req.body.experience,
+            mobile = req.body.number,
+            city = req.body.city,
+            email = req.body.email,
+            website = req.body.Website,
+            sendTo = req.body.sendTo;
 
         var content = ` Applied For: ${applyingFor} <br /> First Name: ${firstname} <br /> Surname: ${surname} <br /> Education: ${education} <br /> Experience: ${experience} <br /> Mobile: ${mobile} <br /> City: ${city} <br /> Email: ${email} <br /> Website: ${website} <br />`;
         var message = `Thank you for your interest. <br /><br />
@@ -91,24 +94,23 @@ export default async (req, res) => {
             subject: `Your job application for ${applyingFor.toLowerCase()} has been submitted - Itu Chaudhuri Design`,
             html: message
         }
-        
+
         await new Promise((resolve, reject) => {
-        // verify connection configuration
+            // verify connection configuration
             transporter.sendMail(mailData, function (err, info) {
-                if(err)
-                console.log(err)
-                else
-                transporter.sendMail(mailContent, function (err, info) {
-                    if(err)
+                if (err)
                     console.log(err)
+                else
+                    res.send('success')
+                transporter.sendMail(mailContent, function (err, info) {
+                    if (err)
+                        console.log(err)
                     else
-                    console.log('submitted successfully');
+                        console.log('submitted successfully');
                 })
             })
         });
     }
-  
-  
     // console.log(req.body)
     res.send('success')
-  }
+}
