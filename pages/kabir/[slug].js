@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllkabirWithSlug , kabirArticle ,  getFooter , getFilters } from '../../lib/api'
+import { getAllkabirWithSlug, kabirArticle, getFooter, getFilters } from '../../lib/api'
 import $ from 'jquery';
 import Image from "next/image";
 import { useEffect } from 'react'
@@ -13,20 +13,20 @@ const Like = dynamic(() => import("../../components/like"));
 const Seo = dynamic(() => import("../../components/seo"));
 
 
-export default function kabir({kabir , data}){
+export default function kabir({ kabir, data }) {
     useEffect(() => {
         document.body.classList.add(style.bg_yellow);
         document.body.classList.add('bg-yellow');
     });
 
-    const seo = kabir ? ( kabir?.seo ?? {} ) : ( {} );
-    const uri = kabir ? ( kabir?.uri ?? {} ) : (  {} );
+    const seo = kabir ? (kabir?.seo ?? {}) : ({});
+    const uri = kabir ? (kabir?.uri ?? {}) : ({});
 
     var featuredImage = kabir?.featuredImage?.node?.sourceUrl
     const toBase64 = (str) =>
-    typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+        typeof window === 'undefined'
+            ? Buffer.from(str).toString('base64')
+            : window.btoa(str)
 
     const toggleShareIcons = () => {
         $('.share-icon').toggleClass('icons-hide');
@@ -37,7 +37,7 @@ export default function kabir({kabir , data}){
         month: 'long',
         year: 'numeric',
     });
-    
+
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -54,8 +54,8 @@ export default function kabir({kabir , data}){
         </svg>`
 
 
-    if(featuredImage){
-        var imageData = 
+    if (featuredImage) {
+        var imageData =
             <div className={` ${style.leadImage} fade-in `}>
                 <Image
                     src={featuredImage}
@@ -64,90 +64,90 @@ export default function kabir({kabir , data}){
                     className="full-lead-img"
                     alt="post-lead"
                     fill
-                    sizes="100vw" />         
-            </div> 
-        }else{
-          imageData = 
-            <div className={style.leadImage}>
-              
+                    sizes="100vw" />
             </div>
-        }
+    } else {
+        imageData =
+            <div className={style.leadImage}>
 
-    return(
+            </div>
+    }
+
+    return (
         <>
-            <Seo seo={seo} uri={uri}/>
-            <section className={`${style.singlePost} mT__260`} key={ kabir?.id }>  
-              <div className="images-loaded-container">
-                {imageData}
-              </div>  
-              <div className={style.postContent_cont}>
-                  <div className="container">
-                      <div className="row">
-                          <div className="col-12 col-md-8 offset-md-2">
-                              <div className={style.posts__container}>
-                                  <div className={style.post__tag}>
-                                      {/* <span className={style.yellow__tag}> { categories }  </span> */}
-                                      <span className={style.yellow__tag}>  </span>
-                                  </div>
-                                  <h1>{ kabir?.title }</h1>
-                                  <div className={style.post__author}>
-                                      <span className="author__img"><img loading="lazy" decoding="async" src={ Icon.src } ></img></span>
-                                      <span className="post-detail">kabir / { date } </span>
-                                      <div className={` ${style.social__media} ${style.header_socialmedia} ${style.header_socialmedia_mobile} social__media d-block d-lg-none `}>
-                                          <Like count={kabir?.likes?.likes}  id={kabir?.id} type={'kabir'} />  
-                                          <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
-                                          <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
-                                          <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
-                                          <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                                      </div>
-                                  </div>
-                                  <div className={`${style.postContent} postContent`}>
-                                     
-                                        {kabir?.content  && (
+            <Seo seo={seo} uri={uri} />
+            <section className={`${style.singlePost} mT__260`} key={kabir?.id}>
+                <div className="images-loaded-container">
+                    {imageData}
+                </div>
+                <div className={style.postContent_cont}>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12 col-md-8 offset-md-2">
+                                <div className={style.posts__container}>
+                                    <div className={style.post__tag}>
+                                        {/* <span className={style.yellow__tag}> { categories }  </span> */}
+                                        <span className={style.yellow__tag}>  </span>
+                                    </div>
+                                    <h1>{kabir?.title}</h1>
+                                    <div className={style.post__author}>
+                                        <span className="author__img"><img loading="lazy" decoding="async" src={Icon.src} ></img></span>
+                                        <span className="post-detail">kabir / {date} </span>
+                                        <div className={` ${style.social__media} ${style.header_socialmedia} ${style.header_socialmedia_mobile} social__media d-block d-lg-none `}>
+                                            <Like count={kabir?.likes?.likes} id={kabir?.id} type={'kabir'} />
+                                            <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
+                                            <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
+                                            <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
+                                            <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                        </div>
+                                    </div>
+                                    <div className={`${style.postContent} postContent`}>
+
+                                        {kabir?.content && (
                                             <>
-                                                 {parse(kabir?.content)}
+                                                {parse(kabir?.content)}
                                             </>
                                         )}
 
-                                  </div>
-                              </div>
-                              <div className={` ${style.social__media} social__media `}>
-                                <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
-                                <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
-                                <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
-                                <span className="icon" onClick={ toggleShareIcons }><img loading="lazy" decoding="async" src={ Share.src } width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                                <Like count={kabir?.likes?.likes}  id={kabir?.id} type={'kabir'} />
-                              </div>
+                                    </div>
+                                </div>
+                                <div className={` ${style.social__media} social__media `}>
+                                    <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
+                                    <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
+                                    <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
+                                    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                    <Like count={kabir?.likes?.likes} id={kabir?.id} type={'kabir'} />
+                                </div>
 
-                          </div>
-                      </div>
-                  </div>
-                </div>     
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </>
     )
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
     const article = await kabirArticle(params.slug)
     // const menus = await getMenus()
     const data = await getFooter()
     const filters = await getFilters()
     return {
-      props: { 
-        kabir: article.kabir,
-        // menus,
-        data,
-        filters
-      },
-      revalidate: 180, 
+        props: {
+            kabir: article.kabir,
+            // menus,
+            data,
+            filters
+        },
+        //   revalidate: 180, 
     }
 }
 
-export async function getStaticPaths() {
-    const allnewsletters = await getAllkabirWithSlug()
-    return {
-      paths: allnewsletters.edges.map(({ node }) => `/kabir/${node.slug}`) || [],
-      fallback: true,
-    }  
-}
+// export async function getStaticPaths() {
+//     const allnewsletters = await getAllkabirWithSlug()
+//     return {
+//       paths: allnewsletters.edges.map(({ node }) => `/kabir/${node.slug}`) || [],
+//       fallback: true,
+//     }  
+// }
