@@ -1,10 +1,10 @@
-import { getAllPosts , getPostCategories , getFilters , getPostPage , getFooter } from '../lib/api'
+import { getAllPosts, getPostCategories, getFilters, getPostPage, getFooter } from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/posts/posts"));
 
 
 
-export default function blogs({  posts : { edges } , meta:{pages} , categories }) {
+export default function blogs({ posts: { edges }, meta: { pages }, categories }) {
   const meta_data = pages.edges[0].node
   // console.log(edges)
   return (
@@ -14,7 +14,7 @@ export default function blogs({  posts : { edges } , meta:{pages} , categories }
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const posts = await getAllPosts()
   // const menus = await getMenus()
   const data = await getFooter()
@@ -22,7 +22,7 @@ export async function getServerSideProps() {
   const categories = await getPostCategories()
   const filters = await getFilters()
   return {
-    props: { 
+    props: {
       posts,
       // menus,
       data,
@@ -31,6 +31,6 @@ export async function getServerSideProps() {
       filters
 
     },
-    // revalidate: 180, 
+    revalidate: 180,
   }
 }

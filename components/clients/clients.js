@@ -114,12 +114,14 @@ export default function clients({ meta, edges }) {
                                     var letter = data?.name?.charAt(0);
                                     var projectData = data?.projects?.nodes
                                     var leadImgSrc
+                                    var ProjectLink
                                     {
                                         projectData?.map((data) => (
-                                            leadImgSrc = data?.featuredImage?.node?.sourceUrl
+                                            leadImgSrc = data?.featuredImage?.node?.sourceUrl,
+                                            ProjectLink = data?.slug
                                         ))
                                     }
-                                    var ProjectLink = projectData?.slug
+
                                     if (letter != currletter) {
                                         projectletter = <h2 className={alphabet.alpha_letter}>{letter}</h2>
                                     } else {

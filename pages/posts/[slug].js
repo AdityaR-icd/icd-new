@@ -24,8 +24,8 @@ const NextPost = dynamic(() => import('../../components/posts/next-post'))
 const PrevPost = dynamic(() => import('../../components/posts/prev-post'))
 
 
-export default function Post({ post, data, filters }) {
-
+export default function Post({ post }) {
+  ``
   const router = useRouter()
 
   const [mounted, setMounted] = useState(false);
@@ -273,10 +273,10 @@ export default function Post({ post, data, filters }) {
                     <div className="post__navigation">
                       <div className="row">
                         <div className="col-md-6 ">
-                          {post?.previous && <PrevPost data={post?.previous} />}
+                          {post?.next && <PrevPost data={post?.next} />}
                         </div>
                         <div className="col-md-6">
-                          {post?.next && <NextPost data={post?.next} />}
+                          {post?.previous && <NextPost data={post?.previous} />}
                         </div>
                       </div>
                     </div>
@@ -294,15 +294,15 @@ export default function Post({ post, data, filters }) {
   )
 }
 
-export async function getStaticPaths() {
-  const allPosts = await getAllPostsForHome()
-  return {
-    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   const allPosts = await getAllPostsForHome()
+//   return {
+//     paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
+//     fallback: true,
+//   }
+// }
 
-export async function getStaticProps({ preview = false, params, previewData }) {
+export async function getServerSideProps({ preview = false, params, previewData }) {
   const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
   // const menus = await getMenus()
   const data = await getFooter()
@@ -316,6 +316,6 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       data,
       filters
     },
-    revalidate: 2,
+    // revalidate: 2,
   }
 }

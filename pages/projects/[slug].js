@@ -26,9 +26,9 @@ import style from '../../styles/singleProject.module.scss'
 
 export default function Projects({ project, data, menus }) {
   const router = useRouter()
-  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.origin + router.asPath
-  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + project?.title + '"&url=' + window.location.origin + router.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window.location.origin + router.asPath + '"&title=' + project?.title;
+  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
+  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + project?.title + '"&url=' + window?.location.origin + router.asPath
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window?.location.origin + router.asPath + '"&title=' + project?.title;
   const seo = project ? (project?.seo ?? {}) : ({});
   const uri = project ? (project?.uri ?? {}) : ({});
   // console.log(uri)
@@ -129,7 +129,7 @@ export default function Projects({ project, data, menus }) {
                         src={leadImgSrc}
                         alt="project-lead"
                         fill
-                        sizes="100vw" />
+                      />
                     </div>
                     <span className="thumbnail-gif"></span>
                   </span>
@@ -249,7 +249,7 @@ export default function Projects({ project, data, menus }) {
               </span>
             </Link>
           </div>
-            <Link href={url} >
+          <Link href={url} >
             <span className={carousel?.projectTitle}>{node?.projectComponent?.heading || node?.title}
               <span className={carousel.grey__color}>  / {client || categories}</span>
             </span>
@@ -596,7 +596,7 @@ export default function Projects({ project, data, menus }) {
   </>;
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const gProject = await getProject(params.slug)
   // const menus = await getMenus()
   const data = await getFooter()
@@ -608,16 +608,16 @@ export async function getStaticProps({ params }) {
       data,
       filters,
     },
-    revalidate: 2,
+    // revalidate: 2,
   }
 }
 
-export async function getStaticPaths() {
-  const allProjects = await getAllProjectsWithSlug()
-  return {
-    paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   const allProjects = await getAllProjectsWithSlug()
+//   return {
+//     paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
+//     fallback: true,
+//   }
+// }
 
 
