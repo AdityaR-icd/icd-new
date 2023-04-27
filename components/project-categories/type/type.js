@@ -90,7 +90,7 @@ export default function projectTypes({ nodes }){
     
                     <div className={type.project__scroll}>
                         <div className={`row ${type.project__row}`}>
-                        {projects.edges.map(({ node }) => (
+                        {projects.edges.map(({ node } , i) => (
                             slug = node?.slug,
                             title = node?.title,
                             leadImgSrc = node?.featuredImage?.node.sourceUrl,
@@ -115,7 +115,7 @@ export default function projectTypes({ nodes }){
                                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                                     )}
                                                     
-                                                    {tag == 'true' &&  !node?.projectComponent?.awardsReceived && (
+                                                    {node?.id === id[i] && (
                                                         <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                     )}
                                                 </Link>

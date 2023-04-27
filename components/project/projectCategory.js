@@ -6,23 +6,15 @@ const Type = dynamic(() => import("../project-categories/type/type"));
 
 import project from './projects.module.scss'
 import category from './category.module.scss'
-import { useEffect, useState } from 'react';
-import projectTypes from '../project-categories/type/type';
 export default function projectCategory({ meta , projectsTypes : { nodes } }) {
     const backButton = () => {
       window.history.back();
     }
-    const [isLoading, setisLoading] = useState(false)
-    useEffect(() => {
-      if(meta != undefined && projectTypes != undefined) {
-        setisLoading(true)
-        // console.log(true)
-      }
-    }, [])
+
     return (
   
         <>
-         {isLoading &&
+        
           <>
             <NextSeo
               title={meta.seo.title}
@@ -70,7 +62,7 @@ export default function projectCategory({ meta , projectsTypes : { nodes } }) {
               
             <Type nodes={nodes} />
           </>
-        }
+        
         </>
         
       )

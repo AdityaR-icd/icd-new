@@ -49,7 +49,7 @@ export default function allproject({ edges }){
     }
 
     for(var i = 0; i < id.length; i++){
-        if(id[i] === project_id[i]){
+        if(id[i] == project_id[i]){
             tag = 'true'
         }
     }
@@ -78,7 +78,8 @@ export default function allproject({ edges }){
             <div className="container">
                 <div className="project__scroll">
                     <div className="row project__row">
-                    {edges.map(({ node }) => (
+                    {edges.map(({ node } , i) => (
+                        console.log(id[i] , node?.id),
                         client = node?.clients?.edges[0]?.node?.name,
                         leadImgSrc = node?.featuredImage?.node?.sourceUrl,
                         
@@ -99,7 +100,7 @@ export default function allproject({ edges }){
                                             {node?.projectComponent?.awardsReceived && (
                                                 <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                             )}
-                                            {tag == 'true' &&  !node?.projectComponent?.awardsReceived && (
+                                            {node?.id == id[i] && (
                                                 <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                             )}
                                     </a>
