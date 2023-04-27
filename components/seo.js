@@ -1,9 +1,9 @@
-import {NextSeo} from 'next-seo';
+import { NextSeo } from 'next-seo';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 
 
-const Seo = ( {seo, uri} ) => {
+const Seo = ({ seo, uri }) => {
 	const {
 		title,
 		metaDesc,
@@ -24,12 +24,11 @@ const Seo = ( {seo, uri} ) => {
 	const image = opengraphImage?.sourceUrl;
 	const twitterImag = twitterImage?.sourceUrl
 
-	// console.log(image)
 	return (
 		<NextSeo
 			title={title}
 			description={opengraphDescription || metaDesc}
-			canonical= {opengraphUrl}
+			canonical={opengraphUrl}
 			// robots={metaRobotsNoindex || metaRobotsNofollow}
 			// googlebot={metaRobotsNofollow || metaRobotsNoindex }
 			openGraph={{
@@ -53,9 +52,9 @@ const Seo = ( {seo, uri} ) => {
 			twitter={{
 				site: opengraphUrl,
 				cardType: 'summary_large_image',
-				image : image,
-				title:  {title},
-				description: {metaDesc}
+				image: twitterImag,
+				title: { title },
+				description: { metaDesc }
 			}}
 		/>
 	);
@@ -78,7 +77,7 @@ Seo.defaultProps = {
 			sourceUrl: ''
 		},
 		twitterImage: {
-			sourceUrl:''
+			sourceUrl: ''
 		},
 		opengraphUrl: '',
 		opengraphSiteName: ''
