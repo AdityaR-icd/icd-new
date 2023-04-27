@@ -122,7 +122,7 @@ export default function Projects({ project, data, menus }) {
                   <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                     <div className={`${carousel?.full_thumb} full-thumb`}>
                       <Image
-                        // priority={true}
+                        priority={true}
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         className={carousel?.project_lead}
@@ -165,7 +165,7 @@ export default function Projects({ project, data, menus }) {
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
                       <Image
-                        // priority={true}
+                        priority={true}
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         className={carousel?.project_lead}
@@ -244,7 +244,7 @@ export default function Projects({ project, data, menus }) {
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
-                    // priority={true}
+                    priority={true}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                     className={carousel?.project_lead}
@@ -270,7 +270,7 @@ export default function Projects({ project, data, menus }) {
   if (awards) {
     var leadImgSrc = project?.projectComponent?.awardsImage?.sourceUrl
     var awardImg = <Image
-      // priority={true}
+      priority={true}
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
       className={` ${carousel.project_lead} d-none d-md-block `}
@@ -283,7 +283,7 @@ export default function Projects({ project, data, menus }) {
   if (project?.projectComponent?.awardsImageMobile) {
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
-      // priority={true}
+      priority={true}
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
@@ -602,7 +602,7 @@ export default function Projects({ project, data, menus }) {
   </>;
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const gProject = await getProject(params.slug)
   // const menus = await getMenus()
   const data = await getFooter()
@@ -614,16 +614,16 @@ export async function getStaticProps({ params }) {
       data,
       filters,
     },
-    revalidate: 2,
+    // revalidate: 2,
   }
 }
 
-export async function getStaticPaths() {
-  const allProjects = await getAllProjectsWithSlug()
-  return {
-    paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   const allProjects = await getAllProjectsWithSlug()
+//   return {
+//     paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
+//     fallback: true,
+//   }
+// }
 
 
