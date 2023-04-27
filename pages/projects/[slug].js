@@ -562,8 +562,8 @@ export default function Projects({ project, data, menus }) {
               <div className={style.more__projects_block}>
                 <div className={`more_cont ${style['more_cont']}`}>
                   <span className={style.more__projects_head} id="more-projectTitle">related</span>
-                  <span className="see-all">
-                    <a href={`/projects`}>see all</a>
+                  <span className={`${style.see_all} see-all`}>
+                    <Link href={`/projects/type/all`}>see all</Link>
                   </span>
                 </div>
                 <span className="bottom__border"></span>
@@ -582,7 +582,7 @@ export default function Projects({ project, data, menus }) {
                 <div className={`more_cont ${style['more_cont']}`}>
                   <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
                   <span className={`${style.see_all} see-all`}>
-                    <a href={` /projects/category/${categorySlug} `}>see all</a>
+                    <Link href={` /projects/category/${categorySlug} `}>see all</Link>
                   </span>
                 </div>
                 <span className="bottom__border"></span>
