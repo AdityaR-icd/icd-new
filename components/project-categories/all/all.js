@@ -79,7 +79,7 @@ export default function allproject({ edges }){
                 <div className="project__scroll">
                     <div className="row project__row">
                     {edges.map(({ node } , i) => (
-                        console.log(id[i] , node?.id),
+                        // console.log(id[i] , node?.id),
                         client = node?.clients?.edges[0]?.node?.name,
                         leadImgSrc = node?.featuredImage?.node?.sourceUrl,
                         
