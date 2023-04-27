@@ -9,7 +9,7 @@ const Footer = dynamic(() => import("../footer/footer"));
 
 const Layout = ({ children }) => {
     const router = useRouter();
-    const home = '/';
+    const home = ['/'];
     const bg_yellow = [`/posts/[slug]`];
     const noNav = [`/yellow-envelope/[slug]`];
     const props = children.props
@@ -22,14 +22,15 @@ const Layout = ({ children }) => {
         }
     })
 
-
+    let transparent = document.getElementById('menu-cont')
     useEffect(() => {
-        const transparent = document.getElementById('menu-cont')
         if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
-            transparent.classList.add('bg-transparent');
+
+            transparent?.classList?.add('bg-transparent');
         }
         else {
-            transparent.classList.remove('bg-transparent');
+
+            transparent?.classList?.remove('bg-transparent');
         }
     })
     return (

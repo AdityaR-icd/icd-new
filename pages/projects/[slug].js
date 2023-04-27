@@ -233,7 +233,7 @@ export default function Projects({ project, data, menus }) {
       url = `/posts/${node.slug}`
     }
 
-    console.log(url)
+    // console.log(url)
 
 
     return <>
