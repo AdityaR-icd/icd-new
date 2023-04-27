@@ -263,7 +263,7 @@ export default function posts({ posts, meta, categories, tags }) {
         ;
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     // const menus = await getMenus()
     const data = await getFooter()
     const meta = await getPostPage()
@@ -281,14 +281,14 @@ export async function getServerSideProps({ params }) {
             tags,
             filters
         },
-        // revalidate: 180,
+        revalidate: 180,
     }
 }
 
-// export async function getStaticPaths() {
-//     const allPosts = await getAllPostsByCategory()
-//     return {
-//         paths: allPosts.edges.map(({ node }) => `/posts/category/${node.slug}`) || [],
-//         fallback: true,
-//     }
-// }
+export async function getStaticPaths() {
+    const allPosts = await getAllPostsByCategory()
+    return {
+        paths: allPosts.edges.map(({ node }) => `/posts/category/${node.slug}`) || [],
+        fallback: true,
+    }
+}

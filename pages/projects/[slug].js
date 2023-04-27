@@ -225,7 +225,15 @@ export default function Projects({ project, data, menus }) {
     var leadImgSrc = node?.featuredImage?.node?.sourceUrl
     var client = node?.clients?.edges[0]?.node.name
     var categories = node?.categories?.edges[0]?.node.name
-    var url = node?.uri ?? `/posts/${node.slug}`
+    var url
+
+    if (node?.uri) {
+      url = `/projects/${node?.slug}`
+    } else {
+      url = `/posts/${node.slug}`
+    }
+
+    console.log(url)
 
 
     return <>
@@ -404,28 +412,26 @@ export default function Projects({ project, data, menus }) {
           <section className={style.singleProjectLeadCont}>
             <div className={style.leadImage}>
               <div className={style.images_loaded_container}>
-                {isDesktop && (
-                  <>
-                    <Image
-                      src={leadComponent}
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      alt="project-lead"
-                      fill
-                      sizes="100vw" />
-                  </>
-                )}
-                {isMobile && (
-                  <>
-                    <Image
-                      src={leadComponentMobile}
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      alt="project-lead"
-                      fill
-                      sizes="100vw" />
-                  </>
-                )}
+
+                <Image
+                  src={leadComponent}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  alt="project-lead"
+                  fill
+                  className='d-none d-md-block'
+                  sizes="100vw" />
+
+
+                <Image
+                  src={leadComponentMobile}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                  alt="project-lead"
+                  fill
+                  className='d-block d-md-none'
+                  sizes="100vw" />
+
               </div>
             </div>
           </section>
@@ -442,7 +448,7 @@ export default function Projects({ project, data, menus }) {
           </section>
         )}
 
-        <article className={` ${style.singleProject} ${style.winnerTag} singleProject`}>
+        <article className={` ${style.singleProject} ${awards && style.winnerTag} singleProject`}>
           <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
             <div className="container">
               <div className="row">

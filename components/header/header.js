@@ -25,30 +25,30 @@ const Header = (props) => {
     var projectTypes = []
     var categories = []
     var tags = []
-    var keywords= []
+    var keywords = []
 
-    filters?.clients.edges.map((item) => {      
+    filters?.clients.edges.map((item) => {
         clients.push(item.node.slug)
     })
 
-    filters?.industries.edges.map((item) => {      
+    filters?.industries.edges.map((item) => {
         industries.push(item.node.slug)
     })
 
-    filters?.projectTypes.edges.map((item) => {      
+    filters?.projectTypes.edges.map((item) => {
         projectTypes.push(item.node.slug)
     })
 
-    filters?.keywords.edges.map((item) => {      
+    filters?.keywords.edges.map((item) => {
         keywords.push(item.node.slug)
     })
 
 
-    filters?.categories.edges.map((item) => {      
+    filters?.categories.edges.map((item) => {
         categories.push(item.node.slug)
     })
 
-    filters?.tags.edges.map((item) => {      
+    filters?.tags.edges.map((item) => {
         tags.push(item.node.slug)
     })
 
@@ -60,21 +60,21 @@ const Header = (props) => {
     const hamburgerToggle = () => {
         $('body').toggleClass('hamburger-open');
         $('.hamburger, .nav-menu').toggleClass("is-active");
-    } 
+    }
 
     const hamburgerClose = () => {
         $('body').removeClass('hamburger-open');
         $('.hamburger, .nav-menu').removeClass("is-active");
-    } 
+    }
 
     const [searchValue, setsearchValue] = useState('')
     // Search Show and Hide
 
     const searchToggle = () => {
         $('body').toggleClass('showSearch');
-        if($('body').hasClass('showSearch')){
+        if ($('body').hasClass('showSearch')) {
             $('.searchInput').focus();
-        }else{
+        } else {
             setsearchValue('')
         }
     }
@@ -82,48 +82,48 @@ const Header = (props) => {
 
 
     useEffect(() => {
-        $(window).on('load', function(){
-           $('.loader').addClass('hideLoader')
+        $(window).on('load', function () {
+            $('.loader').addClass('hideLoader')
         });
 
         var lastScrollTop = 0;
 
-        $(window).on('scroll', function(event){
+        $(window).on('scroll', function (event) {
             var st = $(this).scrollTop();
-            if(st > 150){
-                if (st > lastScrollTop){
+            if (st > 150) {
+                if (st > lastScrollTop) {
                     $('.menu-cont').addClass('header__hide');
                 } else {
-                    $('.menu-cont').removeClass('header__hide');
+                    $('.menu-cont').removeClass('header__hide bg-transparent');
                 }
                 lastScrollTop = st;
             } else {
-                $('.menu-cont').removeClass('header__hide');
+                $('.menu-cont').removeClass('header__hide').addClass('bg-transparent');
             }
-           
+
         });
     });
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         var search = $('#hamburgerSearch').val();
-        var clean = '/search/'+ search;
+        var clean = '/search/' + search;
         router.push({
             pathname: clean,
         })
     }
-   
+
 
 
 
     return <>
 
-    <Head>
-        <link rel="shortcut icon" href="/favicon.ico" />
-    </Head>
-    
+        <Head>
+            <link rel="shortcut icon" href="/favicon.ico" />
+        </Head>
+
         <header id="header">
-            <div className="menu-cont bg-transparent">
+            <div className="menu-cont" id='menu-cont'>
                 <div className="container">
                     <div className="row">
                         <div className="col-10 col-md-2 logo-container">
@@ -184,7 +184,7 @@ const Header = (props) => {
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
                                             <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
-                                            <li className="search-icon d-lg-block d-none" onClick={ searchToggle }><span className="searchIcon"></span></li>
+                                            <li className="search-icon d-lg-block d-none" onClick={searchToggle}><span className="searchIcon"></span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -195,14 +195,14 @@ const Header = (props) => {
                 </div>
             </div>
             <div className="search-form ignore-react-onclickoutside" id="searchID">
-            <Search suggestion={allFilters} ></Search>
-            <div id="close">
-                <span className="close-wrap" onClick={searchToggle}>
-                    <span className="close-line close-line1"></span>
-                    <span className="close-line close-line2"></span>
-                </span>
+                <Search suggestion={allFilters} ></Search>
+                <div id="close">
+                    <span className="close-wrap" onClick={searchToggle}>
+                        <span className="close-line close-line1"></span>
+                        <span className="close-line close-line2"></span>
+                    </span>
+                </div>
             </div>
-        </div>
         </header>
     </>;
 }

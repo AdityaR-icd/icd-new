@@ -88,86 +88,42 @@ export default function projectLead({ edges }) {
                                             <div className={styles.Tilt}>
                                                 <div className="Tilt-inner">
 
-                                                    {isDesktop && (
-                                                        <>
-                                                            {project_video && (
-                                                                <>
-                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
-                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
-                                                                    </div>
-                                                                </>
-                                                            )}
 
-                                                            {!project_video && (
-                                                                <>
-                                                                    <div className={`${styles.project__leadimage}`}>
-                                                                        <Image
-                                                                            priority={true}
-                                                                            placeholder="blur"
-                                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                            src={project_thumbnail}
-                                                                            alt="project-lead"
-                                                                            fill
-                                                                            sizes="100vw" />
-                                                                    </div>
-                                                                </>
-                                                            )}
+                                                    {project_video && (
+                                                        <>
+                                                            <div className={`${styles.project__leadimage}  d-none d-md-block ${styles.video_container}`}>
+                                                                <video src={project_video} autoPlay playsInline loop muted></video>
+                                                            </div>
                                                         </>
                                                     )}
-                                                    {isTabletH && (
-                                                        <>
-                                                            {project_video && (
-                                                                <>
-                                                                    <div className={`${styles.project__leadimage} ${styles.video_container}`}>
-                                                                        <video src={project_video} autoPlay playsInline loop muted></video>
-                                                                    </div>
-                                                                </>
-                                                            )}
 
-                                                            {!project_video && (
-                                                                <>
-                                                                    <div className={`${styles.project__leadimage}`}>
-                                                                        <Image
-                                                                            priority={true}
-                                                                            placeholder="blur"
-                                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                            src={project_thumbnail}
-                                                                            alt="project-lead"
-                                                                            fill
-                                                                            sizes="100vw" />
-                                                                    </div>
-                                                                </>
-                                                            )}
-                                                        </>
-                                                    )}
-                                                    {isMobile && (
+                                                    {!project_video && (
                                                         <>
-                                                            <div className={`${styles.project__leadimage}`}>
+                                                            <div className={` d-none d-md-block ${styles.project__leadimage}`}>
                                                                 <Image
                                                                     priority={true}
                                                                     placeholder="blur"
                                                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                    src={project_thumbnail_mobile}
+                                                                    src={project_thumbnail}
                                                                     alt="project-lead"
                                                                     fill
                                                                     sizes="100vw" />
                                                             </div>
                                                         </>
                                                     )}
-                                                    {isTabletV && (
-                                                        <>
-                                                            <div className={`${styles.project__leadimage}`}>
-                                                                <Image
-                                                                    priority={true}
-                                                                    placeholder="blur"
-                                                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
-                                                                    src={project_thumbnail_mobile}
-                                                                    alt="project-lead"
-                                                                    fill
-                                                                    sizes="100vw" />
-                                                            </div>
-                                                        </>
-                                                    )}
+
+
+                                                    <div className={`  d-block d-md-none ${styles.project__leadimage}`}>
+                                                        <Image
+                                                            priority={true}
+                                                            placeholder="blur"
+                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                            src={project_thumbnail_mobile}
+                                                            alt="project-lead"
+                                                            fill
+                                                            sizes="100vw" />
+                                                    </div>
+
                                                 </div>
                                             </div>
 

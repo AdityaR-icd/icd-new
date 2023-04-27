@@ -269,7 +269,14 @@ body {
     }
   }
 }
-
+.next-post_arrow {
+  display: inline-block;
+  margin-left: 13px;
+}
+.pevious-left_arrow {
+  display: inline-block;
+  margin-right: 13px;
+}
 p {
   font-family: "Merriweather", serif;
   font-size: 16px;
@@ -594,7 +601,7 @@ button.blackBG {
   // margin-bottom: 75px;
   @include for-upto-tablet-portrait {
     margin-bottom: 32.5px;
-    display: none;
+    // display: none;
   }
 }
 
@@ -1331,5 +1338,11 @@ figure {
         }
       }
     }
+  }
+}
+
+.posts__page {
+  .bottom__border {
+    display: block;
   }
 }
