@@ -10,7 +10,7 @@ const All = dynamic(() => import("../../../../components/project-categories/all/
 import ogimage from '../../../../assets/images/seo/og-default.png'
 import style from '../../../../components/project/category.module.scss'
 
-export default function subProject({ subTypeProjects, project, filters }) {
+export default function subProject({ subTypeProjects, project }) {
   const router = useRouter()
   var pageData = project?.edges[0]?.node
   var projectSubTypes = pageData?.children?.edges

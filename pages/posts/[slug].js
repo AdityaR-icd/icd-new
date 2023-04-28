@@ -28,10 +28,10 @@ export default function Post({ post }) {
   ``
   const router = useRouter()
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  // const [mounted, setMounted] = useState(false);
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
   // const clientspage = 
   const seo = post ? (post?.seo ?? {}) : ({});
   const uri = post ? (post?.uri ?? {}) : ({});
@@ -214,43 +214,30 @@ export default function Post({ post }) {
 
   return (
     <>
-      {mounted && (
-        <>
-          <Seo seo={seo} uri={uri} />
-          <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
-            <div className="images-loaded-container">
-              {imageData}
-            </div>
-            <div className={style.postContent_cont}>
-              <div className="container">
-                <div className="row">
-                  <div className="col-12 col-md-8 offset-md-2">
-                    <div className={style.posts__container}>
-                      <div className={style.post__tag}>
-                        <span className={style.yellow__tag}>{categories}</span>
-                      </div>
-                      <h1>{post.title}</h1>
-                      <div className={style.post__author}>
-                        <div className={style.author_wrapper}>
-                          <span className={`sl ${style.author__img}`}><img loading="lazy" alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
-                          </img></span>
-                          <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
-                        </div>
-
-                        <div className={` ${style.social__media} ${style.header_socialmedia} social__media  `}>
-                          <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
-                          <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
-                          <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                          <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                          <Like count={post.likes?.likes} id={post.id} type={'post'} />
-                        </div>
-
-                      </div>
-                      <div className={`${style.postContent} postContent`}>
-                        {parse(post.content)}
-                      </div>
+      {/* {mounted && (
+        <> */}
+      <Seo seo={seo} uri={uri} />
+      <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
+        <div className="images-loaded-container">
+          {imageData}
+        </div>
+        <div className={style.postContent_cont}>
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-md-8 offset-md-2">
+                <div className={style.posts__container}>
+                  <div className={style.post__tag}>
+                    <span className={style.yellow__tag}>{categories}</span>
+                  </div>
+                  <h1>{post.title}</h1>
+                  <div className={style.post__author}>
+                    <div className={style.author_wrapper}>
+                      <span className={`sl ${style.author__img}`}><img loading="lazy" alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
+                      </img></span>
+                      <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
                     </div>
-                    <div className={` ${style.social__media} social__media `}>
+
+                    <div className={` ${style.social__media} ${style.header_socialmedia} social__media  `}>
                       <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
@@ -258,41 +245,54 @@ export default function Post({ post }) {
                       <Like count={post.likes?.likes} id={post.id} type={'post'} />
                     </div>
 
-                    {relatedPost &&
-                      <div className={style.relatedProjects__container}>
-                        <span className={style.relatedProjects__head}>related </span>
-                        <section className={`${type.industry__filter} ${type.all_filter} `}>
-                          <div className="project__scroll">
-                            <div className="row project__row">
-                              {relatedProject}
-                              {relatedPost}
-                            </div>
-                          </div>
-                        </section>
-                      </div>
-                    }
-
-
-                    <div className="post__navigation">
-                      <div className="row">
-                        <div className="col-md-6 ">
-                          {post?.next && <PrevPost data={post?.next} />}
-                        </div>
-                        <div className="col-md-6">
-                          {post?.previous && <NextPost data={post?.previous} />}
-                        </div>
-                      </div>
-                    </div>
-                    {/* <Comment postId={post.postId} comment_data={comment_data} /> */}
+                  </div>
+                  <div className={`${style.postContent} postContent`}>
+                    {parse(post.content)}
                   </div>
                 </div>
+                <div className={` ${style.social__media} social__media `}>
+                  <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
+                  <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
+                  <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
+                  <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                  <Like count={post.likes?.likes} id={post.id} type={'post'} />
+                </div>
+
+                {relatedPost &&
+                  <div className={style.relatedProjects__container}>
+                    <span className={style.relatedProjects__head}>related </span>
+                    <section className={`${type.industry__filter} ${type.all_filter} `}>
+                      <div className="project__scroll">
+                        <div className="row project__row">
+                          {relatedProject}
+                          {relatedPost}
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                }
+
+
+                <div className="post__navigation">
+                  <div className="row">
+                    <div className="col-md-6 ">
+                      {post?.next && <PrevPost data={post?.next} />}
+                    </div>
+                    <div className="col-md-6">
+                      {post?.previous && <NextPost data={post?.previous} />}
+                    </div>
+                  </div>
+                </div>
+                {/* <Comment postId={post.postId} comment_data={comment_data} /> */}
               </div>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
 
-        </>
-      )}
+      {/* </>
+      )} */}
     </>
   )
 }

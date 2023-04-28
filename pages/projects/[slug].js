@@ -396,209 +396,209 @@ export default function Projects({ project, data, menus }) {
 
     ]
   };
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  // const [mounted, setMounted] = useState(false);
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
   return <>
-    {mounted && (
-      <>
-        <Seo seo={seo} uri={uri} />
+    {/* {mounted && (
+      <> */}
+    <Seo seo={seo} uri={uri} />
 
-        {leadComponent && (
-          <section className={style.singleProjectLeadCont}>
-            <div className={style.leadImage}>
-              <div className={style.images_loaded_container}>
+    {leadComponent && (
+      <section className={style.singleProjectLeadCont}>
+        <div className={style.leadImage}>
+          <div className={style.images_loaded_container}>
 
-                <Image
-                  src={leadComponent}
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  alt="project-lead"
-                  layout="fill"
-                  className='d-none d-md-block'
-                  sizes="100vw" />
+            <Image
+              src={leadComponent}
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              alt="project-lead"
+              layout="fill"
+              className='d-none d-md-block'
+              sizes="100vw" />
 
 
-                <Image
-                  src={leadComponentMobile}
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  alt="project-lead"
-                  layout="fill"
-                  className='d-block d-md-none'
-                  sizes="100vw" />
+            <Image
+              src={leadComponentMobile}
+              loading="lazy"
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              alt="project-lead"
+              layout="fill"
+              className='d-block d-md-none'
+              sizes="100vw" />
 
-              </div>
-            </div>
-          </section>
-        )}
-
-        {leadVideo && (
-          <section className={style.singleProjectLeadCont}>
-            <div className={style.leadImage}>
-              <div>
-                <video src={leadVideo} className={`${style.video} d-none d-md-block`} autoPlay loop muted playsInline />
-                <video src={leadVideo_mobile} className={`${style.video} d-block d-md-none`} autoPlay loop muted playsInline />
-              </div>
-            </div>
-          </section>
-        )}
-
-        <article className={` ${style.singleProject} ${awards && style.winnerTag} singleProject`}>
-          <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
-            <div className="container">
-              <div className="row">
-                <span className={`close-button ${style.close_button}`} onClick={hideModal}></span>
-                <div className="col-lg-5 col-xl-4">
-                  <span className={style.modal_project_title}>{title}
-                    {awards && (
-                      <span className="project__tag">Winner</span>
-                    )}
-                  </span>
-                  <div className={style.projectMeta__cont}>
-                    <span className={style.category__title}>project</span>
-                    <span className={style.category}>{heading}</span>
-                  </div>
-                  <div className={style.projectMeta__cont}>
-                    <span className={style.category__title}>client</span>
-                    <span className={style.category}>{clients}</span>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-xl-7">
-                  <div>
-                    {description && (
-                      parse(description)
-                    )}
-                  </div>
-                  <div className={style.projectContent__footer}>
-                    <button onClick={hideModal}>close</button>
-                    {shareBtn}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
-          <div className={`container ${style.projectHeading}`}>
-            <div className="row">
-              <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
-                <div className={style.titlePadding}>
-                  <h1 className={style.project__Title}>{title}
-                    {awards && (
-                      <span className={`${style.project__tag} project__tag`}>Winner</span>
-                    )}
-                  </h1>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
-                <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
-                <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
-                {projectLink && (
-                  <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target={projectLink?.target}>{projectLink?.title}</a></span></div>
-                )}
-                {project?.projectComponent?.awardsReceived > '' && (
-                  <>
-                    <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}>{awardName}</span></div>
-                  </>
-                )}
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
-                <div className={style.project__summary}>
-                  <div className={style.intro_para}>
-                    <div>
-                      {shortDesc && (
-                        parse(shortDesc)
-                      )}
-                    </div>
-                  </div>
-                  <button className={style.collapse__btn} onClick={showModal}>project detail</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={`container ${style.projectWordpress}`}>
-            {awardImg && (
-              <div className='col-md-12'>
-                <span className="awardImg-cont">
-                  {awardImg}
-                  {awardImgMobile}
-                </span>
-              </div>
-            )}
-
-            {content && (
-              parse(content)
-
-              // $('.wp-block-video.controls')
-            )}
-            {shareBtn}
-          </div>
-          <div className="container">
-            <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
-              <div className={style.team__block}>
-                <span className={style.team}>team</span>
-                <div className={` team__content ${style.team__content}`}>
-                  <div className={style.team__detail}>
-                    {team && (
-                      parse(team)
-                    )}
-                  </div>
-                </div>
-                <a className={style.team__seeAll} rel="noopener" aria-label="icd" onClick={seeallTeam}>{seeAll}</a>
-                <button className="collapse__btn" onClick={showModal}>project detail</button>
-              </div>
-            </div>
-          </div>
-
-          {relatedProjects_slider?.length > 0 && (
-            <div className={`container slider-container ${style.relatedProjects__container}`}>
-              <div className={style.more__projects_block}>
-                <div className={`more_cont ${style['more_cont']}`}>
-                  <span className={style.more__projects_head} id="more-projectTitle">related</span>
-                  <span className={`${style.see_all} see-all`}>
-                    <Link href={`/projects/type/all`}>see all</Link>
-                  </span>
-                </div>
-                <span className="bottom__border"></span>
-                <div className="more-projectsCarousel">
-                  <Slider {...settings}>
-                    {relatedProjects_slider}
-                  </Slider>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {other_projects?.length > 0 && (
-            <div className='container slider-container'>
-              <div className={style.more__projects_block}>
-                <div className={`more_cont ${style['more_cont']}`}>
-                  <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
-                  <span className={`${style.see_all} see-all`}>
-                    <Link href={` /projects/category/${categorySlug} `}>see all</Link>
-                  </span>
-                </div>
-                <span className="bottom__border"></span>
-                <div className="more-projectsCarousel">
-                  <Slider {...settings}>
-                    {other_projects_slider}
-                    {other_projects_slider1}
-                  </Slider>
-                </div>
-              </div>
-            </div>
-          )}
-
-        </article>
-      </>
+        </div>
+      </section>
     )}
-  </>;
+
+    {leadVideo && (
+      <section className={style.singleProjectLeadCont}>
+        <div className={style.leadImage}>
+          <div>
+            <video src={leadVideo} className={`${style.video} d-none d-md-block`} autoPlay loop muted playsInline />
+            <video src={leadVideo_mobile} className={`${style.video} d-block d-md-none`} autoPlay loop muted playsInline />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <article className={` ${style.singleProject} ${awards && style.winnerTag} singleProject`}>
+      <div className={` project_details_modal ${style.project_details_modal} ${style.hide_popup}`}>
+        <div className="container">
+          <div className="row">
+            <span className={`close-button ${style.close_button}`} onClick={hideModal}></span>
+            <div className="col-lg-5 col-xl-4">
+              <span className={style.modal_project_title}>{title}
+                {awards && (
+                  <span className="project__tag">Winner</span>
+                )}
+              </span>
+              <div className={style.projectMeta__cont}>
+                <span className={style.category__title}>project</span>
+                <span className={style.category}>{heading}</span>
+              </div>
+              <div className={style.projectMeta__cont}>
+                <span className={style.category__title}>client</span>
+                <span className={style.category}>{clients}</span>
+              </div>
+            </div>
+            <div className="col-lg-6 col-xl-7">
+              <div>
+                {description && (
+                  parse(description)
+                )}
+              </div>
+              <div className={style.projectContent__footer}>
+                <button onClick={hideModal}>close</button>
+                {shareBtn}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={`container ${style.projectHeading}`}>
+        <div className="row">
+          <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+            <div className={style.titlePadding}>
+              <h1 className={style.project__Title}>{title}
+                {awards && (
+                  <span className={`${style.project__tag} project__tag`}>Winner</span>
+                )}
+              </h1>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+            <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
+            <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
+            {projectLink && (
+              <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target={projectLink?.target}>{projectLink?.title}</a></span></div>
+            )}
+            {project?.projectComponent?.awardsReceived > '' && (
+              <>
+                <div className={style.projectMeta__cont}><span className={style.category__title}>awards</span><span className={style.category}>{awardName}</span></div>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+            <div className={style.project__summary}>
+              <div className={style.intro_para}>
+                <div>
+                  {shortDesc && (
+                    parse(shortDesc)
+                  )}
+                </div>
+              </div>
+              <button className={style.collapse__btn} onClick={showModal}>project detail</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={`container ${style.projectWordpress}`}>
+        {awardImg && (
+          <div className='col-md-12'>
+            <span className="awardImg-cont">
+              {awardImg}
+              {awardImgMobile}
+            </span>
+          </div>
+        )}
+
+        {content && (
+          parse(content)
+
+          // $('.wp-block-video.controls')
+        )}
+        {shareBtn}
+      </div>
+      <div className="container">
+        <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+          <div className={style.team__block}>
+            <span className={style.team}>team</span>
+            <div className={` team__content ${style.team__content}`}>
+              <div className={style.team__detail}>
+                {team && (
+                  parse(team)
+                )}
+              </div>
+            </div>
+            <a className={style.team__seeAll} rel="noopener" aria-label="icd" onClick={seeallTeam}>{seeAll}</a>
+            <button className="collapse__btn" onClick={showModal}>project detail</button>
+          </div>
+        </div>
+      </div>
+
+      {relatedProjects_slider?.length > 0 && (
+        <div className={`container slider-container ${style.relatedProjects__container}`}>
+          <div className={style.more__projects_block}>
+            <div className={`more_cont ${style['more_cont']}`}>
+              <span className={style.more__projects_head} id="more-projectTitle">related</span>
+              <span className={`${style.see_all} see-all`}>
+                <Link href={`/projects/type/all`}>see all</Link>
+              </span>
+            </div>
+            <span className="bottom__border"></span>
+            <div className="more-projectsCarousel">
+              <Slider {...settings}>
+                {relatedProjects_slider}
+              </Slider>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {other_projects?.length > 0 && (
+        <div className='container slider-container'>
+          <div className={style.more__projects_block}>
+            <div className={`more_cont ${style['more_cont']}`}>
+              <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
+              <span className={`${style.see_all} see-all`}>
+                <Link href={` /projects/category/${categorySlug} `}>see all</Link>
+              </span>
+            </div>
+            <span className="bottom__border"></span>
+            <div className="more-projectsCarousel">
+              <Slider {...settings}>
+                {other_projects_slider}
+                {other_projects_slider1}
+              </Slider>
+            </div>
+          </div>
+        </div>
+      )}
+
+    </article>
+    {/* </>
+    )} */}
+  </>
 }
 
 export async function getServerSideProps({ params }) {

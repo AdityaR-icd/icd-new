@@ -14,6 +14,7 @@ const Layout = ({ children }) => {
     const bg_yellow = [`/posts/[slug]`];
     const noNav = [`/yellow-envelope/[slug]`];
     const props = children.props
+
     useEffect(() => {
         if (bg_yellow.includes(router.pathname)) {
             document.body.classList.add('bg-yellow');
@@ -23,15 +24,15 @@ const Layout = ({ children }) => {
         }
     })
 
-    let transparent = document.getElementById('menu-cont')
+    // let transparent = 
     useEffect(() => {
         if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
 
-            $(transparent)?.classList?.add('bg-transparent');
+            document.getElementById('menu-cont').classList?.add('bg-transparent');
         }
         else {
 
-            $(transparent)?.classList?.remove('bg-transparent');
+            document.getElementById('menu-cont').classList?.remove('bg-transparent');
         }
     })
     return (
