@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 import Link from 'next/link'
 import { useEffect } from 'react'
 
-export default function fetchNewsletter({data}) {
+export default function fetchNewsletter({ data }) {
     var date = new Date(data.date).toLocaleDateString('en-IN', {
         day: 'numeric',
         month: 'long',
@@ -13,22 +13,22 @@ export default function fetchNewsletter({data}) {
 
     var htmlString = data?.content;
 
-    if(htmlString){
+    if (htmlString) {
         var stripedHtml = htmlString?.replace(/<[^>]+>/g, ' ');
-        var content = stripedHtml?.substr(0,500);
-    }else{
+        var content = stripedHtml?.substr(0, 500);
+    } else {
         content = "...."
     }
-    
+
 
     return (
         <div className="col-md-4 col-lg- grid-item">
             <div className={`${style.postsItems} animateItems}`}>
-                <a href={`/yellow-envelope/${data.slug}`}>
+                <Link href={`/yellow-envelope/${data.slug}`}>
                     <h2 className={style.postTitle}>{data.title}</h2>
                     <span className={style.postBy}> {date}  </span>
                     <div className={style.postInfo}> <p> {parse(content)} </p> </div>
-                </a>
+                </Link>
                 <div className="row">
                     <div className="col-6">
                         <Link href={`/yellow-envelope/${data.slug}`} legacyBehavior>
@@ -42,7 +42,7 @@ export default function fetchNewsletter({data}) {
 }
 
 export async function getStaticProps() {
-    return{
+    return {
         props: {
 
         },

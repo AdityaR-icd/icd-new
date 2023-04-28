@@ -106,7 +106,7 @@ export default function projectTypes({ nodes }) {
                                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                                 {leadImgSrc && (
-                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" fill sizes='100vw' />
+                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" fill sizes='100vw' />
                                                                 )}
                                                             </div>
                                                             <span className="thumbnail-gif"></span>

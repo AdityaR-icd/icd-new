@@ -132,7 +132,7 @@ export default function kanbir({ meta, edges }) {
                                     <Image
                                         src={featuredImage}
                                         placeholder="blur"
-                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                                         alt="post-lead"
                                         layout="fill"
                                         sizes="100vw" />
@@ -146,18 +146,18 @@ export default function kanbir({ meta, edges }) {
                         return (
                             <div className="col-md-6 col-lg-6 grid-item" key={node.id}>
                                 <div className={`${style.postsItems} animateItems}`}>
-                                    <a href={`/kabir/${node.slug}`}>
+                                    <Link href={`/kabir/${node.slug}`}>
                                         <div className={style.postLeadImage}>
                                             <div className="images-loaded-container">
                                                 {imageData}
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href={`/kabir/${node.slug}`}>
+                                    </Link>
+                                    <Link href={`/kabir/${node.slug}`}>
                                         <h2 className={style.postTitle}>{node.title}</h2>
                                         <span className={style.postBy}> {date}  </span>
                                         <div className={style.postInfo}> <p> {parse(content)} </p> </div>
-                                    </a>
+                                    </Link>
                                     <div className="row">
                                         <div className="col-6">
                                             <Link href={`/kabir/${node.slug}`} legacyBehavior>

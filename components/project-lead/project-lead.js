@@ -103,7 +103,7 @@ export default function projectLead({ edges }) {
                                                                 <Image
                                                                     priority={true}
                                                                     placeholder="blur"
-                                                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                                                                     src={project_thumbnail}
                                                                     alt="project-lead"
                                                                     layout="fill"
@@ -117,7 +117,7 @@ export default function projectLead({ edges }) {
                                                         <Image
                                                             priority={true}
                                                             placeholder="blur"
-                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                                                             src={project_thumbnail_mobile}
                                                             alt="project-lead"
                                                             layout="fill"

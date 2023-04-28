@@ -89,7 +89,7 @@ export default function newsletterss({ newsletter }) {
                                   </div>
                                   <div className="desktop_hide mobile-logo" style={{msoHide: 'all', display: 'none', maxHeight: 0, overflow: 'hidden'}}>
                                     <div align="right" className="img-container right autowidth" style={{paddingRight: 0, paddingLeft: 0}}>
-                                      <img loading="lazy" decoding="async" align="right" alt="Image" border={0} className="right autowidth" src={Mobilelogo.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', border: 0, height: 'auto', width: '100%', maxWidth: 54, float: 'none', display: 'block'}} title="Image" width={54} />
+                                      <img loading="lazy" alt='icd-icon' decoding="async" align="right" alt="Image" border={0} className="right autowidth" src={Mobilelogo.src} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', border: 0, height: 'auto', width: '100%', maxWidth: 54, float: 'none', display: 'block'}} title="Image" width={54} />
                                     </div>
                                   </div>
                                 </div>
@@ -162,7 +162,7 @@ export default function newsletterss({ newsletter }) {
                                   <div style={{ width: '100% !important' }}>
                                     <div className="article-content" style={{ borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 0, paddingBottom: 25, paddingRight: 20, paddingLeft: 20 }}>
                                       <div align="center" className="img-container center autowidth fullwidth" style={{ paddingRight: 0, paddingLeft: 0 }}>
-                                        <a style={{color: '#171717', fontStyle: 'italic'}} target="_blank" href={url} ><img loading="lazy" decoding="async" align="center" alt="Image" border={0} className="center autowidth fullwidth" src={data.featuredImage?.node.sourceUrl} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', border: 0, height: 'auto', width: '100%', maxWidth: 560, display: 'block'}} title="Image" width={560} /></a>
+                                        <a style={{color: '#171717', fontStyle: 'italic'}} target="_blank" href={url} ><img loading="lazy" alt='icd-icon' decoding="async" align="center" alt="Image" border={0} className="center autowidth fullwidth" src={data.featuredImage?.node.sourceUrl} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', border: 0, height: 'auto', width: '100%', maxWidth: 560, display: 'block'}} title="Image" width={560} /></a>
                                       </div>
                                       <div style={{ fontFamily: 'Merriweather,Times,Times New Roman,serif', fontSize: 16, lineHeight: 25 + 'px', color: '#171717 !important' }}>
                                         <div>

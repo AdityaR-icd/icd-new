@@ -60,7 +60,7 @@ export default function kabir({ kabir, data }) {
                 <Image
                     src={featuredImage}
                     placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className="full-lead-img"
                     alt="post-lead"
                     fill
@@ -91,14 +91,14 @@ export default function kabir({ kabir, data }) {
                                     </div>
                                     <h1>{kabir?.title}</h1>
                                     <div className={style.post__author}>
-                                        <span className="author__img"><img loading="lazy" decoding="async" src={Icon.src} ></img></span>
+                                        <span className="author__img"><img alt='icd-icon' loading="lazy" decoding="async" src={Icon.src} ></img></span>
                                         <span className="post-detail">kabir / {date} </span>
                                         <div className={` ${style.social__media} ${style.header_socialmedia} ${style.header_socialmedia_mobile} social__media d-block d-lg-none `}>
                                             <Like count={kabir?.likes?.likes} id={kabir?.id} type={'kabir'} />
                                             <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
                                             <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
                                             <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
-                                            <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                            <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                                         </div>
                                     </div>
                                     <div className={`${style.postContent} postContent`}>
@@ -115,7 +115,7 @@ export default function kabir({ kabir, data }) {
                                     <span className="icon share-icon icons-hide"><a href={data?.linkedin} className="linkedin-icon" target="_blank"></a></span>
                                     <span className="icon share-icon icons-hide"><a href={data?.twitter} className="twitter-icon" target="_blank"></a></span>
                                     <span className="icon share-icon icons-hide"><a href={data?.facebook} className="fb-icon" target="_blank"></a></span>
-                                    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                                    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                                     <Like count={kabir?.likes?.likes} id={kabir?.id} type={'kabir'} />
                                 </div>
 

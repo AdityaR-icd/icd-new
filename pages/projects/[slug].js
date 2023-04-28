@@ -84,18 +84,9 @@ export default function Projects({ project, data, menus }) {
       : window.btoa(str)
 
   const shimmer = (w, h) => `
-    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <linearGradient id="g">
-            <stop stop-color="#f6f6f6" offset="20%" />
-            <stop stop-color="#f0f0f0" offset="50%" />
-            <stop stop-color="#f6f6f6" offset="70%" />
-        </linearGradient>
-      </defs>
-      <rect width="${w}" height="${h}" fill="#F6F6F6" />
-      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-    </svg>`
+      <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+      </svg>`
 
   var other_projects = project_slider?.edges
   var other_projects1 = project_slider1?.edges
@@ -126,7 +117,7 @@ export default function Projects({ project, data, menus }) {
                         // priority={true}
                         loading="lazy"
                         placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
@@ -171,7 +162,7 @@ export default function Projects({ project, data, menus }) {
                         // priority={true}
                         loading="lazy"
                         placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
@@ -251,7 +242,7 @@ export default function Projects({ project, data, menus }) {
                     // priority={true}
                     loading="lazy"
                     placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
                     src={leadImgSrc}
                     alt="project-lead"
@@ -277,7 +268,7 @@ export default function Projects({ project, data, menus }) {
     var awardImg = <Image
       priority={true}
       placeholder="blur"
-      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-none d-md-block `}
       src={leadImgSrc}
       alt="project-lead"
@@ -291,7 +282,7 @@ export default function Projects({ project, data, menus }) {
       // priority={true}
       loading="lazy"
       placeholder="blur"
-      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
       src={mobile_image}
       alt="project-lead"
@@ -306,10 +297,10 @@ export default function Projects({ project, data, menus }) {
 
 
   var shareBtn = <div className={`${style.social__media} social__media`}>
-    <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
-    <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
-    <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+    <span className="icon share-icon icons-hide"><a href={linkedinUrl} rel="noopener" aria-label="icd" className="linkedin-icon" target="_blank"></a></span>
+    <span className="icon share-icon icons-hide"><a href={twitterUrl} rel="noopener" aria-label="icd" className="twitter-icon" target="_blank"></a></span>
+    <span className="icon share-icon icons-hide"><a href={fbUrl} rel="noopener" aria-label="icd" className="fb-icon" target="_blank"></a></span>
+    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
     <Like count={project?.likes?.likes} id={project.id} type={'project'} />
   </div>;
 
@@ -507,7 +498,7 @@ export default function Projects({ project, data, menus }) {
                 <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
                 <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
                 {projectLink && (
-                  <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} target={projectLink?.target}>{projectLink?.title}</a></span></div>
+                  <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target={projectLink?.target}>{projectLink?.title}</a></span></div>
                 )}
                 {project?.projectComponent?.awardsReceived > '' && (
                   <>
@@ -559,7 +550,7 @@ export default function Projects({ project, data, menus }) {
                     )}
                   </div>
                 </div>
-                <a className={style.team__seeAll} onClick={seeallTeam}>{seeAll}</a>
+                <a className={style.team__seeAll} rel="noopener" aria-label="icd" onClick={seeallTeam}>{seeAll}</a>
                 <button className="collapse__btn" onClick={showModal}>project detail</button>
               </div>
             </div>

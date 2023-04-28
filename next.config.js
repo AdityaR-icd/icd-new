@@ -8,6 +8,10 @@ module.exports = ({
   //   runtimeCaching,
   //   buildExcludes: [/middleware-manifest\.json$/]
   // },
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
   env: {
     pass: process.env.pass,
   },

@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 const Head = dynamic(() => import('next/head'));
 const Image = dynamic(() => import("next/image"));
 
-
 import loader from '../../assets/images/loader/page-loader.gif'
 
 
@@ -96,8 +95,8 @@ export default function clients({ meta, edges }) {
                             <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
                         </div>
                         <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-                            <a href="/clients" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}>alphabetically</a>
-                            <a href="/clients/industry" className="project__filter marginRight">industry</a>
+                            <Link href="/clients" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}>alphabetically</Link>
+                            <Link href="/clients/industry" className="project__filter marginRight">industry</Link>
                         </div>
                     </div>
                     <span className="bottom__border"></span>
@@ -148,12 +147,12 @@ export default function clients({ meta, edges }) {
                                     if (leadImgSrc) {
                                         var thumbnail =
                                             <div className={alphabet.client_thumbnail}>
-                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" layout="fill" />
                                             </div>
                                     } else {
                                         var thumbnail =
                                             <div className={alphabet.client_thumbnail}>
-                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={loader.src} alt="project-lead" layout="fill" />
+                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={loader.src} alt="project-lead" layout="fill" />
                                             </div>
                                     }
 

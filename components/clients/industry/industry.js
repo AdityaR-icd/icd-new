@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { getLatestProject } from '../../../lib/api'
 const Head = dynamic(() => import('next/head'));
 const Image = dynamic(() => import("next/image"));
-
+import Link from 'next/link';
 
 import category from '../../project/category.module.scss'
 import carousel from '../../project-categories/all/all.module.scss'
@@ -114,8 +114,8 @@ export default function industry({ meta, edges }) {
               <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
             </div>
             <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-              <a href="/clients" className="project__filter marginRight">alphabetically</a>
-              <a href="/clients/industry" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}>industry</a>
+              <Link href="/clients" className="project__filter marginRight">alphabetically</Link>
+              <Link href="/clients/industry" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}>industry</Link>
             </div>
           </div>
           <span className="bottom__border"></span>
@@ -151,11 +151,11 @@ export default function industry({ meta, edges }) {
                         <div className={`col-md-4 ${industries.project__tile}`} key={node.id}>
                           <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                             <div className={carousel.thumbnail_cont}>
-                              <a href={`/projects/${node.slug}`}>
+                              <Link href={`/projects/${node.slug}`}>
                                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                   <div className={`${carousel.full_thumb} full-thumb`}>
                                     {leadImgSrc && (
-                                      <Image className={carousel.project_lead} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} src={leadImgSrc} alt="project-lead" fill loading="lazy" />
+                                      <Image className={carousel.project_lead} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" fill loading="lazy" />
                                     )}
                                   </div>
                                   <span className="thumbnail-gif"></span>
@@ -164,13 +164,13 @@ export default function industry({ meta, edges }) {
                                   // console.log('trye'),
                                   <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                 }
-                              </a>
+                              </Link>
                             </div>
-                            <a href={`/projects/${node.slug}`}>
+                            <Link href={`/projects/${node.slug}`}>
                               <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                                 <span className={carousel.grey__color}>  / {client}</span>
                               </span>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </>

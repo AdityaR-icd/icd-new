@@ -12,7 +12,7 @@ import type from '../../components/project-categories/type/type.module.scss'
 import style from '../../styles/singlePost.module.scss'
 import { NextSeo } from 'next-seo';
 
-
+import Link from 'next/link';
 
 export default function search({ filters, data, filter }) {
     const router = useRouter()
@@ -58,11 +58,11 @@ export default function search({ filters, data, filter }) {
                         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
                             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                 <div className={carousel.thumbnail_cont}>
-                                    <a href={`/projects/${node.slug}`}>
+                                    <Link href={`/projects/${node.slug}`}>
                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                 {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                 )}
                                             </div>
                                             <span className="thumbnail-gif"></span>
@@ -70,13 +70,13 @@ export default function search({ filters, data, filter }) {
                                         {node?.projectComponent?.awardsReceived !== null && (
                                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                         )}
-                                    </a>
+                                    </Link>
                                 </div>
-                                <a href={`/projects/${node.slug}`}>
+                                <Link href={`/projects/${node.slug}`}>
                                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
                                         <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </>
@@ -98,11 +98,11 @@ export default function search({ filters, data, filter }) {
                         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
                             <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
                                 <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                                    <a href={`/projects/${node.slug}`}>
+                                    <Link href={`/projects/${node.slug}`}>
                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                 {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                 )}
                                             </div>
                                             <span className="thumbnail-gif"></span>
@@ -110,13 +110,13 @@ export default function search({ filters, data, filter }) {
                                         {node?.projectComponent?.awardsReceived !== null && (
                                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                         )}
-                                    </a>
+                                    </Link>
                                 </div>
-                                <a href={`/projects/${node.slug}`}>
+                                <Link href={`/projects/${node.slug}`}>
                                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
                                         <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </>
@@ -138,11 +138,11 @@ export default function search({ filters, data, filter }) {
                         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
                             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                 <div className={carousel.thumbnail_cont}>
-                                    <a href={`/projects/${node.slug}`}>
+                                    <Link href={`/projects/${node.slug}`}>
                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                 {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                 )}
                                             </div>
                                             <span className="thumbnail-gif"></span>
@@ -150,13 +150,13 @@ export default function search({ filters, data, filter }) {
                                         {node?.projectComponent?.awardsReceived !== null && (
                                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                         )}
-                                    </a>
+                                    </Link>
                                 </div>
-                                <a href={`/projects/${node.slug}`}>
+                                <Link href={`/projects/${node.slug}`}>
                                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
                                         <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </>
@@ -180,11 +180,11 @@ export default function search({ filters, data, filter }) {
                         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
                             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                 <div className={carousel.thumbnail_cont}>
-                                    <a href={`/projects/${node.slug}`}>
+                                    <Link href={`/projects/${node.slug}`}>
                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                 {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                 )}
                                             </div>
                                             <span className="thumbnail-gif"></span>
@@ -192,13 +192,13 @@ export default function search({ filters, data, filter }) {
                                         {node?.projectComponent?.awardsReceived !== null && (
                                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                         )}
-                                    </a>
+                                    </Link>
                                 </div>
-                                <a href={`/projects/${node.slug}`}>
+                                <Link href={`/projects/${node.slug}`}>
                                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
                                         <span className={carousel.grey__color}>  / {client}</span>
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </>
@@ -220,7 +220,7 @@ export default function search({ filters, data, filter }) {
                 if (featuredImage) {
                     var imageData =
                         <span className={`${carousel.full_thumb} full-thumb`}>
-                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} alt="post-lead" layout="fill" />
+                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
                         </span>
                 } else {
                     imageData =
@@ -232,17 +232,17 @@ export default function search({ filters, data, filter }) {
                     <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
                         <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                             <div className={carousel.thumbnail_cont}>
-                                <a href={`/posts/${data.node.slug}`}>
+                                <Link href={`/posts/${data.node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                         {imageData}
                                     </span>
                                     <span className="postCategory">{categories}</span>
-                                </a>
+                                </Link>
                             </div>
-                            <a href={`/posts/${data.node.slug}`}>
+                            <Link href={`/posts/${data.node.slug}`}>
                                 <span className={carousel.projectTitle}>{data.node.title}
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 )
@@ -262,7 +262,7 @@ export default function search({ filters, data, filter }) {
                 if (featuredImage) {
                     var imageData =
                         <span className={`${carousel.full_thumb} full-thumb`}>
-                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`} alt="post-lead" layout="fill" />
+                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
                         </span>
                 } else {
                     imageData =
@@ -274,17 +274,17 @@ export default function search({ filters, data, filter }) {
                     <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
                         <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                             <div className={carousel.thumbnail_cont}>
-                                <a href={`/posts/${data.node.slug}`}>
+                                <Link href={`/posts/${data.node.slug}`}>
                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                         {imageData}
                                     </span>
                                     <span className="postCategory">{categories}</span>
-                                </a>
+                                </Link>
                             </div>
-                            <a href={`/posts/${data.node.slug}`}>
+                            <Link href={`/posts/${data.node.slug}`}>
                                 <span className={carousel.projectTitle}>{data.node.title}
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 )

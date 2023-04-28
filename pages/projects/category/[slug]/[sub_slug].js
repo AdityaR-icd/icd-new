@@ -27,7 +27,7 @@ export default function subProject({ subTypeProjects, project, filters }) {
 
 
   if (projectSubTypes?.length > 0) {
-    var common = <a href={`/projects/category/${pageData?.slug}`} className={allProject ? ` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} ` : "project__filter marginRight"} onClick={allProjects} >all</a>
+    var common = <Link href={`/projects/category/${pageData?.slug}`} className={allProject ? ` ${style.project__filter} project__filter marginRight ${style.active} ${style.filter__active} ` : "project__filter marginRight"} onClick={allProjects} >all</Link>
 
     var slug = projectSubTypes?.map((item) => {
       if (item?.node?.slug == router.query.sub_slug) {

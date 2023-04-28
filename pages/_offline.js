@@ -7,11 +7,11 @@ export default () => (
     <Head>
       <title>You are offline</title>
     </Head>
-    <div className="container">  
-        <div className={style.error_404}>
-            <span><img loading="lazy" decoding="async" className={style.error404_anim} src = { Anim.src } alt=""/></span>
-            <span className={style.not_found}>Oops! You are offline</span>
-        </div>
+    <div className="container">
+      <div className={style.error_404}>
+        <span><img loading="lazy" alt='icd-icon' decoding="async" className={style.error404_anim} src={Anim.src} alt="" /></span>
+        <span className={style.not_found}>Oops! You are offline</span>
+      </div>
     </div>
   </>
 );

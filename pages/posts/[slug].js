@@ -69,7 +69,7 @@ export default function Post({ post }) {
             <div className="col-md-4 project__item" key={node.id}>
               <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                 <div className={carousel.thumbnail_cont}>
-                  <a href={`/projects/${node.slug}`}>
+                  <Link href={`/projects/${node.slug}`}>
                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                       <div className={`${carousel.full_thumb} full-thumb`}>
                         <Image
@@ -84,13 +84,13 @@ export default function Post({ post }) {
                       </div>
                       <span className="thumbnail-gif"></span>
                     </span>
-                  </a>
+                  </Link>
                 </div>
-                <a href={`/projects/${node.slug}`}>
+                <Link href={`/projects/${node.slug}`}>
                   <span className={carousel.projectTitle}>{node.projectComponent.heading}
                     <span className={carousel.grey__color}>  / {client}</span>
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </>
@@ -136,17 +136,17 @@ export default function Post({ post }) {
               <div className="col-md-4 project__item">
                 <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                   <div className={carousel.thumbnail_cont}>
-                    <a href={`/posts/${data.slug}`}>
+                    <Link href={`/posts/${data.slug}`}>
                       <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                         {imageData}
                       </span>
-                    </a>
+                    </Link>
                   </div>
-                  <a href={`/posts/${data.slug}`}>
+                  <Link href={`/posts/${data.slug}`}>
                     <span className={carousel.projectTitle}>{data.title}
                       <span className={carousel.grey__color}>  / {categories}</span>
                     </span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </>
@@ -192,7 +192,7 @@ export default function Post({ post }) {
           src={featuredImage}
           loading="lazy"
           placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
           className="full-lead-img"
           alt="post-lead"
           fill
@@ -232,7 +232,7 @@ export default function Post({ post }) {
                       <h1>{post.title}</h1>
                       <div className={style.post__author}>
                         <div className={style.author_wrapper}>
-                          <span className={`sl ${style.author__img}`}><img loading="lazy" decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
+                          <span className={`sl ${style.author__img}`}><img loading="lazy" alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
                           </img></span>
                           <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
                         </div>
@@ -241,7 +241,7 @@ export default function Post({ post }) {
                           <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
                           <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
                           <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                          <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                          <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                           <Like count={post.likes?.likes} id={post.id} type={'post'} />
                         </div>
 
@@ -254,7 +254,7 @@ export default function Post({ post }) {
                       <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                      <span className="icon" onClick={toggleShareIcons}><img loading="lazy" decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                      <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                       <Like count={post.likes?.likes} id={post.id} type={'post'} />
                     </div>
 

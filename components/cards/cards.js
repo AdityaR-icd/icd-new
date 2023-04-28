@@ -2,7 +2,7 @@ import cards from './cards.module.scss'
 import home from '../home/home.module.scss'
 import parse from 'html-react-parser';
 import Image from "next/image";
-
+import Link from 'next/link';
 
 export default function Cards({ data }) {
   let card = ""
@@ -36,7 +36,7 @@ export default function Cards({ data }) {
                           sizes="100vw" />
                         <span className={`${cards.card__tag}`}>{data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name}</span>
                         <span className={`${cards.card__text}`}>{parse(data.homePage.featuredCards[k].content)}</span>
-                        <span className={`${cards.card__link}`}><a href="/careers"><button>apply now</button></a></span>
+                        <span className={`${cards.card__link}`}><Link href="/careers"><button>apply now</button></Link></span>
                       </div>
                     </div>
                   )

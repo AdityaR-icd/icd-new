@@ -30,7 +30,7 @@ export default function fetchJobs({ data }) {
                 <span className="position">
                     <Image
                         placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         src={profileImage}
                         alt={data.title}
                         layout="fill"
