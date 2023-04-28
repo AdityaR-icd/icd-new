@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Anim from '../assets/images/404/404.gif'
 import style from '../styles/404.module.scss'
-
 export default () => (
   <>
     <Head>
