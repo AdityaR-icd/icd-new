@@ -144,6 +144,7 @@ const Header = (props) => {
                             <Link href="/" aria-label="logo" className="logo d-block d-lg-none">
                                 <Image
                                     decoding="async"
+                                    loading="lazy"
                                     src={mobileLogo.src}
                                     width="48"
                                     height="36"

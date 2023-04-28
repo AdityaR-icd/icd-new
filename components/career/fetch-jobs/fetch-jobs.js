@@ -2,13 +2,13 @@ import parse from 'html-react-parser';
 import Image from "next/image";
 import Link from 'next/link'
 
-export default function fetchJobs({ data }){
+export default function fetchJobs({ data }) {
     var profileImage = data?.featuredImage?.node?.sourceUrl
 
     const toBase64 = (str) =>
-    typeof window === 'undefined'
-    ? Buffer.from(str).toString('base64')
-    : window.btoa(str)
+        typeof window === 'undefined'
+            ? Buffer.from(str).toString('base64')
+            : window.btoa(str)
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -33,7 +33,8 @@ export default function fetchJobs({ data }){
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         src={profileImage}
                         alt={data.title}
-                        fill
+                        layout="fill"
+                        loading="lazy"
                         sizes="100vw" />
                 </span>
                 <span className="job__desc">{parse(data.content)}</span>

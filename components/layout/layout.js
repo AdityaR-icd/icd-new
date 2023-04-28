@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/router';
 import { useEffect } from 'react'
+import $ from 'jquery'
 
 const Nav = dynamic(() => import("../header/header"));
 const Footer = dynamic(() => import("../footer/footer"));
@@ -26,11 +27,11 @@ const Layout = ({ children }) => {
     useEffect(() => {
         if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
 
-            transparent?.classList?.add('bg-transparent');
+            $(transparent)?.classList?.add('bg-transparent');
         }
         else {
 
-            transparent?.classList?.remove('bg-transparent');
+            $(transparent)?.classList?.remove('bg-transparent');
         }
     })
     return (

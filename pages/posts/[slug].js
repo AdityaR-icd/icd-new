@@ -75,10 +75,11 @@ export default function Post({ post }) {
                         <Image
                           className={carousel.project_lead}
                           placeholder="blur"
+                          loading="lazy"
                           blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                           src={leadImgSrc}
                           alt="project-lead"
-                          fill
+                          layout="fill"
                           sizes="100vw" />
                       </div>
                       <span className="thumbnail-gif"></span>
@@ -117,10 +118,11 @@ export default function Post({ post }) {
               <span className={`${carousel.full_thumb} full-thumb`}>
                 <Image
                   src={featuredImage}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   alt="post-lead"
-                  fill
+                  layout="fill"
                   sizes="100vw" />
               </span>
           } else {
@@ -188,6 +190,7 @@ export default function Post({ post }) {
       <div className={` ${style.leadImage} fade-in `}>
         <Image
           src={featuredImage}
+          loading="lazy"
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
           className="full-lead-img"

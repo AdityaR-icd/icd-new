@@ -106,7 +106,7 @@ export default function projectLead({ edges }) {
                                                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                                                     src={project_thumbnail}
                                                                     alt="project-lead"
-                                                                    fill
+                                                                    layout="fill"
                                                                     sizes="100vw" />
                                                             </div>
                                                         </>
@@ -120,7 +120,7 @@ export default function projectLead({ edges }) {
                                                             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                                             src={project_thumbnail_mobile}
                                                             alt="project-lead"
-                                                            fill
+                                                            layout="fill"
                                                             sizes="100vw" />
                                                     </div>
 

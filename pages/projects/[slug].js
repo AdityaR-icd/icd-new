@@ -119,16 +119,19 @@ export default function Projects({ project, data, menus }) {
             <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
               <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
                 <Link href={node?.uri}>
+
                   <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                     <div className={`${carousel?.full_thumb} full-thumb`}>
                       <Image
-                        priority={true}
+                        // priority={true}
+                        loading="lazy"
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
-                        fill
+                        layout="fill"
+                        sizes="100vw"
                       />
                     </div>
                     <span className="thumbnail-gif"></span>
@@ -160,18 +163,19 @@ export default function Projects({ project, data, menus }) {
         <div className="project__item resultItem-cont" key={node?.id}>
           <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
             <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-              <Link href={node?.uri}>
+              <Link href={`/projects/${node?.slug}`}>
                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
                       <Image
-                        priority={true}
+                        // priority={true}
+                        loading="lazy"
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
-                        fill
+                        layout="fill"
                         sizes="100vw" />
                     )}
                   </div>
@@ -179,7 +183,7 @@ export default function Projects({ project, data, menus }) {
                 </span>
               </Link>
             </div>
-            <Link href={node?.uri}>
+            <Link href={`/projects/${node?.slug}`}>
               <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                 <span className={carousel.grey__color}>  / {client}</span>
               </span>
@@ -244,13 +248,14 @@ export default function Projects({ project, data, menus }) {
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
-                    priority={true}
+                    // priority={true}
+                    loading="lazy"
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                     className={carousel?.project_lead}
                     src={leadImgSrc}
                     alt="project-lead"
-                    fill
+                    layout="fill"
                     sizes="100vw" />
                 </div>
                 <span className="thumbnail-gif"></span>
@@ -276,20 +281,21 @@ export default function Projects({ project, data, menus }) {
       className={` ${carousel.project_lead} d-none d-md-block `}
       src={leadImgSrc}
       alt="project-lead"
-      fill
+      filayout="fill" ll
       sizes="100vw" />
   }
 
   if (project?.projectComponent?.awardsImageMobile) {
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
-      priority={true}
+      // priority={true}
+      loading="lazy"
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
       src={mobile_image}
       alt="project-lead"
-      fill
+      layout="fill"
       sizes="100vw" />
   }
 
@@ -415,20 +421,22 @@ export default function Projects({ project, data, menus }) {
 
                 <Image
                   src={leadComponent}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   alt="project-lead"
-                  fill
+                  layout="fill"
                   className='d-none d-md-block'
                   sizes="100vw" />
 
 
                 <Image
                   src={leadComponentMobile}
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   alt="project-lead"
-                  fill
+                  layout="fill"
                   className='d-block d-md-none'
                   sizes="100vw" />
 

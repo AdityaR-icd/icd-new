@@ -134,7 +134,7 @@ export default function kanbir({ meta, edges }) {
                                         placeholder="blur"
                                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
                                         alt="post-lead"
-                                        fill
+                                        layout="fill"
                                         sizes="100vw" />
                                 </span>
                         } else {
