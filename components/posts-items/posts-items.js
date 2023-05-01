@@ -80,7 +80,7 @@ export default function postItem({ data, ids }) {
                 <Link href={`/posts/${data.slug}`}>
                     <h2 className={style.postTitle}>{data.title}</h2>
                     <span className={style.postBy}>  {date} </span>
-                    <p className={style.postInfo}> {parse(data.excerpt)} </p>
+                    <div className={style.postInfo}> {parse(data.excerpt.substr(0,393))} </div>
                     <div className="d-none"><span>{categories}</span>{postsTags}</div>
                 </Link>
                 <div className="row">
