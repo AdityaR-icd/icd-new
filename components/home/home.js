@@ -40,11 +40,11 @@ export default function Index({ home: { pages }, themes }) {
       <NextSeo
         title={data?.seo?.title}
         description={data?.seo?.metaDesc}
-        canonical="https://icd-v3-vercel.vercel.app/"
+        canonical="https://icdindia.com/"
         robots={data?.metaRobotsNoindex}
         googlebot={data?.metaRobotsNofollow}
         openGraph={{
-          url: 'https://icd-v3-vercel.vercel.app/',
+          url: 'https://icdindia.com/',
           title: data?.seo?.title,
           description: data?.seo?.metaDesc,
           images: [
@@ -62,7 +62,7 @@ export default function Index({ home: { pages }, themes }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={data?.seo?.title} />
         <meta name="twitter:description" content={data?.seo?.metaDesc} />
-        <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/" />
+        <meta name="twitter:url" content="https://icdindia.com/" />
         <meta name="twitter:image" content={data?.featuredImage?.node?.sourceUrl} />
         {/* end of Twitter Cards */}
       </Head>

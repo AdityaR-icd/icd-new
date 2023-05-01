@@ -20,11 +20,11 @@ export default function projectCategory({ meta, projectsTypes: { nodes } }) {
         <NextSeo
           title={meta.seo.title}
           description={meta.seo.metaDesc}
-          canonical="https://icd-v3-vercel.vercel.app/projects"
+          canonical="https://icdindia.com/projects"
           robots={meta.metaRobotsNoindex}
           googlebot={meta.metaRobotsNofollow}
           openGraph={{
-            url: 'https://icd-v3-vercel.vercel.app/projects',
+            url: 'https://icdindia.com/projects',
             title: meta.seo.title,
             description: meta.seo.metaDesc,
             images: [
@@ -41,7 +41,7 @@ export default function projectCategory({ meta, projectsTypes: { nodes } }) {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={meta.seo.title} />
           <meta name="twitter:description" content={meta.seo.metaDesc} />
-          <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/projects" />
+          <meta name="twitter:url" content="https://icdindia.com/projects" />
           <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
           {/* end of Twitter Cards */}
         </Head>

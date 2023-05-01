@@ -20,11 +20,11 @@ export default function contact({ meta }){
         <NextSeo
             title={meta.seo.title}
             description={meta.seo.metaDesc}
-            canonical="https://icd-v3-vercel.vercel.app/contact"
+            canonical="https://icdindia.com/contact"
             robots={meta.metaRobotsNoindex}
             googlebot={meta.metaRobotsNofollow}
             openGraph={{
-            url: 'https://icd-v3-vercel.vercel.app/contact',
+            url: 'https://icdindia.com/contact',
             title: meta.seo.title,
             description: meta.seo.metaDesc,
             images: [
@@ -40,7 +40,7 @@ export default function contact({ meta }){
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.seo.title} />
         <meta name="twitter:description" content={meta.seo.metaDesc} />
-        <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/contact" />
+        <meta name="twitter:url" content="https://icdindia.com/contact" />
         <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
         </Head>
 

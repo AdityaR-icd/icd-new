@@ -63,11 +63,11 @@ export default function clients({ meta, edges }) {
             <NextSeo
                 title={meta.seo.title}
                 description={meta.seo.metaDesc}
-                canonical="https://icd-v3-vercel.vercel.app/clients"
+                canonical="https://icdindia.com/clients"
                 robots={meta.metaRobotsNoindex}
                 googlebot={meta.metaRobotsNofollow}
                 openGraph={{
-                    url: 'https://icd-v3-vercel.vercel.app/clients',
+                    url: 'https://icdindia.com/clients',
                     title: meta.seo.title,
                     description: meta.seo.metaDesc,
                     images: [
@@ -83,7 +83,7 @@ export default function clients({ meta, edges }) {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={meta.seo.title} />
                 <meta name="twitter:description" content={meta.seo.metaDesc} />
-                <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/clients" />
+                <meta name="twitter:url" content="https://icdindia.com/clients" />
                 <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
             </Head>
 

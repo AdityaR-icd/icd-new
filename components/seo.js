@@ -20,7 +20,7 @@ const Seo = ({ seo, uri }) => {
 
 
 	const currentLocation = process.browser ? window.location.origin : null;
-	const opengraphUrl = "https://icd-v3-vercel.vercel.app" + asPath;
+	const opengraphUrl = "https://icdindia.com" + asPath;
 	const image = opengraphImage?.sourceUrl;
 	const twitterImag = twitterImage?.sourceUrl
 

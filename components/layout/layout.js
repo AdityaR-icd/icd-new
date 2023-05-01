@@ -26,15 +26,23 @@ const Layout = ({ children }) => {
 
     // let transparent = 
     useEffect(() => {
-        if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
-
-            document.getElementById('menu-cont').classList?.add('bg-transparent');
-        }
-        else {
-
-            document.getElementById('menu-cont').classList?.remove('bg-transparent');
+        if(!noNav.includes(router.pathname)){
+            if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
+                document.getElementById('menu-cont').classList?.add('bg-transparent');
+            }
+            else {
+                document.getElementById('menu-cont').classList?.remove('bg-transparent');
+            }
         }
     })
+
+    useEffect(() => {
+        if (router.pathname == "/search/[slug]") {
+            $('body').addClass('search-page showSearch ignore-react-onclickoutside');
+        }else{
+            $('body').removeClass('search-page showSearch ignore-react-onclickoutside');
+        }
+    }) 
     return (
         <>
             {/* <Nav {...props} /> */}

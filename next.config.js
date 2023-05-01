@@ -1,22 +1,26 @@
 const path = require('path')
-const withPWA = require("next-pwa");
 const runtimeCaching = require("next-pwa/cache");
+const withPWA = require('next-pwa')({
+  dest: "public",
+  runtimeCaching,
+  buildExcludes: [/middleware-manifest\.json$/]
+})
 
-module.exports = ({
-  // withPWA: {
-  //   dest: "public",
-  //   runtimeCaching,
-  //   buildExcludes: [/middleware-manifest\.json$/]
-  // },
+
+
+module.exports = withPWA({
+
+  
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
   },
+
   env: {
     pass: process.env.pass,
   },
 
-  reactStrictMode: true,
+  // reactStrictMode: true,
   // experimental:{appDir: true},
   // swcMinify: true,
   sassOptions: {

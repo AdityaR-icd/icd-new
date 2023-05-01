@@ -9,11 +9,11 @@ import '../styles/fetch-jobs.scss'
 import '../styles/jobs-form.scss'
 import '../styles/slick/slick.css';
 import '../styles/search-results.scss';
+import '../styles/newsletter.scss';
 import Router from 'next/router';
 import $ from 'jquery';
-// import  NProgress  from 'nprogress';
+import Script from 'next/script';
 import dynamic from "next/dynamic";
-import { useEffect, useState } from 'react';
 const Layout = dynamic(() => import("../components/layout/layout"));
 const Loader = dynamic(() => import("../components/loader/loader"));
 export default function MyApp({ Component, pageProps }) {
@@ -33,6 +33,19 @@ export default function MyApp({ Component, pageProps }) {
   })
   return (
     <>
+    <Script
+        src="https://www.googletagmanager.com/gtag/js?id=GTM-WWCCC9N"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'GTM-WWCCC9N');
+        `}
+      </Script>
       <Loader />
        <Layout>
           <Component {...pageProps} />

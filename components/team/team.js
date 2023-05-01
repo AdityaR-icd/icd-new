@@ -20,11 +20,11 @@ export default function team({ meta, team }) {
         <NextSeo
             title={meta?.seo?.title}
             description={meta?.seo?.metaDesc}
-            canonical="https://icd-v3-vercel.vercel.app/our-team"
+            canonical="https://icdindia.com/our-team"
             robots={meta?.metaRobotsNoindex}
             googlebot={meta?.metaRobotsNofollow}
             openGraph={{
-                url: 'https://icd-v3-vercel.vercel.app/our-team',
+                url: 'https://icdindia.com/our-team',
                 title: meta?.seo?.title,
                 description: meta?.seo?.metaDesc,
                 images: [
@@ -40,7 +40,7 @@ export default function team({ meta, team }) {
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={meta?.seo?.title} />
             <meta name="twitter:description" content={meta?.seo?.metaDesc} />
-            <meta name="twitter:url" content="https://icd-v3-vercel.vercel.app/our-team" />
+            <meta name="twitter:url" content="https://icdindia.com/our-team" />
             <meta name="twitter:image" content={meta?.featuredImage?.node?.sourceUrl} />
         </Head>
 
