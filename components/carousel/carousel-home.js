@@ -6,9 +6,9 @@ export default function carousel({content}){
         <section className={`${styles.heroCarousel} mB__150`}>
             <div className={styles.homelead_thumbnail}>
             <div className={styles.lead_video_cont} >
-                {content &&(
-                    parse(content)
-                )}
+               {(
+                   content && parse(content) || <video autoPlay loop muted src="./home-video/2267188235-1.mp4" playsInline></video>
+               )} 
             </div>
             </div>
             <div className={`${styles.carouselShape__block} d-none d-md-block`}>
