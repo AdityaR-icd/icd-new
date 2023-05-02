@@ -25,7 +25,7 @@ export async function getServerSideProps({ preview = false }) {
   // const menus = await getMenus()
   const data = await getFooter()
   const meta = await getYellowEnvelope()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: { 
         newsletters,
