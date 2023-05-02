@@ -68,7 +68,7 @@ export default function Index({ home: { pages }, themes }) {
       </Head>
       <Crousel content={data?.content} />
       <ProjectLead edges={featuredata} />
-      {data?.homePage?.featuredCardsa && <Cards data={data} />}
+      {data?.homePage?.featuredCards && <Cards data={data} />}
     </>
   )
 }
