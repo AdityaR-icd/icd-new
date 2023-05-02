@@ -14,21 +14,22 @@ import Router from 'next/router';
 import $ from 'jquery';
 import Script from 'next/script';
 import dynamic from "next/dynamic";
+import { useState } from 'react';
 const Layout = dynamic(() => import("../components/layout/layout"));
 const Loader = dynamic(() => import("../components/loader/loader"));
 export default function MyApp({ Component, pageProps }) {
 
-  // const [loading , setLaoading] = useState(true);
+  const [loading , setLaoading] = useState(true);
   Router.events.on("routeChangeStart", (url) => {
     // console.log("Route changing: " );
     // NProgress.start();
-    // setLaoading(false)
+    setLaoading(false)
     $('.loader').removeClass('hideLoader')
   })
   Router.events.on("routeChangeComplete", (url) => {
     // console.log("Route changed: " );
     // NProgress.done();
-    // setLaoading(true)
+    setLaoading(true)
     $('.loader').addClass('hideLoader')  
   })
   return (
@@ -47,8 +48,8 @@ export default function MyApp({ Component, pageProps }) {
         `}
       </Script>
       <Loader />
-       <Layout>
+      {loading && <Layout>
           <Component {...pageProps} />
-      </Layout></>
+      </Layout>}</>
   )
 }

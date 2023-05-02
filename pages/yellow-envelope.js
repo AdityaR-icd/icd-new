@@ -10,7 +10,7 @@ import Link from 'next/link'
 
 
 
-export default function Index({ newsletters: { edges } , meta:{pages} , filters  }) {
+export default function Index({ newsletters: { edges } , meta:{pages}  }) {
   const meta_data = pages.edges[0].node
   // console.log(filters);
  return (
@@ -32,8 +32,8 @@ export async function getServerSideProps({ preview = false }) {
         preview,
         // menus,
         data,
-        meta,
-        filters
+        meta
+        // filters
     },
     // revalidate: 86400, 
   }

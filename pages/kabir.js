@@ -1,4 +1,4 @@
-import { getkabirPostsForHome, getkabir, getFilters, getFooter } from '../lib/api'
+import { getkabirPostsForHome, getkabir,  getFooter } from '../lib/api'
 
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/kabir/kabir"));
@@ -20,15 +20,15 @@ export async function getStaticProps({ preview = false }) {
   // const menus = await getMenus()
   const data = await getFooter()
   const meta = await getkabir()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       posts,
       preview,
       // menus,
       data,
-      meta,
-      filters
+      meta
+      // filters
     },
     // revalidate: 86400, 
   }

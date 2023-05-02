@@ -3,7 +3,7 @@ import { useState } from 'react'
 import dynamic from "next/dynamic";
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { getAllPostsByCategorySlug, getPostPage, getPostCategories, getAllTags, getAllPostsByCategory, getFooter, getFilters } from '../../../lib/api'
+import { getAllPostsByCategorySlug, getPostPage, getPostCategories, getAllTags, getAllPostsByCategory, getFooter } from '../../../lib/api'
 import Link from 'next/link'
 import $ from 'jquery'
 const Head = dynamic(() => import('next/head'));
@@ -270,7 +270,7 @@ export async function getStaticProps({ params }) {
     const categories = await getPostCategories()
     const posts = await getAllPostsByCategorySlug(params.slug)
     const tags = await getAllTags()
-    const filters = await getFilters()
+    // const filters = await getFilters()
     return {
         props: {
             // menus,
@@ -278,8 +278,8 @@ export async function getStaticProps({ params }) {
             meta,
             posts,
             categories,
-            tags,
-            filters
+            tags
+            // filters
         },
         revalidate: 180,
     }

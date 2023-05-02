@@ -1,4 +1,4 @@
-import { getClientsPage, getClients, getFooter, getFilters } from '../lib/api'
+import { getClientsPage, getClients, getFooter} from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/clients/clients"));
 
@@ -17,14 +17,14 @@ export async function getStaticProps() {
   const clients = await getClients()
   // const menus = await getMenus()
   const data = await getFooter()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       clients,
       // menus,
       data,
       meta,
-      filters
+      // filters
     },
     revalidate: 120,
   }

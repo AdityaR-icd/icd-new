@@ -1,4 +1,4 @@
-import { getFooter, getContactPage, getFilters } from '../lib/api'
+import { getFooter, getContactPage} from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/contact/contact"));
 export default function contact({ meta: { pages } }) {
@@ -12,13 +12,13 @@ export async function getStaticProps() {
   // const menus = await getMenus()
   const data = await getFooter()
   const meta = await getContactPage()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       // menus,
       data,
-      meta,
-      filters
+      meta
+      // filters
     },
     revalidate: 86400,
   }

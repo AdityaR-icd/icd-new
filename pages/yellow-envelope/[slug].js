@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllNewsletterWithSlug , getArticle  , getFooter  } from '../../lib/api'
+import { getArticle  , getFooter  } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
 import Head from 'next/head';

@@ -2,7 +2,7 @@ import parse from 'html-react-parser';
 import $ from 'jquery';
 import { useEffect } from 'react'
 import { useState } from 'react';
-import { getAllPostsForHome, getFooter, getPostAndMorePosts, getFilters } from '../../lib/api'
+import { getAllPostsForHome, getFooter, getPostAndMorePosts } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from 'next/link'
@@ -309,15 +309,15 @@ export async function getServerSideProps({ preview = false, params, previewData 
   const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
   // const menus = await getMenus()
   const data = await getFooter()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       post: Moredata.post,
       posts: Moredata.posts,
       preview,
       // menus,
-      data,
-      filters
+      data
+      // filters
     },
     // revalidate: 2,
   }

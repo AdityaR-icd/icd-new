@@ -4,9 +4,10 @@ import Head from 'next/head'
 import Image from "next/image";
 import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
-import $ from 'jquery';
+import $, { parseJSON } from 'jquery';
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { getFilters } from '../../lib/api'
 
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));
@@ -17,7 +18,7 @@ const Search = dynamic(() => import("../search/search"));
 
 const Header = (props) => {
 
-    var filters = props.filters;
+    var suggestionData
 
 
     var clients = []
@@ -26,8 +27,34 @@ const Header = (props) => {
     var categories = []
     var tags = []
     var keywords = []
+    const [data, setData] = useState(null)
+    const [filters, setFilters] = useState(null)
+    // const [isLoading, setLoading] = useState(false)
 
-    filters?.clients.edges.map((item) => {
+    useEffect(() => {
+        console.log(data)
+        async function fetchMyAPI() {
+            let response = await getFilters()
+            setFilters(response)
+        }
+        fetchMyAPI()
+
+      }, [])
+    //   console.log(filters)
+
+
+    
+    const searchToggle = async() => {
+        $('body').toggleClass('showSearch');
+        if ($('body').hasClass('showSearch')) {
+            $('.searchInput').focus();
+        } else {
+            setsearchValue('')
+        }
+    }
+
+
+    filters?.clients?.edges.map((item) => {
         clients.push(item.node.slug)
     })
 
@@ -52,6 +79,9 @@ const Header = (props) => {
         tags.push(item.node.slug)
     })
 
+
+
+
     var allFilters = [...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags]
 
     const router = useRouter()
@@ -66,18 +96,10 @@ const Header = (props) => {
         $('body').removeClass('hamburger-open');
         $('.hamburger, .nav-menu').removeClass("is-active");
     }
-
     const [searchValue, setsearchValue] = useState('')
     // Search Show and Hide
 
-    const searchToggle = () => {
-        $('body').toggleClass('showSearch');
-        if ($('body').hasClass('showSearch')) {
-            $('.searchInput').focus();
-        } else {
-            setsearchValue('')
-        }
-    }
+
 
 
 

@@ -2,7 +2,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsSubTypes, getProjectSubTypes, getProjectByTypes, getFooter, getFilters } from '../../../../lib/api'
+import { getAllProjectsSubTypes, getProjectSubTypes, getProjectByTypes, getFooter } from '../../../../lib/api'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
@@ -125,7 +125,7 @@ export async function getStaticPaths({ params }) {
   const projectTypes = await getAllProjectsSubTypes()
   return {
     paths: [
-      { params: { slug: 'packaging', sub_slug: 'fb' } },
+      { params: { slug: 'packaging', sub_slug: 'fb-packaging' } },
       { params: { slug: 'packaging', sub_slug: 'cosmetics' } },
       { params: { slug: 'packaging', sub_slug: 'other' } },
       { params: { slug: 'editorial', sub_slug: 'newspaper' } },
@@ -144,14 +144,14 @@ export async function getStaticProps({ params }) {
   const subTypeProjects = await getProjectSubTypes(params.slug, params.sub_slug);
   // const menus = await getMenus()
   const data = await getFooter()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       project: gProject.projectTypes,
       // menus,
       data,
       subTypeProjects,
-      filters
+      // filters
     },
     revalidate: 180,
   }

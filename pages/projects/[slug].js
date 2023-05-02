@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug, getProject, getFooter, getFilters, getAllProjectsNotIn, getAllOtherProjects } from '../../lib/api'
+import { getAllProjectsWithSlug, getProject, getFooter, getAllProjectsNotIn, getAllOtherProjects } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -605,13 +605,13 @@ export async function getServerSideProps({ params }) {
   const gProject = await getProject(params.slug)
   // const menus = await getMenus()
   const data = await getFooter()
-  const filters = await getFilters()
+  // const filters = await getFilters()
   return {
     props: {
       project: gProject.project,
       // menus,
       data,
-      filters,
+      // filters,
     },
     // revalidate: 2,
   }
