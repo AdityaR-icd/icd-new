@@ -69,7 +69,9 @@ export default function Projects({ project, data, menus }) {
 
     async function fetchMyAPI() {
       const slides_data = await getAllProjectsNotIn(projectIds, categorySlug)
-      const slides_dat1 = await getAllOtherProjects(categoryId)
+
+
+      // const slides_dat1 = await getAllOtherProjects(categoryId)
       setproject_slider(slides_data)
       // setproject_slider1(slides_dat1)
     }
@@ -98,48 +100,48 @@ export default function Projects({ project, data, menus }) {
       }
     })
   }
-  var projectData = []
-  var other_projects_slider1 = ''
-  if (other_projects2?.length > 0) {
-    other_projects2?.map((node) => {
-      other_projects_slider1 = node?.map(({ node }) => {
-        var leadImgSrc = node?.featuredImage?.node?.sourceUrl
-        var client = node?.clients?.edges[0]?.node?.name
-        return <>
-          <div className="project__item resultItem-cont" key={node?.id}>
-            <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
-              <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                <Link href={node?.uri}>
+  // var projectData = []
+  // var other_projects_slider1 = ''
+  // if (other_projects2?.length > 0) {
+  //   other_projects2?.map((node) => {
+  //     other_projects_slider1 = node?.map(({ node }) => {
+  //       var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+  //       var client = node?.clients?.edges[0]?.node?.name
+  //       return <>
+  //         <div className="project__item resultItem-cont" key={node?.id}>
+  //           <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+  //             <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
+  //               <Link href={node?.uri}>
 
-                  <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                    <div className={`${carousel?.full_thumb} full-thumb`}>
-                      <Image
-                        // priority={true}
-                        loading="lazy"
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-                        className={carousel?.project_lead}
-                        src={leadImgSrc}
-                        alt="project-lead"
-                        layout="fill"
-                        sizes="100vw"
-                      />
-                    </div>
-                    <span className="thumbnail-gif"></span>
-                  </span>
-                </Link>
-              </div>
-              <Link href={node?.uri}>
-                <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
-                  <span className={carousel?.grey__color}>  / {client}</span>
-                </span>
-              </Link>
-            </div>
-          </div>
-        </>;
-      })
-    })
-  }
+  //                 <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+  //                   <div className={`${carousel?.full_thumb} full-thumb`}>
+  //                     <Image
+  //                       // priority={true}
+  //                       loading="lazy"
+  //                       placeholder="blur"
+  //                       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+  //                       className={carousel?.project_lead}
+  //                       src={leadImgSrc}
+  //                       alt="project-lead"
+  //                       layout="fill"
+  //                       sizes="100vw"
+  //                     />
+  //                   </div>
+  //                   <span className="thumbnail-gif"></span>
+  //                 </span>
+  //               </Link>
+  //             </div>
+  //             <Link href={node?.uri}>
+  //               <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
+  //                 <span className={carousel?.grey__color}>  / {client}</span>
+  //               </span>
+  //             </Link>
+  //           </div>
+  //         </div>
+  //       </>;
+  //     })
+  //   })
+  // }
 
 
   if (other_projects?.length > 0) {
@@ -588,7 +590,7 @@ export default function Projects({ project, data, menus }) {
             <div className="more-projectsCarousel">
               <Slider {...settings}>
                 {other_projects_slider}
-                {other_projects_slider1}
+                {/* {other_projects_slider1} */}
               </Slider>
             </div>
           </div>

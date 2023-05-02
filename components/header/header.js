@@ -32,7 +32,7 @@ const Header = (props) => {
     // const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
-        console.log(data)
+        // console.log(data)
         async function fetchMyAPI() {
             let response = await getFilters()
             setFilters(response)
