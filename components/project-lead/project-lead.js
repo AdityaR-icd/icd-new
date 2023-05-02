@@ -22,10 +22,10 @@ export default function projectLead({ edges }) {
     const isTabletH = useMediaQuery({ query: '(min-width: 992px) and (max-width: 1365px)' });
 
 
-    const toBase64 = (str) =>
-        typeof window === 'undefined'
-            ? Buffer.from(str).toString('base64')
-            : window.btoa(str)
+            const toBase64 = (str) =>
+            typeof window === 'undefined'
+                ? Buffer.from(str).toString('base64')
+                : window.btoa(str)
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

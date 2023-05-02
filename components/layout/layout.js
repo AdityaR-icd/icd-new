@@ -24,17 +24,7 @@ const Layout = ({ children }) => {
         }
     })
 
-    // let transparent = 
-    useEffect(() => {
-        if(!noNav.includes(router.pathname)){
-            if (home.includes(router.pathname) || bg_yellow.includes(router.pathname)) {
-                document.getElementById('menu-cont').classList?.add('bg-transparent');
-            }
-            else {
-                document.getElementById('menu-cont').classList?.remove('bg-transparent');
-            }
-        }
-    })
+   
 
     useEffect(() => {
         if (router.pathname == "/search/[slug]") {
