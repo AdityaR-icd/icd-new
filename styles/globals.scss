@@ -1346,3 +1346,19 @@ figure {
     display: block;
   }
 }
+.singlePost{
+  .insta-embed{
+    text-align: center;
+    iframe{
+        border: 1px solid #efefef;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 630px;
+    }
+    @include for-phone-only{
+        iframe{
+            max-height: 560px;
+        }
+    }
+}
+}
