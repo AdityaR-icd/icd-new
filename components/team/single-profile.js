@@ -28,7 +28,7 @@ export default function singleProfile({ data }) {
         </svg>`
 
     return <>
-        <div className="col-md-6 col-lg-4" style={{ order: `${data.teamorder.teamorder}` }}>
+        <div className="col-md-6 col-lg-4">
             <div className={Ourteam.profile}>
                 <div className={` ${Ourteam.profileImg} fade-in `} >
                     <Image

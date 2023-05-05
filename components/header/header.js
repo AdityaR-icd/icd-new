@@ -8,7 +8,7 @@ import $, { parseJSON } from 'jquery';
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { getFilters } from '../../lib/api'
-
+import Script from 'next/script'
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));
 
@@ -53,7 +53,6 @@ const Header = (props) => {
         }
     }
 
-
     filters?.clients?.edges.map((item) => {
         clients.push(item.node.slug)
     })
@@ -67,7 +66,7 @@ const Header = (props) => {
     })
 
     filters?.keywords.edges.map((item) => {
-        keywords.push(item.node.slug)
+    keywords.push(item.node.slug)
     })
 
 
@@ -142,6 +141,7 @@ const Header = (props) => {
 
         <Head>
             <link rel="shortcut icon" href="/favicon.ico" />
+             <Script src="https://example.com/script.js" />
         </Head>
 
         <header id="header">
