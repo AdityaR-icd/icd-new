@@ -3,6 +3,7 @@
   $remSize: $size / 16;
   @return #{$remSize}rem;
 }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Rajdhani&display=swap');
 // rock salt font
 
 /* Global Fonts */
@@ -1547,7 +1548,7 @@ width: 22%;
             margin: 0 !important;
             color: white;
             padding-left: 12px;
-            font-family: $primary-font !important;
+            font-family: 'Inter', sans-serif !important;
             cursor: pointer;
 
 
@@ -1672,6 +1673,7 @@ width: 22%;
   }
 }
 
+
 	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#181818;}
 	.st1{fill:none;stroke:#6D6E70;stroke-width:2;}
 	.st2{fill:#6D6E70;}
@@ -1696,5 +1698,5 @@ width: 22%;
 	.st21{letter-spacing:1;}
 	.st22{fill:none;stroke:#6D6E70;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 	.st23{fill:#EDEDED;}
-	.st24{font-family:'Inter-Bold';}
+	.st24{font-family: 'Inter', sans-serif;}
 	.st25{font-size:16px;}
