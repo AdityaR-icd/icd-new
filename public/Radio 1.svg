@@ -1,361 +1,42 @@
-import parse from 'html-react-parser';
-import $ from 'jquery';
-import { useEffect } from 'react'
-import { useState } from 'react';
-import { getAllPostsForHome, getFooter, getPostAndMorePosts , getTeam } from '../../lib/api'
-import { useRouter } from 'next/router'
-import Image from "next/image";
-import Link from 'next/link'
-import Share from '../../assets/images/post-buttons/share.svg'
-import Icon from '../../assets/images/logo/mobile-logo-new.png'
-
-
-import style from '../../styles/singlePost.module.scss'
-import carousel from '../../components/project-categories/all/all.module.scss'
-import type from '../../components/project-categories/type/type.module.scss'
-import dynamic from "next/dynamic";
-const Seo = dynamic(() => import("../../components/seo"));
-// const Comment = dynamic(() => import("../../components/comment/comment"));
-const Like = dynamic(() => import("../../components/like"));
-const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
-const NextPost = dynamic(() => import('../../components/posts/next-post'))
-const PrevPost = dynamic(() => import('../../components/posts/prev-post'))
-
-
-export default function Post({ post }) {
-  
-  const router = useRouter()
-
-  const [mounted, setMounted] = useState(false);
-  const [range, setRange] = useState('10')
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // const clientspage = 
-  const seo = post ? (post?.seo ?? {}) : ({});
-  const uri = post ? (post?.uri ?? {}) : ({});
-  // const comment_data = post ? (post.comments ?? {}) : ({});
-
-  var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
-  var categories = post?.categories.edges[0]?.node?.name
-  var checkauthor = post?.postAuthor?.postAuthor
-  var checkrelatedpost = post?.relatedPost?.relatedBlog
-  var checkrelatedproject = post?.relatedPost?.relatedProject
-
-
-  const [interactionArticle, setinteractionArticle] = useState(post?.musicArticle?.interactive);
-  const [team, setTeam] = useState(interactionArticle);
-  useEffect( () => {
-      if(interactionArticle === true) {
-          async function fetchData() {
-            // You can await here
-                  const teamData = await getTeam()
-                    setTeam(teamData)
-            // ...
-          }
-          fetchData();
-        }
-  }, [])
-
-  // console.log(team)
-
-
-  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
-  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + window?.location.origin + router.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window?.location.origin + router.asPath + '"&title=' + post?.title;
-
-  if (checkauthor) {
-    var author = post?.postAuthor?.postAuthor[0]?.title
-    var authorImg = post?.postAuthor?.postAuthor[0]?.profileImage?.profileImage
-  }
-  // console.log(post?.postAuthor?.postAuthor[0])
-  var client = '';
-  var leadImgSrc = '';
-
-  if (checkrelatedproject) {
-    var relatedProject =
-
-      <>
-
-        {checkrelatedproject.map((node) => (
-          client = node.clients.edges[0].node.name,
-          leadImgSrc = node.featuredImage.node.sourceUrl,
-          <>
-            <div className="col-md-4 project__item" key={node.id}>
-              <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                <div className={carousel.thumbnail_cont}>
-                  <Link href={`/projects/${node.slug}`}>
-                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                      <div className={`${carousel.full_thumb} full-thumb`}>
-                        <Image
-                          className={carousel.project_lead}
-                          placeholder="blur"
-                          loading="lazy"
-                          blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                          src={leadImgSrc}
-                          alt="project-lead"
-                          layout="fill"
-                          sizes="100vw" />
-                      </div>
-                      <span className="thumbnail-gif"></span>
-                    </span>
-                  </Link>
-                </div>
-                <Link href={`/projects/${node.slug}`}>
-                  <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                    <span className={carousel.grey__color}>  / {client}</span>
-                  </span>
-                </Link>
-              </div>
-            </div>
-          </>
-        ))}
-
-      </>
-
-  }
-  else {
-    var relatedProject = ''
-  }
-
-
-  if (checkrelatedpost) {
-    var relatedPost =
-
-      <>
-        {checkrelatedpost.map((data) => {
-          var categories = data?.categories.edges[0]?.node?.name
-          var featuredImage = data?.featuredImage?.node?.sourceUrl
-
-
-          if (featuredImage) {
-            var imageData =
-              <span className={`${carousel.full_thumb} full-thumb`}>
-                <Image
-                  src={featuredImage}
-                  loading="lazy"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  alt="post-lead"
-                  layout="fill"
-                  sizes="100vw" />
-              </span>
-          } else {
-            imageData =
-              <span className={`${carousel.full_thumb} full-thumb`}>
-
-              </span>
-          }
-          return (
-            <>
-              <div className="col-md-4 project__item">
-                <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                  <div className={carousel.thumbnail_cont}>
-                    <Link href={`/posts/${data.slug}`}>
-                      <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                        {imageData}
-                      </span>
-                    </Link>
-                  </div>
-                  <Link href={`/posts/${data.slug}`}>
-                    <span className={carousel.projectTitle}>{data.title}
-                      <span className={carousel.grey__color}>  / {categories}</span>
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </>
-          )
-        })}
-      </>
-
-  }
-  else {
-    var relatedPost = ''
-  }
-
-
-  var date = new Date(post?.date).toLocaleDateString('en-IN', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-
-  const toBase64 = (str) =>
-    typeof window === 'undefined'
-      ? Buffer.from(str).toString('base64')
-      : window.btoa(str)
-
-  const shimmer = (w, h) => `
-      <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-          <linearGradient id="g">
-              <stop stop-color="#f6f6f6" offset="20%" />
-              <stop stop-color="#f0f0f0" offset="50%" />
-              <stop stop-color="#f6f6f6" offset="70%" />
-          </linearGradient>
-        </defs>
-        <rect width="${w}" height="${h}" fill="#F6F6F6" />
-        <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-        <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-      </svg>`
-
-  if (featuredImage) {
-    var imageData =
-      <div className={` ${style.leadImage} fade-in `}>
-        <Image
-          src={featuredImage}
-          loading="lazy"
-          placeholder="blur"
-          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-          className="full-lead-img"
-          alt="post-lead"
-          fill
-          sizes="100vw" />
-      </div>
-  } else {
-    imageData =
-      <div className={style.leadImage}>
-
-      </div>
-  }
-  if (router.isFallback) {
-    return <div>Loading...</div>
-  }
-
-  const toggleShareIcons = () => {
-    $('.share-icon').toggleClass('icons-hide');
-  }
-
-  const playAudio = async(audio) => {
-      var file = document.getElementById(audio);
-          console.log('click')
-        var className = `.${audio}`
-        if ($(className).hasClass('active')) {
-            console.log('remove')
-            $(className).removeClass('active');
-        } else {
-            $('.person-list li').removeClass('active');
-            console.log('add')
-            $(className).addClass('active');
-        }
-
-      file.currentTime = 0;
-      if (file.paused) {
-          document.querySelectorAll('audio').forEach(el => el.pause());
-          console.log('play')
-          file.load();
-          file.play();
-          // file.classList.add('active');
-      } else {
-          file.pause();
-          // file.classList.remove('active');
-          console.log('pause')
-      }
-  }
-
-  const endFunction = async() => {
-      document.querySelectorAll('li').forEach(el => el.classList.remove('active'));
-  }
-
-
-  const setRangeValue = async(value) => {
-    console.log(value);
-    setRange(value)
-    $('.person-number').removeClass('show')
-    $('.person' + range +'').addClass('show')
-  }
-
-  const rangeMinus = () => {
-
-    if(range != 0){
-      setRange(range - 1)
-      console.log(range)
-    }
-  }
-
-  const rangePlus = () => {
-    if(range != 12){
-      setRange(range + 1)
-      console.log(range)
-    }
-  }
-
-
-  var music_name = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&  <ul className={`person${i} person-number`}>
-          <li className={`p${i+1}`} onClick={() => playAudio(`p${i+1}`)}><span className="volume"></span>{node.music.artistFirst}</li>
-          <li className={`p${i+2}`} onClick={() => playAudio(`p${i+2}`)}><span className="volume"></span>{node.music.artistSecond}</li>
-          <li className={`p${i+3}`} onClick={() => playAudio(`p${i+3}`)}><span className="volume"></span>{node.music.artistThird}</li>
-          <li className={`p${i+4}`} onClick={() => playAudio(`p${i+4}`)}><span className="volume"></span>{node.music.artistFourth}</li>
-          <li className={`p${i+5}`} onClick={() => playAudio(`p${i+5}`)}><span className="volume"></span>{node.music.artistFifth}</li>
-          <li><a href={node?.music?.playlistUrl} target="_blank" rel="noopener"><span className="playlist"></span>Go to playlist</a></li>
-        </ul> }
-      </>
-    ))}
-  </>
-
-  var team_name = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&  <span className={`person${i} person-number`}>{node?.title}</span>}
-      </>
-    ))}
-  </>
-
-  var team_img = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-     
-       {range == i && <img className={`person${i} person-number`} src={node?.profileImage?.profileImageOnHover?.sourceUrl} alt="" />}
-      </>
-    ))}
-  </>
-
-  var music = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&   <div className="audio">
-          <audio onEnded={endFunction} preload="none" id={`p${i+1}`}
-            src={node?.music.musicFirst}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+2}`}
-            src={node?.music.musicSecond}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+3}`}
-            src={node?.music.musicThird}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+4}`}
-            src={node?.music.musicFourth}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+5}`}
-            src={node?.music.musicFifth}></audio>
-      </div> }
-      </>
-    ))}
-  </>
-
-
-  var radioSvg = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&   
-         <div className='interaction-element'>
-            <svg className='radio-img  d-none d-md-block'  version="1.1" id="Layer_1" x="0px" y="0px"
-	 viewBox="0 0 970 641">
-            
-
-<path className="st0" d="M65.6,41.1c0-22.6,18.4-41,41-41h756c22.6,0,41,18.4,41,41v40h25c22.6,0,41,18.4,41,41v478
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 970 641" style="enable-background:new 0 0 970 641;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#181818;}
+	.st1{fill:none;stroke:#6D6E70;stroke-width:2;}
+	.st2{fill:#6D6E70;}
+	.st3{clip-path:url(#SVGID_2_);}
+	.st4{fill:#EC1C24;}
+	.st5{fill:#FFFFFF;}
+	.st6{fill:#4DC460;}
+	.st7{fill:none;stroke:#181818;stroke-width:2;}
+	.st8{fill:none;stroke:#000000;}
+	.st9{fill:#FFCA05;}
+	.st10{fill:#6D6E70;stroke:#6D6E70;stroke-width:2;}
+	.st11{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;filter:url(#Adobe_OpacityMaskFilter);}
+	.st12{mask:url(#path-92-inside-1_20_532_1_);fill:#6D6E70;}
+	.st13{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;filter:url(#Adobe_OpacityMaskFilter_1_);}
+	.st14{mask:url(#path-99-inside-2_20_532_1_);fill:#6D6E70;}
+	.st15{fill:#EB1C24;}
+	.st16{fill:none;stroke:#EDEDED;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st17{stroke:#000000;stroke-width:0.4;stroke-miterlimit:10;}
+	.st18{font-family:'Ozone';}
+	.st19{font-size:23.7239px;}
+	.st20{font-size:29.6509px;}
+	.st21{letter-spacing:1;}
+	.st22{fill:none;stroke:#6D6E70;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st23{fill:#EDEDED;}
+	.st24{font-family:'Inter-Bold';}
+	.st25{font-size:16px;}
+</style>
+<path class="st0" d="M65.6,41.1c0-22.6,18.4-41,41-41h756c22.6,0,41,18.4,41,41v40h25c22.6,0,41,18.4,41,41v478
 	c0,22.6-18.4,41-41,41h-888c-22.6,0-41-18.4-41-41v-478c0-22.6,18.4-41,41-41h25V41.1z M103.6,81.1h762v-26c0-9.4-7.6-17-17-17h-728
 	c-9.4,0-17,7.6-17,17V81.1z"/>
-<line className="st1" x1="486" y1="577" x2="486" y2="641"/>
-<line className="st1" x1="0" y1="564" x2="970" y2="564"/>
-<line className="st1" x1="0" y1="576" x2="970" y2="576"/>
-<path className="st2" d="M50.9,600.9c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4
+<line class="st1" x1="486" y1="577" x2="486" y2="641"/>
+<line class="st1" x1="0" y1="564" x2="970" y2="564"/>
+<line class="st1" x1="0" y1="576" x2="970" y2="576"/>
+<path class="st2" d="M50.9,600.9c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4
 	s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2s0.3,0.1,0.4,0.2C50.8,600.6,50.9,600.7,50.9,600.9z M50.9,602.5c0,0.2-0.1,0.3-0.2,0.4
 	c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4c0-0.2,0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2
 	s0.3,0.1,0.4,0.2C50.8,602.2,50.9,602.3,50.9,602.5z M50.9,604.2c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2
@@ -690,7 +371,7 @@ export default function Post({ post }) {
 	C110.9,610.4,110.9,610.6,110.9,610.7z M110.9,612.4c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2
 	c-0.1-0.1-0.2-0.3-0.2-0.4c0-0.2,0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2c0.2,0,0.3,0.1,0.4,0.2
 	C110.9,612.1,110.9,612.2,110.9,612.4z"/>
-<path className="st2" d="M50.7,601.3l0.2,0.2l0,0L50.7,601.3z M49.8,601.3l-0.2,0.2l0,0L49.8,601.3z M49.8,600.5l-0.2-0.2l0,0
+<path class="st2" d="M50.7,601.3l0.2,0.2l0,0L50.7,601.3z M49.8,601.3l-0.2,0.2l0,0L49.8,601.3z M49.8,600.5l-0.2-0.2l0,0
 	L49.8,600.5z M50.7,600.5l0.2-0.2l0,0L50.7,600.5z M50.7,603l0.2,0.2l0,0L50.7,603z M49.8,603l-0.2,0.2l0,0L49.8,603z M49.8,602.1
 	l-0.2-0.2l0,0L49.8,602.1z M50.7,602.1l0.2-0.2l0,0L50.7,602.1z M50.7,604.6l-0.2-0.2l0,0L50.7,604.6z M49.8,604.6l-0.2,0.2l0,0
 	L49.8,604.6z M49.8,603.7l-0.2-0.2l0,0L49.8,603.7z M50.7,603.7l0.2-0.2l0,0L50.7,603.7z M50.7,606.2l0.2,0.2l0,0L50.7,606.2z
@@ -1837,7 +1518,7 @@ export default function Post({ post }) {
 	c-0.2,0.2-0.2,0.4-0.2,0.6H109.9z M110,612.1c0.1-0.1,0.1-0.1,0.2-0.1v-0.5c-0.2,0-0.5,0.1-0.6,0.3L110,612.1z M110.3,612
 	c0.1,0,0.2,0,0.3,0.1l0.4-0.3c-0.2-0.2-0.4-0.3-0.6-0.3V612z M110.6,612.1c0.1,0.1,0.1,0.1,0.1,0.3h0.5c0-0.2-0.1-0.4-0.2-0.6
 	L110.6,612.1z"/>
-<path className="st2" d="M817.8,600.9c0,0.2-0.1,0.3-0.2,0.4s-0.3,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4
+<path class="st2" d="M817.8,600.9c0,0.2-0.1,0.3-0.2,0.4s-0.3,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4
 	c0-0.2,0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2c0.2,0,0.3,0.1,0.4,0.2S817.8,600.7,817.8,600.9z M817.8,602.5
 	c0,0.2-0.1,0.3-0.2,0.4s-0.3,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4c0-0.2,0.1-0.3,0.2-0.4
 	c0.1-0.1,0.3-0.2,0.4-0.2c0.2,0,0.3,0.1,0.4,0.2S817.8,602.4,817.8,602.5z M817.8,604.2c0,0.2-0.1,0.3-0.2,0.4
@@ -2132,7 +1813,7 @@ export default function Post({ post }) {
 	c0.2,0,0.3,0.1,0.4,0.2C871.3,608.8,871.3,609,871.3,609.1z M871.3,610.8c0,0.2-0.1,0.3-0.2,0.4c-0.1,0.1-0.3,0.2-0.4,0.2
 	c-0.2,0-0.3-0.1-0.4-0.2c-0.1-0.1-0.2-0.3-0.2-0.4s0.1-0.3,0.2-0.4c0.1-0.1,0.3-0.2,0.4-0.2c0.2,0,0.3,0.1,0.4,0.2
 	C871.3,610.5,871.3,610.6,871.3,610.8z"/>
-<path className="st2" d="M817.6,601.3l-0.2-0.2l0,0L817.6,601.3z M817.6,600.5l-0.2,0.2l0,0L817.6,600.5z M817.6,603l-0.2-0.2l0,0
+<path class="st2" d="M817.6,601.3l-0.2-0.2l0,0L817.6,601.3z M817.6,600.5l-0.2,0.2l0,0L817.6,600.5z M817.6,603l-0.2-0.2l0,0
 	L817.6,603z M816.7,602.1l-0.2-0.2l0,0L816.7,602.1z M817.6,602.1l0.2-0.2l0,0L817.6,602.1z M817.6,604.6l-0.2-0.2l0,0L817.6,604.6z
 	 M816.7,604.6l0.2-0.2l0,0L816.7,604.6z M816.7,603.7l-0.2-0.2l0,0L816.7,603.7z M817.6,603.7l0.2-0.2l0,0L817.6,603.7z
 	 M817.6,606.2l-0.2-0.2l0,0L817.6,606.2z M816.7,605.4l0.2,0.2l0,0L816.7,605.4z M817.6,605.4l-0.2,0.2l0,0L817.6,605.4z
@@ -3174,103 +2855,105 @@ export default function Post({ post }) {
 	<defs>
 		<rect id="SVGID_1_" x="881" y="594" width="41" height="31"/>
 	</defs>
-
-	<g className="st3">
-		<path className="st4" d="M881,617.2l8.2,0l5.2,7.8l0-7.8H922l0-23.2h-41L881,617.2z"/>
-		<path className="st5" d="M890.3,600.2h-2.9v10.7h2.9V600.2z"/>
-		<path className="st5" d="M902.7,610.7c-0.8,0.2-1.7,0.4-3.2,0.4c-2.9,0-6.2-1.4-6.2-5.5c0-3.7,2.6-5.6,6.2-5.6c1.1,0,2.2,0.2,3.2,0.6
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st3">
+		<path class="st4" d="M881,617.2l8.2,0l5.2,7.8l0-7.8H922l0-23.2h-41L881,617.2z"/>
+		<path class="st5" d="M890.3,600.2h-2.9v10.7h2.9V600.2z"/>
+		<path class="st5" d="M902.7,610.7c-0.8,0.2-1.7,0.4-3.2,0.4c-2.9,0-6.2-1.4-6.2-5.5c0-3.7,2.6-5.6,6.2-5.6c1.1,0,2.2,0.2,3.2,0.6
 			l-0.2,2.3c-0.9-0.5-1.8-0.8-2.8-0.8c-2,0-3.4,1.5-3.4,3.5c0,2.1,1.5,3.4,3.6,3.4c0.9,0,1.9-0.2,2.7-0.6L902.7,610.7z"/>
-		<path className="st5" d="M905.2,600.2h3.9c3.7,0,6.4,1.2,6.4,5.3c0,4-2.7,5.4-6.4,5.4h-3.9V600.2z M908.1,608.8h1.1
+		<path class="st5" d="M905.2,600.2h3.9c3.7,0,6.4,1.2,6.4,5.3c0,4-2.7,5.4-6.4,5.4h-3.9V600.2z M908.1,608.8h1.1
 			c2.1,0,3.3-1.1,3.3-3.2c0-2.1-1.2-3.2-3.3-3.2h-1.1V608.8z"/>
 	</g>
 </g>
 <g>
-	<circle className="st6" cx="134" cy="606" r="10"/>
+	<circle class="st6" cx="134" cy="606" r="10"/>
 </g>
-<circle className="st6" cx="134" cy="606" r="8"/>
-<rect x="48" y="129" className="st2" width="874" height="45"/>
-<line className="st7" x1="96" y1="146" x2="96" y2="174"/>
-<line className="st8" x1="107.5" y1="158" x2="107.5" y2="174"/>
-<line className="st8" x1="119.5" y1="158" x2="119.5" y2="174"/>
-<line className="st8" x1="131.5" y1="158" x2="131.5" y2="174"/>
-<line className="st8" x1="143.5" y1="158" x2="143.5" y2="174"/>
-<line className="st7" x1="156" y1="146" x2="156" y2="174"/>
-<line className="st8" x1="167.5" y1="158" x2="167.5" y2="174"/>
-<line className="st8" x1="179.5" y1="158" x2="179.5" y2="174"/>
-<line className="st8" x1="191.5" y1="158" x2="191.5" y2="174"/>
-<line className="st8" x1="203.5" y1="158" x2="203.5" y2="174"/>
-<line className="st7" x1="216" y1="146" x2="216" y2="174"/>
-<line className="st8" x1="227.5" y1="158" x2="227.5" y2="174"/>
-<line className="st8" x1="239.5" y1="158" x2="239.5" y2="174"/>
-<line className="st8" x1="251.5" y1="158" x2="251.5" y2="174"/>
-<line className="st8" x1="263.5" y1="158" x2="263.5" y2="174"/>
-<line className="st7" x1="276" y1="146" x2="276" y2="174"/>
-<line className="st8" x1="287.5" y1="158" x2="287.5" y2="174"/>
-<line className="st8" x1="299.5" y1="158" x2="299.5" y2="174"/>
-<line className="st8" x1="311.5" y1="158" x2="311.5" y2="174"/>
-<line className="st8" x1="323.5" y1="158" x2="323.5" y2="174"/>
-<line className="st7" x1="336" y1="146" x2="336" y2="174"/>
-<line className="st8" x1="347.5" y1="158" x2="347.5" y2="174"/>
-<line className="st8" x1="359.5" y1="158" x2="359.5" y2="174"/>
-<line className="st8" x1="371.5" y1="158" x2="371.5" y2="174"/>
-<line className="st8" x1="383.5" y1="158" x2="383.5" y2="174"/>
-<line className="st7" x1="396" y1="146" x2="396" y2="174"/>
-<line className="st8" x1="407.5" y1="158" x2="407.5" y2="174"/>
-<line className="st8" x1="419.5" y1="158" x2="419.5" y2="174"/>
-<line className="st8" x1="431.5" y1="158" x2="431.5" y2="174"/>
-<line className="st8" x1="443.5" y1="158" x2="443.5" y2="174"/>
-<line className="st7" x1="456" y1="146" x2="456" y2="174"/>
-<line className="st8" x1="467.5" y1="158" x2="467.5" y2="174"/>
-<line className="st8" x1="479.5" y1="158" x2="479.5" y2="174"/>
-<line className="st8" x1="491.5" y1="158" x2="491.5" y2="174"/>
-<line className="st8" x1="503.5" y1="158" x2="503.5" y2="174"/>
-<line className="st7" x1="516" y1="146" x2="516" y2="174"/>
-<line className="st8" x1="527.5" y1="158" x2="527.5" y2="174"/>
-<line className="st8" x1="539.5" y1="158" x2="539.5" y2="174"/>
-<line className="st8" x1="551.5" y1="158" x2="551.5" y2="174"/>
-<line className="st8" x1="563.5" y1="158" x2="563.5" y2="174"/>
-<line className="st7" x1="576" y1="146" x2="576" y2="174"/>
-<line className="st8" x1="587.5" y1="158" x2="587.5" y2="174"/>
-<line className="st8" x1="599.5" y1="158" x2="599.5" y2="174"/>
-<line className="st8" x1="611.5" y1="158" x2="611.5" y2="174"/>
-<line className="st8" x1="623.5" y1="158" x2="623.5" y2="174"/>
-<line className="st7" x1="636" y1="146" x2="636" y2="174"/>
-<line className="st8" x1="647.5" y1="158" x2="647.5" y2="174"/>
-<line className="st8" x1="659.5" y1="158" x2="659.5" y2="174"/>
-<line className="st8" x1="671.5" y1="158" x2="671.5" y2="174"/>
-<line className="st8" x1="683.5" y1="158" x2="683.5" y2="174"/>
-<line className="st7" x1="696" y1="146" x2="696" y2="174"/>
-<line className="st8" x1="707.5" y1="158" x2="707.5" y2="174"/>
-<line className="st8" x1="719.5" y1="158" x2="719.5" y2="174"/>
-<line className="st8" x1="731.5" y1="158" x2="731.5" y2="174"/>
-<line className="st8" x1="743.5" y1="158" x2="743.5" y2="174"/>
-<line className="st7" x1="756" y1="146" x2="756" y2="174"/>
-<line className="st8" x1="767.5" y1="158" x2="767.5" y2="174"/>
-<line className="st8" x1="779.5" y1="158" x2="779.5" y2="174"/>
-<line className="st8" x1="791.5" y1="158" x2="791.5" y2="174"/>
-<line className="st8" x1="803.5" y1="158" x2="803.5" y2="174"/>
-<line className="st7" x1="816" y1="146" x2="816" y2="174"/>
-<line className="st8" x1="827.5" y1="158" x2="827.5" y2="174"/>
-<line className="st8" x1="839.5" y1="158" x2="839.5" y2="174"/>
-<line className="st8" x1="851.5" y1="158" x2="851.5" y2="174"/>
-<line className="st8" x1="863.5" y1="158" x2="863.5" y2="174"/>
-<line className="st7" x1="876" y1="146" x2="876" y2="174"/>
-<circle className="st1" cx="198" cy="375" r="138"/>
-<circle className="st9" cx="198" cy="375" r="106"/>
-<circle className="st10" cx="79.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="79.5" cy="493.9" r="8.3"/>
-<circle className="st10" cx="316.9" cy="256.5" r="8.3"/>
-<circle className="st10" cx="316.9" cy="493.9" r="8.3"/>
+<circle class="st6" cx="134" cy="606" r="8"/>
+<rect x="48" y="129" class="st2" width="874" height="45"/>
+<line class="st7" x1="96" y1="146" x2="96" y2="174"/>
+<line class="st8" x1="107.5" y1="158" x2="107.5" y2="174"/>
+<line class="st8" x1="119.5" y1="158" x2="119.5" y2="174"/>
+<line class="st8" x1="131.5" y1="158" x2="131.5" y2="174"/>
+<line class="st8" x1="143.5" y1="158" x2="143.5" y2="174"/>
+<line class="st7" x1="156" y1="146" x2="156" y2="174"/>
+<line class="st8" x1="167.5" y1="158" x2="167.5" y2="174"/>
+<line class="st8" x1="179.5" y1="158" x2="179.5" y2="174"/>
+<line class="st8" x1="191.5" y1="158" x2="191.5" y2="174"/>
+<line class="st8" x1="203.5" y1="158" x2="203.5" y2="174"/>
+<line class="st7" x1="216" y1="146" x2="216" y2="174"/>
+<line class="st8" x1="227.5" y1="158" x2="227.5" y2="174"/>
+<line class="st8" x1="239.5" y1="158" x2="239.5" y2="174"/>
+<line class="st8" x1="251.5" y1="158" x2="251.5" y2="174"/>
+<line class="st8" x1="263.5" y1="158" x2="263.5" y2="174"/>
+<line class="st7" x1="276" y1="146" x2="276" y2="174"/>
+<line class="st8" x1="287.5" y1="158" x2="287.5" y2="174"/>
+<line class="st8" x1="299.5" y1="158" x2="299.5" y2="174"/>
+<line class="st8" x1="311.5" y1="158" x2="311.5" y2="174"/>
+<line class="st8" x1="323.5" y1="158" x2="323.5" y2="174"/>
+<line class="st7" x1="336" y1="146" x2="336" y2="174"/>
+<line class="st8" x1="347.5" y1="158" x2="347.5" y2="174"/>
+<line class="st8" x1="359.5" y1="158" x2="359.5" y2="174"/>
+<line class="st8" x1="371.5" y1="158" x2="371.5" y2="174"/>
+<line class="st8" x1="383.5" y1="158" x2="383.5" y2="174"/>
+<line class="st7" x1="396" y1="146" x2="396" y2="174"/>
+<line class="st8" x1="407.5" y1="158" x2="407.5" y2="174"/>
+<line class="st8" x1="419.5" y1="158" x2="419.5" y2="174"/>
+<line class="st8" x1="431.5" y1="158" x2="431.5" y2="174"/>
+<line class="st8" x1="443.5" y1="158" x2="443.5" y2="174"/>
+<line class="st7" x1="456" y1="146" x2="456" y2="174"/>
+<line class="st8" x1="467.5" y1="158" x2="467.5" y2="174"/>
+<line class="st8" x1="479.5" y1="158" x2="479.5" y2="174"/>
+<line class="st8" x1="491.5" y1="158" x2="491.5" y2="174"/>
+<line class="st8" x1="503.5" y1="158" x2="503.5" y2="174"/>
+<line class="st7" x1="516" y1="146" x2="516" y2="174"/>
+<line class="st8" x1="527.5" y1="158" x2="527.5" y2="174"/>
+<line class="st8" x1="539.5" y1="158" x2="539.5" y2="174"/>
+<line class="st8" x1="551.5" y1="158" x2="551.5" y2="174"/>
+<line class="st8" x1="563.5" y1="158" x2="563.5" y2="174"/>
+<line class="st7" x1="576" y1="146" x2="576" y2="174"/>
+<line class="st8" x1="587.5" y1="158" x2="587.5" y2="174"/>
+<line class="st8" x1="599.5" y1="158" x2="599.5" y2="174"/>
+<line class="st8" x1="611.5" y1="158" x2="611.5" y2="174"/>
+<line class="st8" x1="623.5" y1="158" x2="623.5" y2="174"/>
+<line class="st7" x1="636" y1="146" x2="636" y2="174"/>
+<line class="st8" x1="647.5" y1="158" x2="647.5" y2="174"/>
+<line class="st8" x1="659.5" y1="158" x2="659.5" y2="174"/>
+<line class="st8" x1="671.5" y1="158" x2="671.5" y2="174"/>
+<line class="st8" x1="683.5" y1="158" x2="683.5" y2="174"/>
+<line class="st7" x1="696" y1="146" x2="696" y2="174"/>
+<line class="st8" x1="707.5" y1="158" x2="707.5" y2="174"/>
+<line class="st8" x1="719.5" y1="158" x2="719.5" y2="174"/>
+<line class="st8" x1="731.5" y1="158" x2="731.5" y2="174"/>
+<line class="st8" x1="743.5" y1="158" x2="743.5" y2="174"/>
+<line class="st7" x1="756" y1="146" x2="756" y2="174"/>
+<line class="st8" x1="767.5" y1="158" x2="767.5" y2="174"/>
+<line class="st8" x1="779.5" y1="158" x2="779.5" y2="174"/>
+<line class="st8" x1="791.5" y1="158" x2="791.5" y2="174"/>
+<line class="st8" x1="803.5" y1="158" x2="803.5" y2="174"/>
+<line class="st7" x1="816" y1="146" x2="816" y2="174"/>
+<line class="st8" x1="827.5" y1="158" x2="827.5" y2="174"/>
+<line class="st8" x1="839.5" y1="158" x2="839.5" y2="174"/>
+<line class="st8" x1="851.5" y1="158" x2="851.5" y2="174"/>
+<line class="st8" x1="863.5" y1="158" x2="863.5" y2="174"/>
+<line class="st7" x1="876" y1="146" x2="876" y2="174"/>
+<circle class="st1" cx="198" cy="375" r="138"/>
+<circle class="st9" cx="198" cy="375" r="106"/>
+<circle class="st10" cx="79.5" cy="256.5" r="8.3"/>
+<circle class="st10" cx="79.5" cy="493.9" r="8.3"/>
+<circle class="st10" cx="316.9" cy="256.5" r="8.3"/>
+<circle class="st10" cx="316.9" cy="493.9" r="8.3"/>
 <defs>
 	<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="46" y="223" width="304" height="304">
 		<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
 	</filter>
 </defs>
 <mask maskUnits="userSpaceOnUse" x="46" y="223" width="304" height="304" id="path-92-inside-1_20_532_1_">
-	<path className="st11" d="M327,225H69l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L69,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
+	<path class="st11" d="M327,225H69l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L69,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
 		L327,225z"/>
 </mask>
-<path className="st12" d="M327,225l1.4-1.4l-0.6-0.6H327V225z M69,225v-2h-0.8l-0.6,0.6L69,225z M48.4,245.6L47,247l1.4,1.4l1.4-1.4
+<path class="st12" d="M327,225l1.4-1.4l-0.6-0.6H327V225z M69,225v-2h-0.8l-0.6,0.6L69,225z M48.4,245.6L47,247l1.4,1.4l1.4-1.4
 	L48.4,245.6z M48,245.2l1.4-1.4l-3.4-3.4v4.8H48z M48,504.1h-2v4.8l3.4-3.4L48,504.1z M48.4,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4
 	L48.4,503.7z M69.4,524.7l1.4,1.4l1.4-1.4l-1.4-1.4L69.4,524.7z M69,525l-1.4-1.4l-3.4,3.4H69V525z M327,525v2h4.8l-3.4-3.4L327,525
 	z M326.7,524.7l-1.4-1.4l-1.4,1.4l1.4,1.4L326.7,524.7z M347.7,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4L347.7,503.7z M348,504l-1.4,1.4
@@ -3280,21 +2963,21 @@ export default function Post({ post }) {
 	l2.8,2.8l0.3-0.3L67.9,523.2z M69,527h258v-4H69V527z M328.5,523.6l-0.3-0.3l-2.8,2.8l0.3,0.3L328.5,523.6z M328.1,526.1l21-21
 	l-2.8-2.8l-21,21L328.1,526.1z M346.2,505.1l0.3,0.3l2.8-2.8l-0.3-0.3L346.2,505.1z M350,504V245.3h-4V504H350z M346.6,243.8
 	l-0.3,0.3l2.8,2.8l0.3-0.3L346.6,243.8z M349.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L349.1,244.2z"/>
-<circle className="st1" cx="772" cy="375" r="137.9"/>
-<circle className="st10" cx="653.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="653.5" cy="493.5" r="8.3"/>
-<circle className="st10" cx="890.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="890.5" cy="493.5" r="8.3"/>
+<circle class="st1" cx="772" cy="375" r="137.9"/>
+<circle class="st10" cx="653.5" cy="256.5" r="8.3"/>
+<circle class="st10" cx="653.5" cy="493.5" r="8.3"/>
+<circle class="st10" cx="890.5" cy="256.5" r="8.3"/>
+<circle class="st10" cx="890.5" cy="493.5" r="8.3"/>
 <defs>
 	<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="620" y="223" width="304" height="304">
 		<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
 	</filter>
 </defs>
 <mask maskUnits="userSpaceOnUse" x="620" y="223" width="304" height="304" id="path-99-inside-2_20_532_1_">
-	<path className="st13" d="M901,225H643l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L643,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
+	<path class="st13" d="M901,225H643l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L643,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
 		L901,225z"/>
 </mask>
-<path className="st14" d="M901,225l1.4-1.4l-0.6-0.6H901V225z M643,225v-2h-0.8l-0.6,0.6L643,225z M622.4,245.6L621,247l1.4,1.4l1.4-1.4
+<path class="st14" d="M901,225l1.4-1.4l-0.6-0.6H901V225z M643,225v-2h-0.8l-0.6,0.6L643,225z M622.4,245.6L621,247l1.4,1.4l1.4-1.4
 	L622.4,245.6z M622,245.2l1.4-1.4l-3.4-3.4v4.8H622z M622,504.1h-2v4.8l3.4-3.4L622,504.1z M622.4,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4
 	L622.4,503.7z M643.4,524.7l1.4,1.4l1.4-1.4l-1.4-1.4L643.4,524.7z M643,525l-1.4-1.4l-3.4,3.4h4.8V525z M901,525v2h4.8l-3.4-3.4
 	L901,525z M900.7,524.7l-1.4-1.4l-1.4,1.4l1.4,1.4L900.7,524.7z M921.7,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4L921.7,503.7z M922,504
@@ -3304,216 +2987,72 @@ export default function Post({ post }) {
 	 M641.9,523.2l-0.3,0.3l2.8,2.8l0.3-0.3L641.9,523.2z M643,527h258v-4H643V527z M902.5,523.6l-0.3-0.3l-2.8,2.8l0.3,0.3L902.5,523.6
 	z M902.1,526.1l21-21l-2.8-2.8l-21,21L902.1,526.1z M920.2,505.1l0.3,0.3l2.8-2.8l-0.3-0.3L920.2,505.1z M924,504V245.3h-4V504H924z
 	 M920.6,243.8l-0.3,0.3l2.8,2.8l0.3-0.3L920.6,243.8z M923.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L923.1,244.2z"/>
-<rect x="365" y="226" className="st1" width="240" height="94"/>
-<rect x="365" y="320" className="st1" width="240" height="34"/>
-<rect x="365" y="354" className="st1" width="240" height="34"/>
-<rect x="365" y="388" className="st1" width="240" height="34"/>
-<rect x="365" y="422" className="st1" width="240" height="34"/>
-<rect x="365" y="456" className="st1" width="240" height="34"/>
-<rect x="365" y="490" className="st15" width="240" height="34"/>
-<path className="st16" d="M381.8,511.2l8.3-8.3"/>
-<path className="st16" d="M381.8,502.8h8.3v8.3"/>
-<rect x="365" y="490" className="st1" width="240" height="34"/>
-<text transform="matrix(1 0 0 1 133.5459 371.951)"><tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan><tspan x="0" y="28.5" class="st17 st18 st19">{node?.title.split(" ")[1]}</tspan></text>
-<text transform="matrix(1 0 0 1 377.9917 262.5189)"><tspan x="0" y="0" className="st9 st18 st20 st21">FAVOURITE</tspan><tspan x="0" y="35.6" className="st9 st18 st20 st21">ARTISTS</tspan></text>
+<rect x="365" y="226" class="st1" width="240" height="94"/>
+<rect x="365" y="320" class="st1" width="240" height="34"/>
+<rect x="365" y="354" class="st1" width="240" height="34"/>
+<rect x="365" y="388" class="st1" width="240" height="34"/>
+<rect x="365" y="422" class="st1" width="240" height="34"/>
+<rect x="365" y="456" class="st1" width="240" height="34"/>
+<rect x="365" y="490" class="st15" width="240" height="34"/>
+<path class="st16" d="M381.8,511.2l8.3-8.3"/>
+<path class="st16" d="M381.8,502.8h8.3v8.3"/>
+<rect x="365" y="490" class="st1" width="240" height="34"/>
+<text transform="matrix(1 0 0 1 133.5459 371.951)"><tspan x="0" y="0" class="st17 st18 st19">AYUSHMAAN</tspan><tspan x="0" y="28.5" class="st17 st18 st19">AGARWALLA</tspan></text>
+<text transform="matrix(1 0 0 1 377.9917 262.5189)"><tspan x="0" y="0" class="st9 st18 st20 st21">FAVOURITE</tspan><tspan x="0" y="35.6" class="st9 st18 st20 st21">ARTISTS</tspan></text>
 <g>
 	<g>
-		<path className="st22" d="M385.2,467.2l-4.2,3.3h-3.3v5h3.3l4.2,3.3V467.2z"/>
-		<path className="st22" d="M391.9,467.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,470c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
+		<path class="st22" d="M385.2,467.2l-4.2,3.3h-3.3v5h3.3l4.2,3.3V467.2z"/>
+		<path class="st22" d="M391.9,467.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,470c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
 			/>
 	</g>
-	<g onClick={() => playAudio(`p${i+5}`)}>
-		<text transform="matrix(1 0 0 1 404.0186 478.4983)" className="st23 st24 st25">{node.music.artistFifth}</text>
+	<g>
+		<text transform="matrix(1 0 0 1 404.0186 478.4983)" class="st23 st24 st25">AP Dhillon</text>
 	</g>
 </g>
 <g>
-	<a href={node?.music?.playlistUrl} rel="noopener" target='_blank'><text transform="matrix(1 0 0 1 404.0186 512.744)" className="st23 st24 st25">Go to Playlist</text></a>
+	<text transform="matrix(1 0 0 1 404.0186 512.744)" class="st23 st24 st25">Go to Playlist</text>
+</g>
+<g>
+	<text transform="matrix(1 0 0 1 404.0186 444.9819)" class="st23 st24 st25">AP Dhillon</text>
 </g>
 <g>
 	<g>
-		<path className="st22" d="M385.2,433.7L381,437h-3.3v5h3.3l4.2,3.3V433.7z"/>
-		<path className="st22" d="M391.9,433.6c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,436.5c0.8,0.8,1.2,1.8,1.2,2.9
+		<path class="st22" d="M385.2,433.7L381,437h-3.3v5h3.3l4.2,3.3V433.7z"/>
+		<path class="st22" d="M391.9,433.6c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,436.5c0.8,0.8,1.2,1.8,1.2,2.9
 			s-0.4,2.2-1.2,2.9"/>
 	</g>
-	<g onClick={() => playAudio(`p${i+4}`)}>
-		<text transform="matrix(1 0 0 1 404.0186 444.982)" className="st23 st24 st25">{node.music.artistFourth}</text>
+	<g>
+		<text transform="matrix(1 0 0 1 404.0186 444.982)" class="st23 st24 st25">AP Dhillon</text>
 	</g>
 </g>
 <g>
 	<g>
-		<path className="st22" d="M385.2,400l-4.2,3.3h-3.3v5h3.3l4.2,3.3V400z"/>
-		<path className="st22" d="M391.9,400c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,402.9c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
+		<path class="st22" d="M385.2,400l-4.2,3.3h-3.3v5h3.3l4.2,3.3V400z"/>
+		<path class="st22" d="M391.9,400c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,402.9c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
 			/>
 	</g>
-	<g onClick={() => playAudio(`p${i+3}`)}>
-		<text transform="matrix(1 0 0 1 404.0186 411.3601)" className="st23 st24 st25">{node.music.artistThird}</text>
+	<g>
+		<text transform="matrix(1 0 0 1 404.0186 411.3601)" class="st23 st24 st25">AP Dhillon</text>
 	</g>
 </g>
 <g>
 	<g>
-		<path className="st22" d="M385.2,365l-4.2,3.3h-3.3v5h3.3l4.2,3.3V365z"/>
-		<path className="st22" d="M391.9,364.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,367.9c0.8,0.8,1.2,1.8,1.2,2.9
+		<path class="st22" d="M385.2,365l-4.2,3.3h-3.3v5h3.3l4.2,3.3V365z"/>
+		<path class="st22" d="M391.9,364.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,367.9c0.8,0.8,1.2,1.8,1.2,2.9
 			s-0.4,2.2-1.2,2.9"/>
 	</g>
-	<g onClick={() => playAudio(`p${i+2}`)}>
-		<text transform="matrix(1 0 0 1 404.0186 376.3373)" className="st23 st24 st25">{node.music.artistSecond}</text>
+	<g>
+		<text transform="matrix(1 0 0 1 404.0186 376.3373)" class="st23 st24 st25">AP Dhillon</text>
 	</g>
 </g>
 <g>
 	<g>
-		<path className="st22" d="M385.2,331.3l-4.2,3.3h-3.3v5h3.3l4.2,3.3V331.3z"/>
-		<path className="st22" d="M391.9,331.2c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,334.1c0.8,0.8,1.2,1.8,1.2,2.9
+		<path class="st22" d="M385.2,331.3l-4.2,3.3h-3.3v5h3.3l4.2,3.3V331.3z"/>
+		<path class="st22" d="M391.9,331.2c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,334.1c0.8,0.8,1.2,1.8,1.2,2.9
 			s-0.4,2.2-1.2,2.9"/>
 	</g>
-	<g onClick={() => playAudio(`p${i+1}`)} >
-		<text transform="matrix(1 0 0 1 404.0186 342.588)" className="st23 st24 st25">{node.music.artistFirst}</text>
+	<g>
+		<text transform="matrix(1 0 0 1 404.0186 342.588)" class="st23 st24 st25">AP Dhillon</text>
 	</g>
 </g>
-
-
-            </svg>
-            <span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
-              <input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
-            <span className='d-block d-md-none right-btn range-btn' onClick={rangePlus}></span>
-            <div className="person-img">
-                {team_img}
-            </div>
-        </div>
-       }
-      </>
-    ))}
-  </>
-
-  var interaction =  
-    <>
-      <div className="interaction-element">
-        <img className='radio-img  d-none d-md-block' src="https://digital.icdindia.com/wp-content/uploads/2023/05/Radio-1-2.png" alt="" />
-        <img className='radio-img  d-block d-md-none' src="https://digital.icdindia.com/wp-content/uploads/2023/05/Frame-24-1.png" alt="" />
-          <span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
-            <input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
-          <span className='d-block d-md-none right-btn range-btn' onClick={rangePlus}></span>
-        <div className="person-list">
-          {music_name}
-        </div>
-
-
-      <div className="person-name">
-          {team_name}
-      </div>
-      </div>
-      {music}
-    </>
-
-  return (
-    <>
-      {mounted && (
-        <>
-      <Seo seo={seo} uri={uri} />
-      <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
-        <div className="images-loaded-container">
-          {imageData}
-        </div>
-        <div className={style.postContent_cont}>
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-md-8 offset-md-2">
-                <div className={style.posts__container}>
-                  <div className={style.post__tag}>
-                    <span className={style.yellow__tag}>{categories}</span>
-                  </div>
-                  <h1>{post.title}</h1>
-                  <div className={style.post__author}>
-                    <div className={style.author_wrapper}>
-                      <span className={`sl ${style.author__img}`}><img loading="lazy" alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
-                      </img></span>
-                      <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
-                    </div>
-
-                    <div className={` ${style.social__media} ${style.header_socialmedia} social__media  `}>
-                      <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
-                      <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
-                      <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                      <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                      <Like count={post.likes?.likes} id={post.id} type={'post'} />
-                    </div>
-
-                  </div>
-                  <div className={`${style.postContent} postContent`}>
-                    {post?.content && parse(post?.content)}
-                    {/* {interaction} */}
-                    {/* {radioSvg}
-                    {music} */}
-                  </div>
-                </div>
-                <div className={` ${style.social__media} social__media `}>
-                  <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
-                  <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
-                  <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                  <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
-                  <Like count={post.likes?.likes} id={post.id} type={'post'} />
-                </div>
-
-                {relatedPost &&
-                  <div className={style.relatedProjects__container}>
-                    <span className={style.relatedProjects__head}>related </span>
-                    <section className={`${type.industry__filter} ${type.all_filter} `}>
-                      <div className="project__scroll">
-                        <div className="row project__row">
-                          {relatedProject}
-                          {relatedPost}
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                }
-
-
-                <div className="post__navigation">
-                  <div className="row">
-                    <div className="col-md-6 ">
-                      {post?.next && <PrevPost data={post?.next} />}
-                    </div>
-                    <div className="col-md-6">
-                      {post?.previous && <NextPost data={post?.previous} />}
-                    </div>
-                  </div>
-                </div>
-                {/* <Comment postId={post.postId} comment_data={comment_data} /> */}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      </>
-      )}
-    </>
-  )
-}
-
-export async function getStaticPaths() {
-  const allPosts = await getAllPostsForHome()
-  return {
-    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-    fallback: true,
-  }
-}
-
-export async function getStaticProps({ preview = false, params, previewData }) {
-  const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
-  // const menus = await getMenus()
-  const data = await getFooter()
-  // const filters = await getFilters()
-  return {
-    props: {
-      post: Moredata.post,
-      posts: Moredata.posts,
-      preview,
-      // menus,
-      data
-      // filters
-    },
-    revalidate: 2,
-  }
-}
+</svg>
