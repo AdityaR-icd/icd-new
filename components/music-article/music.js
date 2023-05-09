@@ -3011,11 +3011,84 @@ export default function music({ node , music , i }){
 <a href={node?.music?.playlistUrl} rel="noopener" target='_blank'>
 <rect x="365" y="490" className="st1" width="240" height="34"/>
 </a>
-
-<text className='profile-name' transform="matrix(1 0 0 1 133.5459 371.951)">
-	<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-	<tspan x="0" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-</text>
+{i == 0 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 178.557 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-41.4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 1 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 171.7037 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 2 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 155.8061 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 3 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 148.0423 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="20.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}{node?.title.split(" ")[2]}</tspan>
+	</text>
+}
+{i == 4 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 160.043 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]} {node?.title.split(" ")[2]}</tspan>
+	</text>
+}
+{i == 5 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 167.0407 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-13" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 6 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 151.967 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="8.9" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 7 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 145.7838 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 8 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 168.7734 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 9 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 157.7058 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="3.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 10 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 148.3615 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 11 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 133.5459 371.951)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="0" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 12 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 154.0222 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
 <text transform="matrix(1 0 0 1 377.9917 262.5189)"><tspan x="0" y="0" className="st9 st18 st20 st21">FAVOURITE</tspan><tspan x="0" y="35.6" className="st9 st18 st20 st21">ARTISTS</tspan></text>
 <g>
 	<g onClick={() => playAudio(`p${i+5}`)} className={`p${i+5}`} >
@@ -3082,7 +3155,7 @@ export default function music({ node , music , i }){
 <clipPath id="clip0_20_532">
 <rect width="41" height="31" fill="white" transform="translate(881 594)"/>
 </clipPath>
-<image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImageOnHover?.sourceUrl} />
+<image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 </defs>
 		   
 		    </svg>
@@ -4479,8 +4552,7 @@ export default function music({ node , music , i }){
 		<a href={node?.music?.playlistUrl} rel="noopener" target='_blank'>
 		<text transform="matrix(1 0 0 1 80.9417 644.5615)" className="st13 st14 st15">Go to Playlist</text>
 		</a>
-		</g>
-		
+		</g>	
 	</g>
 </g>
 <defs>
@@ -4496,7 +4568,6 @@ export default function music({ node , music , i }){
 </g>
 <mask id="mask0_144_10"  style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="41" y="182" width="247" height="188">
 <path d="M41.5 226C41.5 201.976 60.9756 182.5 85 182.5H287.5V369.5H85C60.9756 369.5 41.5 350.024 41.5 326V226Z" fill="#D9D9D9" stroke="#6D6E70"/>
-
 </mask>
 <g mask="url(#mask0_144_10)">
 <rect x="31" y="140" width="257" height="235" fill="url(#pattern1)"/>
@@ -4507,15 +4578,13 @@ export default function music({ node , music , i }){
 <path className="st1" d="M240,0h7c4.4,0,8,3.6,8,8v53c0,4.4-3.6,8-8,8h-7c-4.4,0-8-3.6-8-8V8C232,3.6,235.6,0,240,0z"/>
 <text transform="matrix(1 0 0 1 41.0448 433.0999)" className="st20 st21 st22">FAVOURITE ARTISTS</text>
 <g>
-
 <text transform="matrix(1 0 0 1 64.763 355.1686)" className="profile-name st20 st21 st22">{node?.title}</text>
-
 </g>
 <defs>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
 	<use xlinkHref="#image0_144_10" transform="matrix(0.00221239 0 0 0.00241951 0 -0.0189842)"/>
 </pattern>
-	<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImageOnHover?.sourceUrl} />
+	<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 </defs>
 </svg>
 
