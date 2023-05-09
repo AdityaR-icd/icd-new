@@ -4569,7 +4569,6 @@ export default function music({ node , music , i }){
 </g>
 <mask id="mask0_144_10"  style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="41" y="182" width="247" height="188">
 <path d="M41.5 226C41.5 201.976 60.9756 182.5 85 182.5H287.5V369.5H85C60.9756 369.5 41.5 350.024 41.5 326V226Z" fill="#D9D9D9" stroke="#6D6E70"/>
-
 </mask>
 <g mask="url(#mask0_144_10)">
 <rect x="31" y="140" width="257" height="235" fill="url(#pattern1)"/>
