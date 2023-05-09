@@ -4579,9 +4579,7 @@ export default function music({ node , music , i }){
 <path className="st1" d="M240,0h7c4.4,0,8,3.6,8,8v53c0,4.4-3.6,8-8,8h-7c-4.4,0-8-3.6-8-8V8C232,3.6,235.6,0,240,0z"/>
 <text transform="matrix(1 0 0 1 41.0448 433.0999)" className="st20 st21 st22">FAVOURITE ARTISTS</text>
 <g>
-
 <text transform="matrix(1 0 0 1 64.763 355.1686)" className="profile-name st20 st21 st22">{node?.title}</text>
-
 </g>
 <defs>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
