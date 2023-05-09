@@ -12,7 +12,7 @@ export default function clients({ clients: { edges }, meta: { pages } }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const meta = await getClientsPage();
   const clients = await getClients()
   // const menus = await getMenus()
