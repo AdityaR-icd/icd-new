@@ -47,18 +47,8 @@ export default function Post({ post , teamData }) {
 
   const [interactionArticle, setinteractionArticle] = useState(post?.musicArticle?.interactive);
   const [team, setTeam] = useState(interactionArticle);
-  useEffect( () => {
-      if(interactionArticle === true) {
-          async function fetchData() {
-            // You can await here
-                  const teamData = await getTeam()
-                    setTeam(teamData)
-            // ...
-          }
-          fetchData();
-        }
-  }, [])
-
+ 
+//  setTeam(teamData)
   // console.log(team)
 
 
@@ -342,7 +332,7 @@ export default function Post({ post , teamData }) {
 
   var radioSvg = 
   <>
-    {team?.edges?.map(({node} , i) => (
+    {teamData?.edges?.map(({node} , i) => (
       <>
        {range == i &&   
 	   <>
@@ -469,6 +459,7 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       post: Moredata.post,
       posts: Moredata.posts,
       preview,
+      teamData,
       // menus,
       data
       // filters
