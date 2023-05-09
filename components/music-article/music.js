@@ -3011,7 +3011,84 @@ export default function music({ node , music , i }){
 <a href={node?.music?.playlistUrl} rel="noopener" target='_blank'>
 <rect x="365" y="490" className="st1" width="240" height="34"/>
 </a>
-<text className='profile-name' transform="matrix(1 0 0 1 133.5459 371.951)"><tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan><tspan x="0" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan></text>
+{i == 0 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 178.557 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-41.4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 1 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 171.7037 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 2 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 155.8061 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 3 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 148.0423 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="20.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}{node?.title.split(" ")[2]}</tspan>
+	</text>
+}
+{i == 4 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 160.043 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]} {node?.title.split(" ")[2]}</tspan>
+	</text>
+}
+{i == 5 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 167.0407 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-13" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 6 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 151.967 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="8.9" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 7 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 145.7838 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 8 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 168.7734 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 9 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 157.7058 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="3.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 10 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 148.3615 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 11 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 133.5459 371.951)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="0" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
+{i == 12 &&
+	<text className='profile-name' transform="matrix(1 0 0 1 154.0222 366.4554)">
+		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
+		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
+	</text>
+}
 <text transform="matrix(1 0 0 1 377.9917 262.5189)"><tspan x="0" y="0" className="st9 st18 st20 st21">FAVOURITE</tspan><tspan x="0" y="35.6" className="st9 st18 st20 st21">ARTISTS</tspan></text>
 <g>
 	<g onClick={() => playAudio(`p${i+5}`)} className={`p${i+5}`} >
@@ -3078,7 +3155,7 @@ export default function music({ node , music , i }){
 <clipPath id="clip0_20_532">
 <rect width="41" height="31" fill="white" transform="translate(881 594)"/>
 </clipPath>
-<image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImageOnHover?.sourceUrl} />
+<image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 </defs>
 		   
 		    </svg>
@@ -4511,7 +4588,7 @@ export default function music({ node , music , i }){
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
 	<use xlinkHref="#image0_144_10" transform="matrix(0.00221239 0 0 0.00241951 0 -0.0189842)"/>
 </pattern>
-	<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImageOnHover?.sourceUrl} />
+	<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 </defs>
 </svg>
 
