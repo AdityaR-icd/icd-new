@@ -1637,6 +1637,11 @@ width: 22%;
             cursor: pointer;
             background-size: cover ;
             background-repeat: no-repeat;
+
+              @include for-upto-tablet-portrait{
+                width: 20px;
+                height: 50px;
+              }
         }
     }
 
