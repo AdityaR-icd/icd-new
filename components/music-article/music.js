@@ -4552,8 +4552,7 @@ export default function music({ node , music , i }){
 		<a href={node?.music?.playlistUrl} rel="noopener" target='_blank'>
 		<text transform="matrix(1 0 0 1 80.9417 644.5615)" className="st13 st14 st15">Go to Playlist</text>
 		</a>
-		</g>
-		
+		</g>	
 	</g>
 </g>
 <defs>
