@@ -1640,12 +1640,14 @@ width: 22%;
             background-size: cover ;
             background-repeat: no-repeat;
             background-color: transparent;
+            box-shadow: transparent;
               @include for-upto-tablet-portrait{
                 width: 20px;
                 height: 50px;
                 background-size: contain;
                 // background: transparent; 
-                -webkit-tap-highlight-color: transparent
+                -webkit-tap-highlight-color: transparent;
+                box-shadow: transparent;
               }
         }
     }

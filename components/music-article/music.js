@@ -3047,7 +3047,7 @@ export default function music({ node , music , i }){
 	</g>
 </g>
 <g>
-	<g  onClick={() => playAudio(`p${i+3}`)} className={`p${i+2}`} >
+	<g onClick={() => playAudio(`p${i+2}`)} className={`p${i+2}`} >
 		<path className="st22" d="M385.2,365l-4.2,3.3h-3.3v5h3.3l4.2,3.3V365z"/>
 		<path className="st22" d="M391.9,364.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M389,367.9c0.8,0.8,1.2,1.8,1.2,2.9
 			s-0.4,2.2-1.2,2.9"/>
