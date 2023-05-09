@@ -1686,10 +1686,12 @@ width: 22%;
     pointer-events: bounding-box;
 
     .active{
-      filter: brightness(0) invert(1);
       path{
-          filter: brightness(0) invert(1);
+        stroke: white;
       }
+      // path{
+      //     filter: brightness(0) invert(1);
+      // }
     }
 
     &.profile-image{
@@ -1741,7 +1743,7 @@ width: 22%;
   g{
     .active{
       path{
-         filter: brightness(0) invert(1);
+         stroke: white;
       }
     }
   }
