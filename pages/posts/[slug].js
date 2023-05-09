@@ -23,7 +23,7 @@ const PrevPost = dynamic(() => import('../../components/posts/prev-post'))
 const MusicArticle = dynamic(() => import('../../components/music-article/music'))
 
 
-export default function Post({ post }) {
+export default function Post({ post , teamData }) {
   
   const router = useRouter()
 
@@ -346,45 +346,18 @@ export default function Post({ post }) {
       <>
        {range == i &&   
 	   <>
-			<div className='interaction-element  '>
-				<MusicArticle node = {node} />
-				<img className='radio-img d-block d-md-none' src="https://digital.icdindia.com/wp-content/uploads/2023/05/Frame-24-1.png" alt="" />
+			<div className='interaction-element'>
+				<MusicArticle i={i} node = {node} />
 				<span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
 				<input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
 				<span className='d-block d-md-none right-btn range-btn' onClick={rangePlus}></span>
-				<div className="person-img">
-					{team_img}
-				</div>
-				<div className="person-list d-block d-md-none">
-				{music_name}
-				</div>
-				<div className="person-name d-block d-md-none">
-					{team_name}
-				</div>
-			</div>
 
-			{/* <div className="interaction-element d-block d-md-none">
-				
-				<span className='left-btn range-btn' onClick={rangeMinus}></span>
-					<input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
-				<span className='right-btn range-btn' onClick={rangePlus}></span>
-				<div className="person-img">
-					{team_img}
-				</div>
-
-			</div> */}
-
-			{music}
+			</div>			
 	  </>
        }
       </>
     ))}
   </>
-
-  var interaction =  
-    <>
-
-    </>
 
   return (
     <>
@@ -489,6 +462,7 @@ export async function getStaticProps({ preview = false, params, previewData }) {
   const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
   // const menus = await getMenus()
   const data = await getFooter()
+  const teamData = await getTeam()
   // const filters = await getFilters()
   return {
     props: {

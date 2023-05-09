@@ -55,10 +55,15 @@ module.exports = withPWA({
           {
             key: 'Cache-Control',
             value: 'public, max-age=365d, must-revalidate',
-          }
+            
+          },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Headers", "value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
         ],
       },
     ]
   },
 });
+
+
 
