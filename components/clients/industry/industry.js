@@ -47,7 +47,9 @@ export default function industry({ meta, edges }) {
   }
 
   // Onclick expand
-  const toggleClass = () => {
+  const toggleClass = (className) => {
+
+    console.log(className)
     const currentState = expand;
     setExpand(!currentState);
   }
@@ -134,7 +136,7 @@ export default function industry({ meta, edges }) {
                   {projectLength > 3 && (
                     <>
                       <span className={`d-md-block d-none ${industries.project__category__seeAll}`}>
-                        <span className="see-all" onClick={toggleClass}><span className={industries.expand_btn}></span>{expand ? 'less ' + industry.name : 'more ' + industry.name}</span>
+                        <span className="see-all" onClick={toggleClass(sectionClass)}><span className={industries.expand_btn}></span>{expand ? 'less ' + industry.name : 'more ' + industry.name}</span>
                       </span>
                     </>
                   )}
