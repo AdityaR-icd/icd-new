@@ -10,7 +10,7 @@ export default function industry({ industries: { nodes }, meta: { pages } }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const meta = await getClientsPage();
   const industries = await getIndustries()
   // const menus = await getMenus()
