@@ -11,7 +11,7 @@ import category from '../../project/category.module.scss'
 import carousel from '../../project-categories/all/all.module.scss'
 import type from '../../project-categories/type/type.module.scss'
 import industries from './industry.module.scss'
-
+import $ from 'jquery';
 export default function industry({ meta, edges }) {
   const router = useRouter()
   const [expand, setExpand] = useState(false)
@@ -47,18 +47,20 @@ export default function industry({ meta, edges }) {
   }
 
   // Onclick expand
-  const toggleClass = (className) => {
-
-    console.log(className)
+  const [idMatch, setidMatch] = useState('')
+  const toggleClass = (data) => {
+    console.log(data)
+    setidMatch(data)
     const currentState = expand;
     setExpand(!currentState);
+    // $('#'+data).toggleClass(`${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`)
   }
 
-  if (expand) {
-    var sectionClass = `${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`
-  } else {
+
+    var expandsectionClass = `${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`
+  
     var sectionClass = `${industries.industry_type_cont} ${type.industry__filter}`
-  }
+  
 
   const toBase64 = (str) =>
     typeof window === 'undefined'
@@ -128,7 +130,7 @@ export default function industry({ meta, edges }) {
         projects = industry?.projects,
         projectLength = projects?.edges?.length,
         <div key={industry.id}>
-          <section className={sectionClass} id={industry.slug}>
+          <section className={idMatch == industry.slug ? expandsectionClass: sectionClass } id={industry.slug}>
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
@@ -136,7 +138,7 @@ export default function industry({ meta, edges }) {
                   {projectLength > 3 && (
                     <>
                       <span className={`d-md-block d-none ${industries.project__category__seeAll}`}>
-                        <span className="see-all" onClick={toggleClass(sectionClass)}><span className={industries.expand_btn}></span>{expand ? 'less ' + industry.name : 'more ' + industry.name}</span>
+                        <span className="see-all" onClick={() => toggleClass(industry.slug)}><span className={industries.expand_btn}></span>{idMatch == industry.slug ? 'less ' + industry.name : 'more ' + industry.name}</span>
                       </span>
                     </>
                   )}
