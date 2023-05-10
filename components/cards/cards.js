@@ -16,9 +16,10 @@ export default function Cards({ data }) {
               function (featuredCard) {
                 for (let k = 0; k < (data.homePage.featuredCards).length; k++) {
                   if (data.homePage.featuredCards[k]?.designOptions.darkBg) {
-                    bg = ` ${cards.cards__box} ${cards.background_grey}`;
-                  } else {
-                    bg = ` ${cards.cards__box} ${cards.background_yellow}`;
+                    bg = `${cards.cards__box}`;
+
+                  } if(data.homePage.featuredCards[k]?.designOptions.yellowBg) {
+                     bg = `${cards.cards__box} ${cards.background_yellow}`;
                   }
                   let cardImg = data.homePage.featuredCards[k]?.featuredImage.node?.sourceUrl
                   let bgImage = {
@@ -34,9 +35,9 @@ export default function Cards({ data }) {
                           className="card__background_image"
                           layout="fill"
                           sizes="100vw" />
-                        <span className={`${cards.card__tag}`}>{data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name}</span>
+                        <span className={`${cards.card__tag} card__tag ${data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name}`}>{data.homePage.featuredCards[k].cardCategories.edges[0]?.node.name}</span>
                         <span className={`${cards.card__text}`}>{parse(data.homePage.featuredCards[k].content)}</span>
-                        <span className={`${cards.card__link}`}><Link href="/careers"><button>apply now</button></Link></span>
+                        <span className={`${cards.card__link}`}><Link href={data.homePage.featuredCards[k]?.designOptions?.link?.url || '#'}><button>{data.homePage.featuredCards[k]?.designOptions?.link?.title}</button></Link></span>
                       </div>
                     </div>
                   )
