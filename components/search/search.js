@@ -81,6 +81,7 @@ export default function search({ suggestion }){
                         getSuggestionValue={getSuggestionValue}
                         renderSuggestion={renderSuggestion}
                         inputProps={inputProps}
+                        
                     />
                     {/* <div role="combobox" aria-haspopup="listbox" aria-owns="react-autowhatever-1" aria-expanded="false" className="react-autosuggest__container">
                         <input type="search" autoComplete="off" aria-autocomplete="list" aria-controls="react-autowhatever-1" className="searchInput" value={value} onChange={(e) => setValue(e.target.value)} placeholder="type an industry, client or keyword" id="g-search" required="" name="search" role="searchbox" />
