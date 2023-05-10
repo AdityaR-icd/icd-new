@@ -24,6 +24,6 @@ export async function getServerSideProps() {
       meta,
       // filters
     },
-    revalidate: 180,
+    // revalidate: 180,
   }
 }
