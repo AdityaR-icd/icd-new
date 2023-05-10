@@ -46,6 +46,9 @@ export default function industry({ meta, edges }) {
     })
   }
 
+   var expandsectionClass = `${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`
+  
+  var sectionClass = `${industries.industry_type_cont} ${type.industry__filter}`
   // Onclick expand
   const [idMatch, setidMatch] = useState('')
   const toggleClass = (data) => {
@@ -53,13 +56,18 @@ export default function industry({ meta, edges }) {
     setidMatch(data)
     const currentState = expand;
     setExpand(!currentState);
-    // $('#'+data).toggleClass(`${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`)
+
+
+    if($("#"+data).hasClass(expandsectionClass)){
+        $("#"+data).removeClass().addClass(sectionClass)
+    }else{
+      $("#"+data).removeClass().addClass(expandsectionClass)
+    }
+
   }
 
 
-    var expandsectionClass = `${industries.industry_type_cont} ${type.industry__filter} ${industries.projects_expanded}`
-  
-    var sectionClass = `${industries.industry_type_cont} ${type.industry__filter}`
+   
   
 
   const toBase64 = (str) =>
