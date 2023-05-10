@@ -83,7 +83,7 @@ const Header = (props) => {
 
     var allFilters = [...new Set([...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags])]
 
-    console.log(allFilters)
+  
 
     const router = useRouter()
     // const list = props.menus
