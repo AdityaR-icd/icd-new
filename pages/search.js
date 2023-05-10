@@ -36,7 +36,7 @@ export default function search( {filters } ){
     })
 
 
-    var allFilters = [...clients, ...industries, ...projectTypes, ...projectSubTypes, ...categories, ...tags]
+    var allFilters = [...new Set([...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags])]
 
     allFilters.map((item) => {  
         filter.push(item)
