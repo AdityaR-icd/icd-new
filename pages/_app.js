@@ -14,6 +14,7 @@ import Router from 'next/router';
 import $ from 'jquery';
 import Script from 'next/script';
 import dynamic from "next/dynamic";
+import Head from 'next/head'
 import { useState } from 'react';
 const Layout = dynamic(() => import("../components/layout/layout"));
 const Loader = dynamic(() => import("../components/loader/loader"));
@@ -34,6 +35,11 @@ export default function MyApp({ Component, pageProps }) {
   })
   return (
     <>
+    <Head>
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+      <meta http-equiv="Pragma" content="no-cache" />
+      <meta http-equiv="Expires" content="0" />
+    </Head>
     <Script
         src="https://www.googletagmanager.com/gtag/js?id=GTM-WWCCC9N"
         strategy="afterInteractive"
