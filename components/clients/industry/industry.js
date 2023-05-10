@@ -171,8 +171,8 @@ export default function industry({ meta, edges }) {
                               </Link>
                             </div>
                             <Link href={`/projects/${node.slug}`}>
-                              <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
-                                <span className={carousel.grey__color}>  / {client}</span>
+                              <span className={carousel.projectTitle}>{client}
+                                <span className={carousel.grey__color}>  / {node?.projectComponent?.heading}</span>
                               </span>
                             </Link>
                           </div>
