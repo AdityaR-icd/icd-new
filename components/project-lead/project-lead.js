@@ -3,11 +3,11 @@ import style from '../home/home.module.scss'
 import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
-import Image from "next/image";
+import Image from 'next/image'
 import { useMediaQuery } from 'react-responsive';
 
 
-export default function projectLead({ edges }) {
+export default function projectLead({ edges   }){
     let client = ""
     let project_video = ""
     let project_thumbnail = ""
@@ -16,10 +16,7 @@ export default function projectLead({ edges }) {
     let j = 0
     let text = ""
     const projects = edges[0].node.projects.highlightedProjects
-    const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
-    const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
-    const isTabletV = useMediaQuery({ query: '(min-width: 768px) and (max-width: 991px)' });
-    const isTabletH = useMediaQuery({ query: '(min-width: 992px) and (max-width: 1365px)' });
+
 
 
             const toBase64 = (str) =>
@@ -40,53 +37,53 @@ export default function projectLead({ edges }) {
           <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
           <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
         </svg>`
-
-    return <>
-        {projects.map(({ highlightedImage, clients }, j) => (
+    return(
+        <>
+        {projects.map(({ highlightedImage , clients } , j ) => (
             // console.log(j),
+            
             project_video = highlightedImage?.video?.mediaItemUrl,
             project_thumbnail = highlightedImage?.highlightedThumbnail?.sourceUrl,
             project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
-            client = clients?.edges[0]?.node?.name,
-            <>
-                {edges.map(({ node }, i) => (
+            client = clients.edges[0].node.name,
+                <>
+                {edges.map(({ node } ) => (
                     <>
                         {(
 
                             function (home_text) {
-                                if (j % 2 !== 0 && j > 0) {
-                                    text = (
-                                        <div className={`${style.textContainer} container`} key={i}>
-                                            <div className="row">
-                                                <div className="col-md-10 offset-md-1">
-                                                    <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
-                                                        <span className={`${style.homeText}`}>
-                                                            {parse(node.featuredtext[i]?.content)}
-                                                        </span>
-                                                    </div>
+                            if ( j % 2 !== 0 && j > 0 ) {
+                                text = (
+                                    <div className={`${style.textContainer} container`}>
+                                        <div className="row">
+                                            <div className="col-md-10 offset-md-1">
+                                                <div className={`${intro.textContent} ${style.introText} ${intro.homeLeadText}`}>
+                                                    <span className={`${style.homeText}`}>
+                                                        {node?.featuredtext[i]?.content && parse(node?.featuredtext[i]?.content)}   
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                    );
-                                    i = i + 1;
-                                } else {
-                                    text = '';
-                                }
-                                return home_text;
-                            })([], 0, 10)}
+                                    </div>
+                                );
+                                i = i + 1;
+                            } else{
+                            text = '';
+                            }
+                            return home_text;
+                        })([], 0, 10)}
                     </>
-                ))}
-
-                <>
-                    <section className={`mB__150 ${styles.projectlead}`} key={projects[j].id}>
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <Link href={`/projects/${projects[j].slug}`} className="project_link">
-
-                                        <div className={`${styles.project__section}`} >
-                                            <div className={styles.Tilt}>
-                                                <div className="Tilt-inner">
+                    ))}
+                        <>
+                            <section className={`mB__150 ${styles.projectlead}`}>
+                                <div className="container"> 
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <Link className="project_link" href={`/projects/${projects[j].slug}`}>
+                                 
+                                                <div className={`${styles.project__section}`} >
+                                                    <div className={styles.Tilt}>
+                                                                                        <div className="Tilt-inner">
 
 
                                                     {project_video && (
@@ -125,22 +122,23 @@ export default function projectLead({ edges }) {
                                                     </div>
 
                                                 </div>
-                                            </div>
-
+                                                    </div>   
+                                                        
+                                                </div>
+                                                <div className={`${styles.project__name}`}>
+                                                    <span>{projects[j].title}</span>
+                                                    <span className={`font__grey ${styles.project__type}`}> / {client}</span> 
+                                                </div>
+                                         
+                                            </Link>
                                         </div>
-                                        <div className={`${styles.project__name}`}>
-                                            <span>{projects[j].title}</span>
-                                            <span className={`font__grey ${styles.project__type}`}> / {client}</span>
-                                        </div>
-
-                                    </Link>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        {text}
-                    </section>
+                                {text}        
+                            </section>
+                        </>
                 </>
-            </>
-        ))}
-    </>;
+          ))}
+        </>
+    )
 }

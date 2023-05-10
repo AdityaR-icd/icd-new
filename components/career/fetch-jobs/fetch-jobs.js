@@ -34,7 +34,7 @@ export default function fetchJobs({ data }) {
                         src={profileImage}
                         alt={data.title}
                         layout="fill"
-                        loading="lazy"
+                        priority
                         sizes="100vw" />
                 </span>
                 <span className="job__desc">{parse(data.content)}</span>

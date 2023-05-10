@@ -82,7 +82,7 @@ export default function Post({ post , teamData }) {
                         <Image
                           className={carousel.project_lead}
                           placeholder="blur"
-                          loading="lazy"
+                          priority
                           blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                           src={leadImgSrc}
                           alt="project-lead"
@@ -125,7 +125,7 @@ export default function Post({ post , teamData }) {
               <span className={`${carousel.full_thumb} full-thumb`}>
                 <Image
                   src={featuredImage}
-                  loading="lazy"
+                  priority
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   alt="post-lead"
@@ -197,7 +197,7 @@ export default function Post({ post , teamData }) {
       <div className={` ${style.leadImage} fade-in `}>
         <Image
           src={featuredImage}
-          loading="lazy"
+          priority
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
           className="full-lead-img"
@@ -369,7 +369,7 @@ export default function Post({ post , teamData }) {
                   <h1>{post.title}</h1>
                   <div className={style.post__author}>
                     <div className={style.author_wrapper}>
-                      <span className={`sl ${style.author__img}`}><img loading="lazy" alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
+                      <span className={`sl ${style.author__img}`}><img priority alt='icd-icon' decoding="async" src={authorImg ? authorImg.sourceUrl : Icon.src} >
                       </img></span>
                       <span className={` ${style['post-detail']} `}>{author} / {date} / {categories} </span>
                     </div>
@@ -378,7 +378,7 @@ export default function Post({ post , teamData }) {
                       <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
                       <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                      <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                      <span className="icon" onClick={toggleShareIcons}><img priority alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                       <Like count={post.likes?.likes} id={post.id} type={'post'} />
                     </div>
 
@@ -397,7 +397,7 @@ export default function Post({ post , teamData }) {
                   <span className="icon share-icon icons-hide"><a href={linkedinUrl} className="linkedin-icon" target="_blank"></a></span>
                   <span className="icon share-icon icons-hide"><a href={twitterUrl} className="twitter-icon" target="_blank"></a></span>
                   <span className="icon share-icon icons-hide"><a href={fbUrl} className="fb-icon" target="_blank"></a></span>
-                  <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+                  <span className="icon" onClick={toggleShareIcons}><img priority alt='icd-icon' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
                   <Like count={post.likes?.likes} id={post.id} type={'post'} />
                 </div>
 

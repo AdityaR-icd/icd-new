@@ -155,7 +155,7 @@ export default function industry({ meta, edges }) {
                                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                   <div className={`${carousel.full_thumb} full-thumb`}>
                                     {leadImgSrc && (
-                                      <Image className={carousel.project_lead} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" fill loading="lazy" />
+                                      <Image className={carousel.project_lead} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" fill priority />
                                     )}
                                   </div>
                                   <span className="thumbnail-gif"></span>

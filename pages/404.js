@@ -20,7 +20,7 @@ export default function error404() {
       </Head>
       <div className="container">
         <div className={style.error_404}>
-          <span><img alt='icd-icon' loading="lazy" decoding="async" className={style.error404_anim} src={Anim.src} alt="" /></span>
+          <span><img alt='icd-icon' priority decoding="async" className={style.error404_anim} src={Anim.src} alt="" /></span>
           <span className={style.not_found}>Oops! The page couldn’t be found</span>
           <span className={style.error_subtext}>Looking for something specific? Try using <span className={style.error_search} onClick={searchToggle}>Search</span> or go to <Link href="/">Home</Link></span>
         </div>

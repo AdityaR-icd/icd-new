@@ -117,7 +117,7 @@ export default function Projects({ project, data, menus }) {
   //                   <div className={`${carousel?.full_thumb} full-thumb`}>
   //                     <Image
   //                       // priority={true}
-  //                       loading="lazy"
+  //                       priority
   //                       placeholder="blur"
   //                       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
   //                       className={carousel?.project_lead}
@@ -162,7 +162,7 @@ export default function Projects({ project, data, menus }) {
                     {leadImgSrc && (
                       <Image
                         // priority={true}
-                        loading="lazy"
+                        priority
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         className={carousel?.project_lead}
@@ -242,7 +242,7 @@ export default function Projects({ project, data, menus }) {
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
                     // priority={true}
-                    loading="lazy"
+                    priority
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
@@ -282,7 +282,7 @@ export default function Projects({ project, data, menus }) {
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
       // priority={true}
-      loading="lazy"
+      priority
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
@@ -302,7 +302,7 @@ export default function Projects({ project, data, menus }) {
     <span className="icon share-icon icons-hide"><a href={linkedinUrl} rel="noopener" aria-label="icd" className="linkedin-icon" target="_blank"></a></span>
     <span className="icon share-icon icons-hide"><a href={twitterUrl} rel="noopener" aria-label="icd" className="twitter-icon" target="_blank"></a></span>
     <span className="icon share-icon icons-hide"><a href={fbUrl} rel="noopener" aria-label="icd" className="fb-icon" target="_blank"></a></span>
-    <span className="icon" onClick={toggleShareIcons}><img loading="lazy" alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+    <span className="icon" onClick={toggleShareIcons}><img priority alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
     <Like count={project?.likes?.likes} id={project.id} type={'project'} />
   </div>;
 
@@ -414,7 +414,7 @@ export default function Projects({ project, data, menus }) {
 
             <Image
               src={leadComponent}
-              loading="lazy"
+              priority
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               alt="project-lead"
@@ -425,7 +425,7 @@ export default function Projects({ project, data, menus }) {
 
             <Image
               src={leadComponentMobile}
-              loading="lazy"
+              priority
               placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
               alt="project-lead"

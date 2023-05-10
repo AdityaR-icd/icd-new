@@ -81,7 +81,7 @@ const Header = (props) => {
 
 
 
-    var allFilters = [...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags]
+    var allFilters = [...new Set([...clients, ...industries, ...projectTypes, ...keywords, ...categories, ...tags])]
 
     const router = useRouter()
     // const list = props.menus
@@ -166,7 +166,7 @@ const Header = (props) => {
                             <Link href="/" aria-label="logo" className="logo d-block d-lg-none">
                                 <Image
                                     decoding="async"
-                                    loading="lazy"
+                                    priority
                                     src={mobileLogo.src}
                                     width="48"
                                     height="36"
