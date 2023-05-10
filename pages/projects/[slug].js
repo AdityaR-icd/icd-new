@@ -207,6 +207,7 @@ export default function Projects({ project, data, menus }) {
   var shortDesc = project?.shortDescription?.shortDesc;
   var projectLink = project?.shortDescription?.siteLink
   var clients = project?.clients?.edges[0]?.node?.name;
+  var allclients = project?.clients?.edges.length
   var leadComponent = project?.projectComponent?.leadComponent?.sourceUrl
   var leadComponentMobile = project?.projectComponent?.leadComponentMobile?.sourceUrl
   var content = project?.content
@@ -498,7 +499,13 @@ export default function Projects({ project, data, menus }) {
         <div className="row">
           <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
             <div className={style.projectMeta__cont}><span className={style.category__title}>project</span><span className={style.category}>{heading}</span></div>
-            <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{clients}</span></div>
+            <div className={style.projectMeta__cont}><span className={style.category__title}>client</span><span className={style.category}>{project?.clients?.edges?.map((data , i)=>{
+                  if (allclients === i + 1) {
+                    return(data?.node?.name);
+                  } else {
+                    return(data?.node?.name + ', ');
+                  }
+               }) }</span></div>
             {projectLink && (
               <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target={projectLink?.target}>{projectLink?.title}</a></span></div>
             )}
