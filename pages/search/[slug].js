@@ -45,6 +45,20 @@ export default function search({ filters, data, filter }) {
       <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
     </svg>`
 
+
+    var clients = []
+    var industry = []
+    var projectTypes = []
+    var keyword = []
+    var projects = []
+    var posts = []
+    var categories = []
+    var tags = []
+    var Allprojects = []
+
+    var allposts = []
+
+
     var clN = 0
     if (filter?.clients?.edges != '') {
         var client = filter?.clients?.edges[0].node.name
@@ -52,35 +66,36 @@ export default function search({ filters, data, filter }) {
             var clientsprojects = filter?.clients?.edges[0].node.projects
             clN = clientsprojects.edges.length
             var clientData = clientsprojects.edges.map(({ node }) => {
-                var leadImgSrc = node?.featuredImage?.node?.sourceUrl
-                return (
-                    <>
-                        <div className="col-md-4 project__item resultItem-cont" key={node.id}>
-                            <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                                <div className={carousel.thumbnail_cont}>
-                                    <Link href={`/projects/${node.slug}`}>
-                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
-                                                )}
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
-                                        </span>
-                                        {node?.projectComponent?.awardsReceived !== null && (
-                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
-                                        )}
-                                    </Link>
-                                </div>
-                                <Link href={`/projects/${node.slug}`}>
-                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                        <span className={carousel.grey__color}>  / {client}</span>
-                                    </span>
-                                </Link>
-                            </div>
-                        </div>
-                    </>
-                )
+                clients.push(node)
+                // var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+                // return (
+                //     <>
+                //         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                //             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                //                 <div className={carousel.thumbnail_cont}>
+                //                     <Link href={`/projects/${node.slug}`}>
+                //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                             <div className={`${carousel.full_thumb} full-thumb`}>
+                //                                 {leadImgSrc && (
+                //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                //                                 )}
+                //                             </div>
+                //                             <span className="thumbnail-gif"></span>
+                //                         </span>
+                //                         {node?.projectComponent?.awardsReceived !== null && (
+                //                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                //                         )}
+                //                     </Link>
+                //                 </div>
+                //                 <Link href={`/projects/${node.slug}`}>
+                //                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                //                         <span className={carousel.grey__color}>  / {client}</span>
+                //                     </span>
+                //                 </Link>
+                //             </div>
+                //         </div>
+                //     </>
+                // )
             })
         }
     }
@@ -91,36 +106,37 @@ export default function search({ filters, data, filter }) {
             var industriesprojects = filter?.industries?.edges[0].node.projects
             iN = industriesprojects.edges.length
             var industries = industriesprojects.edges.map(({ node }) => {
-                var leadImgSrc = node.featuredImage.node.sourceUrl
-                var client = node.clients.edges[0].node.name
-                return (
-                    <>
-                        <div className="col-md-4 project__item resultItem-cont" key={node.id}>
-                            <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
-                                <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-                                    <Link href={`/projects/${node.slug}`}>
-                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
-                                                )}
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
-                                        </span>
-                                        {node?.projectComponent?.awardsReceived !== null && (
-                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
-                                        )}
-                                    </Link>
-                                </div>
-                                <Link href={`/projects/${node.slug}`}>
-                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                        <span className={carousel.grey__color}>  / {client}</span>
-                                    </span>
-                                </Link>
-                            </div>
-                        </div>
-                    </>
-                )
+                industry.push(node)
+                // var leadImgSrc = node.featuredImage.node.sourceUrl
+                // var client = node.clients.edges[0].node.name
+                // return (
+                //     <>
+                //         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                //             <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
+                //                 <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
+                //                     <Link href={`/projects/${node.slug}`}>
+                //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                             <div className={`${carousel.full_thumb} full-thumb`}>
+                //                                 {leadImgSrc && (
+                //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                //                                 )}
+                //                             </div>
+                //                             <span className="thumbnail-gif"></span>
+                //                         </span>
+                //                         {node?.projectComponent?.awardsReceived !== null && (
+                //                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                //                         )}
+                //                     </Link>
+                //                 </div>
+                //                 <Link href={`/projects/${node.slug}`}>
+                //                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                //                         <span className={carousel.grey__color}>  / {client}</span>
+                //                     </span>
+                //                 </Link>
+                //             </div>
+                //         </div>
+                //     </>
+                // )
             })
         }
     }
@@ -131,80 +147,80 @@ export default function search({ filters, data, filter }) {
             var projectSubTypesprojects = filter?.projectTypes?.edges[0].node.projects
             StN = projectSubTypesprojects.edges.length
             var SubTypes = projectSubTypesprojects.edges.map(({ node }) => {
-                var leadImgSrc = node.featuredImage.node.sourceUrl
-                var client = node.clients.edges[0].node.name
-                return (
-                    <>
-                        <div className="col-md-4 project__item resultItem-cont" key={node.id}>
-                            <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                                <div className={carousel.thumbnail_cont}>
-                                    <Link href={`/projects/${node.slug}`}>
-                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
-                                                )}
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
-                                        </span>
-                                        {node?.projectComponent?.awardsReceived !== null && (
-                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
-                                        )}
-                                    </Link>
-                                </div>
-                                <Link href={`/projects/${node.slug}`}>
-                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                        <span className={carousel.grey__color}>  / {client}</span>
-                                    </span>
-                                </Link>
-                            </div>
-                        </div>
-                    </>
-                )
+                projectTypes.push(node)
+                // var leadImgSrc = node.featuredImage.node.sourceUrl
+                // var client = node.clients.edges[0].node.name
+                // return (
+                //     <>
+                //         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                //             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                //                 <div className={carousel.thumbnail_cont}>
+                //                     <Link href={`/projects/${node.slug}`}>
+                //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                             <div className={`${carousel.full_thumb} full-thumb`}>
+                //                                 {leadImgSrc && (
+                //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                //                                 )}
+                //                             </div>
+                //                             <span className="thumbnail-gif"></span>
+                //                         </span>
+                //                         {node?.projectComponent?.awardsReceived !== null && (
+                //                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                //                         )}
+                //                     </Link>
+                //                 </div>
+                //                 <Link href={`/projects/${node.slug}`}>
+                //                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                //                         <span className={carousel.grey__color}>  / {client}</span>
+                //                     </span>
+                //                 </Link>
+                //             </div>
+                //         </div>
+                //     </>
+                // )
             })
         }
     }
 
     var kN = 0
     if (filter?.keywords?.edges != '') {
-
-
-        if (filter?.keywords?.edges[0].node.projects.edges != '') {
-            var keywordsprojects = filter?.keywords?.edges[0].node.projects
-            kN = keywordsprojects.edges.length
-            var keywordsData = keywordsprojects.edges.map(({ node }) => {
-                var leadImgSrc = node.featuredImage.node.sourceUrl
-                var client = node.clients.edges[0].node.name
-                return (
-                    <>
-                        <div className="col-md-4 project__item resultItem-cont" key={node.id}>
-                            <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                                <div className={carousel.thumbnail_cont}>
-                                    <Link href={`/projects/${node.slug}`}>
-                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                {leadImgSrc && (
-                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
-                                                )}
-                                            </div>
-                                            <span className="thumbnail-gif"></span>
-                                        </span>
-                                        {node?.projectComponent?.awardsReceived !== null && (
-                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
-                                        )}
-                                    </Link>
-                                </div>
-                                <Link href={`/projects/${node.slug}`}>
-                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                        <span className={carousel.grey__color}>  / {client}</span>
-                                    </span>
-                                </Link>
-                            </div>
-                        </div>
-                    </>
-                )
-            })
-        }
+    if (filter?.keywords?.edges[0].node.projects.edges != '') {
+        var keywordsprojects = filter?.keywords?.edges[0].node.projects
+        kN = keywordsprojects.edges.length
+        var keywordsData = keywordsprojects.edges.map(({ node }) => {
+            keyword.push(node)
+            // var leadImgSrc = node.featuredImage.node.sourceUrl
+            // var client = node.clients.edges[0].node.name
+            // return (
+            //     <>
+            //         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+            //             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+            //                 <div className={carousel.thumbnail_cont}>
+            //                     <Link href={`/projects/${node.slug}`}>
+            //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+            //                             <div className={`${carousel.full_thumb} full-thumb`}>
+            //                                 {leadImgSrc && (
+            //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+            //                                 )}
+            //                             </div>
+            //                             <span className="thumbnail-gif"></span>
+            //                         </span>
+            //                         {node?.projectComponent?.awardsReceived !== null && (
+            //                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
+            //                         )}
+            //                     </Link>
+            //                 </div>
+            //                 <Link href={`/projects/${node.slug}`}>
+            //                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
+            //                         <span className={carousel.grey__color}>  / {client}</span>
+            //                     </span>
+            //                 </Link>
+            //             </div>
+            //         </div>
+            //     </>
+            // )
+        })
+    }
     }
 
     var cN = 0
@@ -214,38 +230,39 @@ export default function search({ filters, data, filter }) {
             cN = postsCat.edges.length
 
             var allposts = postsCat.edges.map((data) => {
-                var categories = data?.node?.categories.edges[0]?.node?.name
-                var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
+                categories.push(data)
+                // var categories = data?.node?.categories.edges[0]?.node?.name
+                // var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
 
-                if (featuredImage) {
-                    var imageData =
-                        <span className={`${carousel.full_thumb} full-thumb`}>
-                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
-                        </span>
-                } else {
-                    imageData =
-                        <span className={`${carousel.full_thumb} full-thumb`}>
+                // if (featuredImage) {
+                //     var imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
+                //             <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
+                //         </span>
+                // } else {
+                //     imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
 
-                        </span>
-                }
-                return (
-                    <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                            <div className={carousel.thumbnail_cont}>
-                                <Link href={`/posts/${data.node.slug}`}>
-                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                        {imageData}
-                                    </span>
-                                    <span className="postCategory">{categories}</span>
-                                </Link>
-                            </div>
-                            <Link href={`/posts/${data.node.slug}`}>
-                                <span className={carousel.projectTitle}>{data.node.title}
-                                </span>
-                            </Link>
-                        </div>
-                    </div>
-                )
+                //         </span>
+                // }
+                // return (
+                //     <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                //         <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                //             <div className={carousel.thumbnail_cont}>
+                //                 <Link href={`/posts/${data.node.slug}`}>
+                //                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                         {imageData}
+                //                     </span>
+                //                     <span className="postCategory">{categories}</span>
+                //                 </Link>
+                //             </div>
+                //             <Link href={`/posts/${data.node.slug}`}>
+                //                 <span className={carousel.projectTitle}>{data.node.title}
+                //                 </span>
+                //             </Link>
+                //         </div>
+                //     </div>
+                // )
             })
         }
     }
@@ -256,45 +273,146 @@ export default function search({ filters, data, filter }) {
             var poststags = filter?.tags?.edges[0].node.posts
             tagN = poststags.edges.length
             var allpostsTags = poststags.edges.map((data) => {
-                var categories = data?.node?.categories?.edges[0]?.node?.name
-                var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
+                tags.push(data)
+                // var categories = data?.node?.categories?.edges[0]?.node?.name
+                // var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
 
-                if (featuredImage) {
-                    var imageData =
-                        <span className={`${carousel.full_thumb} full-thumb`}>
-                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
-                        </span>
-                } else {
-                    imageData =
-                        <span className={`${carousel.full_thumb} full-thumb`}>
+                // if (featuredImage) {
+                //     var imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
+                //             <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
+                //         </span>
+                // } else {
+                //     imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
 
-                        </span>
-                }
-                return (
-                    <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
-                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
-                            <div className={carousel.thumbnail_cont}>
-                                <Link href={`/posts/${data.node.slug}`}>
-                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                        {imageData}
-                                    </span>
-                                    <span className="postCategory">{categories}</span>
-                                </Link>
-                            </div>
-                            <Link href={`/posts/${data.node.slug}`}>
-                                <span className={carousel.projectTitle}>{data.node.title}
-                                </span>
-                            </Link>
-                        </div>
-                    </div>
-                )
+                //         </span>
+                // }
+                // return (
+                //     <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                //         <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                //             <div className={carousel.thumbnail_cont}>
+                //                 <Link href={`/posts/${data.node.slug}`}>
+                //                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                         {imageData}
+                //                     </span>
+                //                     <span className="postCategory">{categories}</span>
+                //                 </Link>
+                //             </div>
+                //             <Link href={`/posts/${data.node.slug}`}>
+                //                 <span className={carousel.projectTitle}>{data.node.title}
+                //                 </span>
+                //             </Link>
+                //         </div>
+                //     </div>
+                // )
             })
         }
     }
 
-    
+    var Allprojects = 0
+    if (filter?.projects?.edges != '') {
+        // var client = filter?.projects?.edges[0].node?.clients?.edges.name
+        if (filter?.projects?.edges != '') {
+            var clientsprojects = filter?.projects
+            Allprojects = clientsprojects.edges.length
+            var ProjectData = clientsprojects.edges.map(({ node }) => {
+                projects.push(node)
+                // var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+                // return (
+                //     <>
+                //         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                //             <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                //                 <div className={carousel.thumbnail_cont}>
+                //                     <Link href={`/projects/${node.slug}`}>
+                //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                             <div className={`${carousel.full_thumb} full-thumb`}>
+                //                                 {leadImgSrc && (
+                //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                //                                 )}
+                //                             </div>
+                //                             <span className="thumbnail-gif"></span>
+                //                         </span>
+                //                         {node?.projectComponent?.awardsReceived !== null && (
+                //                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                //                         )}
+                //                     </Link>
+                //                 </div>
+                //                 <Link href={`/projects/${node.slug}`}>
+                //                     <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                //                         <span className={carousel.grey__color}>  / {node?.clients?.edges[0].node?.name}</span>
+                //                     </span>
+                //                 </Link>
+                //             </div>
+                //         </div>
+                //     </>
+                // )
+            })
+        }
+    }
 
-    var resultCount = clN + StN + iN + tagN + cN + kN
+    var Allposts = 0
+    if (filter?.posts?.edges != '') {
+        if (filter?.posts?.edges != '') {
+            var postsCat = filter?.posts
+            Allposts = postsCat.edges.length
+
+            var allposts = postsCat.edges.map((data) => {
+                posts.push(data)
+                // var categories = data?.node?.categories.edges[0]?.node?.name
+                // var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
+
+                // if (featuredImage) {
+                //     var imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
+                //             <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
+                //         </span>
+                // } else {
+                //     imageData =
+                //         <span className={`${carousel.full_thumb} full-thumb`}>
+
+                //         </span>
+                // }
+                // return (
+                //     <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                //         <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                //             <div className={carousel.thumbnail_cont}>
+                //                 <Link href={`/posts/${data.node.slug}`}>
+                //                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                //                         {imageData}
+                //                     </span>
+                //                     <span className="postCategory">{categories}</span>
+                //                 </Link>
+                //             </div>
+                //             <Link href={`/posts/${data.node.slug}`}>
+                //                 <span className={carousel.projectTitle}>{data.node.title}
+                //                 </span>
+                //             </Link>
+                //         </div>
+                //     </div>
+                // )
+            })
+        }
+    }
+
+
+    var Allprojects = [...new Set([...clients, ...industry, ...projectTypes, ...keyword, ...categories, ...projects])]
+    var allposts = [...new Set([...categories, ...tags , ...posts])]
+
+    const uniqueProjects = Array.from(new Set(Allprojects.map(a => a.id)))
+    .map(id => {
+    return Allprojects.find(a => a.id === id)
+    })
+
+    const uniquePosts = Array.from(new Set(allposts.map(a => a?.node?.id)))
+    .map(id => {
+    return allposts.find(a => a?.node?.id === id)
+    })
+
+
+
+
+    var resultCount = uniqueProjects.length + uniquePosts.length
 
     if (resultCount > 0) {
         var resultText = resultCount + ' results'
@@ -337,12 +455,79 @@ export default function search({ filters, data, filter }) {
                         </div>
                     </div>
                     <div className="row">
-                        {clientData}
-                        {SubTypes}
-                        {keywordsData}
-                        {industries}
-                        {allposts}
-                        {allpostsTags}
+                        {
+                            uniqueProjects.map(( node ) => {
+                                var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+                                return (
+                                    <>
+                                        <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                                            <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                                                <div className={carousel.thumbnail_cont}>
+                                                    <Link href={`/projects/${node.slug}`}>
+                                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                                                            <div className={`${carousel.full_thumb} full-thumb`}>
+                                                                {leadImgSrc && (
+                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                                )}
+                                                            </div>
+                                                            <span className="thumbnail-gif"></span>
+                                                        </span>
+                                                        {node?.projectComponent?.awardsReceived !== null && (
+                                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                                                        )}
+                                                    </Link>
+                                                </div>
+                                                <Link href={`/projects/${node.slug}`}>
+                                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
+                                                        <span className={carousel.grey__color}>  / {node?.clients?.edges[0].node?.name}</span>
+                                                    </span>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            })
+
+                            
+                        }
+
+                        {
+                            uniquePosts.map((data) => {
+                                // console.log(data)
+                                var categories = data?.node?.categories.edges[0]?.node?.name
+                                var featuredImage = data?.node?.featuredImage?.node?.sourceUrl
+
+                                if (featuredImage) {
+                                    var imageData =
+                                        <span className={`${carousel.full_thumb} full-thumb`}>
+                                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
+                                        </span>
+                                } else {
+                                    imageData =
+                                        <span className={`${carousel.full_thumb} full-thumb`}>
+
+                                        </span>
+                                }
+                                return (
+                                    <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                                        <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
+                                            <div className={carousel.thumbnail_cont}>
+                                                <Link href={`/posts/${data.node.slug}`}>
+                                                    <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                                                        {imageData}
+                                                    </span>
+                                                    <span className="postCategory">{categories}</span>
+                                                </Link>
+                                            </div>
+                                            <Link href={`/posts/${data.node.slug}`}>
+                                                <span className={carousel.projectTitle}>{data.node.title}
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </section>
