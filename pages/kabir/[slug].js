@@ -23,10 +23,12 @@ export default function kabir({ kabir, data }) {
     const uri = kabir ? (kabir?.uri ?? {}) : ({});
 
     var featuredImage = kabir?.featuredImage?.node?.sourceUrl
-    const toBase64 = (str) =>
-        typeof window === 'undefined'
-            ? Buffer.from(str).toString('base64')
-            : window.btoa(str)
+    const toBase64 = (str) => typeof window === 'undefined' ? Buffer.from(str).toString('base64') : window.btoa(str)
+
+    const shimmer = (w, h) => `
+        <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+        </svg>`
 
     const toggleShareIcons = () => {
         $('.share-icon').toggleClass('icons-hide');
@@ -39,19 +41,6 @@ export default function kabir({ kabir, data }) {
     });
 
 
-    const shimmer = (w, h) => `
-        <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <defs>
-            <linearGradient id="g">
-                <stop stop-color="#f6f6f6" offset="20%" />
-                <stop stop-color="#f0f0f0" offset="50%" />
-                <stop stop-color="#f6f6f6" offset="70%" />
-            </linearGradient>
-        </defs>
-        <rect width="${w}" height="${h}" fill="#F6F6F6" />
-        <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-        <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-        </svg>`
 
 
     if (featuredImage) {
