@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from './contactForm.module.scss'
 import $ from 'jquery'
 export default function contactForm({ dataEmail }) {
@@ -26,6 +26,19 @@ export default function contactForm({ dataEmail }) {
   //     $('.error-message').addClass('show-message');
   //   }
   // }
+
+    useEffect(() => {
+        $("#width_tmp_option").html($('#applying-for option:selected').text()); 
+        $('#applying-for').width($("#width_tmp_select").width());
+        $('#applying-for').change(function(){
+            $("#width_tmp_option").html($('#applying-for option:selected').text()); 
+            $(this).width($("#width_tmp_select").width());
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            $("#width_tmp_option").html($('#applying-for option:selected').text()); 
+            $('#applying-for').width($("#width_tmp_select").width());
+        }, false);
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -84,7 +97,7 @@ export default function contactForm({ dataEmail }) {
             <div className="col-md-12">
               <span className="applying__for">enquire about
                 <span className="font__red">
-                  <select id="applying-for" value={enquiryAbout} onChange={(e) => setenquiryAbout(e.target.value)} style={{ width: '127px ' }}>
+                  <select id="applying-for" value={enquiryAbout} onChange={(e) => setenquiryAbout(e.target.value)}>
                     <option data-mail={dataEmail} value="Branding">Branding</option>
                     <option data-mail={dataEmail} value="Packaging Design">Packaging Design</option>
                     <option data-mail={dataEmail} value="UX/UI Projects">UX/UI Projects</option>
