@@ -1775,8 +1775,17 @@ rect{
 
   g{
     .active{
-      path{
-         stroke: white;
+        path{
+        stroke: white;
+
+        &:last-child{
+          // stroke-dasharray: 16;
+          // stroke-dashoffset: 30;
+          // animation: animate-svg-stroke-1 .8s infinite 0s ease-in-out;
+          stroke-dasharray: 7;
+          stroke-dashoffset: 7;
+          animation: animate-svg-stroke-1 1s linear forwards infinite;
+        }
       }
     }
   }

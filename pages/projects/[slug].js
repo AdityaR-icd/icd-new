@@ -80,15 +80,12 @@ export default function Projects({ project, data, menus }) {
 
   }, []);
 
-  const toBase64 = (str) =>
-    typeof window === 'undefined'
-      ? Buffer.from(str).toString('base64')
-      : window.btoa(str)
+const toBase64 = (str) => typeof window === 'undefined' ? Buffer.from(str).toString('base64') : window.btoa(str)
 
-  const shimmer = (w, h) => `
-      <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
-      </svg>`
+const shimmer = (w, h) => `
+    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+    </svg>`
 
   var other_projects = project_slider?.edges
   var other_projects1 = project_slider1?.edges
@@ -163,13 +160,14 @@ export default function Projects({ project, data, menus }) {
                       <Image
                         // priority={true}
                         priority
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                        
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
+                        placeholder="blur"
+                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         layout="fill"
-                        sizes="100vw" />
+                        />
                     )}
                   </div>
                   <span className="thumbnail-gif"></span>
@@ -245,7 +243,7 @@ export default function Projects({ project, data, menus }) {
                     // priority={true}
                     priority
                     placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1920, 768))}`}
                     className={carousel?.project_lead}
                     src={leadImgSrc}
                     alt="project-lead"
@@ -417,7 +415,7 @@ export default function Projects({ project, data, menus }) {
               src={leadComponent}
               priority
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
               layout="fill"
               className='d-none d-md-block'
@@ -428,7 +426,7 @@ export default function Projects({ project, data, menus }) {
               src={leadComponentMobile}
               priority
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
               layout="fill"
               className='d-block d-md-none'
