@@ -28,7 +28,7 @@ export default function Post({ post , teamData }) {
   const router = useRouter()
 
   const [mounted, setMounted] = useState(false);
-  const [range, setRange] = useState('0')
+  const [range, setRange] = useState(0)
   useEffect(() => {
     setMounted(true)
   }, [])
