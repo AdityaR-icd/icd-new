@@ -46,7 +46,14 @@ module.exports = withPWA({
   env: {
     REVALIDATION_TOKEN: 'randomsecrettoken'
   },
-
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+    ]
+  },
   async headers() {
     return [
       {
