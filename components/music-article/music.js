@@ -34,11 +34,11 @@ export default function music({ node , music , i }){
     return(
         <>
          
-		 	{i == 8 &&
-				<>
-					<span className='credits'> Developed By Alok Joshi </span>
-				</>
-			}
+	
+			<>
+				<span className='credits'> Developed By Alok Joshi </span>
+			</>
+			
             <svg className='radio-img desktop-radio d-none d-md-block'  version="1.1" id="Layer_1" x="0px" y="0px"
 	 viewBox="0 0 970 641">
             

@@ -83,12 +83,12 @@ export default function projectLead({ edges   }){
                                  
                                                 <div className={`${styles.project__section}`} >
                                                     <div className={styles.Tilt}>
-                                                                                        <div className="Tilt-inner">
+                                                    <div className="Tilt-inner">
 
 
                                                     {project_video && (
                                                         <>
-                                                            <div className={`${styles.project__leadimage}  d-none d-md-block ${styles.video_container}`}>
+                                                            <div className={`${styles.project__leadimage}  d-none d-lg-block ${styles.video_container}`}>
                                                                 <video src={project_video} autoPlay playsInline loop muted></video>
                                                             </div>
                                                         </>
@@ -96,7 +96,7 @@ export default function projectLead({ edges   }){
 
                                                     {!project_video && (
                                                         <>
-                                                            <div className={` d-none d-md-block ${styles.project__leadimage}`}>
+                                                            <div className={` d-none d-lg-block ${styles.project__leadimage}`}>
                                                                 <Image
                                                                     priority={true}
                                                                     placeholder="blur"
@@ -110,7 +110,7 @@ export default function projectLead({ edges   }){
                                                     )}
 
 
-                                                    <div className={`  d-block d-md-none ${styles.project__leadimage}`}>
+                                                    <div className={` d-lg-none d-block ${styles.project__leadimage}`}>
                                                         <Image
                                                             priority={true}
                                                             placeholder="blur"
