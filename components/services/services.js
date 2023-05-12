@@ -17,11 +17,11 @@ export default function service({ meta , edges , other_service }){
         <NextSeo
             title={meta.seo.title}
             description={meta.seo.metaDesc}
-            canonical="https://icdindia.com/services"
+            canonical="https://www.icdindia.com/services"
             robots={meta.metaRobotsNoindex}
             googlebot={meta.metaRobotsNofollow}
             openGraph={{
-                url: 'https://icdindia.com/services',
+                url: 'https://www.icdindia.com/services',
                 title: meta.seo.title,
                 description: meta.seo.metaDesc,
                 images: [
@@ -38,7 +38,7 @@ export default function service({ meta , edges , other_service }){
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.seo.title} />
         <meta name="twitter:description" content={meta.seo.metaDesc} />
-        <meta name="twitter:url" content="https://icdindia.com/services" />
+        <meta name="twitter:url" content="https://www.icdindia.com/services" />
         <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
         {/* end of Twitter Cards */}
       </Head>

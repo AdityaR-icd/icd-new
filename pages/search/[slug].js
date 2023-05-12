@@ -425,11 +425,11 @@ export default function search({ filters, data, filter }) {
             <NextSeo
                 title={`${router.query.slug} | Itu Chaudhuri Design `}
                 description=''
-                canonical={`https://icdindia.com/search/${router.query.slug}`}
+                canonical={`https://www.icdindia.com/search/${router.query.slug}`}
                 robots={data.metaRobotsNoindex}
                 googlebot={data.metaRobotsNofollow}
                 openGraph={{
-                    url: `https://icdindia.com/search/${router.query.slug}`,
+                    url: `https://www.icdindia.com/search/${router.query.slug}`,
                     title: router.query.slug,
                     description: '',
                     images: [

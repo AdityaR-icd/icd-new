@@ -66,9 +66,9 @@ export default function Projects({ project }) {
         <NextSeo 
             title={` ${pageData.name} | Itu Chaudhuri Design ` }
             description={seo.metaDesc}
-            canonical={`https://icdindia.com/projects/category/${pageData.slug}`}
+            canonical={`https://www.icdindia.com/projects/category/${pageData.slug}`}
             openGraph={{
-              url: `https://icdindia.com/projects/category/${pageData.slug}`,
+              url: `https://www.icdindia.com/projects/category/${pageData.slug}`,
               title: pageData.name,
               description: seo.opengraphDescription,
               images: [
@@ -85,7 +85,7 @@ export default function Projects({ project }) {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={pageData.name} />
           <meta name="twitter:description" content={seo.opengraphDescription} />
-          <meta name="twitter:url" content={`https://icdindia.com/projects/category/${pageData.slug}`} />
+          <meta name="twitter:url" content={`https://www.icdindia.com/projects/category/${pageData.slug}`} />
           <meta name="twitter:image" content={ogimage.src} />
         </Head>
         <section className={`${style.project_type_cont} mT__260 page__header `}>

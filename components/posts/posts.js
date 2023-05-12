@@ -104,11 +104,11 @@ export default function posts({ meta, categories, edges }) {
                     <NextSeo
                         title={meta.seo.title}
                         description={meta.seo.metaDesc}
-                        canonical="https://icdindia.com/posts"
+                        canonical="https://www.icdindia.com/posts"
                         robots={meta.metaRobotsNoindex}
                         googlebot={meta.metaRobotsNofollow}
                         openGraph={{
-                            url: 'https://icdindia.com/posts',
+                            url: 'https://www.icdindia.com/posts',
                             title: meta.seo.title,
                             description: meta.seo.metaDesc,
                             images: [
@@ -125,7 +125,7 @@ export default function posts({ meta, categories, edges }) {
                         <meta name="twitter:card" content="summary_large_image" />
                         <meta name="twitter:title" content={meta.seo.title} />
                         <meta name="twitter:description" content={meta.seo.metaDesc} />
-                        <meta name="twitter:url" content="https://icdindia.com/posts" />
+                        <meta name="twitter:url" content="https://www.icdindia.com/posts" />
                         <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
                         {/* end of Twitter Cards */}
                     </Head>

@@ -146,11 +146,11 @@ export default function posts({ posts, meta, categories, tags }) {
             <NextSeo
                 title={metaData.seo.title}
                 description={metaData.seo.metaDesc}
-                canonical={`https://icdindia.com/posts/category/${router.query.slug}`}
+                canonical={`https://www.icdindia.com/posts/category/${router.query.slug}`}
                 robots={metaData.metaRobotsNoindex}
                 googlebot={metaData.metaRobotsNofollow}
                 openGraph={{
-                    url: `https://icdindia.com/posts/category/${router.query.slug}`,
+                    url: `https://www.icdindia.com/posts/category/${router.query.slug}`,
                     title: metaData.seo.title,
                     description: metaData.seo.metaDesc,
                     images: [
@@ -166,7 +166,7 @@ export default function posts({ posts, meta, categories, tags }) {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={metaData.seo.title} />
                 <meta name="twitter:description" content={metaData.seo.metaDesc} />
-                <meta name="twitter:url" content={`https://icdindia.com/posts/category/${router.query.slug}`} />
+                <meta name="twitter:url" content={`https://www.icdindia.com/posts/category/${router.query.slug}`} />
                 <meta name="twitter:image" content={metaData.featuredImage?.node.sourceUrl} />
             </Head>
 
