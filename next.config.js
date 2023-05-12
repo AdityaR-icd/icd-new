@@ -51,15 +51,25 @@ module.exports = withPWA({
     return [
       {
         source: '/_next/image(.*)',
-        locale: false,
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=365d, must-revalidate',
+            value: 'public, max-age=365d, stale-while-revalidate=180',
             
           },
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Headers", "value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
+        ],
+      },
+      {
+        // This works, and returns appropriate Response headers:
+        source: '/(.*).jpg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value:
+              'public, max-age=180, s-maxage=180, stale-while-revalidate=180',
+          },
         ],
       },
     ]
