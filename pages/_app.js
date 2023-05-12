@@ -35,11 +35,6 @@ export default function MyApp({ Component, pageProps }) {
   })
   return (
     <>
-    <Head>
-      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-      <meta http-equiv="Pragma" content="no-cache" />
-      <meta http-equiv="Expires" content="0" />
-    </Head>
     <Script
         src="https://www.googletagmanager.com/gtag/js?id=GTM-WWCCC9N"
         strategy="afterInteractive"

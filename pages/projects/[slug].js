@@ -113,8 +113,8 @@ const shimmer = (w, h) => `
   //                 <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
   //                   <div className={`${carousel?.full_thumb} full-thumb`}>
   //                     <Image
-  //                       // priority={true}
-  //                       priority
+  //                       // ={true}
+  //                       
   //                       placeholder="blur"
   //                       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
   //                       className={carousel?.project_lead}
@@ -158,8 +158,8 @@ const shimmer = (w, h) => `
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
                       <Image
-                        // priority={true}
-                        priority
+                        // ={true}
+                        
                         
                         className={carousel?.project_lead}
                         src={leadImgSrc}
@@ -240,8 +240,8 @@ const shimmer = (w, h) => `
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
-                    // priority={true}
-                    priority
+                    // ={true}
+                    
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1920, 768))}`}
                     className={carousel?.project_lead}
@@ -413,7 +413,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponent}
-              priority
+              priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
@@ -424,7 +424,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponentMobile}
-              priority
+              priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
