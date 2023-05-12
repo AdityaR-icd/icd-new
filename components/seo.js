@@ -1,87 +1,43 @@
+import Head from 'next/head'
 import { NextSeo } from 'next-seo';
-import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 
-const Seo = ({ seo, uri }) => {
-	const {
-		title,
-		metaDesc,
-		metaRobotsNoindex,
-		metaRobotsNofollow,
-		opengraphDescription,
-		opengraphTitle,
-		opengraphImage,
-		opengraphSiteName,
-		twitterImage
-	} = seo;
-
+export default function pageSeo({ seo }){
 	const { asPath } = useRouter();
 
+	console.log(seo)
 
-	const currentLocation = process.browser ? window.location.origin : null;
-	const opengraphUrl = "https://icdindia.com" + asPath;
-	const image = opengraphImage?.sourceUrl;
-	const twitterImag = twitterImage?.sourceUrl
-
-	return (
-		<NextSeo
-			title={title}
-			description={opengraphDescription || metaDesc}
-			canonical={opengraphUrl}
-			// robots={metaRobotsNoindex || metaRobotsNofollow}
-			// googlebot={metaRobotsNofollow || metaRobotsNoindex }
-			openGraph={{
-				type: 'website',
-				locale: 'en_US',
-				url: opengraphUrl,
-				title: opengraphTitle,
-				description: opengraphDescription,
-				images: [
-					{
-						url: image,
-						width: 1125,
-						height: 843
-					}
-				],
-
-				/* eslint-disable */
-				site_name: opengraphSiteName
-				/* eslint-enable */
-			}}
-			twitter={{
-				site: opengraphUrl,
-				cardType: 'summary_large_image',
-				image: twitterImag,
-				title: { title },
-				description: { metaDesc }
-			}}
-		/>
-	);
-};
-
-Seo.propTypes = {
-	seo: PropTypes.object
-};
-
-Seo.defaultProps = {
-	seo: {
-		canonical: '',
-		title: '',
-		metaDesc: '',
-		metaRobotsNoindex: '',
-		metaRobotsNofollow: '',
-		opengraphDescription: '',
-		opengraphTitle: '',
-		opengraphImage: {
-			sourceUrl: ''
-		},
-		twitterImage: {
-			sourceUrl: ''
-		},
-		opengraphUrl: '',
-		opengraphSiteName: ''
-	}
-};
-
-export default Seo;
+    return(
+		
+        <>
+        <NextSeo 
+            title={seo?.title}
+            description={seo?.opengraphDescription}
+            canonical={`${process.env.domain}${asPath}`}
+            robots={seo.metaRobotsNoindex}
+			      googlebot={seo.metaRobotsNofollow}
+            openGraph={{
+              url: process.env.domain,
+              title: seo?.title,
+              description: seo?.opengraphDescription,
+              images: [
+                {
+                  url: seo?.opengraphImage?.sourceUrl,
+                  alt: 'homepage-image',
+                  type: 'image/jpeg',
+                },
+              ],
+              site_name: seo.title,
+            }}
+        />
+        <Head>
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={seo?.title} />
+          <meta name="twitter:description" content={seo?.opengraphDescription} />
+          <meta name="twitter:url" content={`${process.env.domain}${asPath}`} />
+          <meta name="twitter:image" content={seo.opengraphImage?.sourceUrl} />
+        </Head> 
+        </>
+    )
+}

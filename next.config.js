@@ -18,6 +18,7 @@ module.exports = withPWA({
 
   env: {
     pass: process.env.pass,
+    domain: process.env.domain
   },
 
   // reactStrictMode: true,
