@@ -193,7 +193,7 @@ export default function industry({ meta, edges }) {
               {projectLength > 3 && (
                 <>
                   <span className="d-block d-md-none m-expand">
-                    <span className="see-all" onClick={toggleClass}><span className={industries.expand_btn}></span>{expand ? 'less ' + industry.name : 'more ' + industry.name}</span>
+                    <span className="see-all" onClick={() => toggleClass(industry.slug)}><span className={industries.expand_btn}></span>{idMatch == industry.slug ? 'less ' + industry.name : 'more ' + industry.name}</span>
                   </span>
                 </>
               )}
