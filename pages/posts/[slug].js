@@ -239,8 +239,7 @@ export default function Post({ post , teamData }) {
 
 
   const setRangeValue = async(value) => {
-    console.log(value);
-    setRange(value)
+    // setRange(value)
     $('.person-number').removeClass('show')
     $('.person' + range +'').addClass('show')
   }
@@ -270,7 +269,7 @@ export default function Post({ post , teamData }) {
 			<div className='interaction-element'>
 				<MusicArticle i={i} node = {node} />
 				<span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
-				<input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
+				<input type="range" min="0" max="12" className="slider" value={range}/>
 				<span className='d-block d-md-none right-btn range-btn' onClick={rangePlus}></span>
 
 			</div>			
@@ -316,12 +315,11 @@ export default function Post({ post , teamData }) {
                   </div>
                   <div className={`${style.postContent} postContent`}>
                     {post?.content && parse(post?.content)}
-                    {/* {interaction} */}
-					{interactionArticle && 
-					<>
-					 	{radioSvg}
-					</>
-					}
+                    {interactionArticle && 
+                      <>
+                        {radioSvg}
+                      </>
+                    }
                   </div>
                 </div>
                 <div className={` ${style.social__media} social__media `}>

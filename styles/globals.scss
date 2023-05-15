@@ -1605,8 +1605,8 @@ width: 22%;
     }
 
     .slider {
-        -webkit-appearance: none;
-        appearance: none;
+          -webkit-appearance: none;
+          appearance: none;
           height: 40px;
           background: none;
           outline: none;
@@ -1615,7 +1615,6 @@ width: 22%;
           position: absolute;
           top: 22%;
           left: 8.8%;
-          border-radius: 0;
           border-radius: 0;
           // border: 1px solid white;
           z-index: 1;
@@ -1769,6 +1768,13 @@ rect{
 	.st23{fill:#EDEDED;}
 	.st24{font-family: 'Inter', sans-serif;  font-weight: 700;}
 	.st25{font-size:16px;}
+  .note-widget{
+    fill: #A0A0A0;
+    font-size: 10px;
+    font-family: 'Inter', sans-serif;  
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 }
 
 .mobile-radio{
@@ -1806,7 +1812,7 @@ rect{
 	.st2{fill:none;stroke:#6D6E70;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 	.st3{fill:none;stroke:#6D6E70;stroke-width:2;}
 	.st4{fill:#EB1C24;}
-	.st5{fill:none;stroke:#EDEDED;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st5{fill:none;stroke:#FFCA05;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 	.st6{fill:#6D6E70;}
 	.st7{clip-path:url(#SVGID_4_);}
 	.st8{fill:none;stroke:#181818;stroke-width:2;}
@@ -1824,6 +1830,11 @@ rect{
 	.st20{fill:#FFCA05;stroke:#FFCA05;stroke-width:0.25;}
 	.st21{font-family: Ozone,sans-serif;}
 	.st22{font-size:16px;}
+  .prev{
+    font-size: 10px;
+    fill: #FFCA05;
+    font-family: 'Inter', sans-serif;  font-weight: 700;
+  }
 }
 
 // .card__tag{

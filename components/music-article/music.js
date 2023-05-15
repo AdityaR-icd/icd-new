@@ -3162,8 +3162,8 @@ export default function music({ node , music , i }){
 </clipPath>
 <image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 </defs>
-		   
-		    </svg>
+<text transform="matrix(1 0 0 1 65.8128 109.4535)" class="note-widget">click on the channels to tune in</text>   
+</svg>
 
 
 
@@ -4585,6 +4585,8 @@ export default function music({ node , music , i }){
 <g>
 <text transform="matrix(1 0 0 1 64.763 355.1686)" className="profile-name st20 st21 st22">{node?.title}</text>
 </g>
+<text transform="matrix(1 0 0 1 23.0407 82.2875)" class="prev">PREV</text>
+<text transform="matrix(1 0 0 1 238.2215 82.2874)" class="prev">NEXT</text>
 <defs>
 <pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
 	<use xlinkHref="#image0_144_10" transform="matrix(0.00221239 0 0 0.00241951 0 -0.0189842)"/>
