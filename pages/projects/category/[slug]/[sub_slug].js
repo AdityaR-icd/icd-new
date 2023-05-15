@@ -18,7 +18,7 @@ export default function subProject({ subTypeProjects, project }) {
   var seo = pageData?.seo
   var activeClass = ''
 
-  console.log(ogimage)
+  
   const [allProject, setallProject] = useState(false)
 
   const allProjects = () => {
