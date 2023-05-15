@@ -261,62 +261,6 @@ export default function Post({ post , teamData }) {
   }
 
 
-  var music_name = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&  <ul className={`person${i} person-number`}>
-          <li className={`p${i+1}`} onClick={() => playAudio(`p${i+1}`)}><span className="volume"></span>{node.music.artistFirst}</li>
-          <li className={`p${i+2}`} onClick={() => playAudio(`p${i+2}`)}><span className="volume"></span>{node.music.artistSecond}</li>
-          <li className={`p${i+3}`} onClick={() => playAudio(`p${i+3}`)}><span className="volume"></span>{node.music.artistThird}</li>
-          <li className={`p${i+4}`} onClick={() => playAudio(`p${i+4}`)}><span className="volume"></span>{node.music.artistFourth}</li>
-          <li className={`p${i+5}`} onClick={() => playAudio(`p${i+5}`)}><span className="volume"></span>{node.music.artistFifth}</li>
-          <li><a href={node?.music?.playlistUrl} target="_blank" rel="noopener"><span className="playlist"></span>Go to playlist</a></li>
-        </ul> }
-      </>
-    ))}
-  </>
-
-  var team_name = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&  <span className={`person${i} person-number`}>{node?.title}</span>}
-      </>
-    ))}
-  </>
-
-  var team_img = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-     
-       {range == i && <img className={`person${i} person-number`} src={node?.profileImage?.profileImageOnHover?.sourceUrl} alt="" />}
-      </>
-    ))}
-  </>
-
-  var music = 
-  <>
-    {team?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&   <div className="audio">
-          <audio onEnded={endFunction} preload="none" id={`p${i+1}`}
-            src={node?.music.musicFirst}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+2}`}
-            src={node?.music.musicSecond}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+3}`}
-            src={node?.music.musicThird}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+4}`}
-            src={node?.music.musicFourth}></audio>
-          <audio onEnded={endFunction} preload="none" id={`p${i+5}`}
-            src={node?.music.musicFifth}></audio>
-      </div> }
-      </>
-    ))}
-  </>
-
-
   var radioSvg = 
   <>
     {teamData?.edges?.map(({node} , i) => (
@@ -337,8 +281,8 @@ export default function Post({ post , teamData }) {
   </>
 
   return (
-    <>
-      {mounted && (
+    // <>
+    //   {mounted && (
         <>
       <Seo seo={seo} uri={uri} />
       <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
@@ -422,18 +366,11 @@ export default function Post({ post , teamData }) {
 
 
       </>
-      )}
-    </>
+    //   )}
+    // </>
   )
 }
 
-export async function getStaticPaths() {
-  const allPosts = await getAllPostsForHome()
-  return {
-    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-    fallback: true,
-  }
-}
 
 export async function getStaticProps({ preview = false, params, previewData }) {
   const Moredata = await getPostAndMorePosts(params.slug, preview, previewData)
@@ -452,5 +389,15 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       // filters
     },
     revalidate: 2,
+  }
+}
+
+
+
+export async function getStaticPaths() {
+  const allPosts = await getAllPostsForHome()
+  return {
+    paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
+    fallback: true,
   }
 }

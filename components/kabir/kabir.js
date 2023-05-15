@@ -57,11 +57,11 @@ export default function kanbir({ meta, edges }) {
         <NextSeo
             title={meta?.seo?.title}
             description={meta?.seo?.metaDesc}
-            canonical={`https://icdindia.com${router.pathname}`}
+            canonical={`https://www.icdindia.com${router.pathname}`}
             robots={meta?.metaRobotsNoindex}
             googlebot={meta?.metaRobotsNofollow}
             openGraph={{
-                url: `https://icdindia.com${router?.pathname}`,
+                url: `https://www.icdindia.com${router?.pathname}`,
                 title: meta?.seo?.title,
                 description: meta?.seo?.metaDesc,
                 images: [
@@ -79,7 +79,7 @@ export default function kanbir({ meta, edges }) {
             <meta name="twitter:title" content={meta?.seo?.title} />
             <meta name="twitter:description" content={meta?.seo
                 ?.metaDesc} />
-            <meta name="twitter:url" content={`https://icdindia.com${router?.pathname}`} />
+            <meta name="twitter:url" content={`https://www.icdindia.com${router?.pathname}`} />
             <meta name="twitter:image" content={meta?.featuredImage?.node?.sourceUrl} />
             {/* end of Twitter Cards */}
         </Head>
