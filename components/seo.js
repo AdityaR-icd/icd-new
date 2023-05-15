@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 export default function pageSeo({ seo }){
 	const { asPath } = useRouter();
+  console.log(seo)
     return(
 		
         <>

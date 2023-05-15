@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug, getProject, getFooter, getAllProjectsNotIn, getAllOtherProjects } from '../../lib/api'
+import { getAllProjectsWithSlug, getProject, getFooter, getAllProjectsNotIn } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import dynamic from "next/dynamic";

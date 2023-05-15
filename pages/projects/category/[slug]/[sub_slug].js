@@ -18,7 +18,7 @@ export default function subProject({ subTypeProjects, project }) {
   var seo = pageData?.seo
   var activeClass = ''
 
-
+  console.log(ogimage)
   const [allProject, setallProject] = useState(false)
 
   const allProjects = () => {
@@ -76,7 +76,7 @@ export default function subProject({ subTypeProjects, project }) {
           description: seo.opengraphDescription,
           images: [
             {
-              url: ogimage.src,
+              url: "https://digital.icdindia.com/wp-content/uploads/2021/10/og-default.49aa7a10.png",
               alt: 'project-categories',
               type: 'image/jpeg',
             },
@@ -89,7 +89,7 @@ export default function subProject({ subTypeProjects, project }) {
         <meta name="twitter:title" content={pageData.name} />
         <meta name="twitter:description" content={seo.opengraphDescription} />
         <meta name="twitter:url" content={`https://www.icdindia.com/projects/category/${pageData.slug}/${router.query.sub_slug}`} />
-        <meta name="twitter:image" content={ogimage.src} />
+        <meta name="twitter:image" content="https://digital.icdindia.com/wp-content/uploads/2021/10/og-default.49aa7a10.png" />
       </Head>
       <section className={`${style.project_type_cont} mT__260 page__header `}>
         <div className="container page__header--container">
