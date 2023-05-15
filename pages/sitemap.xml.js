@@ -1,7 +1,7 @@
 const EXTERNAL_DATA_URL = 'https://www.icdindia.com';
 import { getAllProjects, getAllPostsSlug } from '../lib/api'
 
-function generateSiteMap({allProjects , posts}) {
+function generateSiteMap({allProjects , allposts}) {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
@@ -33,11 +33,11 @@ function generateSiteMap({allProjects , posts}) {
        })
        .join('')}
 
-      ${posts?.edges
-       .map(({ node }) => {
+      ${allposts?.edges
+       .map(( node ) => {
          return `
        <url>
-           <loc>${`${EXTERNAL_DATA_URL}/posts/${node?.slug}`}</loc>
+           <loc>${`${EXTERNAL_DATA_URL}/posts/${node?.node?.slug}`}</loc>
        </url>
      `;
        })
@@ -53,9 +53,9 @@ function SiteMap() {
 export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
   const allProjects = await getAllProjects()
-   const posts = await getAllPostsSlug()
+   const allposts = await getAllPostsSlug()
   // We generate the XML sitemap with the posts data
-  const sitemap = generateSiteMap({allProjects , posts});
+  const sitemap = generateSiteMap({allProjects , allposts});
   res.setHeader('Content-Type', 'text/xml');
   // we send the XML to the browser
   res.write(sitemap);
@@ -65,9 +65,9 @@ export async function getServerSideProps({ res }) {
   return {
     props: {
       allProjects,
-      posts
+      allposts
     },
   };
 }
 
-export default SiteMap;
+export default generateSiteMap;
