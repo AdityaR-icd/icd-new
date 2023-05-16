@@ -1329,6 +1329,7 @@ export default function music({ node , music , i , range }){
 			<text transform="matrix(1 0 0 1 405.4263 473.9185)" class="st23 st24 st25">{node.music.artistFifth}</text>
 		</g>
 	</g>
+	<a rel="noopener" target="_blank" href={node?.music?.playlistUrl}>
 	<g>
 		<rect x="360" y="485.4" class="st1" width="240" height="34"/>
 		<g>
@@ -1342,6 +1343,7 @@ export default function music({ node , music , i , range }){
 			<text transform="matrix(1 0 0 1 405.4261 508.1642)" class="st23 st24 st25">Go to ICD Jukebox</text>
 		</g>
 	</g>
+	</a>
 	<g onClick={() => playAudio(`p${i+4}`)}>
 		<rect x="360" y="417.4" class="st1" width="240" height="34"/>
 		<g>
