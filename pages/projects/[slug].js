@@ -197,7 +197,7 @@ const shimmer = (w, h) => `
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
-                    // priority={true}
+                    priority={true}
                     loading="lazy"
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
@@ -224,7 +224,7 @@ const shimmer = (w, h) => `
   if (awards) {
     var leadImgSrc = project?.projectComponent?.awardsImage?.sourceUrl
     var awardImg = <Image
-      priority={true}
+      // priority={true}
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-none d-md-block `}
@@ -237,7 +237,7 @@ const shimmer = (w, h) => `
   if (project?.projectComponent?.awardsImageMobile) {
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
-      // priority={true}
+      priority={true}
       loading="lazy"
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
@@ -353,7 +353,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponent}
-              priority={true}
+              // priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
@@ -364,7 +364,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponentMobile}
-              priority={true}
+              // priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
@@ -547,26 +547,24 @@ const shimmer = (w, h) => `
   </>
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const gProject = await getProject(params.slug)
   const data = await getFooter()
   return {
     props: {
       project: gProject.project,
-      // menus,
-      data,
-      // filters,
+      data
     },
-    revalidate: 2,
+    // revalidate: 2,
   }
 }
 
-export async function getStaticPaths() {
-  const allProjects = await getAllProjectsWithSlug()
-  return {
-    paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
-    fallback: true,
-  }
-}
+// export async function getStaticPaths() {
+//   const allProjects = await getAllProjectsWithSlug()
+//   return {
+//     paths: allProjects.edges.map(({ node }) => `/projects/${node.slug}`) || [],
+//     fallback: true,
+//   }
+// }
 
 
