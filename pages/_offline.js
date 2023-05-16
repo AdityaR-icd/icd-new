@@ -8,7 +8,7 @@ export default () => (
     </Head>
     <div className="container">
       <div className={style.error_404}>
-        <span><img priority alt='icd-icon' decoding="async" className={style.error404_anim} src={Anim.src} alt="" /></span>
+        <span><img priority alt='icd-icon' decoding="async" className={style.error404_anim} src={Anim.src}  /></span>
         <span className={style.not_found}>Oops! You are offline</span>
       </div>
     </div>

@@ -264,19 +264,19 @@ export default function Post({ post , teamData }) {
   var radioSvg = 
   <>
     {teamData?.edges?.map(({node} , i) => (
-      <>
-       {range == i &&   
+      // <>
+      //  {range == i &&   
 	   <>
 			<div className='interaction-element'>
-				<MusicArticle i={i} node = {node} />
+				<MusicArticle range={range} i={i} node = {node} />
 				<span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
 				<input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
 				<span className='d-block d-md-none right-btn range-btn' onClick={rangePlus}></span>
 
 			</div>			
 	  </>
-       }
-      </>
+      //  }
+      // </>
     ))}
   </>
 

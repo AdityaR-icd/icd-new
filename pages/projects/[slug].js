@@ -24,7 +24,7 @@ import style from '../../styles/singleProject.module.scss'
 
 
 
-export default function Projects({ project, data, menus }) {
+export default function Projects({ project }) {
   const router = useRouter()
   let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
   let twitterUrl = 'https://twitter.com/intent/tweet?text="' + project?.title + '"&url=' + window?.location.origin + router.asPath
@@ -32,8 +32,7 @@ export default function Projects({ project, data, menus }) {
   const seo = project ? (project?.seo ?? {}) : ({});
   const uri = project ? (project?.uri ?? {}) : ({});
   // console.log(uri)
-  const isDesktop = useMediaQuery({ query: '(min-width: 1200px)' });
-  const isMobile = useMediaQuery({ query: '(max-width: 761px)' });
+
 
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -55,7 +54,7 @@ export default function Projects({ project, data, menus }) {
 
   var projectIds = project?.projectId
   var categorySlug = project?.projectTypes.edges[0]?.node?.slug
-  var categoryId = project?.projectTypes?.edges[0]?.node?.databaseId
+  // var categoryId = project?.projectTypes?.edges[0]?.node?.databaseId
   const [project_slider, setproject_slider] = useState('')
   const [project_slider1, setproject_slider1] = useState('')
   useEffect(() => {
@@ -97,48 +96,6 @@ const shimmer = (w, h) => `
       }
     })
   }
-  // var projectData = []
-  // var other_projects_slider1 = ''
-  // if (other_projects2?.length > 0) {
-  //   other_projects2?.map((node) => {
-  //     other_projects_slider1 = node?.map(({ node }) => {
-  //       var leadImgSrc = node?.featuredImage?.node?.sourceUrl
-  //       var client = node?.clients?.edges[0]?.node?.name
-  //       return <>
-  //         <div className="project__item resultItem-cont" key={node?.id}>
-  //           <div className={`${carousel?.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
-  //             <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-  //               <Link href={node?.uri}>
-
-  //                 <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-  //                   <div className={`${carousel?.full_thumb} full-thumb`}>
-  //                     <Image
-  //                       // ={true}
-  //                       
-  //                       placeholder="blur"
-  //                       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-  //                       className={carousel?.project_lead}
-  //                       src={leadImgSrc}
-  //                       alt="project-lead"
-  //                       layout="fill"
-  //                       sizes="100vw"
-  //                     />
-  //                   </div>
-  //                   <span className="thumbnail-gif"></span>
-  //                 </span>
-  //               </Link>
-  //             </div>
-  //             <Link href={node?.uri}>
-  //               <span className={carousel?.projectTitle}>{node?.projectComponent?.heading}
-  //                 <span className={carousel?.grey__color}>  / {client}</span>
-  //               </span>
-  //             </Link>
-  //           </div>
-  //         </div>
-  //       </>;
-  //     })
-  //   })
-  // }
 
 
   if (other_projects?.length > 0) {
@@ -240,12 +197,12 @@ const shimmer = (w, h) => `
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
-                    // ={true}
-                    
+                    // priority={true}
+                    loading="lazy"
                     placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(1920, 768))}`}
+                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
-                    src={leadImgSrc}
+                    src={leadImgSrc || 'https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg'}
                     alt="project-lead"
                     layout="fill"
                     sizes="100vw" />
@@ -271,7 +228,7 @@ const shimmer = (w, h) => `
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-none d-md-block `}
-      src={leadImgSrc}
+      src={leadImgSrc || 'https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg'}
       alt="project-lead"
       filayout="fill" ll
       sizes="100vw" />
@@ -281,11 +238,11 @@ const shimmer = (w, h) => `
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
       // priority={true}
-      priority
+      loading="lazy"
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
-      src={mobile_image}
+      src={leadImgSrc || 'https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg'}
       alt="project-lead"
       layout="fill"
       sizes="100vw" />
@@ -301,7 +258,7 @@ const shimmer = (w, h) => `
     <span className="icon share-icon icons-hide"><a href={linkedinUrl} rel="noopener" aria-label="icd" className="linkedin-icon" target="_blank"></a></span>
     <span className="icon share-icon icons-hide"><a href={twitterUrl} rel="noopener" aria-label="icd" className="twitter-icon" target="_blank"></a></span>
     <span className="icon share-icon icons-hide"><a href={fbUrl} rel="noopener" aria-label="icd" className="fb-icon" target="_blank"></a></span>
-    <span className="icon" onClick={toggleShareIcons}><img priority alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
+    <span className="icon" onClick={toggleShareIcons}><img loading='lazy' alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
     <Like count={project?.likes?.likes} id={project.id} type={'project'} />
   </div>;
 
@@ -336,24 +293,7 @@ const shimmer = (w, h) => `
       Next
     </button>
   );
-  // const carouselArrowClick = () => {
-  //   var curr_slide = $('.more-projectsCarousel .slick-current').find('.projectTitle'),
-  //     slide_2 = $('.more-projectsCarousel .slick-active').eq(1).find('.projectTitle'),
-  //     slide_3 = $('.more-projectsCarousel .slick-active').eq(2).find('.projectTitle'),
-  //     curr_slide_cat = curr_slide.data("type"),
-  //     slide_2_cat = slide_2.data("type"),
-  //     slide_3_cat = slide_3.data("type"),
-  //     more_title = $('#more-projectTitle'),
-  //     seeall_cta = $('.see-all a');
-  //   if (curr_slide_cat == slide_2_cat && slide_2_cat == slide_3_cat) {
-  //     var slug = curr_slide.data("slug");
-  //     more_title.text("more projects");
-  //     seeall_cta.attr("href", "/projects/");
-  //   } else {
-  //     more_title.text("more " + category);
-  //     seeall_cta.attr("href", "/projects/category/" + categorySlug);
-  //   }
-  // }
+
 
   const settings = {
     dots: false,
@@ -595,7 +535,6 @@ const shimmer = (w, h) => `
             <div className="more-projectsCarousel">
               <Slider {...settings}>
                 {other_projects_slider}
-                {/* {other_projects_slider1} */}
               </Slider>
             </div>
           </div>
@@ -610,9 +549,7 @@ const shimmer = (w, h) => `
 
 export async function getStaticProps({ params }) {
   const gProject = await getProject(params.slug)
-  // const menus = await getMenus()
   const data = await getFooter()
-  // const filters = await getFilters()
   return {
     props: {
       project: gProject.project,
