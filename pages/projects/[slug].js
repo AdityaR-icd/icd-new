@@ -26,9 +26,10 @@ import style from '../../styles/singleProject.module.scss'
 
 export default function Projects({ project }) {
   const router = useRouter()
-  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
-  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + project?.title + '"&url=' + window?.location.origin + router.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window?.location.origin + router.asPath + '"&title=' + project?.title;
+  var location = 'https://www.icdindia.com'
+  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
+  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + project?.title + '"&url=' + location + router?.asPath
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + location + router?.asPath + '"&title=' + project?.title;
   const seo = project ? (project?.seo ?? {}) : ({});
   const uri = project ? (project?.uri ?? {}) : ({});
   // console.log(uri)
@@ -198,7 +199,7 @@ const shimmer = (w, h) => `
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
                     priority={true}
-                    loading="lazy"
+              
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
@@ -238,7 +239,7 @@ const shimmer = (w, h) => `
     var mobile_image = project?.projectComponent?.awardsImageMobile?.sourceUrl
     var awardImgMobile = <Image
       priority={true}
-      loading="lazy"
+
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}

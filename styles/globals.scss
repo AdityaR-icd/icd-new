@@ -1644,8 +1644,10 @@ width: 22%;
             box-shadow: transparent;
               @include for-upto-tablet-portrait{
                 width: 20px;
-                height: 50px;
-                background-size: contain;
+                height: 30px;
+                top: -12px;
+                left: 0;
+                background-size: cover;
                 // background: transparent; 
                 -webkit-tap-highlight-color: transparent;
                 box-shadow: transparent;

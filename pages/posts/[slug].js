@@ -17,7 +17,7 @@ import dynamic from "next/dynamic";
 const Seo = dynamic(() => import("../../components/seo"));
 // const Comment = dynamic(() => import("../../components/comment/comment"));
 const Like = dynamic(() => import("../../components/like"));
-const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
+// const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
 const NextPost = dynamic(() => import('../../components/posts/next-post'))
 const PrevPost = dynamic(() => import('../../components/posts/prev-post'))
 const MusicArticle = dynamic(() => import('../../components/music-article/music'))
@@ -39,7 +39,7 @@ export default function Post({ post , teamData }) {
   // const comment_data = post ? (post.comments ?? {}) : ({});
 
   var featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl
-  var categories = post?.categories.edges[0]?.node?.name
+  var categories = post?.categories?.edges[0]?.node?.name
   var checkauthor = post?.postAuthor?.postAuthor
   var checkrelatedpost = post?.relatedPost?.relatedBlog
   var checkrelatedproject = post?.relatedPost?.relatedProject
@@ -55,10 +55,10 @@ export default function Post({ post , teamData }) {
     </svg>`
 
 
-
-  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + window?.location.origin + router.asPath
-  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + window?.location.origin + router.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + window?.location.origin + router.asPath + '"&title=' + post?.title;
+    var location = 'https://www.icdindia.com'
+  let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
+  let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + location + router?.asPath
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + location + router?.asPath + '"&title=' + post?.title;
 
   if (checkauthor) {
     var author = post?.postAuthor?.postAuthor[0]?.title || 'icd studios'
@@ -74,10 +74,10 @@ export default function Post({ post , teamData }) {
       <>
 
         {checkrelatedproject.map((node) => (
-          client = node.clients.edges[0].node.name,
+          client = node?.clients?.edges[0]?.node.name,
           leadImgSrc = node.featuredImage.node.sourceUrl,
           <>
-            <div className="col-md-4 project__item" key={node.id}>
+            <div className="col-md-4 project__item" key={node?.id}>
               <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                 <div className={carousel.thumbnail_cont}>
                   <Link href={`/projects/${node.slug}`}>
@@ -86,7 +86,7 @@ export default function Post({ post , teamData }) {
                         <Image
                           className={carousel.project_lead}
                           placeholder="blur"
-                          priority={true}
+                          priority="true"
                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                           src={leadImgSrc}
                           alt="project-lead"
@@ -129,7 +129,7 @@ export default function Post({ post , teamData }) {
               <span className={`${carousel.full_thumb} full-thumb`}>
                 <Image
                   src={featuredImage}
-                  priority={true}
+                  priority="true"
                   placeholder="blur"
                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                   alt="post-lead"
@@ -144,7 +144,7 @@ export default function Post({ post , teamData }) {
           }
           return (
             <>
-              <div className="col-md-4 project__item">
+              <div className="col-md-4 project__item" key={data?.slug}>
                 <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                   <div className={carousel.thumbnail_cont}>
                     <Link href={`/posts/${data.slug}`}>
@@ -184,7 +184,7 @@ export default function Post({ post , teamData }) {
       <div className={` ${style.leadImage} fade-in `}>
         <Image
           src={featuredImage}
-          priority={true}
+          priority="true"
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
           className="full-lead-img"
@@ -267,7 +267,7 @@ export default function Post({ post , teamData }) {
       // <>
       //  {range == i &&   
 	   <>
-			<div className='interaction-element'>
+			<div className='interaction-element' key={i}>
 				<MusicArticle range={range} i={i} node = {node} />
 				<span className='d-block d-md-none left-btn range-btn' onClick={rangeMinus}></span>
 				<input type="range" min="0" max="12" className="slider" value={range} onChange={(e) => setRangeValue(e.target.value)} />
@@ -281,8 +281,7 @@ export default function Post({ post , teamData }) {
   </>
 
   return (
-    // <>
-    //   {mounted && (
+
         <>
       <Seo seo={seo} uri={uri} />
       <section className={`${style.singlePost} singlePost mT__260`} key={post.id}>
@@ -365,8 +364,7 @@ export default function Post({ post , teamData }) {
 
 
       </>
-    //   )}
-    // </>
+   
   )
 }
 
@@ -383,9 +381,7 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       posts: Moredata.posts,
       preview,
       teamData,
-      // menus,
       data
-      // filters
     },
     revalidate: 2,
   }

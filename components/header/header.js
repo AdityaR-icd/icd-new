@@ -155,7 +155,7 @@ const Header = (props) => {
                                 <Image
                                     decoding="async"
                                     width="172"
-                                    priority={true}
+                                    priority="true"
                                     height="43"
                                     src={logo.src}
                                     className="logo d-none d-lg-block"
@@ -168,7 +168,7 @@ const Header = (props) => {
                             <Link href="/" aria-label="logo" className="logo d-block d-lg-none">
                                 <Image
                                     decoding="async"
-                                    priority
+                                    priority="true"
                                     src={mobileLogo.src}
                                     width="48"
                                     height="36"
