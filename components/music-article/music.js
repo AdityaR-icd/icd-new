@@ -1440,39 +1440,6 @@ export default function music({ node , music , i , range }){
 				<g className="st0">
 					<path className="st1" d="M30,59h228c16.6,0,30,13.4,30,30v580c0,16.6-13.4,30-30,30H30c-16.6,0-30-13.4-30-30V89C0,72.4,13.4,59,30,59
 						z"/>
-					<g className={`p${i+1}`}>
-					<path className="st2" d="M62.2,463.2l-4.2,3.3h-3.3v5H58l4.2,3.3V463.2z"/>
-					<path className="st2" d="M68.9,463.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M65.9,466c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
-						/>
-					</g>
-					<rect onClick={() => playAudio(`p${i+1}`)} x="42" y="452" className="st3" width="286" height="34"/>
-					<g className={`p${i+2}`}>
-					<path className="st2" d="M62.2,497.2l-4.2,3.3h-3.3v5H58l4.2,3.3V497.2z"/>
-					<path className="st2" d="M68.9,497.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M65.9,500c0.8,0.8,1.2,1.8,1.2,2.9s-0.4,2.2-1.2,2.9"
-						/>
-					</g>
-					<rect onClick={() => playAudio(`p${i+2}`)} x="42" y="486" className="st3" width="286" height="34"/>
-					<g className={`p${i+3}`}>
-					<path className="st2" d="M62.2,531.2l-4.2,3.3h-3.3v5H58l4.2,3.3V531.2z"/>
-					<path className="st2" d="M68.9,531.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M65.9,534c0.8,0.8,1.2,1.8,1.2,2.9
-						c0,1.1-0.4,2.2-1.2,2.9"/>
-					</g>
-					<rect onClick={() => playAudio(`p${i+3}`)} x="42" y="520" className="st3" width="286" height="34"/>
-					<g className={`p${i+4}`}>
-					<path className="st2" d="M62.2,565.2l-4.2,3.3h-3.3v5H58l4.2,3.3V565.2z"/>
-					<path className="st2" d="M68.9,565.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M65.9,568c0.8,0.8,1.2,1.8,1.2,2.9
-						c0,1.1-0.4,2.2-1.2,2.9"/>
-					</g>
-					<rect onClick={() => playAudio(`p${i+4}`)} x="42" y="554" className="st3" width="286" height="34"/>
-					<g className={`p${i+5}`}>
-					<path className="st2" d="M62.2,599.2l-4.2,3.3h-3.3v5H58l4.2,3.3V599.2z"/>
-					<path className="st2" d="M68.9,599.1c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M65.9,602c0.8,0.8,1.2,1.8,1.2,2.9
-						c0,1.1-0.4,2.2-1.2,2.9"/>
-					</g>
-					<rect onClick={() => playAudio(`p${i+5}`)} x="42" y="588" className="st3" width="286" height="34"/>
-					<path className="st5" d="M58.8,643.2l8.3-8.3"/>
-					<path className="st5" d="M58.8,634.8h8.3v8.3"/>
-					<path className="st3" d="M42,622h286v19c0,8.3-6.7,15-15,15H57c-8.3,0-15-6.7-15-15V622z"/>
 					<rect x="19" y="101" className="st6" width="36" height="36"/>
 					<path className="st5" d="M31.2,127.2v-16.3"/>
 					<path className="st5" d="M44,127.2L33.5,119l10.5-8.2V127.2z"/>
@@ -2800,16 +2767,6 @@ export default function music({ node , music , i , range }){
 								c-1.4,0-2.1,0.8-2.1,2.1v0.7H20.5z"/>
 						</g>
 					</g>
-					<text onClick={() => playAudio(`p${i+1}`)} transform="matrix(1 0 0 1 80.9417 474.5301)" className="st13 st14 st15">{node.music.artistFirst}</text>
-					<text onClick={() => playAudio(`p${i+2}`)} transform="matrix(1 0 0 1 80.9417 508.5572)" className="st13 st14 st15">{node.music.artistSecond}</text>
-					<text onClick={() => playAudio(`p${i+3}`)} transform="matrix(1 0 0 1 80.9417 542.6137)" className="st13 st14 st15">{node.music.artistThird}</text>
-					<text onClick={() => playAudio(`p${i+4}`)} transform="matrix(1 0 0 1 80.9417 576.6703)" className="st13 st14 st15">{node.music.artistFourth}</text>
-					<text onClick={() => playAudio(`p${i+5}`)} transform="matrix(1 0 0 1 80.9417 610.5453)" className="st13 st14 st15">{node.music.artistFifth}</text>
-					<g>
-					<a href={node?.music?.playlistUrl} rel="noopener" target='_blank'>
-					<text transform="matrix(1 0 0 1 80.9417 644.5615)" className="st13 st14 st15">Go to Playlist</text>
-					</a>
-					</g>	
 				</g>
 			</g>
 			<defs>
@@ -2845,6 +2802,95 @@ export default function music({ node , music , i , range }){
 			</pattern>
 				<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
 			</defs>
+			<g>
+	<text onClick={() => playAudio(`p${i+1}`)} transform="matrix(1 0 0 1 41.0448 433.0999)" class="st20 st21 st22">FAVOURITE ARTISTS</text>
+	<g onClick={() => playAudio(`p${i+5}`)}>
+		<polyline class="st55" points="288,622 41.5,622 41.5,588 288,588 		"/>
+		<g>
+			<rect x="41.6" y="588" class="st55" width="34" height="34"/>
+			<g className={`p${i+5}`}>
+				<path class="st48" d="M57.7,599.2l-4.2,3.3h-3.3v5h3.3l4.2,3.3V599.2z"/>
+				<path class="st48" d="M64.4,599.1c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,602c0.8,0.8,1.2,1.8,1.2,2.9
+					c0,1.1-0.4,2.2-1.2,2.9"/>
+			</g>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 86.9078 610.5005)" class="st13 st14 st15">{node.music.artistFifth}</text>
+		</g>
+	</g>
+	<a href={node?.music?.playlistUrl} target='_blank' rel='nooppener'>
+
+		<g>
+			<polyline class="st55" points="288,656 41.5,656 41.5,622 		"/>
+			<g>
+				<rect x="41.6" y="622" class="st41" width="34" height="34"/>
+				<g>
+					<path class="st42" d="M54.4,635.1h8.3v8.3"/>
+					<path class="st42" d="M54.4,643.4l8.3-8.3"/>
+				</g>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 86.9075 644.7462)" class="st13 st14 st15">Go to ICD Jukebox</text>
+			</g>
+		</g>
+	</a>
+	<g onClick={() => playAudio(`p${i+4}`)}>
+		<polyline class="st55" points="288,588 41.5,588 41.5,554 288,554 		"/>
+		<g>
+			<rect x="41.6" y="554" class="st55" width="34" height="34"/>
+			<g className={`p${i+4}`}>
+				<path class="st48" d="M57.7,565.7l-4.2,3.3h-3.3v5h3.3l4.2,3.3V565.7z"/>
+				<path class="st48" d="M64.4,565.6c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,568.5c0.8,0.8,1.2,1.8,1.2,2.9
+					c0,1.1-0.4,2.2-1.2,2.9"/>
+			</g>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 86.9078 576.9842)" class="st13 st14 st15">{node.music.artistFourth}</text>
+		</g>
+	</g>
+	<g onClick={() => playAudio(`p${i+3}`)}>
+		<rect x="41.6" y="520" class="st55" width="34" height="34"/>
+		<polyline class="st55" points="288,554 41.5,554 41.5,520 288,520 		"/>
+		<g className={`p${i+3}`}>
+			<path class="st48" d="M57.7,532l-4.2,3.3h-3.3v5h3.3l4.2,3.3V532z"/>
+			<path class="st48" d="M64.4,532c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,534.9c0.8,0.8,1.2,1.8,1.2,2.9
+				c0,1.1-0.4,2.2-1.2,2.9"/>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 86.9078 543.3622)" class="st13 st14 st15">{node.music.artistThird}</text>
+		</g>
+	</g>
+	<g onClick={() => playAudio(`p${i+2}`)}>
+		<polyline class="st55" points="288,520 41.5,520 41.5,486 288,486 		"/>
+		<g>
+			<rect x="41.6" y="486" class="st55" width="34" height="34"/>
+			<g className={`p${i+2}`}>
+				<path class="st48" d="M57.7,497l-4.2,3.3h-3.3v5h3.3l4.2,3.3V497z"/>
+				<path class="st48" d="M64.4,496.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,499.9c0.8,0.8,1.2,1.8,1.2,2.9
+					s-0.4,2.2-1.2,2.9"/>
+			</g>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 86.9078 508.3395)" class="st13 st14 st15">{node.music.artistSecond}</text>
+		</g>
+	</g>
+	<g onClick={() => playAudio(`p${i+1}`)}>
+		<polyline class="st55" points="288,486 41.5,486 41.5,452 288,452 		"/>
+		<g>
+			<rect x="41.6" y="452" class="st55" width="34" height="34"/>
+			<g>
+				<g className={`p${i+1}`}>
+					<path class="st48" d="M57.7,463.3l-4.2,3.3h-3.3v5h3.3l4.2,3.3V463.3z"/>
+					<path class="st48" d="M64.4,463.2c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,466.1c0.8,0.8,1.2,1.8,1.2,2.9
+						s-0.4,2.2-1.2,2.9"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<text transform="matrix(1 0 0 1 86.9078 474.5901)" class="st13 st14 st15">{node.music.artistFirst}</text>
+		</g>
+	</g>
+</g>
 			</svg>
 			<div className="audio">
 				<audio onEnded={endFunction} preload="none" id={`p${i+1}`}
