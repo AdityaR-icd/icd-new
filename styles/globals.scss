@@ -1643,9 +1643,9 @@ width: 22%;
             background-color: transparent;
             box-shadow: transparent;
               @include for-upto-tablet-portrait{
-                width: 20px;
-                height: 30px;
-                top: -12px;
+                width: 5.556vw;
+                height: 8.333vw;
+                top: -3.333vw;
                 left: 0;
                 background-size: cover;
                 // background: transparent; 
@@ -1797,6 +1797,7 @@ rect{
     font-size: 11px;
     fill: #A0A0A0;
     font-family: 'Inter', sans-serif;
+    font-weight: 700;
 
     &.yellow{
       fill: #FFCA05;
