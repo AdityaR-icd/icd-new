@@ -2,6 +2,7 @@
     body {
         margin: 0;
         padding: 0;
+        overflow-x: hidden;
     }
 
     table,
@@ -298,3 +299,12 @@
             }
         }
     }
+
+    figure{
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+
