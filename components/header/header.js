@@ -7,7 +7,7 @@ import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $, { parseJSON } from 'jquery';
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { getFilters } from '../../lib/api'
+// import { getFilters } from '../../lib/api'
 import Script from 'next/script'
 import dynamic from "next/dynamic";
 const Search = dynamic(() => import("../search/search"));
@@ -18,8 +18,8 @@ const Search = dynamic(() => import("../search/search"));
 
 const Header = (props) => {
 
-    var suggestionData
-
+    // var suggestionData
+   var filters = props.filters;
 
     var clients = []
     var industries = []
@@ -27,19 +27,19 @@ const Header = (props) => {
     var categories = []
     var tags = []
     var keywords = []
-    const [data, setData] = useState(null)
-    const [filters, setFilters] = useState(null)
+    // const [data, setData] = useState(null)
+    // const [filters, setFilters] = useState(null)
     // const [isLoading, setLoading] = useState(false)
 
-    useEffect(() => {
-        // console.log(data)
-        async function fetchMyAPI() {
-            let response = await getFilters()
-            setFilters(response)
-        }
-        fetchMyAPI()
+    // useEffect(() => {
+    //     // console.log(data)
+    //     async function fetchMyAPI() {
+    //         let response = await getFilters()
+    //         setFilters(response)
+    //     }
+    //     fetchMyAPI()
 
-      }, [])
+    //   }, [])
     //   console.log(filters)
 
 

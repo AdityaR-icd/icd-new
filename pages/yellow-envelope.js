@@ -12,7 +12,6 @@ import Link from 'next/link'
 
 export default function Index({ newsletters: { edges } , meta:{pages}  }) {
   const meta_data = pages.edges[0].node
-  // console.log(filters);
  return (
     <>
       <Layout meta={meta_data} edges={edges} />
@@ -25,15 +24,14 @@ export async function getServerSideProps({ preview = false }) {
   // const menus = await getMenus()
   const data = await getFooter()
   const meta = await getYellowEnvelope()
-  // const filters = await getFilters()
+  const filters = await getFilters()
   return {
     props: { 
         newsletters,
         preview,
-        // menus,
         data,
-        meta
-        // filters
+        meta,
+        filters
     },
     // revalidate: 86400, 
   }

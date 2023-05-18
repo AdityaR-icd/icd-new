@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getAllProjectsWithSlug, getProject, getFooter, getAllProjectsNotIn } from '../../lib/api'
+import { getAllProjectsWithSlug, getProject, getFooter, getAllProjectsNotIn, getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -551,10 +551,12 @@ const shimmer = (w, h) => `
 export async function getStaticProps({ params }) {
   const gProject = await getProject(params.slug)
   const data = await getFooter()
+  const filters = await getFilters()
   return {
     props: {
       project: gProject.project,
-      data
+      data,
+      filters
     },
     revalidate: 2,
   }

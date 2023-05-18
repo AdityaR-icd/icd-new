@@ -2,7 +2,7 @@ import parse from 'html-react-parser';
 import $ from 'jquery';
 import { useEffect } from 'react'
 import { useState } from 'react';
-import { getAllPostsForHome, getFooter, getPostAndMorePosts , getTeam } from '../../lib/api'
+import { getAllPostsForHome, getFooter, getPostAndMorePosts , getTeam, getFilters } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from 'next/link'
@@ -374,14 +374,15 @@ export async function getStaticProps({ preview = false, params, previewData }) {
   // const menus = await getMenus()
   const data = await getFooter()
   const teamData = await getTeam()
-  // const filters = await getFilters()
+  const filters = await getFilters()
   return {
     props: {
       post: Moredata.post,
       posts: Moredata.posts,
       preview,
       teamData,
-      data
+      data,
+      filters
     },
     revalidate: 2,
   }

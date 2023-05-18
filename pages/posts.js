@@ -1,4 +1,4 @@
-import { getAllPosts, getPostCategories, getPostPage, getFooter } from '../lib/api'
+import { getAllPosts, getPostCategories, getPostPage, getFooter, getFilters } from '../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/posts/posts"));
 
@@ -20,15 +20,15 @@ export async function getStaticProps() {
   const data = await getFooter()
   const meta = await getPostPage()
   const categories = await getPostCategories()
-  // const filters = await getFilters()
+  const filters = await getFilters()
   return {
     props: {
       posts,
       // menus,
       data,
       meta,
-      categories
-      // filters
+      categories,
+      filters
 
     },
     revalidate: 180,

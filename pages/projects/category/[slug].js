@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsTypes , getProjectByTypes , getFooter  } from '../../../lib/api'
+import { getAllProjectsTypes , getProjectByTypes , getFooter , getFilters } from '../../../lib/api'
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
 import ogimage from '../../../assets/images/seo/og-default.png'
@@ -120,13 +120,13 @@ export default function Projects({ project }) {
     const gProject = await getProjectByTypes(params.slug)
     // const menus = await getMenus()
     const data = await getFooter()
-    // const filters = await getFilters()
+    const filters = await getFilters()
     return {
       props: { 
         project: gProject.projectTypes,
         // menus,
         data,
-        // filters
+        filters
       },
       revalidate: 180, 
     }
