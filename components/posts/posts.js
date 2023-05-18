@@ -11,7 +11,6 @@ import $ from 'jquery';
 
 import style from './posts.module.scss'
 import categoryStyle from '../project/category.module.scss'
-import search from '../../pages/search';
 
 
 export default function posts({ meta, categories, edges }) {

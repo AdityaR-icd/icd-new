@@ -1,5 +1,5 @@
 import parse from 'html-react-parser';
-import { getArticle  , getFooter  } from '../../lib/api'
+import { getArticle  , getFooter , getAllNewsletterWithSlug } from '../../lib/api'
 import { useRouter } from 'next/router'
 import Seo from '../../components/seo';
 import Head from 'next/head';
@@ -116,7 +116,9 @@ export default function newsletterss({ newsletter }) {
                         </div>
                       </div>
                     {(newsletter.yellowEnvelope?.newsletterArticles)?.map( data  => ( 
+                      console.log(data),
                         data_url = data?.linkTo,
+                        console.log(data_url),
                       <>
 
                         {data_url &&  (
@@ -137,12 +139,12 @@ export default function newsletterss({ newsletter }) {
                                   <div style={{ borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 5, paddingBottom: 5, paddingRight: 0, paddingLeft: 0 }}>
                                     <div className="article-meta" style={{ color: '#828282', fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', lineHeight: '1.2', paddingTop: 25, paddingRight: 20, paddingBottom: 5, paddingLeft: 20 }}>
                                       <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', fontSize: 12, lineHeight: '1.2', color: '#828282', msoLineHeightAlt: 14 }}>
-                                        <p style={{ fontSize: 12, lineHeight: '1.2', msoLineHeightAlt: 17 + 'px', margin: 0, letterSpacing: 2 }}>{data.seo?.title}</p>
+                                        <p clasName="article-mainheading" style={{ fontSize: 12, lineHeight: '1.2', msoLineHeightAlt: 17 + 'px', margin: 0, letterSpacing: 2 , margin: 0}}>{parse(data.excerpt)}</p>
                                       </div>
                                     </div>
                                     <div className="article-headline" style={{ color: '#171717', fontFamily: 'Merriweather,Times,Times New Roman,serif', lineHeight: '1.2', paddingTop: 0, paddingRight: 20, paddingBottom: 15, paddingLeft: 20 }}>
                                       <div style={{ fontFamily: 'Merriweather,Times,Times New Roman,serif', fontSize: 12, lineHeight: '1.2', color: '#171717', msoLineHeightAlt: 14 + 'px' }}>
-                                        <p style={{ fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: 0 }}>
+                                        <p className='newsarticle-heading' style={{ fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: '0px !importatnt' }}>
                                           <span style={{ fontSize: 28, letterSpacing: 0 }}>
                                             <a style={{fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: 0, letterSpacing: 0, textDecoration: 'none !important', color: '#171717'}} target="_blank" href={url}>{data.title}</a>
                                           </span>
@@ -161,11 +163,8 @@ export default function newsletterss({ newsletter }) {
                                 <div className="col num12" style={{ minWidth: 320, maxWidth: 600, display: 'table-cell', verticalAlign: 'top', width: 600 }}>
                                   <div style={{ width: '100% !important' }}>
                                     <div className="article-content" style={{ borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 0, paddingBottom: 25, paddingRight: 20, paddingLeft: 20 }}>
-                                      <div align="center" className="img-container center autowidth fullwidth" style={{ paddingRight: 0, paddingLeft: 0 }}>
-                                        <a style={{color: '#171717', fontStyle: 'italic'}} target="_blank" href={url} ><img priority alt='icd-icon' decoding="async" align="center" border={0} className="center autowidth fullwidth" src={data.featuredImage?.node.sourceUrl} style={{textDecoration: 'none', msInterpolationMode: 'bicubic', border: 0, height: 'auto', width: '100%', maxWidth: 560, display: 'block'}} title="Image" width={560} /></a>
-                                      </div>
                                       <div style={{ fontFamily: 'Merriweather,Times,Times New Roman,serif', fontSize: 16, lineHeight: 25 + 'px', color: '#171717 !important' }}>
-                                        <div>
+                                        <div class="mian-article-content">
                                             {parse(data?.content)}
                                         </div>
                                       </div>
@@ -276,7 +275,7 @@ export default function newsletterss({ newsletter }) {
     )
   }
   
-  export async function getServerSideProps({ params }) {
+  export async function getStaticProps({ params }) {
     const article = await getArticle(params.slug)
     // const menus = await getMenus()
     const data = await getFooter()
@@ -288,15 +287,15 @@ export default function newsletterss({ newsletter }) {
         data,
         // filters
       },
-      // revalidate: 180, 
+      revalidate: 2, 
     }
   }
 
-  // export async function getStaticPaths() {
-  //   const allnewsletters = await getAllNewsletterWithSlug()
-  //   return {
-  //     paths: allnewsletters.edges.map(({ node }) => `/yellow-envelope/${node.slug}`) || [],
-  //     fallback: true,
-  //   }
+  export async function getStaticPaths() {
+    const allnewsletters = await getAllNewsletterWithSlug()
+    return {
+      paths: allnewsletters.edges.map(({ node }) => `/yellow-envelope/${node.slug}`) || [],
+      fallback: true,
+    }
     
-  // }
+  }
