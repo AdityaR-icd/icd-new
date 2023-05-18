@@ -138,7 +138,7 @@ export default function newsletterss({ newsletter }) {
                                   <div style={{ borderTop: '0px solid transparent', borderLeft: '0px solid transparent', borderBottom: '0px solid transparent', borderRight: '0px solid transparent', paddingTop: 5, paddingBottom: 5, paddingRight: 0, paddingLeft: 0 }}>
                                     <div className="article-meta" style={{ color: '#828282', fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', lineHeight: '1.2', paddingTop: 25, paddingRight: 20, paddingBottom: 5, paddingLeft: 20 }}>
                                       <div style={{ fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif', fontSize: 12, lineHeight: '1.2', color: '#828282', msoLineHeightAlt: 14 }}>
-                                        <p clasName="article-mainheading" style={{ fontSize: 12, lineHeight: '1.2', msoLineHeightAlt: 17 + 'px', margin: 0, letterSpacing: 2 , margin: 0}}>{parse(data.excerpt)}</p>
+                                        <p className="article-mainheading" style={{ fontSize: 12, lineHeight: '1.2', msoLineHeightAlt: 17 + 'px', margin: 0, letterSpacing: 2 , margin: 0}}>{parse(data.excerpt)}</p>
                                       </div>
                                     </div>
                                     <div className="article-headline" style={{ color: '#171717', fontFamily: 'Merriweather,Times,Times New Roman,serif', lineHeight: '1.2', paddingTop: 0, paddingRight: 20, paddingBottom: 15, paddingLeft: 20 }}>
