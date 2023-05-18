@@ -117,7 +117,7 @@ export default function newsletterss({ newsletter }) {
                       </div>
                     {(newsletter.yellowEnvelope?.newsletterArticles)?.map( data  => ( 
                         data_url = data?.linkTo,
-                        console.log(data_url),
+                        // console.log(data_url),
                       <>
 
                         {data_url &&  (
