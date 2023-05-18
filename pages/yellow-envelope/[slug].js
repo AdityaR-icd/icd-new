@@ -116,7 +116,6 @@ export default function newsletterss({ newsletter }) {
                         </div>
                       </div>
                     {(newsletter.yellowEnvelope?.newsletterArticles)?.map( data  => ( 
-                      console.log(data),
                         data_url = data?.linkTo,
                         console.log(data_url),
                       <>
@@ -145,8 +144,8 @@ export default function newsletterss({ newsletter }) {
                                     <div className="article-headline" style={{ color: '#171717', fontFamily: 'Merriweather,Times,Times New Roman,serif', lineHeight: '1.2', paddingTop: 0, paddingRight: 20, paddingBottom: 15, paddingLeft: 20 }}>
                                       <div style={{ fontFamily: 'Merriweather,Times,Times New Roman,serif', fontSize: 12, lineHeight: '1.2', color: '#171717', msoLineHeightAlt: 14 + 'px' }}>
                                         <p className='newsarticle-heading' style={{ fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: '0px !importatnt' }}>
-                                          <span style={{ fontSize: 28, letterSpacing: 0 }}>
-                                            <a style={{fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: 0, letterSpacing: 0, textDecoration: 'none !important', color: '#171717'}} target="_blank" href={url}>{data.title}</a>
+                                          <span style={{fontSize: 28, lineHeight: '1.2', msoLineHeightAlt: 34, margin: 0, letterSpacing: 0, textDecoration: 'none !important', color: '#171717'}}>
+                                            {data.title}
                                           </span>
                                         </p>
                                       </div>

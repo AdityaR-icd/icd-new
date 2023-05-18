@@ -58,6 +58,7 @@
             line-height: 1.2 !important;
             color: #828282 !important;
             font-weight: normal !important;
+            margin: 0 !important;
         }
         .article-content p{
             font-family: Merriweather, Times, 'Times New Roman', serif !important;
@@ -278,21 +279,21 @@
 
     }
 
-        .article-mainheadin{
+    .article-mainheading{
+        margin: 0 !important;
+        p{
             margin: 0 !important;
-            p{
-                margin: 0 !important;
-            }   
-        }
+        }   
+    }
 
-        .newsarticle-heading{
-            margin: 0 !important;
-        }
+    .newsarticle-heading{
+        margin: 0 !important;
+    }
 
-        .mian-article-content{
-            .wp-block-image{
-                &:first-of-type{
-                    margin-top: 0 !important;
-                }
+    .mian-article-content{
+        .wp-block-image{
+            &:first-of-type{
+                margin-top: 0 !important;
             }
         }
+    }
