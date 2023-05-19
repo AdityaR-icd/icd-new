@@ -128,7 +128,7 @@ export default function Projects({ project }) {
         data,
         filters
       },
-      revalidate: 180, 
+      revalidate: 3600, 
     }
   }
   export async function getStaticPaths() {

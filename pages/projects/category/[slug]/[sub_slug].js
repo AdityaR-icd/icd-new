@@ -153,7 +153,7 @@ export async function getStaticProps({ params }) {
       subTypeProjects,
       filters
     },
-    revalidate: 180,
+    revalidate: 3600,
   }
 }
 

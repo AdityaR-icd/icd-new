@@ -384,7 +384,7 @@ export async function getStaticProps({ preview = false, params, previewData }) {
       data,
       filters
     },
-    revalidate: 2,
+    revalidate: 3600,
   }
 }
 
