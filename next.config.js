@@ -69,6 +69,14 @@ module.exports = withPWA({
         ],
       },
       {
+        source: '/pages/(.*)',
+        headers: [
+          { key: "Access-Control-Allow-Credentials", "value": "true" },
+          { key: "Access-Control-Allow-Origin", "value": "*" },
+          { key: "Access-Control-Allow-Headers", "value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
+        ]
+      },
+      {
         // This works, and returns appropriate Response headers:
         source: '/(.*).jpg',
         headers: [
