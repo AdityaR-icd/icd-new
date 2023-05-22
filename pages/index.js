@@ -1,23 +1,23 @@
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/home/home"));
-import { getFooter  , getHome , getFilters  } from '../lib/api'
+import { getFooter  , getHome , getFilters , getLatestProject  } from '../lib/api'
 
-export default function Home({data , project , home}) {
+export default function Home({data , project , home , latestProject }) {
     return(
-       <Layout data={data} themes={data} project={project} home={home} />
+       <Layout data={data} themes={data} project={project} home={home} latest={latestProject} />
     )
 }
 
 export async function getStaticProps() {
     const data = await getFooter()
     const home = await getHome()
-    // const menus = await getMenus()
     const filters = await getFilters()
+    const latestProject = await getLatestProject()
     return {
         props: { 
         data,
         home,
-        // menus,
+        latestProject,
         filters
         },
         revalidate: 60, 

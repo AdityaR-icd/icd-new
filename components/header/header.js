@@ -44,7 +44,7 @@ const Header = (props) => {
 
 
     
-    const searchToggle = async() => {
+    const searchToggle = () => {
         $('body').toggleClass('showSearch');
         if ($('body').hasClass('showSearch')) {
             $('.searchInput').focus();

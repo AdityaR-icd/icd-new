@@ -6,7 +6,7 @@ const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 import category from './category.module.scss'
 import Link from 'next/link';
-export default function Index({ AllProjects: { edges }, meta }) {
+export default function Index({ AllProjects: { edges }, meta , latest }) {
   const router = useRouter()
   const backButton = () => {
     window.history.back();
@@ -59,7 +59,7 @@ export default function Index({ AllProjects: { edges }, meta }) {
           </div>
         </section>
         <>
-          <All edges={edges} />
+          <All edges={edges} latestProject={latest} />
         </>
       </></>
   )

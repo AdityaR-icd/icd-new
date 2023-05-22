@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { getAllProjectsTypes , getProjectByTypes , getFooter , getFilters } from '../../../lib/api'
+import { getAllProjectsTypes , getProjectByTypes , getFooter , getFilters , getLatestProject } from '../../../lib/api'
 import { useRouter } from 'next/router'
 import style from '../../../components/project/category.module.scss'
 import ogimage from '../../../assets/images/seo/og-default.png'
@@ -15,7 +15,7 @@ const All = dynamic(() => import("../../../components/project-categories/all/all
 
 
 
-export default function Projects({ project }) {
+export default function Projects({ project , latestProject }) {
     const router = useRouter()
     var pageData = project?.edges[0].node
     var projectSubTypes = pageData?.children?.edges
@@ -26,7 +26,7 @@ export default function Projects({ project }) {
     const [subTypeSlug, setsubTypeSlug] = useState(router.query.slug)
     
 
-
+    
     const allProjects  = () => {
       setallProject(true)
     }
@@ -108,7 +108,7 @@ export default function Projects({ project }) {
         {allProject  && (
           <>
             <Intro description={pageData.description} />
-            <All edges={projects} />
+            <All edges={projects} latestProject={latestProject} />
           </>
         )}        
         
@@ -118,7 +118,7 @@ export default function Projects({ project }) {
   
   export async function getStaticProps({ params }) {
     const gProject = await getProjectByTypes(params.slug)
-    // const menus = await getMenus()
+    const latestProject = await getLatestProject()
     const data = await getFooter()
     const filters = await getFilters()
     return {
@@ -126,7 +126,8 @@ export default function Projects({ project }) {
         project: gProject.projectTypes,
         // menus,
         data,
-        filters
+        filters,
+        latestProject
       },
       revalidate: 3600, 
     }

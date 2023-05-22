@@ -9,7 +9,7 @@ const Snowflakes = require('magic-snowflakes');
 import { useEffect, useState } from 'react'
 
 
-export default function Index({ home: { pages }, themes }) {
+export default function Index({ home: { pages }, themes , latest }) {
 
   // console.log(pages)
 
@@ -67,7 +67,7 @@ export default function Index({ home: { pages }, themes }) {
         {/* end of Twitter Cards */}
       </Head>
       <Crousel content={data?.content} />
-      <ProjectLead edges={featuredata} />
+      <ProjectLead edges={featuredata} latestProject={latest} />
       {data?.homePage?.featuredCards && <Cards data={data} />}
     </>
   )

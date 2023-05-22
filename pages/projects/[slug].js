@@ -231,7 +231,7 @@ const shimmer = (w, h) => `
       className={` ${carousel.project_lead} d-none d-md-block `}
       src={leadImgSrc || 'https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg'}
       alt="project-lead"
-      filayout="fill" ll
+      layout="fill"
       sizes="100vw" />
   }
 
@@ -260,7 +260,7 @@ const shimmer = (w, h) => `
     <span className="icon share-icon icons-hide"><a href={twitterUrl} rel="noopener" aria-label="icd" className="twitter-icon" target="_blank"></a></span>
     <span className="icon share-icon icons-hide"><a href={fbUrl} rel="noopener" aria-label="icd" className="fb-icon" target="_blank"></a></span>
     <span className="icon" onClick={toggleShareIcons}><img loading='lazy' alt='icd' decoding="async" src={Share.src} width="20" height="20" className="icon-img shareIcon--main" />share</span>
-    <Like count={project?.likes?.likes} id={project.id} type={'project'} />
+    <Like count={project?.likes?.likes} id={project?.id} type={'project'} />
   </div>;
 
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (

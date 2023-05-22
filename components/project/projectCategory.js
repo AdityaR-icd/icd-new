@@ -7,7 +7,8 @@ import Link from 'next/link';
 
 import project from './projects.module.scss'
 import category from './category.module.scss'
-export default function projectCategory({ meta, projectsTypes: { nodes } }) {
+export default function projectCategory({ meta, projectsTypes: { nodes } , latest }) {
+
   const backButton = () => {
     window.history.back();
   }
@@ -61,7 +62,7 @@ export default function projectCategory({ meta, projectsTypes: { nodes } }) {
           </div>
         </section>
 
-        <Type nodes={nodes} />
+        <Type nodes={nodes} latestProject={latest} />
       </>
 
     </>

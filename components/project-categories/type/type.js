@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { getLatestProject } from '../../../lib/api'
 
 
-export default function projectTypes({ nodes }) {
+export default function projectTypes({ nodes , latestProject }) {
     var data = ''
     var slug = ''
     var title = ''
@@ -16,25 +16,18 @@ export default function projectTypes({ nodes }) {
     var client = ''
     var clientsName = ''
     var heading = ''
+    var common
 
     const [isLoading, setIsLoading] = useState(true);
-    const [projects, setProjects] = useState('')
-    useEffect(() => {
+    const [projects, setProjects] = useState(latestProject)
 
-        async function fetchMyAPI() {
-            const latestProject = await getLatestProject()
-            setProjects(latestProject)
-        }
 
-        fetchMyAPI()
-
-    }, []);
 
     var tag = 'false'
     var id = []
     var project_id = []
 
-    if (projects.edges) {
+    if (projects?.edges) {
         projects.edges.map(({ node }) => {
             id.push(node.id)
         })
@@ -45,16 +38,19 @@ export default function projectTypes({ nodes }) {
             })
         })
     }
+    function intersection(first, second){
+        var s = new Set(second);
+        return first.filter(item => s.has(item));
+    };
+
+    common = intersection(project_id , id)
+
 
     for (var i = 0; i < id.length; i++) {
         if (id[i] === project_id[i]) {
             tag = 'true'
         }
     }
-
-    // setTimeout(() => {
-    //     setIsLoading(false);
-    // }, 10000);
 
     const toBase64 = (str) =>
         typeof window === 'undefined'

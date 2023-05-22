@@ -6,9 +6,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { useState , useEffect } from 'react';
-import { getLatestProject } from '../../lib/api'
 
-export default function projectLead({ edges   }){
+export default function projectLead({ edges , latestProject }){
     let client = ""
     let project_video = ""
     let project_thumbnail = ""
@@ -18,26 +17,17 @@ export default function projectLead({ edges   }){
     let text = ""
     var common
     const projects = edges[0].node.projects.highlightedProjects
-    const [project, setProjects] = useState('')
-        useEffect(() => {
+    const [project, setProjects] = useState(latestProject)
 
-
-        async function fetchMyAPI() {
-            const latestProject = await getLatestProject()
-            setProjects(latestProject)
-        }
-
-        fetchMyAPI()
-
-    }, []);
 
     var id = []
     var project_id = []
-    if (project.edges) {
+    if (project?.edges) {
         project?.edges.map(({ node }) => {
             id.push(node?.id)
         })
     }
+
 
     projects.map(( node ) => {
         project_id.push(node?.id)
@@ -46,6 +36,7 @@ export default function projectLead({ edges   }){
         var s = new Set(second);
         return first.filter(item => s.has(item));
     };
+    
     common = intersection(project_id , id)
 
 

@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import Link from "next/link";
 import { getLatestProject } from '../../../lib/api'
 
-export default function allproject({ edges }) {
+export default function allproject({ edges , latestProject }) {
 
     var client = '';
     var leadImgSrc = '';
@@ -19,26 +19,14 @@ export default function allproject({ edges }) {
             ? Buffer.from(str).toString('base64')
             : window.btoa(str)
 
-    const [projects, setProjects] = useState('')
+    const [projects, setProjects] = useState(latestProject)
 
     var tag = 'false'
-
-    useEffect(() => {
-
-
-        async function fetchMyAPI() {
-            const latestProject = await getLatestProject()
-            setProjects(latestProject)
-        }
-
-        fetchMyAPI()
-
-    }, []);
 
     var id = []
     var project_id = []
 
-    if (projects.edges) {
+    if (projects?.edges) {
         projects?.edges.map(({ node }) => {
             id.push(node?.id)
         })
