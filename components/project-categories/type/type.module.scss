@@ -150,9 +150,20 @@
         @include for-upto-tablet-portrait {  // for scroll on mobile - project category
             width: 916px;
             white-space: nowrap;
+            height: 293px;
         }
         @include for-tablet-portrait-only {
             width: 1082px;
+            height: 330px;
+        }
+
+        @include for-tablet-horizontal{
+            height: 376px;
+        }
+
+        @include for-desktop-up{
+            height: 568px;
+            overflow: hidden;
         }
     }
     

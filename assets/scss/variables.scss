@@ -73,6 +73,10 @@ $overlaybg-color: rgba(31,31,31,0.5);
     @media (max-width: 1365px) { @content; }
 }
 
+@mixin for-tablet-horizontal {
+    @media (min-width: 992px) and (max-width: 1199px) { @content; }
+}
+
 @mixin for-low-end-laptop {
     @media (min-width: 1366px) and (max-width: 1439px) { @content; }
 }

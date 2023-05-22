@@ -5,8 +5,7 @@ import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
 // import Shimmer from "react-shimmer-effect";
 import { useState, useEffect } from "react";
-import { getLatestProject } from '../../../lib/api'
-
+import $ from 'jquery'
 
 export default function projectTypes({ nodes , latestProject }) {
     var data = ''
@@ -17,11 +16,15 @@ export default function projectTypes({ nodes , latestProject }) {
     var clientsName = ''
     var heading = ''
     var common
+    var Projecttype
 
     const [isLoading, setIsLoading] = useState(true);
     const [projects, setProjects] = useState(latestProject)
 
 
+    // if(typeof window != 'undefined'){
+
+    // }
 
     var tag = 'false'
     var id = []
@@ -45,6 +48,13 @@ export default function projectTypes({ nodes , latestProject }) {
 
     common = intersection(project_id , id)
 
+    // useEffect(() => {
+    //     $('.').addClass(new)
+    // }, []);
+
+    if(typeof window != 'undefined'){
+
+    }
 
     for (var i = 0; i < id.length; i++) {
         if (id[i] === project_id[i]) {
@@ -75,7 +85,7 @@ export default function projectTypes({ nodes , latestProject }) {
         <>
             {nodes.map(({ projects }, i, types) => (
 
-                <section className={`${type.industry__filter} ${type.projectType__filter}`} >
+                <section className={`${type.industry__filter}  ${type.projectType__filter}`} >
                     <div className={` container ${type.container}`}>
                         <div className="row">
                             <div className="col-12">
@@ -84,48 +94,51 @@ export default function projectTypes({ nodes , latestProject }) {
                             </div>
                         </div>
 
-                        <div className={type.project__scroll}>
-                            <div className={`row ${type.project__row}`}>
-                                {projects.edges.map(({ node }, i) => (
+                        <div className={type.project__scroll} >
+                            <div className={`row Projectrow ${type.project__row}`}>
+                                {projects.edges.map(({ node } , j) => (
                                     slug = node?.slug,
                                     title = node?.title,
                                     leadImgSrc = node?.featuredImage?.node.sourceUrl,
                                     client = node?.clients.edges,
                                     clientsName = client[0]?.node.name,
                                     heading = node?.projectComponent?.heading,
-
+                                    Projecttype = node?.projectTypes?.edges[0]?.node?.name,
+                        
                                     <>
-                                        <div className={`col-md-4 ${type.project__item}`}>
-                                            <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                                                <div className={carousel.thumbnail_cont}>
-                                                    <Link href={`/projects/${slug}`}>
-                                                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
-                                                            <div className={`${carousel.full_thumb} full-thumb`}>
-                                                                {leadImgSrc && (
-                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" fill sizes='100vw' />
-                                                                )}
-                                                            </div>
-                                                            <span className="thumbnail-gif"></span>
-                                                        </span>
-                                                        {node?.projectComponent?.awardsReceived !== null && (
-                                                            <span className={`${carousel.project__tag} project__tag`}>winner</span>
-                                                        )}
+                                        { types[i]?.name == Projecttype &&
+                                            <div className={`col-md-4 ${type.project__item}`}>
+                                                <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
+                                                    <div className={carousel.thumbnail_cont}>
+                                                        <Link href={`/projects/${slug}`}>
+                                                            <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
+                                                                <div className={`${carousel.full_thumb} full-thumb`}>
+                                                                    {leadImgSrc && (
+                                                                        <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" fill sizes='100vw' />
+                                                                    )}
+                                                                </div>
+                                                                <span className="thumbnail-gif"></span>
+                                                            </span>
+                                                            {node?.projectComponent?.awardsReceived !== null && (
+                                                                <span className={`${carousel.project__tag} project__tag`}>winner</span>
+                                                            )}
 
-                                                        {node?.id === id[i] && (
-                                                            <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
-                                                        )}
+                                                            {node?.id === id[i] && (
+                                                                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                            )}
+                                                        </Link>
+                                                    </div>
+                                                    <Link href={`/projects/${slug}`}>
+                                                        <span className={carousel.projectTitle}>
+                                                            {heading}
+                                                            <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>
+                                                        </span>
                                                     </Link>
                                                 </div>
-                                                <Link href={`/projects/${slug}`}>
-                                                    <span className={carousel.projectTitle}>
-                                                        {heading}
-                                                        <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>
-                                                    </span>
-                                                </Link>
                                             </div>
-                                        </div>
+                                        }  
                                     </>
-                                )).slice(0, 3)}
+                                ))}
                             </div>
                         </div>
                     </div>
