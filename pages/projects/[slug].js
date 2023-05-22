@@ -446,7 +446,7 @@ const shimmer = (w, h) => `
                   }
                }) }</span></div>
             {projectLink && (
-              <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target={projectLink?.target}>{projectLink?.title}</a></span></div>
+              <div className={style.projectMeta__cont}><span className={style.category__title}>view</span><span className={style.category}><a href={projectLink?.url} rel="noopener" aria-label="icd" target='_blank'>{projectLink?.title}</a></span></div>
             )}
             {project?.projectComponent?.awardsReceived > '' && (
               <>

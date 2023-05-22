@@ -4,8 +4,9 @@ import intro from './intro.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'
 import Image from 'next/image'
-import { useMediaQuery } from 'react-responsive';
 
+import { useState , useEffect } from 'react';
+import { getLatestProject } from '../../lib/api'
 
 export default function projectLead({ edges   }){
     let client = ""
@@ -15,8 +16,37 @@ export default function projectLead({ edges   }){
     let i = 0
     let j = 0
     let text = ""
+    var common
     const projects = edges[0].node.projects.highlightedProjects
+    const [project, setProjects] = useState('')
+        useEffect(() => {
 
+
+        async function fetchMyAPI() {
+            const latestProject = await getLatestProject()
+            setProjects(latestProject)
+        }
+
+        fetchMyAPI()
+
+    }, []);
+
+    var id = []
+    var project_id = []
+    if (project.edges) {
+        project?.edges.map(({ node }) => {
+            id.push(node?.id)
+        })
+    }
+
+    projects.map(( node ) => {
+        project_id.push(node?.id)
+    })
+    function intersection(first, second){
+        var s = new Set(second);
+        return first.filter(item => s.has(item));
+    };
+    common = intersection(project_id , id)
 
 
             const toBase64 = (str) =>
@@ -39,7 +69,9 @@ export default function projectLead({ edges   }){
         </svg>`
     return(
         <>
-        {projects.map(({ highlightedImage , clients } , j ) => (
+        {projects.map(({ highlightedImage , clients } , j , i) => (
+           
+            // console.log(projects[j]?.id , '..................' , id[j]),
             // console.log(j),
             
             project_video = highlightedImage?.video?.mediaItemUrl,
@@ -83,47 +115,52 @@ export default function projectLead({ edges   }){
                                  
                                                 <div className={`${styles.project__section}`} >
                                                     <div className={styles.Tilt}>
-                                                    <div className="Tilt-inner">
+                                                        <div className="Tilt-inner">
 
 
-                                                    {project_video && (
-                                                        <>
-                                                            <div className={`${styles.project__leadimage}  d-none d-lg-block ${styles.video_container}`}>
-                                                                <video src={project_video} autoPlay playsInline loop muted></video>
-                                                            </div>
-                                                        </>
-                                                    )}
+                                                            {project_video && (
+                                                                <>
+                                                                    <div className={`${styles.project__leadimage}  d-none d-lg-block ${styles.video_container}`}>
+                                                                        <video src={`${project_video}#t=0.02`} autoPlay playsInline loop muted></video>
+                                                                    </div>
+                                                                </>
+                                                            )}
 
-                                                    {!project_video && (
-                                                        <>
-                                                            <div className={` d-none d-lg-block ${styles.project__leadimage}`}>
+                                                            {!project_video && (
+                                                                <>
+                                                                    <div className={` d-none d-lg-block ${styles.project__leadimage}`}>
+                                                                        <Image
+                                                                            priority={true}
+                                                                            placeholder="blur"
+                                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                                                                            src={project_thumbnail}
+                                                                            alt="project-lead"
+                                                                            layout="fill"
+                                                                            sizes="100vw" />
+                                                                    </div>
+                                                                </>
+                                                            )}
+
+
+                                                            <div className={` d-lg-none d-block ${styles.project__leadimage}`}>
                                                                 <Image
                                                                     priority={true}
                                                                     placeholder="blur"
                                                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-                                                                    src={project_thumbnail}
+                                                                    src={project_thumbnail_mobile}
                                                                     alt="project-lead"
                                                                     layout="fill"
                                                                     sizes="100vw" />
                                                             </div>
-                                                        </>
-                                                    )}
 
-
-                                                    <div className={` d-lg-none d-block ${styles.project__leadimage}`}>
-                                                        <Image
-                                                            priority={true}
-                                                            placeholder="blur"
-                                                            blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-                                                            src={project_thumbnail_mobile}
-                                                            alt="project-lead"
-                                                            layout="fill"
-                                                            sizes="100vw" />
-                                                    </div>
-
-                                                </div>
-                                                    </div>   
-                                                        
+                                                        </div>
+                                                        {projects[j]?.projectComponent?.awardsReceived && (
+                                                            <span className={`${styles.project__tag} project__tag`}>winner</span>
+                                                        )}
+                                                        {projects[j]?.id == common && (
+                                                            <span className={`${styles.project__tag} ${styles.new_tag} project__tag`}>new</span>
+                                                        )}
+                                                    </div>           
                                                 </div>
                                                 <div className={`${styles.project__name}`}>
                                                     <span>{projects[j].title}</span>
