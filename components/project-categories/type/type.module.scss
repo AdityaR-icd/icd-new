@@ -151,6 +151,7 @@
             width: 916px;
             white-space: nowrap;
             height: 293px;
+            overflow: hidden;
         }
         @include for-tablet-portrait-only {
             width: 1082px;
