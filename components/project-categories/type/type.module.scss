@@ -150,21 +150,33 @@
         @include for-upto-tablet-portrait {  // for scroll on mobile - project category
             width: 916px;
             white-space: nowrap;
-            height: 293px;
+            // height: 293px;
             overflow: hidden;
         }
         @include for-tablet-portrait-only {
             width: 1082px;
-            height: 330px;
+            // height: 330px;
         }
 
         @include for-tablet-horizontal{
-            height: 376px;
+            // height: 376px;
         }
 
         @include for-desktop-up{
-            height: 568px;
+            // height: 568px;
             overflow: hidden;
+        }
+
+        .project__item{
+            display: none;
+            pointer-events: none;
+            visibility: hidden;
+
+            &:first-child ,&:nth-child(2),&:nth-child(3){
+                display: block;
+                pointer-events: all;
+                visibility: visible;
+            }
         }
     }
     
