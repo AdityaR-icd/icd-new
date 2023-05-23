@@ -60,10 +60,7 @@ export default function projectLead({ edges , latestProject }){
         </svg>`
     return(
         <>
-        {projects.map(({ highlightedImage , clients } , j , i) => (
-           
-            // console.log(projects[j]?.id , '..................' , id[j]),
-            // console.log(j),
+        {projects.map(({ highlightedImage , clients } , j) => (
             
             project_video = highlightedImage?.video?.mediaItemUrl,
             project_thumbnail = highlightedImage?.highlightedThumbnail?.sourceUrl,
