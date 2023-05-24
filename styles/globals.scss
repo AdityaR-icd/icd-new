@@ -1930,4 +1930,29 @@ video::-webkit-media-controls-timeline  {
 
 video.clickTPlay{
   cursor: pointer;
+  position: relative;
+}
+
+ video::-webkit-media-controls-panel {
+  &:hover{
+    // background-image: linear-gradient(transparent, transparent) !important;
+  }
+}
+
+@include for-phone-only{
+  .wp-block-video{
+    &.vertical-video{
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+
+      video{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+      }
+    }
+  } 
 }

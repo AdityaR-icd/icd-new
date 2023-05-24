@@ -478,8 +478,8 @@ export default function search({ filters, data, filter }) {
                                                     </Link>
                                                 </div>
                                                 <Link href={`/projects/${node.slug}`}>
-                                                    <span className={carousel.projectTitle}>{node.projectComponent.heading}
-                                                        <span className={carousel.grey__color}>  / {node?.clients?.edges[0].node?.name}</span>
+                                                    <span className={carousel.projectTitle}>{node.projectComponent?.heading}
+                                                        <span className={carousel.grey__color}>  / {node?.clients?.edges[0]?.node?.name}</span>
                                                     </span>
                                                 </Link>
                                             </div>
