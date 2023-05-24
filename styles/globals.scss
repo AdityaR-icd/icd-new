@@ -1956,3 +1956,21 @@ video.clickTPlay{
     }
   } 
 }
+@include for-phone-only{
+  .wp-block-image {
+        &.vertical-video{
+      position: relative;
+      height: 75vh;
+      overflow: hidden;
+
+      img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+      }
+    }
+  } 
+}
+  
