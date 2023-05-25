@@ -1,5 +1,6 @@
 const path = require('path')
 const runtimeCaching = require("next-pwa/cache");
+const RemoveServiceWorkerPlugin = require('webpack-remove-serviceworker-plugin');
 const withPWA = require('next-pwa')({
   dest: "public",
   runtimeCaching,
@@ -20,6 +21,11 @@ module.exports = withPWA({
   env: {
     pass: process.env.pass,
     domain: process.env.domain
+  },
+
+  webpack: (config) => {
+    plugins: [new RemoveServiceWorkerPlugin()];
+    return config;
   },
 
   // reactStrictMode: true,

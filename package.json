@@ -40,7 +40,8 @@
     "sass": "^1.41.1",
     "setimmediate": "^1.0.5",
     "sharp": "^0.32.1",
-    "webpack": "^5.81.0"
+    "webpack": "^5.81.0",
+    "webpack-remove-serviceworker-plugin": "^1.0.0"
   },
   "devDependencies": {
     "@types/react": "18.0.28",
