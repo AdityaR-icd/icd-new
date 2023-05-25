@@ -46,20 +46,11 @@ module.exports = withPWA({
   reactStrictMode: true,
 
   images: {
-    domains: ['digital.icdindia.com'],
-    deviceSizes: [640, 750, 828, 1080, 1920],
+    domains: ['res.cloudinary.com' , 'digital.icdindia.com']
   },
 
   env: {
     REVALIDATION_TOKEN: 'randomsecrettoken'
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap',
-      },
-    ]
   },
   async headers() {
     return [
