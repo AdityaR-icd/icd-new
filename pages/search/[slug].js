@@ -1,6 +1,6 @@
 
-import { getFilters, getFooter, getFiltersBySlug } from '../../lib/api';
-import { useEffect } from 'react';
+import { getFilters, getFooter, getFiltersBySlug , getLatestProject } from '../../lib/api';
+import { useEffect , useState } from 'react';
 import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
 const Type = dynamic(() => import("../../components/project-categories/type/type"));
@@ -14,7 +14,7 @@ import { NextSeo } from 'next-seo';
 
 import Link from 'next/link';
 
-export default function search({ filters, data, filter }) {
+export default function search({ filters, data, filter , latestProject }) {
     const router = useRouter()
 
     useEffect(() => {
@@ -77,7 +77,7 @@ export default function search({ filters, data, filter }) {
                 //                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 //                             <div className={`${carousel.full_thumb} full-thumb`}>
                 //                                 {leadImgSrc && (
-                //                                     <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                //                                     <Image ={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                 //                                 )}
                 //                             </div>
                 //                             <span className="thumbnail-gif"></span>
@@ -419,7 +419,13 @@ export default function search({ filters, data, filter }) {
     } else {
         resultText = 'no results found'
     }
-
+    var id = []
+    const [project, setProjects] = useState(latestProject)
+    if (project?.edges) {
+        project.edges.map(({ node }) => {
+            id.push(node.id)
+        })
+    }
     return (
         <>
             <NextSeo
@@ -456,8 +462,12 @@ export default function search({ filters, data, filter }) {
                     </div>
                     <div className="row">
                         {
-                            uniqueProjects.map(( node ) => {
+                            uniqueProjects.map(( node , i ) => {
                                 var leadImgSrc = node?.featuredImage?.node?.sourceUrl
+                                if(node?.id === id[0] || node?.id === id[1] || node?.id === id[2]){
+                                    var newtag = <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                }else
+                                    newtag = ''
                                 return (
                                     <>
                                         <div className="col-md-4 project__item resultItem-cont" key={node.id}>
@@ -475,6 +485,8 @@ export default function search({ filters, data, filter }) {
                                                         {node?.projectComponent?.awardsReceived !== null && (
                                                             <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                                         )}
+                                                        {newtag}
+                           
                                                     </Link>
                                                 </div>
                                                 <Link href={`/projects/${node.slug}`}>
@@ -539,11 +551,13 @@ export async function getServerSideProps(params) {
     const filter = await getFiltersBySlug(params.query.slug)
     const data = await getFooter()
     const filters = await getFilters()
+    const latestProject = await getLatestProject()
     return {
         props: {
             filter,
             filters,
-            data
+            data,
+            latestProject
         },
     }
 }

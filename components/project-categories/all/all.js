@@ -80,7 +80,7 @@ export default function allproject({ edges , latestProject }) {
                                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                         <div className={`${carousel.full_thumb} full-thumb`}>
                                                             {leadImgSrc && (
-                                                                <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                                <Image loading="lazy" placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                             )}
                                                         </div>
                                                         <span className="thumbnail-gif"></span>
@@ -88,7 +88,13 @@ export default function allproject({ edges , latestProject }) {
                                                     {node?.projectComponent?.awardsReceived && (
                                                         <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                                     )}
-                                                    {node?.id == id[i] && (
+                                                    {node?.id === id[0] && (
+                                                        <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                    )}
+                                                    {node?.id === id[1] && (
+                                                        <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                    )}
+                                                    {node?.id === id[2] && (
                                                         <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                     )}
                                                 </Link>

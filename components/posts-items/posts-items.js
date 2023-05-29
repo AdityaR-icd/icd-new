@@ -68,31 +68,34 @@ export default function postItem({ data, ids }) {
 
     return (
         <div className="col-md-6 col-lg-6 grid-item">
-            <div className={`${style.postsItems} animateItems}`}>
-                <Link href={`/posts/${data.slug}`} legacyBehavior>
+            <div className={`${style.postsItems} animateItems`}>
+                <Link href={`/posts/${data.slug}`} legacyBehavior prefetch={false}>
+                <a>
                     <div className={style.postLeadImage}>
                         <div className="images-loaded-container">
                             {imageData}
                         </div>
                         <span className={style.postCategory}>{categories}</span>
                     </div>
-                </Link>
-                <Link href={`/posts/${data.slug}`}>
+                {/* </Link>
+                <Link href={`/posts/${data.slug}`} legacyBehavior> */}
                     <h2 className={style.postTitle}>{data.title}</h2>
                     <span className={style.postBy}>  {date} </span>
                     <div className={style.postInfo}> {parse(data.excerpt.substr(0,393))} </div>
                     <div className="d-none"><span>{categories}</span>{postsTags}</div>
+                {/* </Link> */}
+                    <div className="row">
+                        <div className="col-6">
+                            {/* <Link href={`/posts/${data.slug}`} legacyBehavior> */}
+                                <button>keep reading</button>
+                            {/* </Link> */}
+                        </div>
+                        <div className="col-6 text-right">
+                            <Like count={data?.likes?.likes} id={data.id} type={'post'} />
+                        </div>
+                    </div>
+                </a>
                 </Link>
-                <div className="row">
-                    <div className="col-6">
-                        <Link href={`/posts/${data.slug}`} legacyBehavior>
-                            <button>keep reading</button>
-                        </Link>
-                    </div>
-                    <div className="col-6 text-right">
-                        <Like count={data?.likes?.likes} id={data.id} type={'post'} />
-                    </div>
-                </div>
             </div>
         </div>
     );

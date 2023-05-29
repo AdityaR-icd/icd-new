@@ -109,8 +109,8 @@ export default function projectTypes({ nodes , latestProject }) {
                                         { types[i]?.name == Projecttype &&
                                             <div className={`col-md-4 ${type.project__item}`}>
                                                 <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
-                                                    <div className={carousel.thumbnail_cont}>
-                                                        <Link href={`/projects/${slug}`}>
+                                                    <Link prefetch={false} href={`/projects/${slug}`}>
+                                                        <div className={carousel.thumbnail_cont}>
                                                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                                 <div className={`${carousel.full_thumb} full-thumb`}>
                                                                     {leadImgSrc && (
@@ -123,12 +123,19 @@ export default function projectTypes({ nodes , latestProject }) {
                                                                 <span className={`${carousel.project__tag} project__tag`}>winner</span>
                                                             )}
 
-                                                            {node?.id === id[i] && (
+                                                            {node?.id === id[0] && (
                                                                 <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                             )}
-                                                        </Link>
-                                                    </div>
-                                                    <Link href={`/projects/${slug}`}>
+                                                            {node?.id === id[1] && (
+                                                                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                            )}
+                                                            {node?.id === id[2] && (
+                                                                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+                                                            )}
+                                                            
+                                                            {/* </Link> */}
+                                                        </div>
+                                                    {/* <Link href={`/projects/${slug}`}> */}
                                                         <span className={carousel.projectTitle}>
                                                             {heading}
                                                             <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>

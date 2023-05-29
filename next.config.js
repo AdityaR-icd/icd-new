@@ -1,6 +1,11 @@
 const path = require('path')
 const runtimeCaching = require("next-pwa/cache");
 const RemoveServiceWorkerPlugin = require('webpack-remove-serviceworker-plugin');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+
 const withPWA = require('next-pwa')({
   dest: "public",
   runtimeCaching,
@@ -10,8 +15,9 @@ const withPWA = require('next-pwa')({
 
 
 
-module.exports = withPWA({
+module.exports = withBundleAnalyzer({
 
+  
   
   i18n: {
     locales: ['en'],
@@ -44,7 +50,11 @@ module.exports = withPWA({
   },
   optimizeFonts: true,
   reactStrictMode: true,
-
+  // experimental: {
+  //     images: {
+  //         // unoptimized: true
+  //     }
+  // },
   images: {
     domains: ['res.cloudinary.com' , 'digital.icdindia.com']
   },

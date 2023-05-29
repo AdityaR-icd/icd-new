@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export"
+    "export": "next export",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.21.5",
+    "@next/bundle-analyzer": "^13.4.4",
     "@popperjs/core": "^2.10.2",
     "@vercel/analytics": "^1.0.1",
     "axios": "^0.21.4",
@@ -47,6 +49,7 @@
     "@types/react": "18.0.28",
     "eslint": "7.32.0",
     "eslint-config-next": "^13.1.6",
-    "next-pwa": "^5.4.1"
+    "next-pwa": "^5.4.1",
+    "webpack-bundle-analyzer": "^4.8.0"
   }
 }

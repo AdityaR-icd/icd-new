@@ -14,11 +14,9 @@ import Router from 'next/router';
 import $ from 'jquery';
 import Script from 'next/script';
 import dynamic from "next/dynamic";
-import Head from 'next/head'
 import { useState } from 'react';
 const Layout = dynamic(() => import("../components/layout/layout"));
 const Loader = dynamic(() => import("../components/loader/loader"));
-import { Analytics } from '@vercel/analytics/react';
 export default function MyApp({ Component, pageProps }) {
 
   const [loading , setLaoading] = useState(true);
@@ -52,6 +50,6 @@ export default function MyApp({ Component, pageProps }) {
       <Loader />
       {loading && <Layout>
           <Component {...pageProps} />
-      </Layout>} <Analytics /></>
+      </Layout>}</>
   )
 }

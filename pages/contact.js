@@ -20,6 +20,6 @@ export async function getStaticProps() {
       meta,
       filters
     },
-    revalidate: 86400,
+    // revalidate: 86400,
   }
 }

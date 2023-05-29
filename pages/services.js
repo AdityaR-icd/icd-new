@@ -30,6 +30,6 @@ export async function getStaticProps() {
             otherService,
             filters
         },
-        revalidate: 86400, 
+        // revalidate: 86400, 
     }
 }

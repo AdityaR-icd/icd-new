@@ -87,7 +87,7 @@ export default function Post({ post , teamData }) {
                           className={carousel.project_lead}
                           placeholder="blur"
                           priority="true"
-                           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                          blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                           src={leadImgSrc}
                           alt="project-lead"
                           layout="fill"

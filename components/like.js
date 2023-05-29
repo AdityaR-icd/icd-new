@@ -35,8 +35,8 @@ export default function Like(count) {
         <>
             <span className="like-btn icon liked" onClick={handleLike} >
                 <div className="like-icon">
-                    <img priority alt='icd-icon' decoding="async" src={liked.src} width="20" height="20" className="icon-img icon-outline" />
-                    <img priority alt='icd-icon' decoding="async" src={likesFilled.src} width="20" height="20" className="icon-img like-filled" />
+                    <img alt='icd-icon' decoding="async" src={liked.src} width="20" height="20" className="icon-img icon-outline" />
+                    <img alt='icd-icon' decoding="async" src={likesFilled.src} width="20" height="20" className="icon-img like-filled" />
                 </div>
                 {likes} likes
             </span>

@@ -141,11 +141,6 @@ const Header = (props) => {
 
     return <>
 
-        <Head>
-            <link rel="shortcut icon" href="/favicon.ico" />
-             <Script src="https://example.com/script.js" />
-        </Head>
-
         <header id="header">
             <div className="menu-cont" id='menu-cont'>
                 <div className="container">
@@ -201,13 +196,13 @@ const Header = (props) => {
                                                 </form>
                                             </li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/projects" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/clients" className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/services" className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/posts" className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/contact" className={router.pathname == "/contact" ? "active" : ""}>contact</Link></li>
-                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
-                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/projects" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/clients" className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/services" className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/posts" className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/contact" className={router.pathname == "/contact" ? "active" : ""}>contact</Link></li>
+                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link prefetch={false} href="/our-team">team</Link></li>
+                                            <li className="mobile__menu--items" onClick={hamburgerClose}><Link prefetch={false} href="/careers">careers</Link></li>
                                             <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
                                             <li className="search-icon d-lg-block d-none" onClick={searchToggle}><span className="searchIcon"></span></li>
                                         </ul>

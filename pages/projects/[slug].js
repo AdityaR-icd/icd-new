@@ -111,7 +111,7 @@ const shimmer = (w, h) => `
         <div className="project__item resultItem-cont" key={node?.id}>
           <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
             <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-              <Link href={`/projects/${node?.slug}`}>
+              <Link prefetch={false} href={`/projects/${node?.slug}`}>
                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
@@ -132,7 +132,7 @@ const shimmer = (w, h) => `
                 </span>
               </Link>
             </div>
-            <Link href={`/projects/${node?.slug}`}>
+            <Link prefetch={false} href={`/projects/${node?.slug}`}>
               <span className={carousel.projectTitle}>{node?.projectComponent?.heading}
                 <span className={carousel.grey__color}>  / {client}</span>
               </span>
@@ -194,7 +194,7 @@ const shimmer = (w, h) => `
       <div className="project__item resultItem-cont" key={node?.id}>
         <div className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}>
           <div className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}>
-            <Link href={url} >
+            <Link prefetch={false} href={url} >
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <Image
@@ -212,7 +212,7 @@ const shimmer = (w, h) => `
               </span>
             </Link>
           </div>
-          <Link href={url} >
+          <Link prefetch={false} href={url} >
             <span className={carousel?.projectTitle}>{node?.projectComponent?.heading || node?.title}
               <span className={carousel.grey__color}>  / {client || categories}</span>
             </span>
@@ -510,7 +510,7 @@ const shimmer = (w, h) => `
             <div className={`more_cont ${style['more_cont']}`}>
               <span className={style.more__projects_head} id="more-projectTitle">related</span>
               <span className={`${style.see_all} see-all`}>
-                <Link href={`/projects/type/all`}>see all</Link>
+                <Link prefetch={false} href={`/projects/type/all`}>see all</Link>
               </span>
             </div>
             <span className="bottom__border"></span>
@@ -529,7 +529,7 @@ const shimmer = (w, h) => `
             <div className={`more_cont ${style['more_cont']}`}>
               <span className={style.more__projects_head} id="more-projectTitle">more {category}</span>
               <span className={`${style.see_all} see-all`}>
-                <Link href={` /projects/category/${categorySlug} `}>see all</Link>
+                <Link prefetch={false} href={` /projects/category/${categorySlug} `}>see all</Link>
               </span>
             </div>
             <span className="bottom__border"></span>
