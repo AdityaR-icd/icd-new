@@ -52,7 +52,7 @@ export default function industry({ meta, edges }) {
   // Onclick expand
   const [idMatch, setidMatch] = useState('')
   const toggleClass = (data) => {
-    console.log(data)
+    // console.log(data)
     setidMatch(data)
     const currentState = expand;
     setExpand(!currentState);
