@@ -20,6 +20,6 @@ export async function getStaticProps() {
         latestProject,
         filters
         },
-        revalidate: 60, 
+        // revalidate: 60, 
     }
 }

@@ -134,7 +134,7 @@ export async function getStaticPaths({ params }) {
       { params: { slug: 'digital', sub_slug: 'application' } },
       { params: { slug: 'digital', sub_slug: 'enterprise-product' } },
     ],
-    fallback: true,
+    fallback: false,
   }
 }
 

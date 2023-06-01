@@ -289,6 +289,6 @@ export async function getStaticPaths() {
     const allPosts = await getAllPostsByCategory()
     return {
         paths: allPosts.edges.map(({ node }) => `/posts/category/${node.slug}`) || [],
-        fallback: true,
+        fallback: false,
     }
 }
