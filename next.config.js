@@ -12,7 +12,6 @@ const withPWA = require('next-pwa')({
   skipWaiting: false,
   buildExcludes: [/middleware-manifest\.json$/],
   sw: 'service-worker.js',
-  importScripts: ['/worker.js']
   // disable: process.env.NODE_ENV === 'development'
 })
 
