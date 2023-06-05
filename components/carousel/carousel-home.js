@@ -2,12 +2,19 @@ import styles from './carousel.module.scss'
 import parse from 'html-react-parser';
 
 export default function carousel({content}){
+    var videosrc = "https://player.vimeo.com/video/736122279?background=1&quality=1080p&playsinline=1";
+    var mobilevideosrc = "https://player.vimeo.com/video/736122794?background=1&quality=1080p&playsinline=1";
     return(
         <section className={`${styles.heroCarousel} mB__150`}>
             <div className={styles.homelead_thumbnail}>
+            <span className={styles.loading}>loading</span>
             <div className={styles.lead_video_cont} >
                {(
-                   content && parse(content) || <video autoPlay loop muted src="./home-video/2267188235-1.mp4" playsInline></video>
+                   content && parse(content) || 
+                    <>
+                        <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block" frameborder="0" allow="autoplay" allowfullscreen="">
+                        </iframe><iframe title="ICD Home Lead Video" src={mobilevideosrc} className="d-block d-md-none" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+                    </>
                )} 
             </div>
             </div>

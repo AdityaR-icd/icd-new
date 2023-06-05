@@ -6,7 +6,7 @@ const Crousel = dynamic(() => import("../carousel/carousel-home"));
 const ProjectLead = dynamic(() => import("../project-lead/project-lead"));
 const Cards = dynamic(() => import("../cards/cards"));
 const Snowflakes = require('magic-snowflakes');
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 
 export default function Index({ home: { pages }, themes , latest }) {
