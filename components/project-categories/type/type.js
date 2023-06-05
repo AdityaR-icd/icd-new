@@ -7,7 +7,7 @@ import type from './type.module.scss'
 import { useState, useEffect } from "react";
 import $ from 'jquery'
 
-export default function projectTypes({ nodes , latestProject }) {
+export default function projectTypes({ nodes, latestProject }) {
     var data = ''
     var slug = ''
     var title = ''
@@ -41,18 +41,18 @@ export default function projectTypes({ nodes , latestProject }) {
             })
         })
     }
-    function intersection(first, second){
+    function intersection(first, second) {
         var s = new Set(second);
         return first.filter(item => s.has(item));
     };
 
-    common = intersection(project_id , id)
+    common = intersection(project_id, id)
 
     // useEffect(() => {
     //     $('.').addClass(new)
     // }, []);
 
-    if(typeof window != 'undefined'){
+    if (typeof window != 'undefined') {
 
     }
 
@@ -96,25 +96,30 @@ export default function projectTypes({ nodes , latestProject }) {
 
                         <div className={type.project__scroll} >
                             <div className={`row Projectrow ${type.project__row}`}>
-                                {projects.edges.map(({ node } , j) => (
+                                {projects.edges.map(({ node }, j) => (
                                     slug = node?.slug,
                                     title = node?.title,
-                                    leadImgSrc = node?.featuredImage?.node.sourceUrl,
+                                    leadImgSrc = (node?.featuredImage?.node.sourceUrl).replace('gif', 'mp4'),
                                     client = node?.clients.edges,
                                     clientsName = client[0]?.node.name,
                                     heading = node?.projectComponent?.heading,
                                     Projecttype = node?.projectTypes?.edges[0]?.node?.name,
-                        
+
                                     <>
-                                        { types[i]?.name == Projecttype &&
+                                        {types[i]?.name == Projecttype &&
                                             <div className={`col-md-4 ${type.project__item}`}>
                                                 <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                                                     <Link prefetch={false} href={`/projects/${slug}`}>
                                                         <div className={carousel.thumbnail_cont}>
                                                             <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                                 <div className={`${carousel.full_thumb} full-thumb`}>
-                                                                    {leadImgSrc && (
+                                                                    {!leadImgSrc.includes('mp4') && (
                                                                         <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" fill sizes='100vw' />
+                                                                    )}
+                                                                    {leadImgSrc.includes('mp4') && (
+                                                                        <video autoPlay muted loop playsInline>
+                                                                            <source src={leadImgSrc.replace('fl_progressive,q_auto,dpr_auto,f_auto/f_auto,q_auto/', '')} type="video/mp4" />
+                                                                        </video>
                                                                     )}
                                                                 </div>
                                                                 <span className="thumbnail-gif"></span>
@@ -132,10 +137,10 @@ export default function projectTypes({ nodes , latestProject }) {
                                                             {node?.id === id[2] && (
                                                                 <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
                                                             )}
-                                                            
+
                                                             {/* </Link> */}
                                                         </div>
-                                                    {/* <Link href={`/projects/${slug}`}> */}
+                                                        {/* <Link href={`/projects/${slug}`}> */}
                                                         <span className={carousel.projectTitle}>
                                                             {heading}
                                                             <span className={` ${carousel.grey__color}`}>  / {clientsName}</span>
@@ -143,7 +148,7 @@ export default function projectTypes({ nodes , latestProject }) {
                                                     </Link>
                                                 </div>
                                             </div>
-                                        }  
+                                        }
                                     </>
                                 ))}
                             </div>

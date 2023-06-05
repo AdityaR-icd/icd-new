@@ -68,10 +68,11 @@ export default function allproject({ edges , latestProject }) {
                         <div className="row project__row">
                             {edges.map(({ node }, i) => (
                                 // console.log(id[i] , node?.id),
+                               
                                 client = node?.clients?.edges[0]?.node?.name,
-                                leadImgSrc = node?.featuredImage?.node?.sourceUrl,
-
-
+                                leadImgSrc = (node?.featuredImage?.node?.sourceUrl).replace('gif' , 'mp4'),
+                                // console.log(leadImgSrc),
+                                
                                 <>
                                     <div className="col-md-4 project__item" key={node?.id}>
                                         <div className={`${carousel.projectCarousel} ${types.projectCarousel}`}>
@@ -79,8 +80,13 @@ export default function allproject({ edges , latestProject }) {
                                                 <Link href={`/projects/${node?.slug}`}>
                                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                         <div className={`${carousel.full_thumb} full-thumb`}>
-                                                            {leadImgSrc && (
+                                                            {!leadImgSrc.includes('mp4')  && (
                                                                 <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                            )}
+                                                                                                                                                                            {leadImgSrc.includes('mp4')  && (
+                                                                <video autoPlay muted loop playsInline>
+                                                                <source src={leadImgSrc.replace('fl_progressive,q_auto,dpr_auto,f_auto/f_auto,q_auto/' , '')} type="video/mp4" />
+                                                                </video>
                                                             )}
                                                         </div>
                                                         <span className="thumbnail-gif"></span>

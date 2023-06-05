@@ -967,6 +967,13 @@ select::placeholder {
   height: 100%;
   z-index: 10;
 }
+.full-thumb{
+  video{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
 
 .full-lead-img {
   position: relative;
