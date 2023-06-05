@@ -15,10 +15,13 @@ const withPWA = require('next-pwa')({
 
 
 
-module.exports = withPWA({
+module.exports = {
+  
+  webpack: (config) => {
+    plugins: [new RemoveServiceWorkerPlugin()];
+    return config;
+  },
 
-  
-  
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
@@ -27,11 +30,6 @@ module.exports = withPWA({
   env: {
     pass: process.env.pass,
     domain: process.env.domain
-  },
-
-  webpack: (config) => {
-    plugins: [new RemoveServiceWorkerPlugin()];
-    return config;
   },
 
   // reactStrictMode: true,
@@ -97,7 +95,7 @@ module.exports = withPWA({
       },
     ]
   },
-});
+};
 
 
 
