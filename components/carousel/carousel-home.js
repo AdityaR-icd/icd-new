@@ -12,8 +12,8 @@ export default function carousel({content}){
                {(
                    content && parse(content) || 
                     <>
-                        <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block" frameborder="0" allow="autoplay" allowfullscreen="">
-                        </iframe><iframe title="ICD Home Lead Video" src={mobilevideosrc} className="d-block d-md-none" frameborder="0" allow="autoplay" allowfullscreen=""></iframe>
+                        <iframe title="ICD Home Lead Video" src={videosrc} className="d-none d-md-block" frameBorder="0" allow="autoplay" allowFullScreen="">
+                        </iframe><iframe title="ICD Home Lead Video" src={mobilevideosrc} className="d-block d-md-none" frameBorder="0" allow="autoplay" allowFullScreen=""></iframe>
                     </>
                )} 
             </div>

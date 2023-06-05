@@ -9,18 +9,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withPWA = require('next-pwa')({
   dest: "public",
   runtimeCaching,
+  skipWaiting: false,
   buildExcludes: [/middleware-manifest\.json$/],
-  disable: process.env.NODE_ENV === 'development'
+  importScripts: ['/worker.js']
+  // disable: process.env.NODE_ENV === 'development'
 })
 
 
 
-module.exports = {
-  
-  webpack: (config) => {
-    plugins: [new RemoveServiceWorkerPlugin()];
-    return config;
-  },
+module.exports = withPWA({
 
   i18n: {
     locales: ['en'],
@@ -95,7 +92,7 @@ module.exports = {
       },
     ]
   },
-};
+});
 
 
 
