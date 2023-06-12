@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import dynamic from "next/dynamic";
 const Type = dynamic(() => import("../../components/project-categories/type/type"));
 const PostItem = dynamic(() => import('../../components/posts-items/posts-items'))
-const Image = dynamic(() => import("next/image"));
+// const Image = dynamic(() => import("next/image"));
 import $ from 'jquery';
 import carousel from '../../components/project-categories/all/all.module.scss'
 import type from '../../components/project-categories/type/type.module.scss'
@@ -234,7 +234,7 @@ export default function search({ filters, data, filter , latestProject }) {
                                                         <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                             <div className={`${carousel.full_thumb} full-thumb`}>
                                                                 {leadImgSrc && (
-                                                                    <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                                    <img priority={true}  className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                                 )}
                                                             </div>
                                                             <span className="thumbnail-gif"></span>
@@ -269,7 +269,7 @@ export default function search({ filters, data, filter , latestProject }) {
                                 if (featuredImage) {
                                     var imageData =
                                         <span className={`${carousel.full_thumb} full-thumb`}>
-                                            <Image src={featuredImage} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} alt="post-lead" layout="fill" />
+                                            <img src={featuredImage} alt="post-lead" layout="fill" />
                                         </span>
                                 } else {
                                     imageData =

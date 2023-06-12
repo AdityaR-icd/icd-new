@@ -115,15 +115,15 @@ const shimmer = (w, h) => `
                 <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
-                      <Image
+                      <img
                         // ={true}
                         
                         
                         className={carousel?.project_lead}
                         src={leadImgSrc}
                         alt="project-lead"
-                        placeholder="blur"
-                        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                        // placeholder="blur"
+                        // blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         layout="fill"
                         />
                     )}
@@ -197,11 +197,11 @@ const shimmer = (w, h) => `
             <Link prefetch={false} href={url} >
               <span className={`${carousel?.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                 <div className={`${carousel.full_thumb} full-thumb`}>
-                  <Image
+                  <img
                     priority={true}
               
-                    placeholder="blur"
-                    blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                    // placeholder="blur"
+                    // blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
                     src={leadImgSrc || 'https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg'}
                     alt="project-lead"
