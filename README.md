@@ -25,7 +25,7 @@ To run the Next Application in Production mode run the command\
 
 3. open wordpress admin with 
     username : admin
-    password : icd123
+    password : *******
 
 4. To obtain graphql endpoint open GrahQL settings you can get graphql endpoint from their
 
