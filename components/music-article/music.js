@@ -1329,7 +1329,7 @@ export default function music({ node , music , i , range }){
 			<text transform="matrix(1 0 0 1 405.4263 473.9185)" class="st23 st24 st25">{node.music.artistFifth}</text>
 		</g>
 	</g>
-	<a rel="noopener" target="_blank" href={node?.music?.playlistUrl}>
+	<a rel="noopener" target="_blank" href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1">
 	<g>
 		<rect x="360" y="485.4" class="st1" width="240" height="34"/>
 		<g>
@@ -2828,7 +2828,7 @@ export default function music({ node , music , i , range }){
 			<text transform="matrix(1 0 0 1 86.9078 610.5005)" class="st13 st14 st15">{node.music.artistFifth}</text>
 		</g>
 	</g>
-	<a href={node?.music?.playlistUrl} target='_blank' rel='nooppener'>
+	<a href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1" target='_blank' rel='nooppener'>
 
 		<g>
 			<polyline class="st55" points="288,656 41.5,656 41.5,622 		"/>
