@@ -58,7 +58,8 @@ export default function Post({ post , teamData }) {
     var location = 'https://www.icdindia.com'
   let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
   let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + location + router?.asPath
-  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url="' + location + router?.asPath + '"&title=' + post?.title;
+  let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + location + router?.asPath + '&title=' + post?.title + '"&source=LinkedIn';
+
 
   if (checkauthor) {
     var author = post?.postAuthor?.postAuthor[0]?.title || 'icd studios'
