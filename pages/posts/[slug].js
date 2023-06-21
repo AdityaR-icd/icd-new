@@ -322,6 +322,8 @@ export default function Post({ post , teamData }) {
                         <p>Everyone at ICD has a station of their own. Drag the slider to switch channels. Click on the artist name for a short stream of the team member’s favourite song from that artist.</p>
                         <p>You can click on the Spotify link to get the full ICD playlist. Also, do get in touch if you want the source code to make a radio for your office, we’d be happy to share the joy we got from this fun exercise.</p>
                         <p>As legendary fashion designer and creative director of Chanel, Karl Lagerfeld said, “Music gives colour to the air of the moment”. We agree.</p>
+                        <p>_____________________________</p>
+                        <p><em>Widget design: Abhishek Ghosh. Developer: Alok Joshi</em></p>
                       </>
                     }
                   </div>
