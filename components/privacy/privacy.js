@@ -36,19 +36,24 @@ export default function posts({ meta }) {
                 <meta name="twitter:image" content={meta.featuredImage?.node.sourceUrl} />
                 {/* end of Twitter Cards */}
             </Head>
-            <section className={`services__page mT__260 page__header`}>
+            {/* <section className={`services__page mT__260 page__header`}>
                 <div className="container page__header--container">
                 <div className="row">
                     <div className="col-12 page__header--title">
-                        <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>{meta.title}</h1></div>
+                        <div className="back-cta" onClick={backButton}><span className="backBtn"></span><h1>Privacy Policy</h1></div>
                     </div>
                 </div>
                 <span className="bottom__border"></span>
                 </div>
-            </section>
-            <section className='mT__260'>
+            </section> */}
+            <section className='mT__260 privacy-policy-page'>
                 <div className='container'>
-                    {meta.content && parse(meta.content)}
+                    <div className='privacy-content'>
+                        <h1>Privacy Policy</h1>
+                        <div className='policyContent'>
+                            {meta.content && parse(meta.content)}
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
