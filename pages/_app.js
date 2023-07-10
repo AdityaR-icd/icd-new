@@ -34,7 +34,6 @@ export default function MyApp({ Component, pageProps }) {
   })
   return (
     <>
-        <Script src="https://www.google.com/recaptcha/api.js?hl=en" />
     <Script
         src="https://www.googletagmanager.com/gtag/js?id=GTM-WWCCC9N"
         strategy="afterInteractive"
