@@ -17,7 +17,7 @@ export default function subscribe() {
                         <label className="form-control-placeholder" htmlFor="LASTNAME">last name *</label>
                     </div>
                     <div>
-                         <div class="g-recaptcha" data-sitekey="6LfZrQ8nAAAAAMTeJXmH3Ax74Xm9ZnMGaBZ6-p2k" data-callback="invisibleCaptchaCallback" data-size="invisible" onclick="executeCaptcha"></div>
+                         <div class="g-recaptcha" data-sitekey="6Lfj0A8nAAAAAAK4580nLypWOeWGu9J7kLaOFBNc" data-callback="invisibleCaptchaCallback" data-size="invisible" onclick="executeCaptcha"></div>
                     </div>
                 </span>  
                 <button type="submit" form="sib-form" className="blackBG">subscribe</button>
