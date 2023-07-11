@@ -32,14 +32,14 @@ const Navbar = (props) => {
                             <span className="footerHead d-md-block d-none">connect</span>
                             <div className="row footer__connect">
                                 <div className="col-6 m-fl-right">
-                                    <span className="footerText facebook-link"><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></span>
-                                    <span className="footerText twitter-link"><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></span>
-                                    <span className="footerText linkedin-link"><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></span>
+                                    <span className="footerText facebook-link"><p><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></p></span>
+                                    <span className="footerText twitter-link"><p><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></p></span>
+                                    <span className="footerText linkedin-link"><p><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></p></span>
                                 </div>
                                 <div className="col-6 m-fl-left">
-                                    <span className="footerText instagram-link"><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></span>
-                                    <span className="footerText vimeo-link"><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></span>
-                                    <span className="footerText behance-link"><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></span>
+                                    <span className="footerText instagram-link"><p><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></p></span>
+                                    <span className="footerText vimeo-link"><p><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></p></span>
+                                    <span className="footerText behance-link"><p><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></p></span>
                                 </div>
                             </div>
                         </div>
@@ -48,9 +48,9 @@ const Navbar = (props) => {
                     <div className="col-lg-2 d-lg-block d-none">
                         <div className="quickLinks paddingLeft">
                             <span className="footerHead text-right">quickly</span>
-                            <span className="footerText"><Link href="/contact">contact</Link></span>
-                            <span className="footerText"><Link href="/our-team">team</Link></span>
-                            <span className="footerText"><Link href="/careers">careers</Link></span>
+                            <span className="footerText"><p><Link href="/contact">contact</Link></p></span>
+                            <span className="footerText"><p><Link href="/our-team">team</Link></p></span>
+                            <span className="footerText"><p><Link href="/careers">careers</Link></p></span>
                         </div>
                     </div>
 

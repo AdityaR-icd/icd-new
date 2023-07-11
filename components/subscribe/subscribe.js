@@ -1,4 +1,27 @@
+import { useState , useEffect } from "react";
 export default function subscribe() {
+    const [btn, setbtn] = useState(false)
+
+    // if(typeof window !== 'undefined'){
+    //     function handleCaptchaResponse() {
+    //         var event = new Event('captchaChange');
+    //         document.getElementById('sib-captcha').dispatchEvent(event);
+    //     }
+    // }
+
+    useEffect(() => {
+        window.handleCaptchaResponse = handleCaptchaResponse; 
+
+        function handleCaptchaResponse() {
+           
+            if (grecaptcha.getResponse() == ""){
+                alert("You can't proceed!");
+            } else {
+                setbtn(true)
+                document.getElementById('sib-captcha').style.display = "none";
+            }
+        }  
+    })
     return(
         <div>
             <form id="sib-form" className="custom-form" method="POST" action="https://a6f6a24b.sibforms.com/serve/MUIEADiDSmHjT9afNf-PzgCgWsau7TkVZSO86tS2jMasQzX1k-xTv25YrkndeW2CSUQ7-yuvRRJ0uKy-BF3km-KAv5vj1s-Vww4KNEE7N3jzfkzbToN1fn-8C2W0qKvHRMyQsZVB5JVNDs32ERczKkCLMQbAyFD6xSWbUsGW9t7Rejlsrkb1wGyvdX1b8orKjZ7Yr1c1CKjmiktF">
@@ -17,8 +40,11 @@ export default function subscribe() {
                         <label className="form-control-placeholder" htmlFor="LASTNAME">last name *</label>
                     </div>
                 </span>  
-                <button type="submit" form="sib-form" className="blackBG">subscribe</button>
+                 <div className="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LfroRMnAAAAAFm-MBFJhVkyyu-NaBssRrlevxHv" data-callback="handleCaptchaResponse"></div>
+                <button type="submit" form="sib-form"  className={btn ? ` blackBG ` : "blackBG disable"}>subscribe</button>
             </form>
+           
+                
         </div>
     )
 }

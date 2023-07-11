@@ -1,4 +1,4 @@
-const EXTERNAL_DATA_URL = 'https://www.icdindia.com';
+const EXTERNAL_DATA_URL = 'https://icdindia.com';
 import { getAllProjects, getAllPostsSlug } from '../lib/api'
 
 function generateSiteMap({allProjects , allposts}) {
@@ -6,22 +6,22 @@ function generateSiteMap({allProjects , allposts}) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://www.icdindia.com</loc>
+       <loc>https://icdindia.com</loc>
      </url>
       <url>
-       <loc>https://www.icdindia.com/projects</loc>
+       <loc>https://icdindia.com/projects</loc>
      </url>
           <url>
-       <loc>https://www.icdindia.com/posts</loc>
+       <loc>https://icdindia.com/posts</loc>
      </url>
           <url>
-       <loc>https://www.icdindia.com/clients</loc>
+       <loc>https://icdindia.com/clients</loc>
      </url>
           <url>
-       <loc>https://www.icdindia.com/services</loc>
+       <loc>https://icdindia.com/services</loc>
      </url>
           <url>
-       <loc>https://www.icdindia.com/</loc>
+       <loc>https://icdindia.com/</loc>
      </url>
      ${allProjects?.edges
        .map(({ node }) => {

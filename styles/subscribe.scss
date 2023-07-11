@@ -2,6 +2,10 @@
 
 .subscribe__field{
     display: block;
+
+    @include for-phone-only{
+        overflow: hidden;
+    }
     .form-control-placeholder{
         font-size: 16px;
     }
@@ -88,4 +92,11 @@
     
 }
 
+
+.g-recaptcha {
+    @include for-tablet-portrait-up{
+        position: absolute;
+        bottom: -40%;
+    }
+}
 
