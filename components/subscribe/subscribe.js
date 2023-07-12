@@ -40,7 +40,7 @@ export default function subscribe() {
                         <label className="form-control-placeholder" htmlFor="LASTNAME">last name *</label>
                     </div>
                 </span>  
-                 <div className="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LfroRMnAAAAAFm-MBFJhVkyyu-NaBssRrlevxHv" data-callback="handleCaptchaResponse"></div>
+                 <div className="g-recaptcha sib-visible-recaptcha" id="sib-captcha" data-sitekey="6LceABgnAAAAAIm51-3MRr9ruU_VWmfs1OfAfh9z" data-callback="handleCaptchaResponse"></div>
                 <button type="submit" form="sib-form"  className={btn ? ` blackBG ` : "blackBG disable"}>subscribe</button>
             </form>
            
