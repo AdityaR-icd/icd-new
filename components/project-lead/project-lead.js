@@ -39,6 +39,7 @@ export default function projectLead({ edges , latestProject }){
     
     common = intersection(project_id , id)
 
+    
 
             const toBase64 = (str) =>
             typeof window === 'undefined'
@@ -67,6 +68,7 @@ export default function projectLead({ edges , latestProject }){
             project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
             client = clients.edges[0].node.name,
 
+            console.log(projects[j]?.id , '.............' ,common),
             // console.log(project_video),
                 <>
                 {edges.map(({ node } ) => (
@@ -147,7 +149,7 @@ export default function projectLead({ edges , latestProject }){
                                                         {projects[j]?.projectComponent?.awardsReceived && (
                                                             <span className={`${styles.project__tag} project__tag`}>winner</span>
                                                         )}
-                                                        {projects[j]?.id == common && (
+                                                        {projects[j]?.id == common[0] && (
                                                             <span className={`${styles.project__tag} ${styles.new_tag} project__tag`}>new</span>
                                                         )}
                                                     </div>           
