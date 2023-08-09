@@ -62,7 +62,7 @@ export default function projectLead({ edges , latestProject }){
         <>
         {projects.map(({ highlightedImage , clients } , j) => (
             
-            project_video = highlightedImage?.video?.mediaItemUrl,
+            project_video = highlightedImage?.video_for_desktop?.mediaItemUrl,
             project_thumbnail = highlightedImage?.highlightedThumbnail?.sourceUrl,
             project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
             client = clients.edges[0].node.name,

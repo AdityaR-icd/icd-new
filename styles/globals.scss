@@ -1981,6 +1981,15 @@ video.clickTPlay{
     }
   } 
 }
+
+@include for-phone-only{
+  .video-container{
+  
+    &.vertical-video{
+      padding-bottom: 128.25% !important;
+    }
+  }
+}
   
 .singleProject{
   .video-container {

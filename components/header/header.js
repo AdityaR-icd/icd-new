@@ -107,7 +107,11 @@ const Header = (props) => {
     useEffect(() => {
         $(window).on('load', function () {
             $('.loader').addClass('hideLoader')
+
+            $('.vertical-video .player').css('height', 'inherit !important');
         });
+
+      
 
         var lastScrollTop = 0;
 
