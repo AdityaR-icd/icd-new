@@ -31,7 +31,7 @@ export default function subProject({ subTypeProjects, project , latestProject })
 
     var slug = projectSubTypes?.map((item) => {
       if (item?.node?.slug == router.query.sub_slug) {
-        activeClass = `${style.project__filter} project__filter marginRight ${style.filter__active}`
+        activeClass = `${style.project__filter} project__filter marginRight ${style.filter__active} ${style.active}`
       }
       else {
         activeClass = `project__filter marginRight`
