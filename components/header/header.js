@@ -146,7 +146,7 @@ const Header = (props) => {
     return <>
 
         <header id="header">
-            <div className="menu-cont" id='menu-cont'>
+            <div className="menu-cont bg-transparent" id='menu-cont'>
                 <div className="container">
                     <div className="row">
                         <div className="col-10 col-md-2 logo-container">
