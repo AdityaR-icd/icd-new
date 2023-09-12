@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { useState , useEffect } from 'react';
+import { useState } from 'react';
 
 export default function projectLead({ edges , latestProject }){
     let client = ""
@@ -41,10 +41,10 @@ export default function projectLead({ edges , latestProject }){
 
     
 
-            const toBase64 = (str) =>
-            typeof window === 'undefined'
-                ? Buffer.from(str).toString('base64')
-                : window.btoa(str)
+    const toBase64 = (str) =>
+    typeof window === 'undefined'
+        ? Buffer.from(str).toString('base64')
+        : window.btoa(str)
 
     const shimmer = (w, h) => `
         <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -68,7 +68,7 @@ export default function projectLead({ edges , latestProject }){
             project_thumbnail_mobile = highlightedImage?.highlightedThumbnailMobile?.sourceUrl,
             client = clients.edges[0].node.name,
 
-            console.log(projects[j]?.id , '.............' ,common),
+            // console.log(projects[j]?.id , '.............' ,common),
             // console.log(project_video),
                 <>
                 {edges.map(({ node } ) => (

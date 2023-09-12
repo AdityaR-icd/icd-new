@@ -50,7 +50,7 @@ export default async (req, res) => {
                     console.log(err)
                 else
                     res.send('success')
-                transporter.sendMail(mailContent, function (err, info) {
+                    transporter.sendMail(mailContent, function (err, info) {
                     if (err)
                         console.log(err)
                     else

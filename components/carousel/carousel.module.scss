@@ -3,6 +3,10 @@
     position: relative;
     max-width: 100vw;
     overflow: hidden;
+    
+   @include for-phone-only{
+    margin: 80px 0;
+   }
     img{
         // max-height: 770px;
         max-height: 95vh; 
@@ -19,11 +23,23 @@
             height: 85px;
             background: $color-white;
         }
+
+        .carouselBlock__1{
+            @include for-phone-only{
+                width: 10%;
+            }
+        }
         .carouselBlock__2{
             margin-left: 75px;
             position: relative;
+            width: 0;
+            max-width: 0px;
+
+            @include for-phone-only{
+                padding-right: 0;
+            }
             &:after{
-                content: '';
+                content: none;
                 background: $color-white;
                 width: 100%;
                 right: -100%;
@@ -83,17 +99,23 @@
         display: block;
         position: absolute;
         left: 50%;
-        min-width: 100%;
-        min-height: 100%;
+        // min-width: 100%;
+        // min-height: 100%;
         // width: auto;
                 // height: 770px;
-        height: auto;
-
+        height: 100%;
+        width: 100%;
+        max-width: 140.556vw;
         object-fit: cover;
         top: 50%;
         transform: translate(-50%, -50%);
         cursor: pointer;
         z-index: 0;
+
+        @include for-phone-only{
+            height: 100%;
+            object-fit: contain;
+        }
     }
 
     .lead_video_cont{
@@ -110,7 +132,7 @@
         //     top: 0;
         // }
         @include for-phone-only{
-            padding-bottom: 90vh;
+            padding-bottom: 100%;
         }
     }
 

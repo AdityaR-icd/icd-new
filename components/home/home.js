@@ -15,8 +15,9 @@ export default function Index({ home: { pages }, themes , latest }) {
 
   const data = pages?.edges[0]?.node
   const featuredata = pages?.edges
+  const carouselProjects = pages?.edges[0]?.node?.projects?.carouselProjects
 
-
+  // console.log(featuredata)
   if (themes?.theme == 'on') {
     useEffect(() => {
       $('body').addClass('home-snowflake')
@@ -66,7 +67,7 @@ export default function Index({ home: { pages }, themes , latest }) {
         <meta name="twitter:image" content={data?.featuredImage?.node?.sourceUrl} />
         {/* end of Twitter Cards */}
       </Head>
-      <Crousel content={data?.content} />
+      <Crousel edges={carouselProjects} latestProject={latest} content={data?.content} />
       <ProjectLead edges={featuredata} latestProject={latest} />
       {data?.homePage?.featuredCards && <Cards data={data} />}
     </>
