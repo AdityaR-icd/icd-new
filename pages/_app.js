@@ -42,10 +42,10 @@ export default function MyApp({ Component, pageProps }) {
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
+          function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'GTM-WWCCC9N');
+          gtag('config', 'G-KY6NKRPCTL');
         `}
       </Script>
       <Loader />
