@@ -59,6 +59,16 @@ export default function carousel({content , edges , latestProject }){
         // afterChange :
         //     (currentSlide) => 
         //       setcurrentSlide(currentSlide + 1),
+        responsive: [
+            {
+                breakpoint: 991,
+                settings: {
+                    autoplaySpeed: 2000,
+                    swipeToSlide: true,
+                    arrows: false
+                }
+            },
+        ],
         onInit: () => {
             if(typeof window !== "undefined"){
                 console.log('init')
