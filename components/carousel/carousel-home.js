@@ -41,6 +41,7 @@ export default function carousel({content , edges , latestProject }){
     // var mobilevideosrc = "https://player.vimeo.com/video/736122794?background=1&quality=1080p&playsinline=1";
     const [currentSlide, setcurrentSlide] = useState(1) 
     const [slideCounts, setslideCount] = useState(1)    
+
     const settings = {
         dots: false,
         infinite: true,
@@ -54,8 +55,9 @@ export default function carousel({content , edges , latestProject }){
         fade: true,
         autoplay: true,
         speed: 400,
-        autoplaySpeed: 5500,
+        autoplaySpeed: 1000,
         cssEase: "ease-in-out",
+        // adaptiveHeight: true,
         // afterChange :
         //     (currentSlide) => 
         //       setcurrentSlide(currentSlide + 1),
@@ -63,7 +65,7 @@ export default function carousel({content , edges , latestProject }){
             {
                 breakpoint: 991,
                 settings: {
-                    autoplaySpeed: 2000,
+                    // autoplaySpeed: 2000,
                     swipeToSlide: true,
                     arrows: false
                 }
@@ -95,6 +97,7 @@ export default function carousel({content , edges , latestProject }){
                 $('.slick-slide').find('video').get(0).pause();
                 $('.slick-slide').find('video').get(0).currentTime = 0;
             });
+            console.log(currentSlide)
              setcurrentSlide(currentSlide + 1)
                 // $('.slick-slide').find('video').get(0).pause();
                 // console.log('function run')
@@ -108,6 +111,7 @@ export default function carousel({content , edges , latestProject }){
                
             }
     };
+
 
     const toBase64 = (str) =>
     typeof window === 'undefined'
@@ -132,21 +136,31 @@ export default function carousel({content , edges , latestProject }){
     let project_thumbnail = ""
     let project_thumbnail_mobile = ""
     let slideCount 
+    let text = ''
 
-    var other_projects_slider = edges.map(( node  , j) => {
+    var other_projects_slider = 
+    
+
+
+    edges.map(( node  , j , {length}) => {
+
         
-        slideCount = j
+        slideCount = length
         project_video = node?.projectComponent?.carouselVideoDesktop?.mediaItemUrl
         project_video_mobile = node?.projectComponent?.carouselVideoMobile?.mediaItemUrl
         project_thumbnail = node?.projectComponent?.carouselImage?.sourceUrl
         project_thumbnail_mobile = node?.projectComponent?.carouselImageMobile?.sourceUrl
+        
+        // console.log(j)
+        // setslideCount({length})
+
+        // and empty div for the last slide
 
         return <>
-            
             <div className={styles.lead_video_cont} key={node.id}>
                 <Link className="project_link" href={`/projects/${node?.slug}`}>
 
-                    <div className={`${styles.project__section}`}>
+                    <div className={`${styles.project___section}`}>
                                
                             {project_video && (
                                 <>
@@ -198,7 +212,7 @@ export default function carousel({content , edges , latestProject }){
                                 <div className='wrapper'>
                                 
                                     <h1 className='project-title'>{node.title}</h1>
-                                    <span className='slide-count d-none d-md-block'> {currentSlide}/6  </span>
+                                    <span className='slide-count d-none d-md-block'> {currentSlide}/{slideCount + 1}  </span>
                                 </div>
                                 
                             </div>
@@ -206,18 +220,43 @@ export default function carousel({content , edges , latestProject }){
                     </div>
                 </Link>
             </div>
-            
         </>
+
     })
+
+
+
 
 
     return(
         <section className={`${styles.heroCarousel} hero-carousel mB__150`}>
             <div className={styles.homelead_thumbnail}>
-                <span className={styles.loading}>loading</span>
+                {/* <span className={styles.loading}>loading</span> */}
                 {(
                     <Slider {...settings}>
+                        <div className={`${styles.lead_video_cont} lead_carousel_video`}>
+                            <Link className="project_link" href={`/services`}>
+                                <div className={`${styles.project__section}`}>
+                                    <span className='col-md-2  d-none d-lg-block'></span>
+                                    <h1 className='offset-md-2'>ICD serves marketing, branding and editorial functions, on screen, in print, on shelf or anywhere, really; with visual design, or a concept.</h1>      
+                                </div>
+                                <div className='about-project-container'>
+                                    <div className='row'>
+                                        <div className='col-md-2' />
+                                        <div className='project-title-container offset-md-2'>
+                                            <div className='wrapper'>
+                                            
+                                                <h1 className='project-title'>let’s talk</h1>
+                                                <span className='slide-count d-none d-md-block'> {currentSlide}/{slideCount + 1}  </span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
                         {other_projects_slider}
+
                     </Slider>
                 )}
             </div>
@@ -231,7 +270,7 @@ export default function carousel({content , edges , latestProject }){
                     </div>
                 </div>
             </div>
-            <span className='slide-count mobile-only d-block d-lg-none'> {currentSlide}/6  </span>
+            <span className='slide-count mobile-only d-block d-lg-none'> {currentSlide}/7  </span>
         </section>
     )
 }

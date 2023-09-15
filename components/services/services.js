@@ -67,7 +67,7 @@ export default function service({ meta , edges , other_service }){
             <div className="container">
                 <div className="row">
                     {otherServiceData.map(({ node }) => (
-                        <Service data={node}/>
+                        <Service data={node}/> 
                     ))}  
                 </div>
             </div>

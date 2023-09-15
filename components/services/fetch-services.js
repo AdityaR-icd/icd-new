@@ -8,6 +8,8 @@ export default function fetchServices({ data }) {
     var cardImgSrc = data?.featuredImage?.backgroundImg?.sourceUrl;
     var cardGifImgSrc = data?.featuredImage?.gifAnimationImg?.sourceUrl;
     var projectLink = data?.projectLink?.linkProject?.slug;
+    var contact = data?.featuredImage?.differentField
+
     if (projectLink) {
         var projecturl =
             <Link href={` /projects/${projectLink}`} legacyBehavior>
@@ -15,8 +17,8 @@ export default function fetchServices({ data }) {
             </Link>
     } else {
         projecturl =
-            <Link href={` projects`} legacyBehavior>
-                <button>view project</button>
+            <Link href={` /contact`} legacyBehavior>
+                <button>enquire</button>
             </Link>
     }
 
@@ -48,9 +50,12 @@ export default function fetchServices({ data }) {
                 </span>
             </span>
             <span className={style.serviceHeader}>{data.title}</span>
-            <span className={style.aboutService}>
-                {parse(data.content)}
-            </span>
+            {data?.content && 
+                <span className={style.aboutService}>
+                    {parse(data?.content)}
+                </span>
+            }
+
             <span className={style.servicesButton}>
                 {projecturl}
             </span>

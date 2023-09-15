@@ -2328,6 +2328,22 @@ video.clickTPlay{
   .slick-arrow{
     position: absolute;
   }
+  
+  .slick-slide{
+    @include for-desktop-up{
+      height: 95vh;
+    }
+
+    &:first-child{
+      .lead_carousel_video{
+        background: $color-yellow;
+      }
+
+      @include for-phone-only{
+        max-height: 100vw;
+      }
+    }
+  }
 
    .slick-arrow.slick-hidden {
     display: none;
