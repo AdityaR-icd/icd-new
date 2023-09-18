@@ -1,11 +1,11 @@
-import { getAllProjectsForHome, getFooter, getProjectPage, getFilters , getLatestProject} from '../../../lib/api'
+import { getAllProjectsForHome, getFooter, getProjectPage, getFilters , getLatestProject , getProjectTypes} from '../../../lib/api'
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../../../components/project/allProject"));
 
-export default function All({ AllProjects, meta: { pages } , latestProject }) {
+export default function All({ AllProjects, meta: { pages } , latestProject , projectsTypes }) {
   const meta_data = pages.edges[0].node
   return (
-    <Layout AllProjects={AllProjects} meta={meta_data} latest={latestProject} />
+    <Layout AllProjects={AllProjects} projectsTypes={projectsTypes} meta={meta_data} latest={latestProject} />
   );
 }
 
@@ -15,14 +15,16 @@ export async function getStaticProps({ preview = false }) {
   const meta = await getProjectPage()
   const filters = await getFilters()
   const latestProject = await getLatestProject()
+  const projectsTypes = await getProjectTypes()
   return {
     props: {
       AllProjects,
       data,
       latestProject,
       meta,
-      filters
+      filters,
+      projectsTypes
     },
-    revalidate: 3600,
+    revalidate: 180,
   }
 }

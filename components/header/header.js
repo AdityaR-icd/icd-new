@@ -200,7 +200,7 @@ const Header = (props) => {
                                                 </form>
                                             </li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/projects" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
+                                            <li onClick={hamburgerClose}><Link prefetch={false} href="/projects/type/all" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
                                             <li onClick={hamburgerClose}><Link prefetch={false} href="/clients" className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
                                             <li onClick={hamburgerClose}><Link prefetch={false} href="/services" className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
                                             <li onClick={hamburgerClose}><Link prefetch={false} href="/posts" className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>

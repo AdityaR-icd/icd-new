@@ -9,6 +9,7 @@ import project from './projects.module.scss'
 import category from './category.module.scss'
 export default function projectCategory({ meta, projectsTypes: { nodes } , latest }) {
 
+
   const backButton = () => {
     window.history.back();
   }
@@ -55,7 +56,10 @@ export default function projectCategory({ meta, projectsTypes: { nodes } , lates
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
                 <Link href="/projects/type/all" className="project__filter marginRight">all</Link>
-                <Link href="/projects" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`} >category</Link>
+                {/* <Link href="/projects" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`} >category</Link> */}
+                {nodes.map(({name , slug}) => (
+                  <Link href={`/projects/category/${slug}`} className={` project__filter ${category.project__filter}`} >{name}</Link>
+                ))}
               </div>
             </div>
             <span className="bottom__border"></span>

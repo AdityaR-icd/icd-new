@@ -3,8 +3,6 @@ import { getFooter, getProjectTypes, getProjectPage, getFilters , getLatestProje
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import("../components/project/projectCategory"));
 
-
-
 export default function Index({ projectsTypes, meta: { pages } , latestProject }) {
   const meta_data = pages?.edges[0]?.node
 
@@ -32,7 +30,7 @@ export async function getStaticProps({ preview = false }) {
       latestProject
 
     },
-    revalidate: 180,
+    // revalidate: 180,
   }
 
 }

@@ -6,7 +6,7 @@ const All = dynamic(() => import("../project-categories/all/all"));
 import project from './projects.module.scss'
 import category from './category.module.scss'
 import Link from 'next/link';
-export default function Index({ AllProjects: { edges }, meta , latest }) {
+export default function Index({ AllProjects: { edges }, meta , projectsTypes: { nodes } , latest }) {
   const router = useRouter()
   const backButton = () => {
     window.history.back();
@@ -52,7 +52,10 @@ export default function Index({ AllProjects: { edges }, meta , latest }) {
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
                 <Link href="/projects/type/all" className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}  >all</Link>
-                <Link href="/projects" className="project__filter">category</Link>
+                {/* <Link href="/projects" className="project__filter">category</Link> */}
+                {nodes.map(({name , slug}) => (
+                  <Link href={`/projects/category/${slug}`} className={` project__filter ${category.project__filter}`} >{name}</Link>
+                ))}
               </div>
             </div>
             <span className="bottom__border"></span>

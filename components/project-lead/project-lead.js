@@ -103,7 +103,7 @@ export default function projectLead({ edges , latestProject }){
                                 <div className="container"> 
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <Link className="project_link" href={`/projects/${projects[j].slug}`}>
+                                            <Link prefetch={false} className="project_link" href={`/projects/${projects[j].slug}`}>
                                  
                                                 <div className={`${styles.project__section}`} >
                                                     <div className={styles.Tilt}>
