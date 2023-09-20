@@ -24,7 +24,7 @@ import style from '../../styles/singleProject.module.scss'
 
 
 
-export default function Projects({ project }) {
+export default function Projects({ project , oProjects }) {
   const router = useRouter()
   var location = 'https://www.icdindia.com'
   let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
@@ -67,18 +67,22 @@ export default function Projects({ project }) {
       }
     })
 
-    async function fetchMyAPI() {
-      const slides_data = await getAllProjectsNotIn(projectIds, categorySlug)
+    // setproject_slider(oProjects)
+    // async function fetchMyAPI() {
+    //   const slides_data = await getAllProjectsNotIn(projectIds, categorySlug)
 
 
-      // const slides_dat1 = await getAllOtherProjects(categoryId)
-      setproject_slider(slides_data)
-      // setproject_slider1(slides_dat1)
-    }
+    //   // const slides_dat1 = await getAllOtherProjects(categoryId)
+    //   setproject_slider(slides_data)
+    //   // setproject_slider1(slides_dat1)
+    // }
 
-    fetchMyAPI()
+    // fetchMyAPI()
 
   }, []);
+
+  
+
 
 const toBase64 = (str) => typeof window === 'undefined' ? Buffer.from(str).toString('base64') : window.btoa(str)
 
@@ -87,7 +91,7 @@ const shimmer = (w, h) => `
         <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
     </svg>`
 
-  var other_projects = project_slider?.edges
+  var other_projects = oProjects?.edges
   var other_projects1 = project_slider1?.edges
   var other_projects2 = []
   if (other_projects1?.length > 0) {
@@ -98,11 +102,12 @@ const shimmer = (w, h) => `
     })
   }
 
+// console.log(other_projects[0]?.node?.projectTypes?.edges[0].node?.projects?.edges)
 
   if (other_projects?.length > 0) {
-    other_projects = project_slider?.edges[0]?.node?.projects.edges ?? []
+    // console.log('enter')
+    other_projects = other_projects[0]?.node?.projectTypes?.edges[0].node?.projects?.edges ?? []
     other_projects1 = other_projects2
-
 
     var other_projects_slider = other_projects?.map(({ node }) => {
       var leadImgSrc = node?.featuredImage?.node?.sourceUrl
@@ -140,8 +145,7 @@ const shimmer = (w, h) => `
           </div>
         </div>
       </>;
-    })
-  }
+    }).slice(1)}
 
 
   const [seeAll, setseeAll] = useState('see all')
@@ -552,11 +556,13 @@ export async function getStaticProps({ params }) {
   const gProject = await getProject(params.slug)
   const data = await getFooter()
   const filters = await getFilters()
+  const oProjects = await getAllProjectsNotIn(params.slug)
   return {
     props: {
       project: gProject.project,
       data,
-      filters
+      filters,
+      oProjects
     },
     // revalidate: 3600,
   }

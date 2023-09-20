@@ -55,10 +55,22 @@ export default function Post({ post , teamData }) {
     </svg>`
 
 
-    var location = 'https://www.icdindia.com'
+  var location = 'https://www.icdindia.com'
   let fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
   let twitterUrl = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + location + router?.asPath
   let linkedinUrl = 'https://www.linkedin.com/shareArticle?mini=true&url=' + location + router?.asPath + '&title=' + post?.title + '"&source=LinkedIn';
+
+
+if(typeof window !== 'undefined'){
+  $("blockquote").each(function(){
+    var text = $(this).text().toLowerCase();
+    var fbpageURL = 'https://www.facebook.com/sharer/sharer.php?u=' + location + router?.asPath
+    var twitterpageURL = 'https://twitter.com/intent/tweet?text="' + post?.title + '"&url=' + location + router?.asPath
+    var fbshareurl = "<a href='"+fbpageURL+"' class='fb-share fb-icon' target='_blank'></a>";
+    var twittershareurl = "<a href='"+twitterpageURL+"' class='twitter-share twitter-icon' target='_blank'></a>";
+    $(this).append(fbshareurl , twittershareurl);
+  });
+}
 
 
   if (checkauthor) {

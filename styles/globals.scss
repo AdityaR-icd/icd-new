@@ -2418,3 +2418,40 @@ video.clickTPlay{
     }
   }
 }
+
+.singlePost{
+  blockquote{
+    position: relative;
+    font-family: $akz-bold;
+    font-size: 28px;
+    line-height: 34px;
+    letter-spacing: -1px;
+    color: $color-dark-black;
+    margin: 50px auto;
+    width: 100%;
+    max-width: 500px;
+    text-transform: lowercase;
+    @include for-upto-tablet-portrait{
+        margin: 120px 0 80px;
+    }
+    .fb-share,
+    .twitter-share {
+        position: absolute;
+        top: 10px;
+        left: -60px;
+        @include for-upto-tablet-portrait{
+            left: 0;
+            top: -40px;
+            background-size: 10px;
+        }
+    }
+    .twitter-share {
+        top: 70px;
+        @include for-upto-tablet-portrait{
+            left: 60px;
+            top: -40px;
+            background-size: 18px;
+        }
+    }
+  }
+}
