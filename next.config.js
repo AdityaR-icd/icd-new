@@ -23,10 +23,6 @@ module.exports = withPWA({
     defaultLocale: 'en',
   },
 
-  env: {
-    pass: process.env.pass,
-    domain: process.env.domain
-  },
 
   // reactStrictMode: true,
   // experimental:{appDir: true},
