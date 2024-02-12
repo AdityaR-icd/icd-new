@@ -181,6 +181,7 @@ export default function carousel({content , edges , latestProject }){
                             {project_thumbnail_mobile && (
                                 <div className={` d-lg-none d-block`}>
                                     <Image
+                                        unoptimized={true}
                                         priority={true}
                                         placeholder="blur"
                                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
@@ -194,6 +195,7 @@ export default function carousel({content , edges , latestProject }){
                             {project_thumbnail && (
                                 <div className="d-none d-lg-block">
                                     <Image
+                                        unoptimized={true}
                                         priority={true}
                                         placeholder="blur"
                                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
