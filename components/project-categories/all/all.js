@@ -81,7 +81,7 @@ export default function allproject({ edges , latestProject }) {
                                                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                                                         <div className={`${carousel.full_thumb} full-thumb`}>
                                                             {!leadImgSrc.includes('mp4')  && (
-                                                                <Image priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                                <Image unoptimized priority={true} placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={carousel.project_lead} src={leadImgSrc} alt="project-lead" layout="fill" />
                                                             )}
                                                                                                                                                                             {leadImgSrc.includes('mp4')  && (
                                                                 <video autoPlay muted loop playsInline>

@@ -29,6 +29,7 @@ export default function Cards({ data }) {
                     <div className={` col-lg-4 ${home.home_cards}`} key={data.homePage.featuredCards[k].id}>
                       <div className={bg}>
                         <Image
+                          unoptimized
                           priority={true}
                           src={cardImg}
                           alt="card-image"
