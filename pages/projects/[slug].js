@@ -203,7 +203,7 @@ const shimmer = (w, h) => `
                 <div className={`${carousel.full_thumb} full-thumb`}>
                   <img
                     priority={true}
-              
+                    unoptimized
                     // placeholder="blur"
                     // blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                     className={carousel?.project_lead}
@@ -230,6 +230,7 @@ const shimmer = (w, h) => `
     var leadImgSrc = project?.projectComponent?.awardsImage?.sourceUrl
     var awardImg = <Image
       // priority={true}
+       unoptimized
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-none d-md-block `}
@@ -358,6 +359,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponent}
+              unoptimized
               // priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
@@ -371,6 +373,7 @@ const shimmer = (w, h) => `
               src={leadComponentMobile}
               // priority={true}
               placeholder="blur"
+              unoptimized
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
               layout="fill"

@@ -47,6 +47,7 @@ export default function kabir({ kabir, data }) {
         var imageData =
             <div className={` ${style.leadImage} fade-in `}>
                 <Image
+                 unoptimized
                     src={featuredImage}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}

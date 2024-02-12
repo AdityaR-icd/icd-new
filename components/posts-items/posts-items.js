@@ -39,6 +39,8 @@ export default function postItem({ data, ids }) {
         var imageData =
             <span className="postThumbnail fade-in">
                 <Image
+
+                 unoptimized
                     src={featuredImage}
                     placeholder="blur"
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}

@@ -147,12 +147,12 @@ export default function clients({ meta, edges }) {
                                     if (leadImgSrc) {
                                         var thumbnail =
                                             <div className={alphabet.client_thumbnail}>
-                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" layout="fill" />
+                                                <Image  unoptimized placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={leadImgSrc} alt="project-lead" layout="fill" />
                                             </div>
                                     } else {
                                         var thumbnail =
                                             <div className={alphabet.client_thumbnail}>
-                                                <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={loader.src} alt="project-lead" layout="fill" />
+                                                <Image   unoptimized placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} src={loader.src} alt="project-lead" layout="fill" />
                                             </div>
                                     }
 

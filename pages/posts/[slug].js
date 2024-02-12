@@ -97,6 +97,7 @@ if(typeof window !== 'undefined'){
                     <span className={`${carousel.projectThumbnail} fade-in`} style={{ "width": "100%" }}>
                       <div className={`${carousel.full_thumb} full-thumb`}>
                         <Image
+                         unoptimized
                           className={carousel.project_lead}
                           placeholder="blur"
                           priority="true"
@@ -141,6 +142,7 @@ if(typeof window !== 'undefined'){
             var imageData =
               <span className={`${carousel.full_thumb} full-thumb`}>
                 <Image
+                 unoptimized
                   src={featuredImage}
                   priority="true"
                   placeholder="blur"
@@ -196,6 +198,7 @@ if(typeof window !== 'undefined'){
     var imageData =
       <div className={` ${style.leadImage} fade-in `}>
         <Image
+         unoptimized
           src={featuredImage}
           priority="true"
           placeholder="blur"

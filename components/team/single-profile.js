@@ -32,6 +32,7 @@ export default function singleProfile({ data }) {
             <div className={Ourteam.profile}>
                 <div className={` ${Ourteam.profileImg} fade-in `} >
                     <Image
+                     unoptimized
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         className={` ${Ourteam?.profileImg__main} full-lead-img`}
@@ -40,6 +41,7 @@ export default function singleProfile({ data }) {
                         layout="fill"
                         sizes="100vw" />
                     <Image
+                     unoptimized
                         placeholder="blur"
                         blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
                         className={` ${Ourteam?.profileImg__hover} full-lead-img`}

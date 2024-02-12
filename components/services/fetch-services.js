@@ -45,8 +45,8 @@ export default function fetchServices({ data }) {
         <div className={`col-md-6 col-lg-4 ${style.servicesItem}`}>
             <span className={style.serviceLogo}>
                 <span>
-                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={style.serviceLogo__anim} src={cardGifImgSrc} fill alt="" />
-                    <Image placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={style.serviceLogo__static} src={cardImgSrc} fill alt="" />
+                    <Image  unoptimized placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={style.serviceLogo__anim} src={cardGifImgSrc} fill alt="" />
+                    <Image   unoptimized placeholder="blur" blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`} className={style.serviceLogo__static} src={cardImgSrc} fill alt="" />
                 </span>
             </span>
             <span className={style.serviceHeader}>{data.title}</span>
