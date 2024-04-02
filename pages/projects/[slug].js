@@ -359,8 +359,7 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponent}
-              unoptimized
-              // priority={true}
+              priority={true}
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
@@ -371,9 +370,8 @@ const shimmer = (w, h) => `
 
             <Image
               src={leadComponentMobile}
-              // priority={true}
+              priority={true}
               placeholder="blur"
-              unoptimized
               blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
               alt="project-lead"
               layout="fill"

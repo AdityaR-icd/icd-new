@@ -16,7 +16,7 @@ const withPWA = require('next-pwa')({
 
 
 
-module.exports = withPWA({
+module.exports = withBundleAnalyzer(withPWA({
 
   i18n: {
     locales: ['en'],
@@ -87,7 +87,7 @@ module.exports = withPWA({
       },
     ]
   },
-});
+}));
 
 
 

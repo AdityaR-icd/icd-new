@@ -122,7 +122,7 @@ export default function projectLead({ edges , latestProject }){
                                                                 <>
                                                                     <div className={` d-none d-lg-block ${styles.project__leadimage}`}>
                                                                         <Image
-                                                                            unoptimized
+                                                                            
                                                                             priority={true}
                                                                             placeholder="blur"
                                                                             blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
@@ -137,7 +137,7 @@ export default function projectLead({ edges , latestProject }){
 
                                                             <div className={` d-lg-none d-block ${styles.project__leadimage}`}>
                                                                 <Image
-                                                                    unoptimized
+                                                                    
                                                                     priority={true}
                                                                     placeholder="blur"
                                                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
