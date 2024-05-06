@@ -87,7 +87,7 @@ export default function career({meta , jobs}){
             </div>
         </section>
 
-        <section className="careers__page mB__150" id="careerForm">
+        <section className="careers__page mB__150" id="careerForm" >
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
