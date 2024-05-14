@@ -6,6 +6,7 @@ export default async (req, res) => {
         auth: {
             user: 'mail@icdindia.com',
             pass: process.env.pass,
+            // pass: 'zxtpndwkmgrxiysr'
             // user: 'shivani@icdindia.com',
             // pass: 'shivani123',
         },

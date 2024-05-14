@@ -119,6 +119,9 @@ $overlaybg-color: rgba(31, 31, 31, 0.5);
   }
 }
 
+*{
+  scroll-behavior: smooth !important;
+}
 // Global
 html {
   font-size: 16px;

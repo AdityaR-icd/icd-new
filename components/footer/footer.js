@@ -6,27 +6,28 @@ import Link from 'next/link'
 const Navbar = (props) => {
     const data = props.data
     return(
-        <footer>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-7 col-lg-5 col-xl-5">
-                        <Subscribe /> 
-                    </div>
-                    <div className="col-md-4 col-lg-3 col-xl-3">
-                        <div className="footer__talk-padding paddingLeft">
-                            <span className="footerHead">let’s talk</span>
-                            <span className="footerText">
-                                <p><strong>business</strong>&nbsp;<a href="mailto:abhishek@icdindia.com">{data?.email}</a></p>
+        <>
+            <footer>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-7 col-lg-5 col-xl-5">
+                            <Subscribe />
+                        </div>
+                        <div className="col-md-4 col-lg-3 col-xl-3">
+                            <div className="footer__talk-padding paddingLeft">
+                                <span className="footerHead">let’s talk</span>
+                                <span className="footerText">
+                                    <p><strong>business</strong>&nbsp;<a href={`mailto:${data?.email}`}>{data?.email}</a></p>
+                                </span>
+                                <span className="footerText">
+                                    <p><strong>jobs</strong>&nbsp;<a href={`mailto:${data?.job}}`}>{data?.job}</a></p>
                             </span>
                             <span className="footerText">
-                                <p><strong>jobs</strong>&nbsp;<a href="mailto:work@icdindia.com">{data?.job}</a></p>
-                            </span>
-                            <span className="footerText">
-                                <p><strong>call</strong>&nbsp;<a href="tel:{}">{data?.call}</a></p>
+                                <p><strong>call</strong>&nbsp;<a href={`tel:${data?.call}`}>{data?.call}</a></p>
                             </span>
                         </div>
                     </div>
-                
+
                     <div className="col-md-2 col-lg-2 d-lg-block d-none">
                         <div className="paddingLeft footer__connect--wrapper">
                             <span className="footerHead d-md-block d-none">connect</span>
@@ -61,17 +62,18 @@ const Navbar = (props) => {
                     </div>
                 </div>
 
-                {/* connect buttons for mobile */}     
-            </div>
-            <div className="footer__connect d-lg-none d-block">
-                <span className="footerText facebook-link"><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></span>
-                <span className="footerText twitter-link"><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></span>
-                <span className="footerText linkedin-link"><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></span>
-                <span className="footerText instagram-link"><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></span>
-                <span className="footerText vimeo-link"><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></span>
-                <span className="footerText behance-link"><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></span>
-            </div>
-        </footer>
+                {/* connect buttons for mobile */}
+                </div>
+                <div className="footer__connect d-lg-none d-block">
+                    <span className="footerText facebook-link"><a href={data?.facebook} target="_blank" rel="noreferrer noopener">facebook</a></span>
+                    <span className="footerText twitter-link"><a href={data?.twitter} target="_blank" rel="noreferrer noopener">twitter</a></span>
+                    <span className="footerText linkedin-link"><a href={data?.linkedin} target="_blank" rel="noreferrer noopener">linkedin</a></span>
+                    <span className="footerText instagram-link"><a href={data?.instagram} target="_blank" rel="noreferrer noopener">instagram</a></span>
+                    <span className="footerText vimeo-link"><a href={data?.vimeo} target="_blank" rel="noreferrer noopener">vimeo</a></span>
+                    <span className="footerText behance-link"><a href={data?.behance} target="_blank" rel="noreferrer noopener">behance</a></span>
+                </div>
+            </footer>
+        </>
     )
 }
 
