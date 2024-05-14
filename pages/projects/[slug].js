@@ -365,8 +365,9 @@ const shimmer = (w, h) => `
               alt="project-lead"
               layout="fill"
               className='d-none d-md-block'
+              unoptimized
               sizes="100vw" />
-
+          
 
             <Image
               src={leadComponentMobile}
@@ -376,6 +377,7 @@ const shimmer = (w, h) => `
               alt="project-lead"
               layout="fill"
               className='d-block d-md-none'
+              unoptimized
               sizes="100vw" />
 
           </div>

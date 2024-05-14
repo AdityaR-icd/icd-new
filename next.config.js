@@ -40,11 +40,11 @@ module.exports = withBundleAnalyzer(withPWA({
   },
   optimizeFonts: true,
   reactStrictMode: true,
-  // experimental: {
-  //     images: {
-  //         // unoptimized: true
-  //     }
-  // },
+  experimental: {
+      images: {
+          unoptimized: true
+      }
+  },
   images: {
     domains: ['res.cloudinary.com' , 'digital.icdindia.com']
   },
