@@ -117,7 +117,7 @@ export default function Enquiry({ position }) {
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" id="school-name" className="form-control" placeholder=" " autoComplete="off" value={schoolName} onChange={(e) => setQualification(e.target.value)} required />
-                                <label className="form-control-placeholder" htmlFor="school-name">your school Name *</label>
+                                <label className="form-control-placeholder" htmlFor="school-name">your school name *</label>
                             </div>
                         </div>
 

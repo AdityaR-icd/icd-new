@@ -38,7 +38,7 @@ export default function fetchJobs({ data }) {
                         sizes="100vw" />
                 </span>
                 <span className="job__desc">{parse(data.content)}</span>
-                <Link href="#careerForm" legacyBehavior><button className="jobApply">apply</button></Link>
+                {/* <Link href="#careerForm" legacyBehavior><button className="jobApply">apply</button></Link> */}
             </div>
         </div>
     </>;
