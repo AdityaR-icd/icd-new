@@ -64,6 +64,9 @@ export default async (req, res) => {
             applyingFor = req.body.applyingFor,
             surname = req.body.lastName,
             education = req.body.qualification,
+            underGraduateCollege = req.body.UGCollegeName,
+            postGraduateCollege = req.body.PGCollegeName,
+            lastOffice = req.body.lastOffice,
             experience = req.body.experience,
             mobile = req.body.number,
             city = req.body.city,
@@ -71,7 +74,8 @@ export default async (req, res) => {
             website = req.body.Website,
             sendTo = req.body.sendTo;
 
-        var content = ` Applied For: ${applyingFor} <br /> First Name: ${firstname} <br /> Surname: ${surname} <br /> Education: ${education} <br /> Experience: ${experience} <br /> Mobile: ${mobile} <br /> City: ${city} <br /> Email: ${email} <br /> Website: ${website} <br />`;
+
+        var content = ` Applied For: ${applyingFor} <br /> First Name: ${firstname} <br /> Surname: ${surname} <br /> School Name: ${education} <br /> Undergraduate College Name: ${underGraduateCollege} <br /> Post Graduate College Name: ${postGraduateCollege} <br /> Experience: ${experience} <br /> Last Employed At: ${lastOffice} <br /> Mobile: ${mobile} <br /> City: ${city} <br /> Email: ${email} <br /> Website: ${website} <br />`;
         var message = `Thank you for your interest. <br /><br />
         We take about two weeks to write back, if we see a fit—unfortunately, we’re not able to write back when we don’t (we’re a small office). 
         Typically, we do a preliminary selection based on your work, and the next rounds are in—person interviews with team lead and partners. 

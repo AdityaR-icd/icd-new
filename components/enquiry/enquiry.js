@@ -9,7 +9,10 @@ export default function Enquiry({ position }) {
     const [email, setEmail] = useState('')
     const [number, setNumber] = useState('')
     const [city, setcity] = useState('')
-    const [qualification, setQualification] = useState('')
+    const [schoolName, setQualification] = useState('')
+    const [UGCollegeName, setUGCollegeName] = useState('')
+    const [PGCollegeName, setPGCollegeName] = useState('')
+    const [lastOffice, setlastOffice] = useState('')
     const [experience, setexperience] = useState('')
     const [Website, setWebsite] = useState('')
     const [submitted, setSubmitted] = useState(false)
@@ -40,7 +43,10 @@ export default function Enquiry({ position }) {
             email,
             number,
             city,
-            qualification,
+            schoolName,
+            UGCollegeName,
+            PGCollegeName,
+            lastOffice,
             experience,
             Website,
             sendTo: array,
@@ -68,6 +74,9 @@ export default function Enquiry({ position }) {
                 setNumber('')
                 setcity('')
                 setQualification('')
+                setUGCollegeName('')
+                setPGCollegeName('')
+                setlastOffice('')
                 setexperience('');
                 setWebsite('')
             } else $('.error-message').addClass('show-message');
@@ -107,42 +116,65 @@ export default function Enquiry({ position }) {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <input type="text" id="qualification" className="form-control" placeholder=" " autoComplete="off" value={qualification} onChange={(e) => setQualification(e.target.value)} required />
-                                <label className="form-control-placeholder" htmlFor="qualification">your educational qualification *</label>
+                                <input type="text" id="school-name" className="form-control" placeholder=" " autoComplete="off" value={schoolName} onChange={(e) => setQualification(e.target.value)} required />
+                                <label className="form-control-placeholder" htmlFor="school-name">your school Name *</label>
                             </div>
                         </div>
+
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <input type="text" id="UGCollegeName" className="form-control" placeholder=" " autoComplete="off" value={UGCollegeName} onChange={(e) => setUGCollegeName(e.target.value)} required />
+                                <label className="form-control-placeholder" htmlFor="UGCollegeName">your undergraduate college name *</label>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <input type="text" id="PGCollegeName" className="form-control" placeholder=" " autoComplete="off" value={PGCollegeName} onChange={(e) => setPGCollegeName(e.target.value)} required />
+                                <label className="form-control-placeholder" htmlFor="PGCollegeName">your post graduate college name *</label>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-6">
+                            <div className="form-group">
+                                <input type="text" id="lastOffice" className="form-control" placeholder=" " autoComplete="off" value={lastOffice} onChange={(e) => setlastOffice(e.target.value)} required />
+                                <label className="form-control-placeholder" htmlFor="lastOffice">your previous organization *</label>
+                            </div>
+                        </div>
+
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" name="experience" id="experience" className="form-control" placeholder=" " autoComplete="off" value={experience} onChange={(e) => setexperience(e.target.value)} required />
                                 <label className="form-control-placeholder" htmlFor="experience">your years of experience *</label>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
+
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="tel" className="form-control" value={number} onChange={(e) => setNumber(e.target.value)} placeholder=" " minLength="10" maxLength="10" id="mobile-no" autoComplete="off" required />
                                 <label className="form-control-placeholder" htmlFor="mobile-no">your mobile number *</label>
                             </div>
                         </div>
+
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" id="city" autoComplete="off" value={city} onChange={(e) => setcity(e.target.value)} placeholder=" " className="form-control" required />
                                 <label className="form-control-placeholder" htmlFor="city">your current city *</label>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
+
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="email" id="emailId" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder=" " className="form-control" required />
                                 <label className="form-control-placeholder" htmlFor="emailId">your email id *</label>
                             </div>
                         </div>
+                    </div>
+                    <div className="row">
                         <div className="col-lg-6">
                             <div className="form-group">
-                                <input type="text" id="website" value={Website} onChange={(e) => setWebsite(e.target.value)} pattern="(?:(?:https?:\/\/)?|(?:www\.))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&/=]*)" autoComplete="off" placeholder=" " className="form-control" />
-                                <label className="form-control-placeholder" htmlFor="website">your website/behance/linkedin url (like example.com)</label>
+                                <input type="text" id="website" value={Website} onChange={(e) => setWebsite(e.target.value)} pattern="(?:(?:https?:\/\/)?|(?:www\.))[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_\+.~#?&/=]*)" autoComplete="off" placeholder=" " className="form-control" required />
+                                <label className="form-control-placeholder" htmlFor="website">your website/behance/linkedin url (like example.com)*</label>
                             </div>
                         </div>
                     </div>
