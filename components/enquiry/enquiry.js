@@ -117,21 +117,21 @@ export default function Enquiry({ position }) {
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" id="school-name" className="form-control" placeholder=" " autoComplete="off" value={schoolName} onChange={(e) => setQualification(e.target.value)} required />
-                                <label className="form-control-placeholder" htmlFor="school-name">your school name *</label>
+                                <label className="form-control-placeholder" htmlFor="school-name">your school name and location *</label>
                             </div>
                         </div>
 
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" id="UGCollegeName" className="form-control" placeholder=" " autoComplete="off" value={UGCollegeName} onChange={(e) => setUGCollegeName(e.target.value)} required />
-                                <label className="form-control-placeholder" htmlFor="UGCollegeName">your undergraduate college name *</label>
+                                <label className="form-control-placeholder" htmlFor="UGCollegeName">your undergraduate college name and location *</label>
                             </div>
                         </div>
 
                         <div className="col-lg-6">
                             <div className="form-group">
                                 <input type="text" id="PGCollegeName" className="form-control" placeholder=" " autoComplete="off" value={PGCollegeName} onChange={(e) => setPGCollegeName(e.target.value)} required />
-                                <label className="form-control-placeholder" htmlFor="PGCollegeName">your post graduate college name *</label>
+                                <label className="form-control-placeholder" htmlFor="PGCollegeName">your post graduate college name and location *</label>
                             </div>
                         </div>
 
