@@ -1,4 +1,4 @@
- # Folder structure
+ # Folder structure.
     
    1. -- /components :   Contains modules for pages 
    2. -- /src/components : Components used in the website like header , footer etc
