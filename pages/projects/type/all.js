@@ -25,6 +25,6 @@ export async function getStaticProps({ preview = false }) {
       filters,
       projectsTypes
     },
-    revalidate: 180,
+    // revalidate: 180,
   }
 }
