@@ -281,7 +281,7 @@ export async function getStaticProps({ params }) {
             tags,
             filters
         },
-        revalidate: 3600,
+        // revalidate: 3600,
     }
 }
 
