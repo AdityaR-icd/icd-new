@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
     "lint": "next lint",
-    "export": "next export",
-    "analyze": "ANALYZE=true next build"
+    "export": "NODE_OPTIONS=--openssl-legacy-provider next export",
+    "analyze": "NODE_OPTIONS=--openssl-legacy-provider ANALYZE=true next build"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
