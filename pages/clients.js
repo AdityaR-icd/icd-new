@@ -15,7 +15,6 @@ export default function clients({ clients: { edges }, meta: { pages } }) {
 export async function getStaticProps() {
   const meta = await getClientsPage();
   const clients = await getClients()
-  // const menus = await getMenus()
   const data = await getFooter()
   const filters = await getFilters()
   return {
