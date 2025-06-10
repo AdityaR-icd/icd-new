@@ -18,7 +18,6 @@ import carousel from '../../components/project-categories/all/all.module.scss'
 import type from '../../components/project-categories/type/type.module.scss'
 
 import $ from 'jquery';
-import { useMediaQuery } from 'react-responsive';
 import style from '../../styles/singleProject.module.scss'
 
 
@@ -176,6 +175,7 @@ const shimmer = (w, h) => `
   var awards = project?.projectComponent?.awardsReceived
   var awardName = project?.projectComponent?.nameOfTheAwardEgC
   var relatedProjects = project?.projectComponent?.relatedprojects ?? []
+  var addDisclaimer = project?.addDisclaimer?.addDisclaimer
 
 
   var relatedProjects_slider = relatedProjects?.map((node) => {
@@ -506,6 +506,8 @@ const shimmer = (w, h) => `
               </div>
             </div>
             <a className={style.team__seeAll} rel="noopener" aria-label="icd" onClick={seeallTeam}>{seeAll}</a>
+            {addDisclaimer && <span className={style.disclaimer}>The fonts and images used here are for representation purposes. The rights of commercial usage have not been purchased.
+</span>}
             <button className="collapse__btn" onClick={showModal}>project detail</button>
           </div>
         </div>
