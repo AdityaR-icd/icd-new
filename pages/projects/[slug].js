@@ -506,7 +506,7 @@ const shimmer = (w, h) => `
               </div>
             </div>
             <a className={style.team__seeAll} rel="noopener" aria-label="icd" onClick={seeallTeam}>{seeAll}</a>
-            {addDisclaimer && <span className={style.disclaimer}>The fonts and images used here are for representation purposes. The rights of commercial usage have not been purchased.
+            {addDisclaimer && <span className={style.disclaimer}>Fonts and stock images, if used, are for representation purposes. The rights of commercial usage have not been purchased.
 </span>}
             <button className="collapse__btn" onClick={showModal}>project detail</button>
           </div>
