@@ -3,8 +3,7 @@ import style from '../posts/posts.module.scss'
 import Link from 'next/link'
 import Image from "next/image";
 
-import dynamic from "next/dynamic";
-const Like = dynamic(() => import("../../components/like"));
+import Like from "../../components/like";
 
 export default function postItem({ data, ids }) {
     var categories = data?.categories.edges[0]?.node?.name

@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from 'react'
 import style from './contactForm.module.scss'
 import $ from 'jquery'

@@ -1,7 +1,5 @@
 import { getClientsPage, getClients } from '../../lib/api'
-import dynamic from "next/dynamic";
-
-const ClientsComponent = dynamic(() => import("../../components/clients/clients"));
+import ClientsComponent from "../../components/clients/clients";
 
 export default async function Clients() {
   const meta = await getClientsPage();

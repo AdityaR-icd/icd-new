@@ -1,8 +1,7 @@
 import { NextSeo } from 'next-seo';
-import dynamic from "next/dynamic";
-const Head = dynamic(() => import('next/head'));
-const Intro = dynamic(() => import("../intro-text/intro-text"));
-const Service = dynamic(() => import("./fetch-services"));
+import Head from 'next/head';
+import Intro from "../intro-text/intro-text";
+import Service from "./fetch-services";
 
 import style from "./services.module.scss";
 

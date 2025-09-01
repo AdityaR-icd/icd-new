@@ -1,8 +1,7 @@
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import style from "./services.module.scss";
-import dynamic from "next/dynamic";
-const Image = dynamic(() => import("next/image"));
+import Image from "next/image";
 
 export default function fetchServices({ data }) {
     var cardImgSrc = data?.featuredImage?.backgroundImg?.sourceUrl;

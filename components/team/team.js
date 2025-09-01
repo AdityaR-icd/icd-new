@@ -1,10 +1,10 @@
+"use client";
 import Head from 'next/head'
 import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 
-import dynamic from "next/dynamic";
-const Intro = dynamic(() => import("../intro-text/intro-text"));
-const SingleProfile = dynamic(() => import("./single-profile"));
+import Intro from "../intro-text/intro-text";
+import SingleProfile from "./single-profile";
 
 import style from '../project/category.module.scss'
 import Ourteam from './our-team.module.scss'

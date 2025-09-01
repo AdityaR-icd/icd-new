@@ -1,10 +1,10 @@
-import dynamic from "next/dynamic";
+"use client";
 import { useRouter } from 'next/router';
 import { useEffect } from 'react'
 import $ from 'jquery'
 
-const Nav = dynamic(() => import("../header/header"));
-const Footer = dynamic(() => import("../footer/footer"));
+import Nav from "../header/header";
+import Footer from "../footer/footer";
 
 
 

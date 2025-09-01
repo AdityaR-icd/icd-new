@@ -10,8 +10,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 // import { getFilters } from '../../lib/api'
 import Script from "next/script";
-import dynamic from "next/dynamic";
-const Search = dynamic(() => import("../search/search"));
+import Search from "../search/search";
 
 // const FilterLayout = dynamic(() => import("../../app/filterlayout/layout"));
 

@@ -3,11 +3,9 @@
 import { NextSeo } from 'next-seo';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import dynamic from "next/dynamic";
 import Link from 'next/link';
-
-const Head = dynamic(() => import('next/head'));
-const PostItem = dynamic(() => import('../../../components/posts-items/posts-items'));
+import Head from 'next/head';
+import PostItem from '../../../components/posts-items/posts-items';
 
 import style from '../../../components/posts/posts.module.scss';
 import categoryStyle from '../../../components/project/category.module.scss';

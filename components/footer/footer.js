@@ -1,5 +1,4 @@
-import dynamic from "next/dynamic";
-const Subscribe = dynamic(() => import("../subscribe/subscribe"));
+import Subscribe from "../subscribe/subscribe";
 import Link from 'next/link'
 
 

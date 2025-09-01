@@ -1,6 +1,6 @@
-import dynamic from "next/dynamic";
+"use client";
 import Link from "next/link";
-const Image = dynamic(() => import("next/image"));
+import Image from "next/image";
 import carousel from '../all/all.module.scss'
 import type from './type.module.scss'
 // import Shimmer from "react-shimmer-effect";

@@ -1,7 +1,7 @@
+"use client";
 import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
-import dynamic from "next/dynamic";
-const Head = dynamic(() => import('next/head'));
+import Head from 'next/head';
 export default function posts({ meta }) {
     const backButton = () => {
         window.history.back();
