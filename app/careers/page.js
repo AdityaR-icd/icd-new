@@ -1,7 +1,5 @@
 import { getCareerPage, getJobs } from '../../lib/api'
-import dynamic from "next/dynamic";
-
-const CareersComponent = dynamic(() => import("../../components/career/careers"));
+import CareersComponent from "../../components/career/careers";
 
 export default async function Careers() {
   const meta = await getCareerPage()

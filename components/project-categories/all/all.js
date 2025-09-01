@@ -1,5 +1,5 @@
-import dynamic from "next/dynamic";
-const Image = dynamic(() => import("next/image"));
+"use client";
+import Image from "next/image";
 import carousel from './all.module.scss'
 import types from '../type/type.module.scss'
 import { useState, useEffect } from 'react'

@@ -11,13 +11,11 @@ import Icon from '../../assets/images/logo/default-author.jpeg';
 import style from '../../styles/singlePost.module.scss';
 import carousel from '../../components/project-categories/all/all.module.scss';
 import type from '../../components/project-categories/type/type.module.scss';
-import dynamic from "next/dynamic";
-
-const Seo = dynamic(() => import("../../components/seo"));
-const Like = dynamic(() => import("../../components/like"));
-const NextPost = dynamic(() => import('../../components/posts/next-post'));
-const PrevPost = dynamic(() => import('../../components/posts/prev-post'));
-const MusicArticle = dynamic(() => import('../../components/music-article/music'));
+import Seo from "../../components/seo";
+import Like from "../../components/like";
+import NextPost from '../../components/posts/next-post';
+import PrevPost from '../../components/posts/prev-post';
+import MusicArticle from '../../components/music-article/music';
 
 export default function PostPage({ post, teamData }) {
   const pathname = usePathname();

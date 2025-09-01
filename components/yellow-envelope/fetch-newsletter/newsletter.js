@@ -1,3 +1,4 @@
+"use client";
 import style from '../../posts/posts.module.scss'
 import parse from 'html-react-parser';
 import Link from 'next/link'

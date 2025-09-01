@@ -1,8 +1,7 @@
 import { NextSeo } from 'next-seo';
 import React from 'react';
-import dynamic from "next/dynamic";
-const Head = dynamic(() => import('next/head'));
-const Type = dynamic(() => import("../project-categories/type/type"));
+import Head from 'next/head';
+import Type from "../project-categories/type/type";
 import Link from 'next/link';
 
 import project from './projects.module.scss'

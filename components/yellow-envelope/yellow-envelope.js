@@ -1,9 +1,8 @@
 import { NextSeo } from 'next-seo';
-import dynamic from "next/dynamic";
 import { useRouter } from 'next/router'
 import parse from 'html-react-parser';
 import Link from 'next/link'
-const Head = dynamic(() => import('next/head'));
+import Head from 'next/head';
 // const FetchNewsletter = dynamic (() => import("./fetch-newsletter/newsletter"));
 
 import $ from 'jquery';

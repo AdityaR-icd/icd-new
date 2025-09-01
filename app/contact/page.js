@@ -1,7 +1,5 @@
 import { getContactPage } from '../../lib/api'
-import dynamic from "next/dynamic";
-
-const ContactComponent = dynamic(() => import("../../components/contact/contact"));
+import ContactComponent from "../../components/contact/contact";
 
 export default async function Contact() {
   const meta = await getContactPage();

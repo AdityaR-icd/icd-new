@@ -1,11 +1,11 @@
+"use client";
 import { NextSeo } from 'next-seo';
-import dynamic from "next/dynamic";
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-const Head = dynamic(() => import('next/head'));
-const PostItem = dynamic(() => import('../posts-items/posts-items'))
+import Head from 'next/head';
+import PostItem from '../posts-items/posts-items';
 import $ from 'jquery';
 
 

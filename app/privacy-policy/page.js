@@ -1,7 +1,5 @@
 import { getPolicyPage } from '../../lib/api'
-import dynamic from "next/dynamic";
-
-const PrivacyComponent = dynamic(() => import("../../components/privacy/privacy"));
+import PrivacyComponent from "../../components/privacy/privacy";
 
 export default async function PrivacyPolicy() {
   const meta = await getPolicyPage();
