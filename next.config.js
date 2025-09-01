@@ -5,18 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const withPWA = require('next-pwa')({
-  dest: "public",
-  runtimeCaching,
-  skipWaiting: false,
-  buildExcludes: [/middleware-manifest\.json$/],
-  sw: 'service-worker.js',
-  disable: process.env.NODE_ENV === 'development'
-})
-
-
-
-module.exports = withBundleAnalyzer(withPWA({
+module.exports = withBundleAnalyzer({
 
   i18n: {
     locales: ['en'],
@@ -40,11 +29,6 @@ module.exports = withBundleAnalyzer(withPWA({
   },
   optimizeFonts: true,
   reactStrictMode: true,
-  experimental: {
-      images: {
-          unoptimized: true
-      }
-  },
   images: {
     domains: ['res.cloudinary.com' , 'digital.icdindia.com']
   },

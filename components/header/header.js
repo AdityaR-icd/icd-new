@@ -6,7 +6,7 @@ import logo from '../../assets/logo/icd-logo.9e81fca5.svg'
 import mobileLogo from '../../assets/logo/mobile-logo-new.png'
 import $, { parseJSON } from 'jquery';
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 // import { getFilters } from '../../lib/api'
 import Script from 'next/script'
 import dynamic from "next/dynamic";
@@ -85,17 +85,16 @@ const Header = (props) => {
 
   
 
-    const router = useRouter()
-    // const list = props.menus
-    // Onclick expand paragraph
+    const pathname = usePathname()
+    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
     const hamburgerToggle = () => {
-        $('body').toggleClass('hamburger-open');
-        $('.hamburger, .nav-menu').toggleClass("is-active");
+        setIsHamburgerOpen(!isHamburgerOpen);
     }
 
     const hamburgerClose = () => {
-        $('body').removeClass('hamburger-open');
-        $('.hamburger, .nav-menu').removeClass("is-active");
+        setIsHamburgerOpen(false);
     }
     const [searchValue, setsearchValue] = useState('')
     // Search Show and Hide
@@ -133,11 +132,12 @@ const Header = (props) => {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        var search = $('#hamburgerSearch').val();
-        var clean = '/search/' + search;
-        router.push({
-            pathname: clean,
-        })
+        const search = e.target.elements.search.value;
+        const clean = `/search/${search}`;
+        // router.push({
+        //     pathname: clean,
+        // })
+        window.location.href = clean;
     }
 
 
@@ -182,14 +182,14 @@ const Header = (props) => {
                         <div className="col-2 col-md-10">
                             <div className="d-block d-lg-none">
 
-                                <div className="hamburger hamburger--spring js-hamburger" onClick={hamburgerToggle}>
+                                <div className={`hamburger hamburger--spring js-hamburger ${isHamburgerOpen ? 'is-active' : ''}`} onClick={hamburgerToggle}>
                                     <div className="hamburger-box">
                                         <div className="hamburger-inner"></div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div className="nav-menu">
+                            <div className={`nav-menu ${isHamburgerOpen ? 'is-active' : ''}`}>
                                 <div className="container">
                                     <div className="row">
                                         <ul>
@@ -200,11 +200,11 @@ const Header = (props) => {
                                                 </form>
                                             </li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/">home</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/projects/type/all" className={router.pathname == "/projects" || router.pathname == "/projects/[slug]" || router.pathname == "/projects/category/[slug]" || router.pathname == "/projects/category/[slug]/[sub_slug]" || router.pathname == "/projects/type/all" ? "active" : ""}>projects</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/clients" className={router.pathname == "/clients" || router.pathname == "/clients/industry" ? "active" : ""}>clients</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/services" className={router.pathname == "/services" ? "active" : ""}>services</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/posts" className={router.pathname == "/posts" || router.pathname == "/posts/[slug]" || router.pathname == "/posts/category/[slug]" ? "active" : ""}>posts</Link></li>
-                                            <li onClick={hamburgerClose}><Link href="/contact" className={router.pathname == "/contact" ? "active" : ""}>contact</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/projects/type/all" className={pathname.startsWith("/projects") ? "active" : ""}>projects</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/clients" className={pathname.startsWith("/clients") ? "active" : ""}>clients</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/services" className={pathname === "/services" ? "active" : ""}>services</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/posts" className={pathname.startsWith("/posts") ? "active" : ""}>posts</Link></li>
+                                            <li onClick={hamburgerClose}><Link href="/contact" className={pathname === "/contact" ? "active" : ""}>contact</Link></li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/our-team">team</Link></li>
                                             <li className="mobile__menu--items" onClick={hamburgerClose}><Link href="/careers">careers</Link></li>
                                             <li className="copyright">© 1990-2019 itu chaudhuri design pvt ltd | all rights reserved. please note — no images or content from site can be reproduced without prior written consent from icd</li>
@@ -218,10 +218,10 @@ const Header = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="search-form ignore-react-onclickoutside" id="searchID">
+            <div className={`search-form ignore-react-onclickoutside ${isSearchOpen ? 'showSearch' : ''}`} id="searchID">
                 <Search suggestion={allFilters} ></Search>
                 <div id="close">
-                    <span className="close-wrap" onClick={searchToggle}>
+                    <span className="close-wrap" onClick={() => setIsSearchOpen(false)}>
                         <span className="close-line close-line1"></span>
                         <span className="close-line close-line2"></span>
                     </span>
