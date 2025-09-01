@@ -1,7 +1,8 @@
 import { getAllPostsByCategorySlug, getPostPage, getPostCategories, getAllTags, getAllPostsByCategory } from '../../../../lib/api'
 import PostCategoryPage from '../../../../components/posts/PostCategoryPage'
 
-export default async function PostCategory({ params }) {
+export default async function PostCategory(props) {
+  const params = await props.params;
   const { slug } = params;
   const posts = await getAllPostsByCategorySlug(slug);
   const meta = await getPostPage();

@@ -1,7 +1,8 @@
 import { getPostAndMorePosts, getTeam, getAllPostsForHome } from '../../../lib/api'
 import PostPage from '../../../components/posts/PostPage'
 
-export default async function Post({ params }) {
+export default async function Post(props) {
+  const params = await props.params;
   const { slug } = params;
   const data = await getPostAndMorePosts(slug);
   const teamData = await getTeam();

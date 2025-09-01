@@ -1,23 +1,21 @@
-const path = require('path')
+const path = require("path");
 const runtimeCaching = require("next-pwa/cache");
-const RemoveServiceWorkerPlugin = require('webpack-remove-serviceworker-plugin');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const RemoveServiceWorkerPlugin = require("webpack-remove-serviceworker-plugin");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
 
 module.exports = withBundleAnalyzer({
-
   i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
+    locales: ["en"],
+    defaultLocale: "en",
   },
-
 
   // reactStrictMode: true,
   // experimental:{appDir: true},
   // swcMinify: true,
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, "styles")],
   },
 
   staticPageGenerationTimeout: 1000,
@@ -30,48 +28,52 @@ module.exports = withBundleAnalyzer({
   optimizeFonts: true,
   reactStrictMode: true,
   images: {
-    domains: ['res.cloudinary.com' , 'digital.icdindia.com']
+    domains: ["res.cloudinary.com", "digital.icdindia.com"],
   },
 
   env: {
-    REVALIDATION_TOKEN: 'randomsecrettoken'
+    REVALIDATION_TOKEN: "randomsecrettoken",
   },
   async headers() {
     return [
       {
-        source: '/_next/image(.*)',
+        source: "/_next/image(.*)",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=365d, stale-while-revalidate=180',
-            
+            key: "Cache-Control",
+            value: "public, max-age=365d, stale-while-revalidate=180",
           },
           { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "Access-Control-Allow-Headers", "value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+          },
         ],
       },
       {
-        source: '/pages/(.*)',
+        source: "/pages/(.*)",
         headers: [
-          { key: "Access-Control-Allow-Credentials", "value": "true" },
-          { key: "Access-Control-Allow-Origin", "value": "*" },
-          { key: "Access-Control-Allow-Headers", "value": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With" }
-        ]
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+          },
+        ],
       },
       {
         // This works, and returns appropriate Response headers:
-        source: '/(.*).jpg',
+        source: "/(.*).jpg",
         headers: [
           {
-            key: 'Cache-Control',
+            key: "Cache-Control",
             value:
-              'public, max-age=180, s-maxage=180, stale-while-revalidate=180',
+              "public, max-age=180, s-maxage=180, stale-while-revalidate=180",
           },
         ],
       },
-    ]
+    ];
   },
-}));
-
-
-
+});

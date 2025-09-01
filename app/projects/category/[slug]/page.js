@@ -1,18 +1,28 @@
-import { getProjectByTypes, getLatestProject, getAllProjectsTypes } from '../../../../lib/api'
-import ProjectCategoryPage from '../../../../components/project/ProjectCategoryPage'
+import {
+  getProjectByTypes,
+  getLatestProject,
+  getAllProjectsTypes,
+} from "../../../../lib/api";
+import ProjectCategoryPage from "../../../../components/project/ProjectCategoryPage";
 
-export default async function ProjectCategory({ params }) {
+export default async function ProjectCategory(props) {
+  const params = await props.params;
   const { slug } = params;
   const gProject = await getProjectByTypes(slug);
   const latestProject = await getLatestProject();
 
-  return <ProjectCategoryPage project={gProject.projectTypes} latestProject={latestProject} />;
+  return (
+    <ProjectCategoryPage
+      project={gProject.projectTypes}
+      latestProject={latestProject}
+    />
+  );
 }
 
-export async function generateStaticParams() {
-  const allProjects = await getAllProjectsTypes();
+// export async function generateStaticParams() {
+//   const allProjects = await getAllProjectsTypes();
 
-  return allProjects.edges.map(({ node }) => ({
-    slug: node.slug,
-  }));
-}
+//   return allProjects.edges.map(({ node }) => ({
+//     slug: node.slug,
+//   }));
+// }

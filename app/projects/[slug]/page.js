@@ -1,7 +1,12 @@
-import { getProject, getAllProjectsNotIn, getAllProjectsWithSlug } from '../../../lib/api'
-import ProjectPage from '../../../components/project/ProjectPage'
+import {
+  getProject,
+  getAllProjectsNotIn,
+  getAllProjectsWithSlug,
+} from "../../../lib/api";
+import ProjectPage from "../../../components/project/ProjectPage";
 
-export default async function Project({ params }) {
+export default async function Project(props) {
+  const params = await props.params;
   const { slug } = params;
   const gProject = await getProject(slug);
   const oProjects = await getAllProjectsNotIn(slug);
@@ -9,10 +14,10 @@ export default async function Project({ params }) {
   return <ProjectPage project={gProject.project} oProjects={oProjects} />;
 }
 
-export async function generateStaticParams() {
-  const allProjects = await getAllProjectsWithSlug();
+// export async function generateStaticParams() {
+//   const allProjects = await getAllProjectsWithSlug();
 
-  return allProjects.edges.map(({ node }) => ({
-    slug: node.slug,
-  }));
-}
+//   return allProjects.edges.map(({ node }) => ({
+//     slug: node.slug,
+//   }));
+// }
