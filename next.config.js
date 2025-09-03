@@ -1,6 +1,4 @@
 const path = require("path");
-const runtimeCaching = require("next-pwa/cache");
-const RemoveServiceWorkerPlugin = require("webpack-remove-serviceworker-plugin");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -11,9 +9,8 @@ module.exports = withBundleAnalyzer({
     defaultLocale: "en",
   },
 
-  // reactStrictMode: true,
-  // experimental:{appDir: true},
-  // swcMinify: true,
+  swcMinify: true, // Optional: Ensure SWC is enabled for minification
+
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
@@ -25,8 +22,10 @@ module.exports = withBundleAnalyzer({
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+
   optimizeFonts: true,
   reactStrictMode: true,
+
   images: {
     domains: ["res.cloudinary.com", "digital.icdindia.com"],
   },
@@ -34,6 +33,7 @@ module.exports = withBundleAnalyzer({
   env: {
     REVALIDATION_TOKEN: "randomsecrettoken",
   },
+
   async headers() {
     return [
       {
@@ -64,7 +64,6 @@ module.exports = withBundleAnalyzer({
         ],
       },
       {
-        // This works, and returns appropriate Response headers:
         source: "/(.*).jpg",
         headers: [
           {
