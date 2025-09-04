@@ -3,8 +3,8 @@ import {
   getProjectPage,
   getLatestProject,
   getProjectTypes,
-} from "../../../../../lib/api";
-import Layout from "../../../../../components/project/allProject";
+} from "@/lib/api";
+import Layout from "@/components/project/allProject";
 
 export default async function Page() {
   const AllProjects = await getAllProjectsForHome();

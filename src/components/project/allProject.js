@@ -76,6 +76,7 @@ export default function Index({
                   <Link
                     href={`/projects/category/${slug}`}
                     className={` project__filter ${category.project__filter}`}
+                    key={slug + name}
                   >
                     {name}
                   </Link>

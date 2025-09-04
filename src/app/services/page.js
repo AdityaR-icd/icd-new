@@ -1,6 +1,6 @@
-import { getPages, getService, getOtherService } from "../../lib/api";
+import { getPages, getService, getOtherService } from "@/lib/api";
 
-import Layout from "../../components/services/services";
+import Layout from "@/components/services/services";
 
 export default async function Page() {
   const meta = await getPages();
@@ -15,7 +15,6 @@ export default async function Page() {
       meta={meta_data}
       edges={service.edges}
       other_service={other_service}
-      filters={filters}
     />
   );
 }

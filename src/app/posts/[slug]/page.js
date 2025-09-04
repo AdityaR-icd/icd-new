@@ -1,4 +1,5 @@
 // app/post/[slug]/page.js
+
 import parse from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,7 +19,6 @@ import Like from "@/components/like";
 import NextPost from "@/components/posts/next-post";
 import PrevPost from "@/components/posts/prev-post";
 import MusicArticle from "@/components/music-article/music";
-
 /**
  * Generate static params (replaces getStaticPaths)
  */
@@ -41,6 +41,7 @@ export default async function PostPage({
   const teamData = await getTeam();
 
   const post = Moredata?.post;
+
   if (!post) {
     return <div>Post not found</div>; // triggers 404
   }
