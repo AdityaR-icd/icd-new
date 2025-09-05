@@ -1,10 +1,9 @@
 "use client";
 
-import { NextSeo } from "next-seo";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Head from "next/head";
+
 import PostItem from "../posts-items/posts-items";
 
 import style from "../posts/posts.module.scss";
@@ -57,39 +56,6 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
 
   return (
     <>
-      <NextSeo
-        title={metaData.seo.title}
-        description={metaData.seo.metaDesc}
-        canonical={`https://www.icdindia.com${pathname}`}
-        robots={metaData.metaRobotsNoindex}
-        googlebot={metaData.metaRobotsNofollow}
-        openGraph={{
-          url: `https://www.icdindia.com${pathname}`,
-          title: metaData.seo.title,
-          description: metaData.seo.metaDesc,
-          images: [
-            {
-              url: metaData.featuredImage?.node.sourceUrl,
-              alt: "homepage-image",
-              type: "image/jpeg",
-            },
-          ],
-          site_name: metaData.seo.title,
-        }}
-      />
-      <Head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metaData.seo.title} />
-        <meta name="twitter:description" content={metaData.seo.metaDesc} />
-        <meta
-          name="twitter:url"
-          content={`https://www.icdindia.com${pathname}`}
-        />
-        <meta
-          name="twitter:image"
-          content={metaData.featuredImage?.node.sourceUrl}
-        />
-      </Head>
       <section
         className={`${style.posts__page} mT__260 page__header posts__page ${
           showSearch ? style.post_search__open : ""

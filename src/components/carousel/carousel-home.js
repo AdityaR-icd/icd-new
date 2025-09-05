@@ -69,7 +69,6 @@ export default function carousel({ content, edges, latestProject }) {
     ],
     onInit: () => {
       if (typeof window !== "undefined") {
-        console.log("init");
         $(".slick-active").find("video")?.get(0)?.play();
         $(".slick-active").find("video")?.get(1)?.play();
       }
@@ -92,7 +91,7 @@ export default function carousel({ content, edges, latestProject }) {
         $(".slick-slide").find("video").get(0).pause();
         $(".slick-slide").find("video").get(0).currentTime = 0;
       });
-      console.log(currentSlide);
+
       setcurrentSlide(currentSlide + 1);
       // $('.slick-slide').find('video').get(0).pause();
       // console.log('function run')

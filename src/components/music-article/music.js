@@ -1,58 +1,64 @@
-import $ from 'jquery';
-export default function music({ node , music , i , range }){
+import $ from "jquery";
+export default function music({ node, music, i, range }) {
+  const playAudio = async (audio) => {
+    var file = document.getElementById(audio);
 
+    var className = `.${audio}`;
+    if ($(className).hasClass("active")) {
+      $(className).removeClass("active");
+    } else {
+      $("g").removeClass("active");
 
-  const playAudio = async(audio) => {
-      var file = document.getElementById(audio);
-          console.log('click')
-        var className = `.${audio}`
-        if ($(className).hasClass('active')) {
-            console.log('remove')
-            $(className).removeClass('active');
-        } else {
-            $('g').removeClass('active');
-            console.log('add')
-            $(className).addClass('active');
-        }
+      $(className).addClass("active");
+    }
 
-      file.currentTime = 0;
-      if (file.paused) {
-          document.querySelectorAll('audio').forEach(el => el.pause());
-          console.log('play')
-          file.load();
-          file.play();
-          // file.classList.add('active');
-      } else {
-          file.pause();
-          // file.classList.remove('active');
-          console.log('pause')
-      }
-  }
+    file.currentTime = 0;
+    if (file.paused) {
+      document.querySelectorAll("audio").forEach((el) => el.pause());
 
-  const endFunction = async() => {
-      document.querySelectorAll('g').forEach(el => el.classList.remove('active'));
-  }
-    return(
+      file.load();
+      file.play();
+      // file.classList.add('active');
+    } else {
+      file.pause();
+      // file.classList.remove('active');
+      console.log("pause");
+    }
+  };
+
+  const endFunction = async () => {
+    document
+      .querySelectorAll("g")
+      .forEach((el) => el.classList.remove("active"));
+  };
+  return (
+    <>
+      <>
+        <span className="credits"> Developed By Alok Joshi </span>
+      </>
+
+      {range == i && (
         <>
-         
-	
-			<>
-				<span className='credits'> Developed By Alok Joshi </span>
-			</>
-			
-		 	{range == i &&
-			<>   
-            <svg className='radio-img desktop-radio d-none d-md-block'  version="1.1" id="Layer_1" x="0px" y="0px"
-	 viewBox="0 0 970 641">
-            
-
-<path className="st0" d="M65.6,41.1c0-22.6,18.4-41,41-41h756c22.6,0,41,18.4,41,41v40h25c22.6,0,41,18.4,41,41v478
+          <svg
+            className="radio-img desktop-radio d-none d-md-block"
+            version="1.1"
+            id="Layer_1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 970 641"
+          >
+            <path
+              className="st0"
+              d="M65.6,41.1c0-22.6,18.4-41,41-41h756c22.6,0,41,18.4,41,41v40h25c22.6,0,41,18.4,41,41v478
 	c0,22.6-18.4,41-41,41h-888c-22.6,0-41-18.4-41-41v-478c0-22.6,18.4-41,41-41h25V41.1z M103.6,81.1h762v-26c0-9.4-7.6-17-17-17h-728
-	c-9.4,0-17,7.6-17,17V81.1z"/>
-<line className="st1" x1="486" y1="577" x2="486" y2="641"/>
-<line className="st1" x1="0" y1="564" x2="970" y2="564"/>
-<line className="st1" x1="0" y1="576" x2="970" y2="576"/>
-<path className="st2" d="M817.6,601.3l-0.2-0.2l0,0L817.6,601.3z M817.6,600.5l-0.2,0.2l0,0L817.6,600.5z M817.6,603l-0.2-0.2l0,0
+	c-9.4,0-17,7.6-17,17V81.1z"
+            />
+            <line className="st1" x1="486" y1="577" x2="486" y2="641" />
+            <line className="st1" x1="0" y1="564" x2="970" y2="564" />
+            <line className="st1" x1="0" y1="576" x2="970" y2="576" />
+            <path
+              className="st2"
+              d="M817.6,601.3l-0.2-0.2l0,0L817.6,601.3z M817.6,600.5l-0.2,0.2l0,0L817.6,600.5z M817.6,603l-0.2-0.2l0,0
 	L817.6,603z M816.7,602.1l-0.2-0.2l0,0L816.7,602.1z M817.6,602.1l0.2-0.2l0,0L817.6,602.1z M817.6,604.6l-0.2-0.2l0,0L817.6,604.6z
 	 M816.7,604.6l0.2-0.2l0,0L816.7,604.6z M816.7,603.7l-0.2-0.2l0,0L816.7,603.7z M817.6,603.7l0.2-0.2l0,0L817.6,603.7z
 	 M817.6,606.2l-0.2-0.2l0,0L817.6,606.2z M816.7,605.4l0.2,0.2l0,0L816.7,605.4z M817.6,605.4l-0.2,0.2l0,0L817.6,605.4z
@@ -1089,102 +1095,140 @@ export default function music({ node , music , i , range }){
 	c-0.1-0.1-0.1-0.1-0.1-0.3h-0.5c0,0.2,0.1,0.4,0.2,0.6L870.4,611z M870.3,610.8c0-0.1,0-0.2,0.1-0.3l-0.4-0.4
 	c-0.2,0.2-0.2,0.4-0.2,0.6H870.3z M870.5,610.5c0.1-0.1,0.1-0.1,0.3-0.1v-0.5c-0.2,0-0.5,0.1-0.6,0.3L870.5,610.5z M870.7,610.4
 	c0.1,0,0.2,0,0.2,0.1l0.4-0.3c-0.2-0.2-0.4-0.3-0.6-0.3V610.4z M871,610.5c0.1,0.1,0.1,0.1,0.1,0.3h0.5c0-0.2-0.1-0.4-0.2-0.6
-	L871,610.5z"/>
-<g>
-	<defs>
-		<rect id="SVGID_1_" x="881" y="594" width="41" height="31"/>
-	</defs>
+	L871,610.5z"
+            />
+            <g>
+              <defs>
+                <rect id="SVGID_1_" x="881" y="594" width="41" height="31" />
+              </defs>
 
-	<g className="st3">
-		<path className="st4" d="M881,617.2l8.2,0l5.2,7.8l0-7.8H922l0-23.2h-41L881,617.2z"/>
-		<path className="st5" d="M890.3,600.2h-2.9v10.7h2.9V600.2z"/>
-		<path className="st5" d="M902.7,610.7c-0.8,0.2-1.7,0.4-3.2,0.4c-2.9,0-6.2-1.4-6.2-5.5c0-3.7,2.6-5.6,6.2-5.6c1.1,0,2.2,0.2,3.2,0.6
-			l-0.2,2.3c-0.9-0.5-1.8-0.8-2.8-0.8c-2,0-3.4,1.5-3.4,3.5c0,2.1,1.5,3.4,3.6,3.4c0.9,0,1.9-0.2,2.7-0.6L902.7,610.7z"/>
-		<path className="st5" d="M905.2,600.2h3.9c3.7,0,6.4,1.2,6.4,5.3c0,4-2.7,5.4-6.4,5.4h-3.9V600.2z M908.1,608.8h1.1
-			c2.1,0,3.3-1.1,3.3-3.2c0-2.1-1.2-3.2-3.3-3.2h-1.1V608.8z"/>
-	</g>
-</g>
+              <g className="st3">
+                <path
+                  className="st4"
+                  d="M881,617.2l8.2,0l5.2,7.8l0-7.8H922l0-23.2h-41L881,617.2z"
+                />
+                <path className="st5" d="M890.3,600.2h-2.9v10.7h2.9V600.2z" />
+                <path
+                  className="st5"
+                  d="M902.7,610.7c-0.8,0.2-1.7,0.4-3.2,0.4c-2.9,0-6.2-1.4-6.2-5.5c0-3.7,2.6-5.6,6.2-5.6c1.1,0,2.2,0.2,3.2,0.6
+			l-0.2,2.3c-0.9-0.5-1.8-0.8-2.8-0.8c-2,0-3.4,1.5-3.4,3.5c0,2.1,1.5,3.4,3.6,3.4c0.9,0,1.9-0.2,2.7-0.6L902.7,610.7z"
+                />
+                <path
+                  className="st5"
+                  d="M905.2,600.2h3.9c3.7,0,6.4,1.2,6.4,5.3c0,4-2.7,5.4-6.4,5.4h-3.9V600.2z M908.1,608.8h1.1
+			c2.1,0,3.3-1.1,3.3-3.2c0-2.1-1.2-3.2-3.3-3.2h-1.1V608.8z"
+                />
+              </g>
+            </g>
 
-<rect x="48" y="129" className="st2" width="874" height="45"/>
-<g>
-	<line className="st7" x1="96.4" y1="146" x2="96.4" y2="174"/>
-	<line className="st8" x1="109.4" y1="158" x2="109.4" y2="174"/>
-	<line className="st8" x1="122.3" y1="158" x2="122.3" y2="174"/>
-	<line className="st8" x1="135.3" y1="158" x2="135.3" y2="174"/>
-	<line className="st8" x1="148.2" y1="158" x2="148.2" y2="174"/>
-	<line className="st7" x1="161.2" y1="146" x2="161.2" y2="174"/>
-	<line className="st8" x1="174.1" y1="158" x2="174.1" y2="174"/>
-	<line className="st8" x1="187.1" y1="158" x2="187.1" y2="174"/>
-	<line className="st8" x1="200" y1="158" x2="200" y2="174"/>
-	<line className="st8" x1="213" y1="158" x2="213" y2="174"/>
-	<line className="st7" x1="225.9" y1="146" x2="225.9" y2="174"/>
-	<line className="st8" x1="238.9" y1="158" x2="238.9" y2="174"/>
-	<line className="st8" x1="251.8" y1="158" x2="251.8" y2="174"/>
-	<line className="st8" x1="264.8" y1="158" x2="264.8" y2="174"/>
-	<line className="st8" x1="277.8" y1="158" x2="277.8" y2="174"/>
-	<line className="st7" x1="290.7" y1="146" x2="290.7" y2="174"/>
-	<line className="st8" x1="303.7" y1="158" x2="303.7" y2="174"/>
-	<line className="st8" x1="316.6" y1="158" x2="316.6" y2="174"/>
-	<line className="st8" x1="329.6" y1="158" x2="329.6" y2="174"/>
-	<line className="st8" x1="342.5" y1="158" x2="342.5" y2="174"/>
-	<line className="st7" x1="355.5" y1="146" x2="355.5" y2="174"/>
-	<line className="st8" x1="368.4" y1="158" x2="368.4" y2="174"/>
-	<line className="st8" x1="381.4" y1="158" x2="381.4" y2="174"/>
-	<line className="st8" x1="394.3" y1="158" x2="394.3" y2="174"/>
-	<line className="st8" x1="407.3" y1="158" x2="407.3" y2="174"/>
-	<line className="st7" x1="420.2" y1="146" x2="420.2" y2="174"/>
-	<line className="st8" x1="433.2" y1="158" x2="433.2" y2="174"/>
-	<line className="st8" x1="446.1" y1="158" x2="446.1" y2="174"/>
-	<line className="st8" x1="459.1" y1="158" x2="459.1" y2="174"/>
-	<line className="st8" x1="472" y1="158" x2="472" y2="174"/>
-	<line className="st7" x1="485" y1="146" x2="485" y2="174"/>
-	<line className="st8" x1="498" y1="158" x2="498" y2="174"/>
-	<line className="st8" x1="510.9" y1="158" x2="510.9" y2="174"/>
-	<line className="st8" x1="523.9" y1="158" x2="523.9" y2="174"/>
-	<line className="st8" x1="536.8" y1="158" x2="536.8" y2="174"/>
-	<line className="st7" x1="549.8" y1="146" x2="549.8" y2="174"/>
-	<line className="st8" x1="562.7" y1="158" x2="562.7" y2="174"/>
-	<line className="st8" x1="575.7" y1="158" x2="575.7" y2="174"/>
-	<line className="st8" x1="588.6" y1="158" x2="588.6" y2="174"/>
-	<line className="st8" x1="601.6" y1="158" x2="601.6" y2="174"/>
-	<line className="st7" x1="614.5" y1="146" x2="614.5" y2="174"/>
-	<line className="st8" x1="627.5" y1="158" x2="627.5" y2="174"/>
-	<line className="st8" x1="640.4" y1="158" x2="640.4" y2="174"/>
-	<line className="st8" x1="653.4" y1="158" x2="653.4" y2="174"/>
-	<line className="st8" x1="666.3" y1="158" x2="666.3" y2="174"/>
-	<line className="st7" x1="679.3" y1="146" x2="679.3" y2="174"/>
-	<line className="st8" x1="692.2" y1="158" x2="692.2" y2="174"/>
-	<line className="st8" x1="705.2" y1="158" x2="705.2" y2="174"/>
-	<line className="st8" x1="718.2" y1="158" x2="718.2" y2="174"/>
-	<line className="st8" x1="731.1" y1="158" x2="731.1" y2="174"/>
-	<line className="st7" x1="744.1" y1="146" x2="744.1" y2="174"/>
-	<line className="st8" x1="757" y1="158" x2="757" y2="174"/>
-	<line className="st8" x1="770" y1="158" x2="770" y2="174"/>
-	<line className="st8" x1="782.9" y1="158" x2="782.9" y2="174"/>
-	<line className="st8" x1="795.9" y1="158" x2="795.9" y2="174"/>
-	<line className="st7" x1="808.8" y1="146" x2="808.8" y2="174"/>
-	<line className="st8" x1="821.8" y1="158" x2="821.8" y2="174"/>
-	<line className="st8" x1="834.7" y1="158" x2="834.7" y2="174"/>
-	<line className="st8" x1="847.7" y1="158" x2="847.7" y2="174"/>
-	<line className="st8" x1="860.6" y1="158" x2="860.6" y2="174"/>
-	<line className="st7" x1="873.6" y1="146" x2="873.6" y2="174"/>
-</g>
-<circle className="st1" cx="198" cy="375" r="138"/>
-<circle onClick={() => playAudio(`p${i+3}`)} className="st9 profile-nameBox" cx="198" cy="375" r="106"/>
-<circle className="st10" cx="79.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="79.5" cy="493.9" r="8.3"/>
-<circle className="st10" cx="316.9" cy="256.5" r="8.3"/>
-<circle className="st10" cx="316.9" cy="493.9" r="8.3"/>
-<defs>
-	<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="46" y="223" width="304" height="304">
-		<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
-	</filter>
-</defs>
-<mask maskUnits="userSpaceOnUse" x="46" y="223" width="304" height="304" id="path-92-inside-1_20_532_1_">
-	<path className="st11" d="M327,225H69l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L69,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
-		L327,225z"/>
-</mask>
-<path className="st12" d="M327,225l1.4-1.4l-0.6-0.6H327V225z M69,225v-2h-0.8l-0.6,0.6L69,225z M48.4,245.6L47,247l1.4,1.4l1.4-1.4
+            <rect x="48" y="129" className="st2" width="874" height="45" />
+            <g>
+              <line className="st7" x1="96.4" y1="146" x2="96.4" y2="174" />
+              <line className="st8" x1="109.4" y1="158" x2="109.4" y2="174" />
+              <line className="st8" x1="122.3" y1="158" x2="122.3" y2="174" />
+              <line className="st8" x1="135.3" y1="158" x2="135.3" y2="174" />
+              <line className="st8" x1="148.2" y1="158" x2="148.2" y2="174" />
+              <line className="st7" x1="161.2" y1="146" x2="161.2" y2="174" />
+              <line className="st8" x1="174.1" y1="158" x2="174.1" y2="174" />
+              <line className="st8" x1="187.1" y1="158" x2="187.1" y2="174" />
+              <line className="st8" x1="200" y1="158" x2="200" y2="174" />
+              <line className="st8" x1="213" y1="158" x2="213" y2="174" />
+              <line className="st7" x1="225.9" y1="146" x2="225.9" y2="174" />
+              <line className="st8" x1="238.9" y1="158" x2="238.9" y2="174" />
+              <line className="st8" x1="251.8" y1="158" x2="251.8" y2="174" />
+              <line className="st8" x1="264.8" y1="158" x2="264.8" y2="174" />
+              <line className="st8" x1="277.8" y1="158" x2="277.8" y2="174" />
+              <line className="st7" x1="290.7" y1="146" x2="290.7" y2="174" />
+              <line className="st8" x1="303.7" y1="158" x2="303.7" y2="174" />
+              <line className="st8" x1="316.6" y1="158" x2="316.6" y2="174" />
+              <line className="st8" x1="329.6" y1="158" x2="329.6" y2="174" />
+              <line className="st8" x1="342.5" y1="158" x2="342.5" y2="174" />
+              <line className="st7" x1="355.5" y1="146" x2="355.5" y2="174" />
+              <line className="st8" x1="368.4" y1="158" x2="368.4" y2="174" />
+              <line className="st8" x1="381.4" y1="158" x2="381.4" y2="174" />
+              <line className="st8" x1="394.3" y1="158" x2="394.3" y2="174" />
+              <line className="st8" x1="407.3" y1="158" x2="407.3" y2="174" />
+              <line className="st7" x1="420.2" y1="146" x2="420.2" y2="174" />
+              <line className="st8" x1="433.2" y1="158" x2="433.2" y2="174" />
+              <line className="st8" x1="446.1" y1="158" x2="446.1" y2="174" />
+              <line className="st8" x1="459.1" y1="158" x2="459.1" y2="174" />
+              <line className="st8" x1="472" y1="158" x2="472" y2="174" />
+              <line className="st7" x1="485" y1="146" x2="485" y2="174" />
+              <line className="st8" x1="498" y1="158" x2="498" y2="174" />
+              <line className="st8" x1="510.9" y1="158" x2="510.9" y2="174" />
+              <line className="st8" x1="523.9" y1="158" x2="523.9" y2="174" />
+              <line className="st8" x1="536.8" y1="158" x2="536.8" y2="174" />
+              <line className="st7" x1="549.8" y1="146" x2="549.8" y2="174" />
+              <line className="st8" x1="562.7" y1="158" x2="562.7" y2="174" />
+              <line className="st8" x1="575.7" y1="158" x2="575.7" y2="174" />
+              <line className="st8" x1="588.6" y1="158" x2="588.6" y2="174" />
+              <line className="st8" x1="601.6" y1="158" x2="601.6" y2="174" />
+              <line className="st7" x1="614.5" y1="146" x2="614.5" y2="174" />
+              <line className="st8" x1="627.5" y1="158" x2="627.5" y2="174" />
+              <line className="st8" x1="640.4" y1="158" x2="640.4" y2="174" />
+              <line className="st8" x1="653.4" y1="158" x2="653.4" y2="174" />
+              <line className="st8" x1="666.3" y1="158" x2="666.3" y2="174" />
+              <line className="st7" x1="679.3" y1="146" x2="679.3" y2="174" />
+              <line className="st8" x1="692.2" y1="158" x2="692.2" y2="174" />
+              <line className="st8" x1="705.2" y1="158" x2="705.2" y2="174" />
+              <line className="st8" x1="718.2" y1="158" x2="718.2" y2="174" />
+              <line className="st8" x1="731.1" y1="158" x2="731.1" y2="174" />
+              <line className="st7" x1="744.1" y1="146" x2="744.1" y2="174" />
+              <line className="st8" x1="757" y1="158" x2="757" y2="174" />
+              <line className="st8" x1="770" y1="158" x2="770" y2="174" />
+              <line className="st8" x1="782.9" y1="158" x2="782.9" y2="174" />
+              <line className="st8" x1="795.9" y1="158" x2="795.9" y2="174" />
+              <line className="st7" x1="808.8" y1="146" x2="808.8" y2="174" />
+              <line className="st8" x1="821.8" y1="158" x2="821.8" y2="174" />
+              <line className="st8" x1="834.7" y1="158" x2="834.7" y2="174" />
+              <line className="st8" x1="847.7" y1="158" x2="847.7" y2="174" />
+              <line className="st8" x1="860.6" y1="158" x2="860.6" y2="174" />
+              <line className="st7" x1="873.6" y1="146" x2="873.6" y2="174" />
+            </g>
+            <circle className="st1" cx="198" cy="375" r="138" />
+            <circle
+              onClick={() => playAudio(`p${i + 3}`)}
+              className="st9 profile-nameBox"
+              cx="198"
+              cy="375"
+              r="106"
+            />
+            <circle className="st10" cx="79.5" cy="256.5" r="8.3" />
+            <circle className="st10" cx="79.5" cy="493.9" r="8.3" />
+            <circle className="st10" cx="316.9" cy="256.5" r="8.3" />
+            <circle className="st10" cx="316.9" cy="493.9" r="8.3" />
+            <defs>
+              <filter
+                id="Adobe_OpacityMaskFilter"
+                filterUnits="userSpaceOnUse"
+                x="46"
+                y="223"
+                width="304"
+                height="304"
+              >
+                <feColorMatrix
+                  type="matrix"
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                />
+              </filter>
+            </defs>
+            <mask
+              maskUnits="userSpaceOnUse"
+              x="46"
+              y="223"
+              width="304"
+              height="304"
+              id="path-92-inside-1_20_532_1_"
+            >
+              <path
+                className="st11"
+                d="M327,225H69l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L69,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
+		L327,225z"
+              />
+            </mask>
+            <path
+              className="st12"
+              d="M327,225l1.4-1.4l-0.6-0.6H327V225z M69,225v-2h-0.8l-0.6,0.6L69,225z M48.4,245.6L47,247l1.4,1.4l1.4-1.4
 	L48.4,245.6z M48,245.2l1.4-1.4l-3.4-3.4v4.8H48z M48,504.1h-2v4.8l3.4-3.4L48,504.1z M48.4,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4
 	L48.4,503.7z M69.4,524.7l1.4,1.4l1.4-1.4l-1.4-1.4L69.4,524.7z M69,525l-1.4-1.4l-3.4,3.4H69V525z M327,525v2h4.8l-3.4-3.4L327,525
 	z M326.7,524.7l-1.4-1.4l-1.4,1.4l1.4,1.4L326.7,524.7z M347.7,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4L347.7,503.7z M348,504l-1.4,1.4
@@ -1193,29 +1237,66 @@ export default function music({ node , music , i , range }){
 	V245.2H46z M49.4,505.5l0.4-0.4l-2.8-2.8l-0.4,0.4L49.4,505.5z M47,505.1l21,21l2.8-2.8l-21-21L47,505.1z M67.9,523.2l-0.3,0.3
 	l2.8,2.8l0.3-0.3L67.9,523.2z M69,527h258v-4H69V527z M328.5,523.6l-0.3-0.3l-2.8,2.8l0.3,0.3L328.5,523.6z M328.1,526.1l21-21
 	l-2.8-2.8l-21,21L328.1,526.1z M346.2,505.1l0.3,0.3l2.8-2.8l-0.3-0.3L346.2,505.1z M350,504V245.3h-4V504H350z M346.6,243.8
-	l-0.3,0.3l2.8,2.8l0.3-0.3L346.6,243.8z M349.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L349.1,244.2z"/>
-<circle className="st1" cx="772" cy="375" r="137.9"/>
-<mask id="mask0_20_532" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="666" y="269" width="212" height="212">
-<circle cx="772" cy="375" r="105.556" fill="#FFCA05"/>
-</mask>
+	l-0.3,0.3l2.8,2.8l0.3-0.3L346.6,243.8z M349.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L349.1,244.2z"
+            />
+            <circle className="st1" cx="772" cy="375" r="137.9" />
+            <mask
+              id="mask0_20_532"
+              style={{ maskType: "alpha" }}
+              maskUnits="userSpaceOnUse"
+              x="666"
+              y="269"
+              width="212"
+              height="212"
+            >
+              <circle cx="772" cy="375" r="105.556" fill="#FFCA05" />
+            </mask>
 
-<g className="profile-image" mask="url(#mask0_20_532)">
-<rect x="653" y="258" width="234" height="223" fill="url(#pattern0)"/>
-</g>
-<circle className="st10" cx="653.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="653.5" cy="493.5" r="8.3"/>
-<circle className="st10" cx="890.5" cy="256.5" r="8.3"/>
-<circle className="st10" cx="890.5" cy="493.5" r="8.3"/>
-<defs>
-	<filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="620" y="223" width="304" height="304">
-		<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
-	</filter>
-</defs>
-<mask maskUnits="userSpaceOnUse" x="620" y="223" width="304" height="304" id="path-99-inside-2_20_532_1_">
-	<path className="st13" d="M901,225H643l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L643,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
-		L901,225z"/>
-</mask>
-<path className="st14" d="M901,225l1.4-1.4l-0.6-0.6H901V225z M643,225v-2h-0.8l-0.6,0.6L643,225z M622.4,245.6L621,247l1.4,1.4l1.4-1.4
+            <g className="profile-image" mask="url(#mask0_20_532)">
+              <rect
+                x="653"
+                y="258"
+                width="234"
+                height="223"
+                fill="url(#pattern0)"
+              />
+            </g>
+            <circle className="st10" cx="653.5" cy="256.5" r="8.3" />
+            <circle className="st10" cx="653.5" cy="493.5" r="8.3" />
+            <circle className="st10" cx="890.5" cy="256.5" r="8.3" />
+            <circle className="st10" cx="890.5" cy="493.5" r="8.3" />
+            <defs>
+              <filter
+                id="Adobe_OpacityMaskFilter_1_"
+                filterUnits="userSpaceOnUse"
+                x="620"
+                y="223"
+                width="304"
+                height="304"
+              >
+                <feColorMatrix
+                  type="matrix"
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                />
+              </filter>
+            </defs>
+            <mask
+              maskUnits="userSpaceOnUse"
+              x="620"
+              y="223"
+              width="304"
+              height="304"
+              id="path-99-inside-2_20_532_1_"
+            >
+              <path
+                className="st13"
+                d="M901,225H643l-20.6,20.6l-0.4-0.4v258.9l0.4-0.4l21,21L643,525h258l-0.3-0.3l21-21l0.3,0.3V245.3l-0.3,0.3
+		L901,225z"
+              />
+            </mask>
+            <path
+              className="st14"
+              d="M901,225l1.4-1.4l-0.6-0.6H901V225z M643,225v-2h-0.8l-0.6,0.6L643,225z M622.4,245.6L621,247l1.4,1.4l1.4-1.4
 	L622.4,245.6z M622,245.2l1.4-1.4l-3.4-3.4v4.8H622z M622,504.1h-2v4.8l3.4-3.4L622,504.1z M622.4,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4
 	L622.4,503.7z M643.4,524.7l1.4,1.4l1.4-1.4l-1.4-1.4L643.4,524.7z M643,525l-1.4-1.4l-3.4,3.4h4.8V525z M901,525v2h4.8l-3.4-3.4
 	L901,525z M900.7,524.7l-1.4-1.4l-1.4,1.4l1.4,1.4L900.7,524.7z M921.7,503.7l1.4-1.4l-1.4-1.4l-1.4,1.4L921.7,503.7z M922,504
@@ -1224,273 +1305,637 @@ export default function music({ node , music , i , range }){
 	 M620,245.2v258.9h4V245.2H620z M623.4,505.5l0.4-0.4l-2.8-2.8l-0.4,0.4L623.4,505.5z M621,505.1l21,21l2.8-2.8l-21-21L621,505.1z
 	 M641.9,523.2l-0.3,0.3l2.8,2.8l0.3-0.3L641.9,523.2z M643,527h258v-4H643V527z M902.5,523.6l-0.3-0.3l-2.8,2.8l0.3,0.3L902.5,523.6
 	z M902.1,526.1l21-21l-2.8-2.8l-21,21L902.1,526.1z M920.2,505.1l0.3,0.3l2.8-2.8l-0.3-0.3L920.2,505.1z M924,504V245.3h-4V504H924z
-	 M920.6,243.8l-0.3,0.3l2.8,2.8l0.3-0.3L920.6,243.8z M923.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L923.1,244.2z"/>
+	 M920.6,243.8l-0.3,0.3l2.8,2.8l0.3-0.3L920.6,243.8z M923.1,244.2l-20.6-20.6l-2.8,2.8l20.6,20.6L923.1,244.2z"
+            />
 
-
-
-{i == 0 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 178.557 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-41.4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 1 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 171.7037 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-4" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 2 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 155.8061 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 3 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 148.0423 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="20.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}{node?.title.split(" ")[2]}</tspan>
-	</text>
-}
-{i == 4 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 160.043 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-27.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]} {node?.title.split(" ")[2]}</tspan>
-	</text>
-}
-{i == 5 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 167.0407 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-13" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 6 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 151.967 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="8.9" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 7 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 145.7838 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 8 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 168.7734 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 9 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 157.7058 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="3.7" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 10 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 148.3615 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="-2.8" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 11 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 133.5459 371.951)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="0" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-{i == 12 &&
-	<text onClick={() => playAudio(`p${i+3}`)} className='profile-name' transform="matrix(1 0 0 1 154.0222 366.4554)">
-		<tspan x="0" y="0" className="st17 st18 st19">{node?.title.split(" ")[0]}</tspan>
-		<tspan x="16.6" y="28.5" className="st17 st18 st19">{node?.title.split(" ")[1]}</tspan>
-	</text>
-}
-    <rect x="360" y="485.4" class="st49" width="240" height="34"/>
-<g>
-	<g onClick={() => playAudio(`p${i+1}`)}>
-		<rect x="360" y="221.4" class="st1" width="240" height="94"/>
-		<g>
-			<text transform="matrix(1 0 0 1 373.0409 257.9391)" class="st9 st18 st20 st21">FAVOURITE</text>
-			<text transform="matrix(1 0 0 1 373.0409 293.5391)" class="st9 st18 st20 st21">ARTISTS</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+5}`)}>
-		<rect x="360" y="451.4" class="st1" width="240" height="34"/>
-		<g>
-			<rect x="360.1" y="451.4" class="st33" width="34" height="34"/>
-			<g className={`p${i+5}`}>
-				<path class="st22" d="M376.2,462.6l-4.2,3.3h-3.3v5h3.3l4.2,3.3V462.6z"/>
-				<path class="st22" d="M382.9,462.5c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,465.4c0.8,0.8,1.2,1.8,1.2,2.9
-					s-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4263 473.9185)" class="st23 st24 st25">{node.music.artistFifth}</text>
-		</g>
-	</g>
-	<a rel="noopener" target="_blank" href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1">
-	<g>
-		<rect x="360" y="485.4" class="st1" width="240" height="34"/>
-		<g>
-			<rect x="360.1" y="485.4" class="st38" width="34" height="34"/>
-			<g>
-				<path class="st39" d="M372.9,498.5h8.3v8.3"/>
-				<path class="st39" d="M372.9,506.8l8.3-8.3"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4261 508.1642)" class="st23 st24 st25">Go to ICD Jukebox</text>
-		</g>
-		<g>
-			<path class="st30" d="M563.1,494.9c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1s7.1-3.2,7.1-7.1
-				C570.3,498.1,567.1,494.9,563.1,494.9z"/>
-			<path d="M567.7,501.3c-0.1,0-0.2,0-0.4-0.1c-2-1.2-5.7-1.5-8.1-0.9c-0.1,0-0.2,0.1-0.4,0.1c-0.4,0-0.7-0.3-0.7-0.7
+            {i == 0 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 178.557 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-41.4" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 1 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 171.7037 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-4" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 2 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 155.8061 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-27.6" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 3 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 148.0423 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="20.7" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                  {node?.title.split(" ")[2]}
+                </tspan>
+              </text>
+            )}
+            {i == 4 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 160.043 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-27.6" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]} {node?.title.split(" ")[2]}
+                </tspan>
+              </text>
+            )}
+            {i == 5 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 167.0407 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-13" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 6 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 151.967 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="8.9" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 7 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 145.7838 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="16.6" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 8 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 168.7734 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-2.8" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 9 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 157.7058 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="3.7" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 10 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 148.3615 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="-2.8" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 11 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 133.5459 371.951)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="0" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            {i == 12 && (
+              <text
+                onClick={() => playAudio(`p${i + 3}`)}
+                className="profile-name"
+                transform="matrix(1 0 0 1 154.0222 366.4554)"
+              >
+                <tspan x="0" y="0" className="st17 st18 st19">
+                  {node?.title.split(" ")[0]}
+                </tspan>
+                <tspan x="16.6" y="28.5" className="st17 st18 st19">
+                  {node?.title.split(" ")[1]}
+                </tspan>
+              </text>
+            )}
+            <rect x="360" y="485.4" class="st49" width="240" height="34" />
+            <g>
+              <g onClick={() => playAudio(`p${i + 1}`)}>
+                <rect x="360" y="221.4" class="st1" width="240" height="94" />
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 373.0409 257.9391)"
+                    class="st9 st18 st20 st21"
+                  >
+                    FAVOURITE
+                  </text>
+                  <text
+                    transform="matrix(1 0 0 1 373.0409 293.5391)"
+                    class="st9 st18 st20 st21"
+                  >
+                    ARTISTS
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 5}`)}>
+                <rect x="360" y="451.4" class="st1" width="240" height="34" />
+                <g>
+                  <rect
+                    x="360.1"
+                    y="451.4"
+                    class="st33"
+                    width="34"
+                    height="34"
+                  />
+                  <g className={`p${i + 5}`}>
+                    <path
+                      class="st22"
+                      d="M376.2,462.6l-4.2,3.3h-3.3v5h3.3l4.2,3.3V462.6z"
+                    />
+                    <path
+                      class="st22"
+                      d="M382.9,462.5c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,465.4c0.8,0.8,1.2,1.8,1.2,2.9
+					s-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 405.4263 473.9185)"
+                    class="st23 st24 st25"
+                  >
+                    {node.music.artistFifth}
+                  </text>
+                </g>
+              </g>
+              <a
+                rel="noopener"
+                target="_blank"
+                href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1"
+              >
+                <g>
+                  <rect x="360" y="485.4" class="st1" width="240" height="34" />
+                  <g>
+                    <rect
+                      x="360.1"
+                      y="485.4"
+                      class="st38"
+                      width="34"
+                      height="34"
+                    />
+                    <g>
+                      <path class="st39" d="M372.9,498.5h8.3v8.3" />
+                      <path class="st39" d="M372.9,506.8l8.3-8.3" />
+                    </g>
+                  </g>
+                  <g>
+                    <text
+                      transform="matrix(1 0 0 1 405.4261 508.1642)"
+                      class="st23 st24 st25"
+                    >
+                      Go to ICD Jukebox
+                    </text>
+                  </g>
+                  <g>
+                    <path
+                      class="st30"
+                      d="M563.1,494.9c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1s7.1-3.2,7.1-7.1
+				C570.3,498.1,567.1,494.9,563.1,494.9z"
+                    />
+                    <path
+                      d="M567.7,501.3c-0.1,0-0.2,0-0.4-0.1c-2-1.2-5.7-1.5-8.1-0.9c-0.1,0-0.2,0.1-0.4,0.1c-0.4,0-0.7-0.3-0.7-0.7
 				c0-0.4,0.2-0.6,0.5-0.7c1-0.3,2.1-0.4,3.4-0.4c2.1,0,4.3,0.4,5.9,1.4c0.2,0.1,0.4,0.3,0.4,0.6C568.4,501,568,501.3,567.7,501.3
 				L567.7,501.3z M566.8,503.5c-0.1,0-0.2-0.1-0.4-0.1c-1.8-1.1-4.5-1.5-6.8-0.8c-0.1,0-0.2,0.1-0.3,0.1c-0.3,0-0.6-0.2-0.6-0.6
 				s0.1-0.5,0.4-0.6c0.8-0.2,1.6-0.4,2.8-0.4c1.9,0,3.7,0.5,5.1,1.3c0.2,0.1,0.3,0.3,0.3,0.6C567.4,503.2,567.1,503.5,566.8,503.5z
 				 M566,505.4c-0.1,0-0.2,0-0.3-0.1c-1.8-1.1-3.9-1.1-5.9-0.7c-0.1,0-0.3,0.1-0.3,0.1c-0.3,0-0.5-0.2-0.5-0.5
-				c0-0.3,0.2-0.4,0.4-0.5c2.4-0.5,4.8-0.5,6.8,0.8c0.2,0.1,0.3,0.2,0.3,0.5C566.5,505.2,566.3,505.4,566,505.4L566,505.4z"/>
-		</g>
-	</g>
-	</a>
-	<g onClick={() => playAudio(`p${i+4}`)}>
-		<rect x="360" y="417.4" class="st1" width="240" height="34"/>
-		<g>
-			<rect x="360.1" y="417.4" class="st33" width="34" height="34"/>
-			<g className={`p${i+4}`}>
-				<path class="st22" d="M376.2,429.1l-4.2,3.3h-3.3v5h3.3l4.2,3.3V429.1z"/>
-				<path class="st22" d="M382.9,429c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,431.9c0.8,0.8,1.2,1.8,1.2,2.9
-					s-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4263 440.4022)" class="st23 st24 st25">{node.music.artistFourth}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+3}`)}>
-		<rect x="360.1" y="383.4" class="st33" width="34" height="34"/>
-		<rect x="360" y="383.4" class="st1" width="240" height="34"/>
-		<g className={`p${i+3}`}>
-			<path class="st22" d="M376.2,395.4l-4.2,3.3h-3.3v5h3.3l4.2,3.3V395.4z"/>
-			<path class="st22" d="M382.9,395.4c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,398.3c0.8,0.8,1.2,1.8,1.2,2.9
-				s-0.4,2.2-1.2,2.9"/>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4263 406.7803)" class="st23 st24 st25">{node.music.artistThird}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+2}`)}>
-		<rect x="360" y="349.4" class="st1" width="240" height="34"/>
-		<g className={`p${i+2}`}>
-			<rect x="360.1" y="349.4" class="st33" width="34" height="34"/>
-			<g>
-				<path class="st22" d="M376.2,360.4l-4.2,3.3h-3.3v5h3.3l4.2,3.3V360.4z"/>
-				<path class="st22" d="M382.9,360.3c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,363.3c0.8,0.8,1.2,1.8,1.2,2.9
-					s-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4263 371.7575)" class="st23 st24 st25">{node.music.artistSecond}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+1}`)}>
-		<rect x="360" y="315.4" class="st1" width="240" height="34"/>
-		<g>
-			<rect x="360.1" y="315.4" class="st33" width="34" height="34"/>
-			<g className={`p${i+1}`}>
-				<g>
-					<path class="st22" d="M376.2,326.7L372,330h-3.3v5h3.3l4.2,3.3V326.7z"/>
-					<path class="st22" d="M382.9,326.6c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,329.5c0.8,0.8,1.2,1.8,1.2,2.9
-						s-0.4,2.2-1.2,2.9"/>
-				</g>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 405.4263 338.0082)" class="st23 st24 st25">{node.music.artistFirst}</text>
-		</g>
-	</g>
-</g>   
-	<defs>
-<filter id="filter0_f_20_532" x="116" y="588" width="36" height="36" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-<feFlood floodOpacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="4" result="effect1_foregroundBlur_20_532"/>
-</filter>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlinkHref="#image0_20_532" transform="matrix(0.00222143 0 0 0.002331 -0.00204212 0)"/>
-</pattern>
-<clipPath id="clip0_20_532">
-<rect width="41" height="31" fill="white" transform="translate(881 594)"/>
-</clipPath>
-<image id="image0_20_532" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
-</defs>
-<text transform="matrix(1 0 0 1 60.862 114.4982)" class="imp-note">DRAG the</text>
-<text transform="matrix(1 0 0 1 120.062 114.4982)" class="imp-note yellow">SLIDER</text>
-<text transform="matrix(1 0 0 1 43.5412 608.6469)" class="st2 st42">301FM</text>
-			</svg>
+				c0-0.3,0.2-0.4,0.4-0.5c2.4-0.5,4.8-0.5,6.8,0.8c0.2,0.1,0.3,0.2,0.3,0.5C566.5,505.2,566.3,505.4,566,505.4L566,505.4z"
+                    />
+                  </g>
+                </g>
+              </a>
+              <g onClick={() => playAudio(`p${i + 4}`)}>
+                <rect x="360" y="417.4" class="st1" width="240" height="34" />
+                <g>
+                  <rect
+                    x="360.1"
+                    y="417.4"
+                    class="st33"
+                    width="34"
+                    height="34"
+                  />
+                  <g className={`p${i + 4}`}>
+                    <path
+                      class="st22"
+                      d="M376.2,429.1l-4.2,3.3h-3.3v5h3.3l4.2,3.3V429.1z"
+                    />
+                    <path
+                      class="st22"
+                      d="M382.9,429c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,431.9c0.8,0.8,1.2,1.8,1.2,2.9
+					s-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 405.4263 440.4022)"
+                    class="st23 st24 st25"
+                  >
+                    {node.music.artistFourth}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 3}`)}>
+                <rect x="360.1" y="383.4" class="st33" width="34" height="34" />
+                <rect x="360" y="383.4" class="st1" width="240" height="34" />
+                <g className={`p${i + 3}`}>
+                  <path
+                    class="st22"
+                    d="M376.2,395.4l-4.2,3.3h-3.3v5h3.3l4.2,3.3V395.4z"
+                  />
+                  <path
+                    class="st22"
+                    d="M382.9,395.4c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,398.3c0.8,0.8,1.2,1.8,1.2,2.9
+				s-0.4,2.2-1.2,2.9"
+                  />
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 405.4263 406.7803)"
+                    class="st23 st24 st25"
+                  >
+                    {node.music.artistThird}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 2}`)}>
+                <rect x="360" y="349.4" class="st1" width="240" height="34" />
+                <g className={`p${i + 2}`}>
+                  <rect
+                    x="360.1"
+                    y="349.4"
+                    class="st33"
+                    width="34"
+                    height="34"
+                  />
+                  <g>
+                    <path
+                      class="st22"
+                      d="M376.2,360.4l-4.2,3.3h-3.3v5h3.3l4.2,3.3V360.4z"
+                    />
+                    <path
+                      class="st22"
+                      d="M382.9,360.3c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,363.3c0.8,0.8,1.2,1.8,1.2,2.9
+					s-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 405.4263 371.7575)"
+                    class="st23 st24 st25"
+                  >
+                    {node.music.artistSecond}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 1}`)}>
+                <rect x="360" y="315.4" class="st1" width="240" height="34" />
+                <g>
+                  <rect
+                    x="360.1"
+                    y="315.4"
+                    class="st33"
+                    width="34"
+                    height="34"
+                  />
+                  <g className={`p${i + 1}`}>
+                    <g>
+                      <path
+                        class="st22"
+                        d="M376.2,326.7L372,330h-3.3v5h3.3l4.2,3.3V326.7z"
+                      />
+                      <path
+                        class="st22"
+                        d="M382.9,326.6c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M380,329.5c0.8,0.8,1.2,1.8,1.2,2.9
+						s-0.4,2.2-1.2,2.9"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 405.4263 338.0082)"
+                    class="st23 st24 st25"
+                  >
+                    {node.music.artistFirst}
+                  </text>
+                </g>
+              </g>
+            </g>
+            <defs>
+              <filter
+                id="filter0_f_20_532"
+                x="116"
+                y="588"
+                width="36"
+                height="36"
+                filterUnits="userSpaceOnUse"
+                colorInterpolationFilters="sRGB"
+              >
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="BackgroundImageFix"
+                  result="shape"
+                />
+                <feGaussianBlur
+                  stdDeviation="4"
+                  result="effect1_foregroundBlur_20_532"
+                />
+              </filter>
+              <pattern
+                id="pattern0"
+                patternContentUnits="objectBoundingBox"
+                width="1"
+                height="1"
+              >
+                <use
+                  xlinkHref="#image0_20_532"
+                  transform="matrix(0.00222143 0 0 0.002331 -0.00204212 0)"
+                />
+              </pattern>
+              <clipPath id="clip0_20_532">
+                <rect
+                  width="41"
+                  height="31"
+                  fill="white"
+                  transform="translate(881 594)"
+                />
+              </clipPath>
+              <image
+                id="image0_20_532"
+                width="452"
+                height="429"
+                xlinkHref={node?.profileImage?.profileImage?.sourceUrl}
+              />
+            </defs>
+            <text transform="matrix(1 0 0 1 60.862 114.4982)" class="imp-note">
+              DRAG the
+            </text>
+            <text
+              transform="matrix(1 0 0 1 120.062 114.4982)"
+              class="imp-note yellow"
+            >
+              SLIDER
+            </text>
+            <text transform="matrix(1 0 0 1 43.5412 608.6469)" class="st2 st42">
+              301FM
+            </text>
+          </svg>
 
-
-
-
-
-
-
- 
-			<svg className='mobile-radio d-block d-md-none' version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-				viewBox="0 0 288 699"  xmlSpace="preserve">
-
-			<g>
-				<defs>
-					<rect id="SVGID_1_" y="59" width="288" height="640"/>
-				</defs>
-				<clipPath id="SVGID_2_">
-					<use xlinkHref="#SVGID_1_"  style={{overflow: 'visible'}}/>
-				</clipPath>
-				<g className="st0">
-					<path className="st1" d="M30,59h228c16.6,0,30,13.4,30,30v580c0,16.6-13.4,30-30,30H30c-16.6,0-30-13.4-30-30V89C0,72.4,13.4,59,30,59
-						z"/>
-					<rect x="19" y="101" className="st6" width="36" height="36"/>
-					<path className="st5" d="M31.2,127.2v-16.3"/>
-					<path className="st5" d="M44,127.2L33.5,119l10.5-8.2V127.2z"/>
-					<g>
-						<defs>
-							<rect id="SVGID_3_" x="61" y="101" width="166" height="36"/>
-						</defs>
-						<clipPath id="SVGID_4_">
-							<use xlinkHref="#SVGID_3_"  style={{overflow: 'visible'}}/>
-						</clipPath>
-						<g className="st7">
-							<rect x="62" y="102" className="st3" width="164" height="34"/>
-							<rect x="63" y="105" className="st6" width="312" height="28"/>
-							<line className="st8" x1="75.3" y1="105" x2="75.3" y2="133"/>
-							<line className="st8" x1="64" y1="105" x2="64" y2="133"/>
-							<path className="st8" d="M226,133"/>
-							<path className="st8" d="M226,105"/>
-							<line className="st8" x1="86.8" y1="105" x2="86.8" y2="133"/>
-							<line className="st8" x1="98.2" y1="105" x2="98.2" y2="133"/>
-							<line className="st8" x1="109.7" y1="105" x2="109.7" y2="133"/>
-							<line className="st8" x1="121.2" y1="105" x2="121.2" y2="133"/>
-							<line className="st8" x1="167.2" y1="105" x2="167.2" y2="133"/>
-							<line className="st8" x1="178.7" y1="105" x2="178.7" y2="133"/>
-							<line className="st8" x1="190.2" y1="105" x2="190.2" y2="133"/>
-							<line className="st8" x1="201.7" y1="105" x2="201.7" y2="133"/>
-							<line className="st8" x1="213.2" y1="105" x2="213.2" y2="133"/>
-							<line className="st8" x1="224" y1="105" x2="224" y2="133"/>
-							<line className="st8" x1="132.7" y1="105" x2="132.7" y2="133"/>
-							<line className="st8" x1="144.2" y1="105" x2="144.2" y2="133"/>
-							<line className="st8" x1="155.7" y1="105" x2="155.7" y2="133"/>
-						</g>
-					</g>
-					<rect x="233" y="101" className="st6" width="36" height="36"/>
-					<path className="st5" d="M256.8,110.8v16.3"/>
-					<path className="st5" d="M244,110.8l10.5,8.2l-10.5,8.2V110.8z"/>
-					<rect x="12" y="94" className="st3" width="264" height="50"/>
-					<line className="st9" x1="0" y1="159" x2="288" y2="159"/>
-					<line className="st9" x1="0" y1="385" x2="288" y2="385"/>
-					<line className="st9" x1="0" y1="167" x2="288" y2="167"/>
-					<line className="st9" x1="0" y1="393" x2="288" y2="393"/>
-					<path className="st6" d="M14.9,613.9c0.1,0,0.2,0,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3s0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.3,0.1
+          <svg
+            className="mobile-radio d-block d-md-none"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 288 699"
+            xmlSpace="preserve"
+          >
+            <g>
+              <defs>
+                <rect id="SVGID_1_" y="59" width="288" height="640" />
+              </defs>
+              <clipPath id="SVGID_2_">
+                <use xlinkHref="#SVGID_1_" style={{ overflow: "visible" }} />
+              </clipPath>
+              <g className="st0">
+                <path
+                  className="st1"
+                  d="M30,59h228c16.6,0,30,13.4,30,30v580c0,16.6-13.4,30-30,30H30c-16.6,0-30-13.4-30-30V89C0,72.4,13.4,59,30,59
+						z"
+                />
+                <rect x="19" y="101" className="st6" width="36" height="36" />
+                <path className="st5" d="M31.2,127.2v-16.3" />
+                <path className="st5" d="M44,127.2L33.5,119l10.5-8.2V127.2z" />
+                <g>
+                  <defs>
+                    <rect
+                      id="SVGID_3_"
+                      x="61"
+                      y="101"
+                      width="166"
+                      height="36"
+                    />
+                  </defs>
+                  <clipPath id="SVGID_4_">
+                    <use
+                      xlinkHref="#SVGID_3_"
+                      style={{ overflow: "visible" }}
+                    />
+                  </clipPath>
+                  <g className="st7">
+                    <rect
+                      x="62"
+                      y="102"
+                      className="st3"
+                      width="164"
+                      height="34"
+                    />
+                    <rect
+                      x="63"
+                      y="105"
+                      className="st6"
+                      width="312"
+                      height="28"
+                    />
+                    <line
+                      className="st8"
+                      x1="75.3"
+                      y1="105"
+                      x2="75.3"
+                      y2="133"
+                    />
+                    <line className="st8" x1="64" y1="105" x2="64" y2="133" />
+                    <path className="st8" d="M226,133" />
+                    <path className="st8" d="M226,105" />
+                    <line
+                      className="st8"
+                      x1="86.8"
+                      y1="105"
+                      x2="86.8"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="98.2"
+                      y1="105"
+                      x2="98.2"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="109.7"
+                      y1="105"
+                      x2="109.7"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="121.2"
+                      y1="105"
+                      x2="121.2"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="167.2"
+                      y1="105"
+                      x2="167.2"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="178.7"
+                      y1="105"
+                      x2="178.7"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="190.2"
+                      y1="105"
+                      x2="190.2"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="201.7"
+                      y1="105"
+                      x2="201.7"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="213.2"
+                      y1="105"
+                      x2="213.2"
+                      y2="133"
+                    />
+                    <line className="st8" x1="224" y1="105" x2="224" y2="133" />
+                    <line
+                      className="st8"
+                      x1="132.7"
+                      y1="105"
+                      x2="132.7"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="144.2"
+                      y1="105"
+                      x2="144.2"
+                      y2="133"
+                    />
+                    <line
+                      className="st8"
+                      x1="155.7"
+                      y1="105"
+                      x2="155.7"
+                      y2="133"
+                    />
+                  </g>
+                </g>
+                <rect x="233" y="101" className="st6" width="36" height="36" />
+                <path className="st5" d="M256.8,110.8v16.3" />
+                <path
+                  className="st5"
+                  d="M244,110.8l10.5,8.2l-10.5,8.2V110.8z"
+                />
+                <rect x="12" y="94" className="st3" width="264" height="50" />
+                <line className="st9" x1="0" y1="159" x2="288" y2="159" />
+                <line className="st9" x1="0" y1="385" x2="288" y2="385" />
+                <line className="st9" x1="0" y1="167" x2="288" y2="167" />
+                <line className="st9" x1="0" y1="393" x2="288" y2="393" />
+                <path
+                  className="st6"
+                  d="M14.9,613.9c0.1,0,0.2,0,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3s0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.3,0.1
 						c-0.1,0-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3s0-0.2,0.1-0.3C14.7,614,14.8,613.9,14.9,613.9z M16.2,613.9c0.1,0,0.2,0,0.3,0.1
 						c0.1,0.1,0.1,0.2,0.1,0.3s0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.3,0.1s-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3s0-0.2,0.1-0.3
 						C15.9,614,16,613.9,16.2,613.9z M17.4,613.9c0.1,0,0.2,0,0.3,0.1c0.1,0.1,0.1,0.2,0.1,0.3s0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.3,0.1
@@ -1765,8 +2210,11 @@ export default function music({ node , music , i , range }){
 						c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1,0,0.2-0.1,0.3c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3
 						c0-0.1,0-0.2,0.1-0.3C20.9,573.8,21,573.8,21.1,573.8z M22.3,573.8c0.1,0,0.2,0,0.3,0.1s0.1,0.2,0.1,0.3c0,0.1,0,0.2-0.1,0.3
 						c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2,0-0.3-0.1c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.1,0-0.2,0.1-0.3C22.1,573.8,22.2,573.8,22.3,573.8z
-						"/>
-					<path className="st6" d="M15.3,614.1l-0.2,0.2l0,0L15.3,614.1z M14.6,614.1l0.2,0.2l0,0L14.6,614.1z M16.5,614.1l-0.2,0.2l0,0
+						"
+                />
+                <path
+                  className="st6"
+                  d="M15.3,614.1l-0.2,0.2l0,0L15.3,614.1z M14.6,614.1l0.2,0.2l0,0L14.6,614.1z M16.5,614.1l-0.2,0.2l0,0
 						L16.5,614.1z M15.8,614.7l-0.2,0.2l0,0L15.8,614.7z M15.8,614.1l-0.2-0.2l0,0L15.8,614.1z M17.7,614.1l-0.2,0.2l0,0L17.7,614.1z
 						M17.7,614.7l-0.2-0.2l0,0L17.7,614.7z M17.1,614.7l-0.2,0.2l0,0L17.1,614.7z M17.1,614.1l-0.2-0.2l0,0L17.1,614.1z M18.9,614.1
 						l-0.2,0.2l0,0L18.9,614.1z M18.3,614.7l0.2-0.2l0,0L18.3,614.7z M18.3,614.1l0.2,0.2l0,0L18.3,614.1z M20.2,614.1l0.2-0.2
@@ -2760,172 +3208,374 @@ export default function music({ node , music , i , range }){
 						c0-0.2-0.1-0.4-0.2-0.5L22.5,574.1z M22.5,574.2c0,0.1,0,0.1-0.1,0.2l0.4,0.4c0.1-0.1,0.2-0.3,0.2-0.5H22.5z M22.5,574.4
 						c0,0-0.1,0.1-0.1,0.1v0.5c0.2,0,0.4-0.1,0.5-0.2L22.5,574.4z M22.3,574.4c-0.1,0-0.1,0-0.1-0.1l-0.4,0.4c0.1,0.1,0.3,0.2,0.5,0.2
 						V574.4z M22.2,574.4c0,0-0.1-0.1-0.1-0.2h-0.5c0,0.2,0.1,0.4,0.2,0.5L22.2,574.4z M22.1,574.2c0-0.1,0-0.1,0.1-0.1l-0.3-0.4
-						c-0.1,0.1-0.2,0.3-0.2,0.5H22.1z M22.2,574.1c0,0,0.1-0.1,0.1-0.1v-0.5c-0.2,0-0.4,0.1-0.5,0.2L22.2,574.1z"/>
-					<g>
-						<defs>
-							<rect id="SVGID_5_" x="11" y="540" width="20" height="26"/>
-						</defs>
-						<clipPath id="SVGID_6_">
-							<use xlinkHref="#SVGID_5_"  style={{overflow: 'visible'}}/>
-						</clipPath>
-						<g className="st10">
-							<path className="st11" d="M26,566l0-5.2l5-3.3l-5,0V540l-15,0v26L26,566z"/>
-							<path className="st12" d="M15,560.1v1.8h6.9v-1.8H15z"/>
-							<path className="st12" d="M21.7,552.3c0.1,0.5,0.3,1.1,0.3,2c0,1.8-0.9,3.9-3.6,3.9c-2.4,0-3.6-1.7-3.6-3.9c0-0.7,0.2-1.4,0.4-2
-								l1.5,0.1c-0.3,0.6-0.5,1.2-0.5,1.8c0,1.3,1,2.1,2.2,2.1c1.4,0,2.2-0.9,2.2-2.3c0-0.6-0.2-1.2-0.4-1.7L21.7,552.3z"/>
-							<path className="st12" d="M15,550.7v-2.5c0-2.4,0.8-4,3.4-4c2.6,0,3.5,1.7,3.5,4v2.5H15z M20.5,548.8v-0.7c0-1.4-0.7-2.1-2.1-2.1
-								c-1.4,0-2.1,0.8-2.1,2.1v0.7H20.5z"/>
-						</g>
-					</g>
-				</g>
-			</g>
-			<defs>
-				<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="31" y="160" width="257" height="235">
-					<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
-				</filter>
-			</defs>
-			<mask maskUnits="userSpaceOnUse" x="31" y="160" width="257" height="235" id="mask0_144_10_1_">
-				<path className="st16" d="M85,182.5h202.5v187H85c-24,0-43.5-19.5-43.5-43.5V226C41.5,202,61,182.5,85,182.5z"/>
-			</mask>
-			<g className="st17">
-				<rect x="31" y="160" className="st18" width="257" height="235"/>
-			</g>
-			<mask id="mask0_144_10"  style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x="41" y="182" width="247" height="188">
-			<path d="M41.5 226C41.5 201.976 60.9756 182.5 85 182.5H287.5V369.5H85C60.9756 369.5 41.5 350.024 41.5 326V226Z" fill="#D9D9D9" stroke="#6D6E70"/>
-			</mask>
-			<g mask="url(#mask0_144_10)">
-			<rect x="31" y="140" width="257" height="235" fill="url(#pattern1)"/>
-			</g>
-			<path className="st1" d="M83,369.5c-22.8,0-41.2-18.3-41.5-41h246v41H83z"/>
+						c-0.1,0.1-0.2,0.3-0.2,0.5H22.1z M22.2,574.1c0,0,0.1-0.1,0.1-0.1v-0.5c-0.2,0-0.4,0.1-0.5,0.2L22.2,574.1z"
+                />
+                <g>
+                  <defs>
+                    <rect id="SVGID_5_" x="11" y="540" width="20" height="26" />
+                  </defs>
+                  <clipPath id="SVGID_6_">
+                    <use
+                      xlinkHref="#SVGID_5_"
+                      style={{ overflow: "visible" }}
+                    />
+                  </clipPath>
+                  <g className="st10">
+                    <path
+                      className="st11"
+                      d="M26,566l0-5.2l5-3.3l-5,0V540l-15,0v26L26,566z"
+                    />
+                    <path className="st12" d="M15,560.1v1.8h6.9v-1.8H15z" />
+                    <path
+                      className="st12"
+                      d="M21.7,552.3c0.1,0.5,0.3,1.1,0.3,2c0,1.8-0.9,3.9-3.6,3.9c-2.4,0-3.6-1.7-3.6-3.9c0-0.7,0.2-1.4,0.4-2
+								l1.5,0.1c-0.3,0.6-0.5,1.2-0.5,1.8c0,1.3,1,2.1,2.2,2.1c1.4,0,2.2-0.9,2.2-2.3c0-0.6-0.2-1.2-0.4-1.7L21.7,552.3z"
+                    />
+                    <path
+                      className="st12"
+                      d="M15,550.7v-2.5c0-2.4,0.8-4,3.4-4c2.6,0,3.5,1.7,3.5,4v2.5H15z M20.5,548.8v-0.7c0-1.4-0.7-2.1-2.1-2.1
+								c-1.4,0-2.1,0.8-2.1,2.1v0.7H20.5z"
+                    />
+                  </g>
+                </g>
+              </g>
+            </g>
+            <defs>
+              <filter
+                id="Adobe_OpacityMaskFilter"
+                filterUnits="userSpaceOnUse"
+                x="31"
+                y="160"
+                width="257"
+                height="235"
+              >
+                <feColorMatrix
+                  type="matrix"
+                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"
+                />
+              </filter>
+            </defs>
+            <mask
+              maskUnits="userSpaceOnUse"
+              x="31"
+              y="160"
+              width="257"
+              height="235"
+              id="mask0_144_10_1_"
+            >
+              <path
+                className="st16"
+                d="M85,182.5h202.5v187H85c-24,0-43.5-19.5-43.5-43.5V226C41.5,202,61,182.5,85,182.5z"
+              />
+            </mask>
+            <g className="st17">
+              <rect x="31" y="160" className="st18" width="257" height="235" />
+            </g>
+            <mask
+              id="mask0_144_10"
+              style={{ maskType: "alpha" }}
+              maskUnits="userSpaceOnUse"
+              x="41"
+              y="182"
+              width="247"
+              height="188"
+            >
+              <path
+                d="M41.5 226C41.5 201.976 60.9756 182.5 85 182.5H287.5V369.5H85C60.9756 369.5 41.5 350.024 41.5 326V226Z"
+                fill="#D9D9D9"
+                stroke="#6D6E70"
+              />
+            </mask>
+            <g mask="url(#mask0_144_10)">
+              <rect
+                x="31"
+                y="140"
+                width="257"
+                height="235"
+                fill="url(#pattern1)"
+              />
+            </g>
+            <path
+              className="st1"
+              d="M83,369.5c-22.8,0-41.2-18.3-41.5-41h246v41H83z"
+            />
 
-			<path className="st19" d="M83,369.5c-22.8,0-41.2-18.3-41.5-41h246v41H83z"/>
-			<path className="st1" d="M240,0h7c4.4,0,8,3.6,8,8v53c0,4.4-3.6,8-8,8h-7c-4.4,0-8-3.6-8-8V8C232,3.6,235.6,0,240,0z"/>
-			<text transform="matrix(1 0 0 1 41.0448 433.0999)" className="st20 st21 st22">FAVOURITE ARTISTS</text>
-			<g>
-			<text transform="matrix(1 0 0 1 64.763 355.1686)" className="profile-name st20 st21 st22">{node?.title}</text>
-			</g>
-			<text transform="matrix(1 0 0 1 23.0407 82.2875)" class="prev">PREV</text>
-			<text transform="matrix(1 0 0 1 238.2215 82.2874)" class="prev">NEXT</text>
-			<defs>
-			<pattern id="pattern1" patternContentUnits="objectBoundingBox" width="1" height="1">
-				<use xlinkHref="#image0_144_10" transform="matrix(0.00221239 0 0 0.00241951 0 -0.0189842)"/>
-			</pattern>
-				<image id="image0_144_10" width="452" height="429" xlinkHref={node?.profileImage?.profileImage?.sourceUrl} />
-			</defs>
-			<g>
-	<text onClick={() => playAudio(`p${i+1}`)} transform="matrix(1 0 0 1 41.0448 433.0999)" class="st20 st21 st22">FAVOURITE ARTISTS</text>
-	<g onClick={() => playAudio(`p${i+5}`)}>
-		<polyline class="st55" points="288,622 41.5,622 41.5,588 288,588 		"/>
-		<g>
-			<rect x="41.6" y="588" class="st55" width="34" height="34"/>
-			<g className={`p${i+5}`}>
-				<path class="st48" d="M57.7,599.2l-4.2,3.3h-3.3v5h3.3l4.2,3.3V599.2z"/>
-				<path class="st48" d="M64.4,599.1c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,602c0.8,0.8,1.2,1.8,1.2,2.9
-					c0,1.1-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 86.9078 610.5005)" class="st13 st14 st15">{node.music.artistFifth}</text>
-		</g>
-	</g>
-	<a href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1" target='_blank' rel='nooppener'>
-
-		<g>
-			<polyline class="st55" points="288,656 41.5,656 41.5,622 		"/>
-			<g>
-				<rect x="41.6" y="622" class="st41" width="34" height="34"/>
-				<g>
-					<path class="st42" d="M54.4,635.1h8.3v8.3"/>
-					<path class="st42" d="M54.4,643.4l8.3-8.3"/>
-				</g>
-			</g>
-			<g>
-				<text transform="matrix(1 0 0 1 86.9075 644.7462)" class="st13 st14 st15">Go to ICD Jukebox</text>
-			</g>
-			<g>
-				<path class="st24" d="M226.4,631.9c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1s7.1-3.2,7.1-7.1
-					C233.6,635.1,230.4,631.9,226.4,631.9z"/>
-				<path d="M231,638.3c-0.1,0-0.2,0-0.4-0.1c-2-1.2-5.7-1.5-8.1-0.9c-0.1,0-0.2,0.1-0.4,0.1c-0.4,0-0.7-0.3-0.7-0.7
+            <path
+              className="st19"
+              d="M83,369.5c-22.8,0-41.2-18.3-41.5-41h246v41H83z"
+            />
+            <path
+              className="st1"
+              d="M240,0h7c4.4,0,8,3.6,8,8v53c0,4.4-3.6,8-8,8h-7c-4.4,0-8-3.6-8-8V8C232,3.6,235.6,0,240,0z"
+            />
+            <text
+              transform="matrix(1 0 0 1 41.0448 433.0999)"
+              className="st20 st21 st22"
+            >
+              FAVOURITE ARTISTS
+            </text>
+            <g>
+              <text
+                transform="matrix(1 0 0 1 64.763 355.1686)"
+                className="profile-name st20 st21 st22"
+              >
+                {node?.title}
+              </text>
+            </g>
+            <text transform="matrix(1 0 0 1 23.0407 82.2875)" class="prev">
+              PREV
+            </text>
+            <text transform="matrix(1 0 0 1 238.2215 82.2874)" class="prev">
+              NEXT
+            </text>
+            <defs>
+              <pattern
+                id="pattern1"
+                patternContentUnits="objectBoundingBox"
+                width="1"
+                height="1"
+              >
+                <use
+                  xlinkHref="#image0_144_10"
+                  transform="matrix(0.00221239 0 0 0.00241951 0 -0.0189842)"
+                />
+              </pattern>
+              <image
+                id="image0_144_10"
+                width="452"
+                height="429"
+                xlinkHref={node?.profileImage?.profileImage?.sourceUrl}
+              />
+            </defs>
+            <g>
+              <text
+                onClick={() => playAudio(`p${i + 1}`)}
+                transform="matrix(1 0 0 1 41.0448 433.0999)"
+                class="st20 st21 st22"
+              >
+                FAVOURITE ARTISTS
+              </text>
+              <g onClick={() => playAudio(`p${i + 5}`)}>
+                <polyline
+                  class="st55"
+                  points="288,622 41.5,622 41.5,588 288,588 		"
+                />
+                <g>
+                  <rect x="41.6" y="588" class="st55" width="34" height="34" />
+                  <g className={`p${i + 5}`}>
+                    <path
+                      class="st48"
+                      d="M57.7,599.2l-4.2,3.3h-3.3v5h3.3l4.2,3.3V599.2z"
+                    />
+                    <path
+                      class="st48"
+                      d="M64.4,599.1c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,602c0.8,0.8,1.2,1.8,1.2,2.9
+					c0,1.1-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 86.9078 610.5005)"
+                    class="st13 st14 st15"
+                  >
+                    {node.music.artistFifth}
+                  </text>
+                </g>
+              </g>
+              <a
+                href="https://open.spotify.com/playlist/2waHIeAFXKEsrubXWem6QD?si=gAcAEdEwQTaRGyfLWZviAg&nd=1"
+                target="_blank"
+                rel="nooppener"
+              >
+                <g>
+                  <polyline class="st55" points="288,656 41.5,656 41.5,622 		" />
+                  <g>
+                    <rect
+                      x="41.6"
+                      y="622"
+                      class="st41"
+                      width="34"
+                      height="34"
+                    />
+                    <g>
+                      <path class="st42" d="M54.4,635.1h8.3v8.3" />
+                      <path class="st42" d="M54.4,643.4l8.3-8.3" />
+                    </g>
+                  </g>
+                  <g>
+                    <text
+                      transform="matrix(1 0 0 1 86.9075 644.7462)"
+                      class="st13 st14 st15"
+                    >
+                      Go to ICD Jukebox
+                    </text>
+                  </g>
+                  <g>
+                    <path
+                      class="st24"
+                      d="M226.4,631.9c-3.9,0-7.1,3.2-7.1,7.1c0,3.9,3.2,7.1,7.1,7.1s7.1-3.2,7.1-7.1
+					C233.6,635.1,230.4,631.9,226.4,631.9z"
+                    />
+                    <path
+                      d="M231,638.3c-0.1,0-0.2,0-0.4-0.1c-2-1.2-5.7-1.5-8.1-0.9c-0.1,0-0.2,0.1-0.4,0.1c-0.4,0-0.7-0.3-0.7-0.7
 				c0-0.4,0.2-0.6,0.5-0.7c1-0.3,2.1-0.4,3.4-0.4c2.1,0,4.3,0.4,5.9,1.4c0.2,0.1,0.4,0.3,0.4,0.6C231.7,638,231.3,638.3,231,638.3
 				L231,638.3z M230.1,640.5c-0.1,0-0.2-0.1-0.4-0.1c-1.8-1.1-4.5-1.5-6.8-0.8c-0.1,0-0.2,0.1-0.3,0.1c-0.3,0-0.6-0.2-0.6-0.6
 				s0.1-0.5,0.4-0.6c0.8-0.2,1.6-0.4,2.8-0.4c1.9,0,3.7,0.5,5.1,1.3c0.2,0.1,0.3,0.3,0.3,0.6C230.7,640.2,230.4,640.5,230.1,640.5z
 				 M229.3,642.3c-0.1,0-0.2,0-0.3-0.1c-1.8-1.1-3.9-1.1-5.9-0.7c-0.1,0-0.3,0.1-0.3,0.1c-0.3,0-0.5-0.2-0.5-0.5
-				c0-0.3,0.2-0.4,0.4-0.5c2.4-0.5,4.8-0.5,6.8,0.8c0.2,0.1,0.3,0.2,0.3,0.5C229.8,642.2,229.6,642.3,229.3,642.3L229.3,642.3z"/>
-			</g>
-		</g>
-	</a>
-	<g onClick={() => playAudio(`p${i+4}`)}>
-		<polyline class="st55" points="288,588 41.5,588 41.5,554 288,554 		"/>
-		<g>
-			<rect x="41.6" y="554" class="st55" width="34" height="34"/>
-			<g className={`p${i+4}`}>
-				<path class="st48" d="M57.7,565.7l-4.2,3.3h-3.3v5h3.3l4.2,3.3V565.7z"/>
-				<path class="st48" d="M64.4,565.6c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,568.5c0.8,0.8,1.2,1.8,1.2,2.9
-					c0,1.1-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 86.9078 576.9842)" class="st13 st14 st15">{node.music.artistFourth}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+3}`)}>
-		<rect x="41.6" y="520" class="st55" width="34" height="34"/>
-		<polyline class="st55" points="288,554 41.5,554 41.5,520 288,520 		"/>
-		<g className={`p${i+3}`}>
-			<path class="st48" d="M57.7,532l-4.2,3.3h-3.3v5h3.3l4.2,3.3V532z"/>
-			<path class="st48" d="M64.4,532c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,534.9c0.8,0.8,1.2,1.8,1.2,2.9
-				c0,1.1-0.4,2.2-1.2,2.9"/>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 86.9078 543.3622)" class="st13 st14 st15">{node.music.artistThird}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+2}`)}>
-		<polyline class="st55" points="288,520 41.5,520 41.5,486 288,486 		"/>
-		<g>
-			<rect x="41.6" y="486" class="st55" width="34" height="34"/>
-			<g className={`p${i+2}`}>
-				<path class="st48" d="M57.7,497l-4.2,3.3h-3.3v5h3.3l4.2,3.3V497z"/>
-				<path class="st48" d="M64.4,496.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,499.9c0.8,0.8,1.2,1.8,1.2,2.9
-					s-0.4,2.2-1.2,2.9"/>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 86.9078 508.3395)" class="st13 st14 st15">{node.music.artistSecond}</text>
-		</g>
-	</g>
-	<g onClick={() => playAudio(`p${i+1}`)}>
-		<polyline class="st55" points="288,486 41.5,486 41.5,452 288,452 		"/>
-		<g>
-			<rect x="41.6" y="452" class="st55" width="34" height="34"/>
-			<g>
-				<g className={`p${i+1}`}>
-					<path class="st48" d="M57.7,463.3l-4.2,3.3h-3.3v5h3.3l4.2,3.3V463.3z"/>
-					<path class="st48" d="M64.4,463.2c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,466.1c0.8,0.8,1.2,1.8,1.2,2.9
-						s-0.4,2.2-1.2,2.9"/>
-				</g>
-			</g>
-		</g>
-		<g>
-			<text transform="matrix(1 0 0 1 86.9078 474.5901)" class="st13 st14 st15">{node.music.artistFirst}</text>
-		</g>
-	</g>
-</g>
-			</svg>
-			<div className="audio">
-				<audio onEnded={endFunction} preload="none" id={`p${i+1}`}
-					src={node?.music.musicFirst}></audio>
-				<audio onEnded={endFunction} preload="none" id={`p${i+2}`}
-					src={node?.music.musicSecond}></audio>
-				<audio onEnded={endFunction} preload="none" id={`p${i+3}`}
-					src={node?.music.musicThird}></audio>
-				<audio onEnded={endFunction} preload="none" id={`p${i+4}`}
-					src={node?.music.musicFourth}></audio>
-				<audio onEnded={endFunction} preload="none" id={`p${i+5}`}
-					src={node?.music.musicFifth}></audio>
-			</div> 
-			</>
-			}
+				c0-0.3,0.2-0.4,0.4-0.5c2.4-0.5,4.8-0.5,6.8,0.8c0.2,0.1,0.3,0.2,0.3,0.5C229.8,642.2,229.6,642.3,229.3,642.3L229.3,642.3z"
+                    />
+                  </g>
+                </g>
+              </a>
+              <g onClick={() => playAudio(`p${i + 4}`)}>
+                <polyline
+                  class="st55"
+                  points="288,588 41.5,588 41.5,554 288,554 		"
+                />
+                <g>
+                  <rect x="41.6" y="554" class="st55" width="34" height="34" />
+                  <g className={`p${i + 4}`}>
+                    <path
+                      class="st48"
+                      d="M57.7,565.7l-4.2,3.3h-3.3v5h3.3l4.2,3.3V565.7z"
+                    />
+                    <path
+                      class="st48"
+                      d="M64.4,565.6c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,568.5c0.8,0.8,1.2,1.8,1.2,2.9
+					c0,1.1-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 86.9078 576.9842)"
+                    class="st13 st14 st15"
+                  >
+                    {node.music.artistFourth}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 3}`)}>
+                <rect x="41.6" y="520" class="st55" width="34" height="34" />
+                <polyline
+                  class="st55"
+                  points="288,554 41.5,554 41.5,520 288,520 		"
+                />
+                <g className={`p${i + 3}`}>
+                  <path
+                    class="st48"
+                    d="M57.7,532l-4.2,3.3h-3.3v5h3.3l4.2,3.3V532z"
+                  />
+                  <path
+                    class="st48"
+                    d="M64.4,532c1.6,1.6,2.4,3.7,2.4,5.9c0,2.2-0.9,4.3-2.4,5.9 M61.5,534.9c0.8,0.8,1.2,1.8,1.2,2.9
+				c0,1.1-0.4,2.2-1.2,2.9"
+                  />
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 86.9078 543.3622)"
+                    class="st13 st14 st15"
+                  >
+                    {node.music.artistThird}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 2}`)}>
+                <polyline
+                  class="st55"
+                  points="288,520 41.5,520 41.5,486 288,486 		"
+                />
+                <g>
+                  <rect x="41.6" y="486" class="st55" width="34" height="34" />
+                  <g className={`p${i + 2}`}>
+                    <path
+                      class="st48"
+                      d="M57.7,497l-4.2,3.3h-3.3v5h3.3l4.2,3.3V497z"
+                    />
+                    <path
+                      class="st48"
+                      d="M64.4,496.9c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,499.9c0.8,0.8,1.2,1.8,1.2,2.9
+					s-0.4,2.2-1.2,2.9"
+                    />
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 86.9078 508.3395)"
+                    class="st13 st14 st15"
+                  >
+                    {node.music.artistSecond}
+                  </text>
+                </g>
+              </g>
+              <g onClick={() => playAudio(`p${i + 1}`)}>
+                <polyline
+                  class="st55"
+                  points="288,486 41.5,486 41.5,452 288,452 		"
+                />
+                <g>
+                  <rect x="41.6" y="452" class="st55" width="34" height="34" />
+                  <g>
+                    <g className={`p${i + 1}`}>
+                      <path
+                        class="st48"
+                        d="M57.7,463.3l-4.2,3.3h-3.3v5h3.3l4.2,3.3V463.3z"
+                      />
+                      <path
+                        class="st48"
+                        d="M64.4,463.2c1.6,1.6,2.4,3.7,2.4,5.9s-0.9,4.3-2.4,5.9 M61.5,466.1c0.8,0.8,1.2,1.8,1.2,2.9
+						s-0.4,2.2-1.2,2.9"
+                      />
+                    </g>
+                  </g>
+                </g>
+                <g>
+                  <text
+                    transform="matrix(1 0 0 1 86.9078 474.5901)"
+                    class="st13 st14 st15"
+                  >
+                    {node.music.artistFirst}
+                  </text>
+                </g>
+              </g>
+            </g>
+          </svg>
+          <div className="audio">
+            <audio
+              onEnded={endFunction}
+              preload="none"
+              id={`p${i + 1}`}
+              src={node?.music.musicFirst}
+            ></audio>
+            <audio
+              onEnded={endFunction}
+              preload="none"
+              id={`p${i + 2}`}
+              src={node?.music.musicSecond}
+            ></audio>
+            <audio
+              onEnded={endFunction}
+              preload="none"
+              id={`p${i + 3}`}
+              src={node?.music.musicThird}
+            ></audio>
+            <audio
+              onEnded={endFunction}
+              preload="none"
+              id={`p${i + 4}`}
+              src={node?.music.musicFourth}
+            ></audio>
+            <audio
+              onEnded={endFunction}
+              preload="none"
+              id={`p${i + 5}`}
+              src={node?.music.musicFifth}
+            ></audio>
+          </div>
         </>
-    )
+      )}
+    </>
+  );
 }

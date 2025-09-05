@@ -1,16 +1,16 @@
 "use client";
-import { NextSeo } from "next-seo";
+
 import { useRouter } from "next/navigation";
 import parse from "html-react-parser";
 import Link from "next/link";
-import Head from "next/head";
+
 // const FetchNewsletter = dynamic (() => import("./fetch-newsletter/newsletter"));
 
 import $ from "jquery";
 
 import style from "../posts/posts.module.scss";
 
-export default function yellowEnvelop({ meta, edges }) {
+export default function YellowEnvelop({ meta, edges }) {
   const router = useRouter();
 
   const backButton = () => {
@@ -31,42 +31,6 @@ export default function yellowEnvelop({ meta, edges }) {
   var content = "";
   return (
     <>
-      <NextSeo
-        title={meta.seo.title}
-        description={meta.seo.metaDesc}
-        canonical={`https://www.icdindia.com${router.pathname}`}
-        robots={meta.metaRobotsNoindex}
-        googlebot={meta.metaRobotsNofollow}
-        openGraph={{
-          url: `https://www.icdindia.com${router.pathname}`,
-          title: meta.seo.title,
-          description: meta.seo.metaDesc,
-          images: [
-            {
-              url: meta.featuredImage?.node.sourceUrl,
-              alt: "homepage-image",
-              type: "image/jpeg",
-            },
-          ],
-          site_name: meta.seo.title,
-        }}
-      />
-      <Head>
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.seo.title} />
-        <meta name="twitter:description" content={meta.seo.metaDesc} />
-        <meta
-          name="twitter:url"
-          content={`https://www.icdindia.com${router.pathname}`}
-        />
-        <meta
-          name="twitter:image"
-          content={meta.featuredImage?.node.sourceUrl}
-        />
-        {/* end of Twitter Cards */}
-      </Head>
-
       <section
         className={`${style.posts__page} mT__260 page__header posts__page `}
       >

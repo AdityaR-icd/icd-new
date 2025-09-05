@@ -61,8 +61,6 @@ export default function postItem({ data, ids }) {
     var postsTags = <span></span>;
   }
 
-  console.log("parsed data", parse(data.excerpt.substr(0, 393)));
-
   return (
     <div className="col-md-6 col-lg-6 grid-item">
       <div className={`${style.postsItems} animateItems`}>
@@ -76,7 +74,6 @@ export default function postItem({ data, ids }) {
           <h2 className={style.postTitle}>{data.title}</h2>
           <span className={style.postBy}> {date} </span>
           <div className={style.postInfo}>
-            {console.log("data excerpt", data.excerpt)}
             {parse(data.excerpt.substr(0, 393))}{" "}
           </div>
           <div className="d-none">

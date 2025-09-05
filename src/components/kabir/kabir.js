@@ -1,16 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { NextSeo } from "next-seo";
 import parse from "html-react-parser";
 import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head";
 import Like from "../../components/like";
 
 import $ from "jquery";
 
 import style from "../posts/posts.module.scss";
-export default function kabir({ meta, edges }) {
+export default function Kabir({ meta, edges }) {
   // console.log(meta.)
   const router = useRouter();
 
@@ -52,42 +50,6 @@ export default function kabir({ meta, edges }) {
 
   return (
     <>
-      <NextSeo
-        title={meta?.seo?.title}
-        description={meta?.seo?.metaDesc}
-        canonical={`https://www.icdindia.com${router.pathname}`}
-        robots={meta?.metaRobotsNoindex}
-        googlebot={meta?.metaRobotsNofollow}
-        openGraph={{
-          url: `https://www.icdindia.com${router?.pathname}`,
-          title: meta?.seo?.title,
-          description: meta?.seo?.metaDesc,
-          images: [
-            {
-              url: meta?.featuredImage?.node?.sourceUrl,
-              alt: "homepage-image",
-              type: "image/jpeg",
-            },
-          ],
-          site_name: meta?.seo?.title,
-        }}
-      />
-      <Head>
-        {/* Twitter Cards */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta?.seo?.title} />
-        <meta name="twitter:description" content={meta?.seo?.metaDesc} />
-        <meta
-          name="twitter:url"
-          content={`https://www.icdindia.com${router?.pathname}`}
-        />
-        <meta
-          name="twitter:image"
-          content={meta?.featuredImage?.node?.sourceUrl}
-        />
-        {/* end of Twitter Cards */}
-      </Head>
-
       <section
         className={`${style.posts__page} mT__260 page__header posts__page `}
       >
