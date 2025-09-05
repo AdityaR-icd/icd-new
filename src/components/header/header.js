@@ -293,7 +293,7 @@ const Header = (props) => {
         >
           <Search suggestion={allFilters}></Search>
           <div id="close">
-            <span className="close-wrap" onClick={() => setIsSearchOpen(false)}>
+            <span className="close-wrap" onClick={searchToggle}>
               <span className="close-line close-line1"></span>
               <span className="close-line close-line2"></span>
             </span>
