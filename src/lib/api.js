@@ -509,6 +509,9 @@ export async function getAllProjectsForHome(preview) {
         onlyEnabled: !preview,
         preview,
       },
+    },
+    {
+      next: { revalidate: 86400 },
     }
   );
   return data?.projects;

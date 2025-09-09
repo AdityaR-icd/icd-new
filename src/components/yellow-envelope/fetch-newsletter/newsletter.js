@@ -1,8 +1,6 @@
-"use client";
 import style from "../../posts/posts.module.scss";
 import parse from "html-react-parser";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function fetchNewsletter({ data }) {
   var date = new Date(data.date).toLocaleDateString("en-IN", {
@@ -41,11 +39,4 @@ export default function fetchNewsletter({ data }) {
       </div>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {},
-    // revalidate: 1,
-  };
 }

@@ -7,10 +7,12 @@ import {
 import Layout from "@/components/project/allProject";
 
 export default async function Page() {
-  const AllProjects = await getAllProjectsForHome();
-  const meta = await getProjectPage();
-  const latestProject = await getLatestProject();
-  const projectsTypes = await getProjectTypes();
+  const [AllProjects, meta, latestProject, projectsTypes] = await Promise.all([
+    getAllProjectsForHome(),
+    getProjectPage(),
+    getLatestProject(),
+    getProjectTypes(),
+  ]);
 
   const meta_data = meta.pages.edges[0].node;
 
@@ -23,3 +25,6 @@ export default async function Page() {
     />
   );
 }
+
+// Optional: ISR equivalent
+export const revalidate = 86400; // same as getStaticProps revalidate

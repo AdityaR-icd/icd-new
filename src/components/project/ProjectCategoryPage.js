@@ -40,14 +40,14 @@ export default function ProjectCategoryPage({ project, latestProject }) {
   );
 
   const slug = projectSubTypes?.map(
-    (item) =>
+    (item, index) =>
       item?.node?.projects?.edges.length > 0 && (
         <Link
           href={`/projects/category/${pageData?.slug}/${item?.node?.slug}`}
           className={`${style.project__filter} project__filter marginRight ${
             !allProject ? style.active : ""
           }`}
-          key={item.node.id}
+          key={`${index}-project-category`}
         >
           {item?.node?.name}
         </Link>
