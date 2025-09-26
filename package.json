@@ -8,7 +8,8 @@
     "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
     "lint": "next lint",
     "export": "NODE_OPTIONS=--openssl-legacy-provider next export",
-    "analyze": "NODE_OPTIONS=--openssl-legacy-provider ANALYZE=true next build"
+    "analyze": "NODE_OPTIONS=--openssl-legacy-provider ANALYZE=true next build",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -38,10 +39,11 @@
     "react-autosuggest": "^9.4.3",
     "react-dom": "19.1.1",
     "react-responsive": "^9.0.0-beta.4",
-    "react-slick": "^0.24.0",
+    "react-slick": "^0.31.0",
     "sass": "^1.41.1",
     "setimmediate": "^1.0.5",
     "sharp": "^0.32.1",
+    "slick-carousel": "^1.8.1",
     "webpack": "^5.81.0",
     "webpack-remove-serviceworker-plugin": "^1.0.0"
   },
@@ -50,6 +52,8 @@
     "eslint": "7.32.0",
     "eslint-config-next": "15.5.2",
     "next-pwa": "^5.4.1",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "webpack-bundle-analyzer": "^4.8.0"
   },
   "overrides": {

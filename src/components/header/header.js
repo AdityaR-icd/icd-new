@@ -10,10 +10,7 @@ import { usePathname } from "next/navigation";
 
 import Search from "../search/search";
 
-// const FilterLayout = dynamic(() => import("../../app/filterlayout/layout"));
-
 const Header = (props) => {
-  // var suggestionData
   var filters = props.filters;
 
   var clients = [];
@@ -22,15 +19,6 @@ const Header = (props) => {
   var categories = [];
   var tags = [];
   var keywords = [];
-
-  const searchToggle = () => {
-    $("body").toggleClass("showSearch");
-    if ($("body").hasClass("showSearch")) {
-      $(".searchInput").focus();
-    } else {
-      setsearchValue("");
-    }
-  };
 
   filters?.clients?.edges.map((item) => {
     clients.push(item.node.slug);
@@ -68,25 +56,37 @@ const Header = (props) => {
   ];
 
   const pathname = usePathname();
-  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
+  useEffect(() => {
+    if (!pathname.startsWith("/search")) {
+      $("body").removeClass();
+    }
+  });
+
+  const searchToggle = () => {
+    $("body").toggleClass("showSearch");
+    if ($("body").hasClass("showSearch")) {
+      $(".searchInput").focus();
+    } else {
+      setSearchValue("");
+    }
+  };
 
   const hamburgerToggle = () => {
-    setIsHamburgerOpen(!isHamburgerOpen);
+    $("body").toggleClass("hamburger-open");
+    $(".hamburger, .nav-menu").toggleClass("is-active");
   };
 
   const hamburgerClose = () => {
-    setIsHamburgerOpen(false);
+    $("body").removeClass("hamburger-open");
+    $(".hamburger, .nav-menu").removeClass("is-active");
+    $("body").removeClass("showSearch");
   };
-  const [searchValue, setsearchValue] = useState("");
-  // Search Show and Hide
 
   useEffect(() => {
-    $(window).on("load", function () {
-      $(".loader").addClass("hideLoader");
-
-      $(".vertical-video .player").css("height", "inherit !important");
-    });
+    $(".loader").addClass("hideLoader");
+    $(".vertical-video .player").css("height", "inherit !important");
 
     var lastScrollTop = 0;
 
@@ -103,204 +103,199 @@ const Header = (props) => {
         $(".menu-cont").removeClass("header__hide").addClass("bg-transparent");
       }
     });
-  });
+  }, []);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const search = e.target.elements.search.value;
     const clean = `/search/${search}`;
-    // router.push({
-    //     pathname: clean,
-    // })
-    window.location.href = clean;
+    router.push(clean);
+    setSearchValue("");
   };
 
   return (
-    <>
-      <header id="header">
-        <div className="menu-cont bg-transparent" id="menu-cont">
-          <div className="container">
-            <div className="row">
-              <div className="col-10 col-md-2 logo-container">
-                <Link
-                  href="/"
-                  aria-label="logo"
+    <header id="header">
+      <div className="menu-cont bg-transparent" id="menu-cont">
+        <div className="container">
+          <div className="row">
+            <div className="col-10 col-md-2 logo-container">
+              <Link
+                href="/"
+                aria-label="logo"
+                className="logo d-none d-lg-block"
+              >
+                <Image
+                  decoding="async"
+                  width="172"
+                  priority="true"
+                  height="43"
+                  src={logo.src}
                   className="logo d-none d-lg-block"
-                >
-                  <Image
-                    decoding="async"
-                    width="172"
-                    priority="true"
-                    height="43"
-                    src={logo.src}
-                    className="logo d-none d-lg-block"
-                    alt="icd-logo"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </Link>
-                <Link
-                  href="/"
-                  aria-label="logo"
+                  alt="icd-logo"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Link>
+              <Link
+                href="/"
+                aria-label="logo"
+                className="logo d-block d-lg-none"
+              >
+                <Image
+                  decoding="async"
+                  priority="true"
+                  src={mobileLogo.src}
+                  width="48"
+                  height="36"
                   className="logo d-block d-lg-none"
+                  alt="icd-logo"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                />
+              </Link>
+            </div>
+            <div className="col-2 col-md-10">
+              <div className="d-block d-lg-none">
+                <div
+                  className={`hamburger hamburger--spring js-hamburger`}
+                  onClick={hamburgerToggle}
                 >
-                  <Image
-                    decoding="async"
-                    priority="true"
-                    src={mobileLogo.src}
-                    width="48"
-                    height="36"
-                    className="logo d-block d-lg-none"
-                    alt="icd-logo"
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                  />
-                </Link>
-              </div>
-              <div className="col-2 col-md-10">
-                <div className="d-block d-lg-none">
-                  <div
-                    className={`hamburger hamburger--spring js-hamburger ${
-                      isHamburgerOpen ? "is-active" : ""
-                    }`}
-                    onClick={hamburgerToggle}
-                  >
-                    <div className="hamburger-box">
-                      <div className="hamburger-inner"></div>
-                    </div>
+                  <div className="hamburger-box">
+                    <div className="hamburger-inner"></div>
                   </div>
                 </div>
-                <div
-                  className={`nav-menu ${isHamburgerOpen ? "is-active" : ""}`}
-                >
-                  <div className="container">
-                    <div className="row">
-                      <ul>
-                        <li className="mobile__menu--items">
-                          <form className="global-search">
-                            <input
-                              type="search"
-                              className="searchInput"
-                              value={searchValue}
-                              onChange={(e) => setsearchValue(e.target.value)}
-                              placeholder="type an industry, client or keyword"
-                              id="hamburgerSearch"
-                              required=""
-                              name="search"
-                            />
-                            <input
-                              className="searchBtn"
-                              onClick={onSubmitHandler}
-                              type="submit"
-                              value=""
-                            />
-                          </form>
-                        </li>
-                        <li
-                          className="mobile__menu--items"
-                          onClick={hamburgerClose}
+              </div>
+              <div className={`nav-menu`}>
+                <div className="container">
+                  <div className="row">
+                    <ul>
+                      <li className="mobile__menu--items">
+                        <form className="global-search">
+                          <input
+                            type="search"
+                            className="searchInput"
+                            value={searchValue}
+                            onChange={(e) => setSearchValue(e.target.value)}
+                            placeholder="type an industry, client or keyword"
+                            id="hamburgerSearch"
+                            required=""
+                            name="search"
+                          />
+                          <input
+                            className="searchBtn"
+                            onClick={onSubmitHandler}
+                            type="submit"
+                            value=""
+                          />
+                        </form>
+                      </li>
+                      <li
+                        className="mobile__menu--items"
+                        onClick={hamburgerClose} // Changed from hamburgerToggle
+                      >
+                        <Link href="/">home</Link>
+                      </li>
+                      <li onClick={hamburgerClose}>
+                        {" "}
+                        {/* Changed from hamburgerToggle */}
+                        <Link
+                          href="/projects/type/all"
+                          className={
+                            pathname.startsWith("/projects") ? "active" : ""
+                          }
                         >
-                          <Link href="/">home</Link>
-                        </li>
-                        <li onClick={hamburgerClose}>
-                          <Link
-                            href="/projects/type/all"
-                            className={
-                              pathname.startsWith("/projects") ? "active" : ""
-                            }
-                          >
-                            projects
-                          </Link>
-                        </li>
-                        <li onClick={hamburgerClose}>
-                          <Link
-                            href="/clients"
-                            className={
-                              pathname.startsWith("/clients") ? "active" : ""
-                            }
-                          >
-                            clients
-                          </Link>
-                        </li>
-                        <li onClick={hamburgerClose}>
-                          <Link
-                            href="/services"
-                            className={pathname === "/services" ? "active" : ""}
-                          >
-                            services
-                          </Link>
-                        </li>
-                        <li onClick={hamburgerClose}>
-                          <Link
-                            href="/posts"
-                            className={
-                              pathname.startsWith("/posts") ? "active" : ""
-                            }
-                          >
-                            posts
-                          </Link>
-                        </li>
-                        <li onClick={hamburgerClose}>
-                          <Link
-                            href="/contact"
-                            className={pathname === "/contact" ? "active" : ""}
-                          >
-                            contact
-                          </Link>
-                        </li>
-                        <li
-                          className="mobile__menu--items"
-                          onClick={hamburgerClose}
+                          projects
+                        </Link>
+                      </li>
+                      <li onClick={hamburgerClose}>
+                        {" "}
+                        {/* Changed from hamburgerToggle */}
+                        <Link
+                          href="/clients"
+                          className={
+                            pathname.startsWith("/clients") ? "active" : ""
+                          }
                         >
-                          <Link href="/our-team">team</Link>
-                        </li>
-                        <li
-                          className="mobile__menu--items"
-                          onClick={hamburgerClose}
+                          clients
+                        </Link>
+                      </li>
+                      <li onClick={hamburgerClose}>
+                        {" "}
+                        {/* Changed from hamburgerToggle */}
+                        <Link
+                          href="/services"
+                          className={pathname === "/services" ? "active" : ""}
                         >
-                          <Link href="/careers">careers</Link>
-                        </li>
-                        <li className="copyright">
-                          © 1990-2019 itu chaudhuri design pvt ltd | all rights
-                          reserved. please note — no images or content from site
-                          can be reproduced without prior written consent from
-                          icd
-                        </li>
-                        <li
-                          className="search-icon d-lg-block d-none"
-                          onClick={searchToggle}
+                          services
+                        </Link>
+                      </li>
+                      <li onClick={hamburgerClose}>
+                        {" "}
+                        {/* Changed from hamburgerToggle */}
+                        <Link
+                          href="/posts"
+                          className={
+                            pathname.startsWith("/posts") ? "active" : ""
+                          }
                         >
-                          <span className="searchIcon"></span>
-                        </li>
-                      </ul>
-                    </div>
+                          posts
+                        </Link>
+                      </li>
+                      <li onClick={hamburgerClose}>
+                        {" "}
+                        {/* Changed from hamburgerToggle */}
+                        <Link
+                          href="/contact"
+                          className={pathname === "/contact" ? "active" : ""}
+                        >
+                          contact
+                        </Link>
+                      </li>
+                      <li
+                        className="mobile__menu--items"
+                        onClick={hamburgerClose} // Changed from hamburgerToggle
+                      >
+                        <Link href="/our-team">team</Link>
+                      </li>
+                      <li
+                        className="mobile__menu--items"
+                        onClick={hamburgerClose} // Changed from hamburgerToggle
+                      >
+                        <Link href="/careers">careers</Link>
+                      </li>
+                      <li className="copyright">
+                        © 1990-2019 itu chaudhuri design pvt ltd | all rights
+                        reserved. please note — no images or content from site
+                        can be reproduced without prior written consent from icd
+                      </li>
+                      <li
+                        className="search-icon d-lg-block d-none"
+                        onClick={searchToggle}
+                      >
+                        <span className="searchIcon"></span>
+                      </li>
+                    </ul>
                   </div>
-                </div>{" "}
-                {/* nav-menu end */}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div
-          className={`search-form ignore-react-onclickoutside ${
-            isSearchOpen ? "showSearch" : ""
-          }`}
-          id="searchID"
-        >
-          <Search suggestion={allFilters}></Search>
-          <div id="close">
-            <span className="close-wrap" onClick={searchToggle}>
-              <span className="close-line close-line1"></span>
-              <span className="close-line close-line2"></span>
-            </span>
-          </div>
+      </div>
+      <div className={`search-form ignore-react-onclickoutside `} id="searchID">
+        <Search suggestion={allFilters}></Search>
+        <div id="close">
+          <span className="close-wrap" onClick={searchToggle}>
+            <span className="close-line close-line1"></span>
+            <span className="close-line close-line2"></span>
+          </span>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
 

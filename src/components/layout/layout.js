@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import $ from "jquery";
 
@@ -15,6 +15,8 @@ const Layout = ({ children }) => {
   const noNav = [`/yellow-envelope/:id`];
   const props = children.props;
 
+  const pathname = usePathname();
+
   useEffect(() => {
     if (
       bg_yellow.includes(router.pathname) ||
@@ -28,14 +30,17 @@ const Layout = ({ children }) => {
   });
 
   useEffect(() => {
-    if (router.pathname == "/search/[slug]") {
+    if (pathname.startsWith("/search")) {
       $("body").addClass("search-page showSearch ignore-react-onclickoutside");
     } else {
+      console.log("removing search-page from layout");
       $("body").removeClass(
         "search-page showSearch ignore-react-onclickoutside"
       );
+      console.log("removed search-page from layout");
     }
-  });
+  }, [pathname]);
+
   return (
     <>
       {/* <Nav {...props} /> */}

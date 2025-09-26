@@ -76,7 +76,7 @@ header {
       overflow-y: scroll;
       background: $color-yellow;
       opacity: 0;
-      padding: 80px 16px 0;
+      padding: 80px 16px 0 !important;
       text-align: left;
       z-index: -1;
       transition: ease all 0.5s;

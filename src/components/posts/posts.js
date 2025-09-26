@@ -1,10 +1,10 @@
 "use client";
-import { NextSeo } from "next-seo";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Head from "next/head";
+
 import PostItem from "../posts-items/posts-items";
 import $ from "jquery";
 
@@ -78,6 +78,7 @@ export default function posts({ meta, categories, edges }) {
       href={`/posts`}
       className={`${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.active}`}
       onClick={seeAllProject}
+      prefetch={true}
     >
       all
     </Link>
@@ -95,6 +96,7 @@ export default function posts({ meta, categories, edges }) {
         href={`/posts/category/${item?.node?.slug}`}
         key={item?.node?.id}
         className={activeClass}
+        prefetch={true}
       >
         {" "}
         {item?.node?.name}{" "}
@@ -106,38 +108,6 @@ export default function posts({ meta, categories, edges }) {
     <>
       {mounted && (
         <>
-          <NextSeo
-            title={meta?.seo?.title}
-            description={meta?.seo?.metaDesc}
-            canonical="https://www.icdindia.com/posts"
-            robots={meta?.metaRobotsNoindex}
-            googlebot={meta?.metaRobotsNofollow}
-            openGraph={{
-              url: "https://www.icdindia.com/posts",
-              title: meta?.seo?.title,
-              description: meta?.seo?.metaDesc,
-              images: [
-                {
-                  url: meta?.featuredImage?.node?.sourceUrl,
-                  alt: "homepage-image",
-                  type: "image/jpeg",
-                },
-              ],
-              site_name: meta?.seo?.title,
-            }}
-          />
-          <Head>
-            {/* Twitter Cards */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={meta?.seo?.title} />
-            <meta name="twitter:description" content={meta?.seo?.metaDesc} />
-            <meta name="twitter:url" content="https://www.icdindia.com/posts" />
-            <meta
-              name="twitter:image"
-              content={meta?.featuredImage?.node?.sourceUrl}
-            />
-            {/* end of Twitter Cards */}
-          </Head>
           <section
             className={`${style.posts__page} mT__260 page__header posts__page `}
           >
