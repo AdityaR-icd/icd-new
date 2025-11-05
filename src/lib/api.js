@@ -725,9 +725,7 @@ export async function getAllProjectsNotIn(categorySlug) {
         }
       }
     }
-  `,
-    { tags: ["projects", "types"] },
-    { key: "getAllProjectsNotIn" }
+  `
   );
   return data?.projects;
 }

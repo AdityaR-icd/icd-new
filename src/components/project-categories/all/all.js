@@ -53,6 +53,13 @@ export default function allproject({ edges, latestProject }) {
           <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
         </svg>`;
 
+  const handleRouteChange = () => {
+    const loader = document.querySelector(".loader");
+    if (loader) {
+      loader.classList.remove("hideLoader");
+    }
+  };
+
   return (
     <>
       <section className={`${types.industry__filter} ${types.all_filter} `}>
@@ -75,7 +82,11 @@ export default function allproject({ edges, latestProject }) {
                           className={`${carousel.projectCarousel} ${types.projectCarousel}`}
                         >
                           <div className={carousel.thumbnail_cont}>
-                            <Link href={`/projects/${node?.slug}`}>
+                            <Link
+                              href={`/projects/${node?.slug}`}
+                              prefetch={true}
+                              onClick={handleRouteChange}
+                            >
                               <span
                                 className={`${carousel.projectThumbnail} fade-in`}
                                 style={{ width: "100%" }}
@@ -141,7 +152,10 @@ export default function allproject({ edges, latestProject }) {
                               )}
                             </Link>
                           </div>
-                          <Link href={`/projects/${node?.slug}`}>
+                          <Link
+                            href={`/projects/${node?.slug}`}
+                            prefetch={true}
+                          >
                             <span className={carousel.projectTitle}>
                               {node?.projectComponent?.heading}
                               <span className={carousel.grey__color}>

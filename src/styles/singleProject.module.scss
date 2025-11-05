@@ -720,7 +720,7 @@
       display: inline-block;
     }
 
-    .disclaimer{
+    .disclaimer {
       font-family: $tundra-mediumitalic;
       margin-bottom: 0;
       font-size: 20px;
@@ -731,7 +731,7 @@
       display: inline-block;
       color: #231f20;
 
-      @include for-phone-only{
+      @include for-phone-only {
         margin: 60px 0 40px;
       }
     }
@@ -939,6 +939,7 @@
     .projectCarousel {
       margin: 0 10px;
       position: relative;
+
       // hover test
       .projectThumbnail:hover {
         cursor: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSI0NiIgdmlld0JveD0iMCAwIDI1IDQ2Ij4gIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1IC01KSI+ICAgIDxyZWN0IHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIvPiAgICA8cG9seWxpbmUgc3Ryb2tlPSIjRkZGIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49ImJldmVsIiBzdHJva2Utd2lkdGg9IjMuNSIgcG9pbnRzPSIxOC4yIDguNCAzOC41IDI4LjIwNCAxOC4yIDQ3LjYiLz4gIDwvZz48L3N2Zz4=)

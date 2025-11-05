@@ -67,6 +67,7 @@ export default function Index({
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
                 <Link
                   href="/projects/type/all"
+                  prefetch={true}
                   className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}
                 >
                   all
@@ -77,6 +78,7 @@ export default function Index({
                     href={`/projects/category/${slug}`}
                     className={` project__filter ${category.project__filter}`}
                     key={slug + name}
+                    prefetch={true}
                   >
                     {name}
                   </Link>

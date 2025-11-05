@@ -1,9 +1,7 @@
 "use client";
-import { NextSeo } from "next-seo";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getLatestProject } from "../../../lib/api";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -86,40 +84,6 @@ export default function industry({ meta, edges }) {
 
   return (
     <>
-      <NextSeo
-        title={meta.seo.title}
-        description={meta.seo.metaDesc}
-        canonical={`https://www.icdindia.com${router.route}`}
-        robots={meta.metaRobotsNoindex}
-        googlebot={meta.metaRobotsNofollow}
-        openGraph={{
-          url: `https://www.icdindia.com${router.route}`,
-          title: meta.seo.title,
-          description: meta.seo.metaDesc,
-          images: [
-            {
-              url: meta.featuredImage?.node.sourceUrl,
-              alt: "homepage-image",
-              type: "image/jpeg",
-            },
-          ],
-          site_name: meta.seo.title,
-        }}
-      />
-      <Head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.seo.title} />
-        <meta name="twitter:description" content={meta.seo.metaDesc} />
-        <meta
-          name="twitter:url"
-          content={`https://www.icdindia.com${router.route}`}
-        />
-        <meta
-          name="twitter:image"
-          content={meta.featuredImage?.node.sourceUrl}
-        />
-      </Head>
-
       <section className="client__page mT__260 page__header">
         <div className="container page__header--container">
           <div className="row">
@@ -130,12 +94,17 @@ export default function industry({ meta, edges }) {
               </div>
             </div>
             <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">
-              <Link href="/clients" className="project__filter marginRight">
+              <Link
+                href="/clients"
+                className="project__filter marginRight"
+                prefetch={true}
+              >
                 alphabetically
               </Link>
               <Link
                 href="/clients/industry"
                 className={` project__filter ${category.project__filter} ${category.filter__active} filter__active`}
+                prefetch={true}
               >
                 industry
               </Link>
@@ -191,63 +160,66 @@ export default function industry({ meta, edges }) {
                             (leadImgSrc = node?.featuredImage?.node?.sourceUrl),
                             (
                               // console.log(i, node?.id, '.......', id[i + 1]),
-                              <>
+
+                              <div
+                                className={`col-md-4 ${industries.project__tile}`}
+                                key={node.id}
+                              >
                                 <div
-                                  className={`col-md-4 ${industries.project__tile}`}
-                                  key={node.id}
+                                  className={`${carousel.projectCarousel} ${type.projectCarousel}`}
                                 >
-                                  <div
-                                    className={`${carousel.projectCarousel} ${type.projectCarousel}`}
-                                  >
-                                    <div className={carousel.thumbnail_cont}>
-                                      <Link href={`/projects/${node.slug}`}>
-                                        <span
-                                          className={`${carousel.projectThumbnail} fade-in`}
-                                          style={{ width: "100%" }}
+                                  <div className={carousel.thumbnail_cont}>
+                                    <Link
+                                      href={`/projects/${node.slug}`}
+                                      prefetch={true}
+                                    >
+                                      <span
+                                        className={`${carousel.projectThumbnail} fade-in`}
+                                        style={{ width: "100%" }}
+                                      >
+                                        <div
+                                          className={`${carousel.full_thumb} full-thumb`}
                                         >
-                                          <div
-                                            className={`${carousel.full_thumb} full-thumb`}
-                                          >
-                                            {leadImgSrc && (
-                                              <Image
-                                                className={
-                                                  carousel.project_lead
-                                                }
-                                                placeholder="blur"
-                                                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                                                  shimmer(500, 500)
-                                                )}`}
-                                                src={leadImgSrc}
-                                                alt="project-lead"
-                                                fill
-                                                priority
-                                              />
-                                            )}
-                                          </div>
-                                          <span className="thumbnail-gif"></span>
-                                        </span>
-                                        {node?.id === id[i + 1] && (
-                                          // console.log('trye'),
-                                          <span
-                                            className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}
-                                          >
-                                            new
-                                          </span>
-                                        )}
-                                      </Link>
-                                    </div>
-                                    <Link href={`/projects/${node.slug}`}>
-                                      <span className={carousel.projectTitle}>
-                                        {client}
-                                        <span className={carousel.grey__color}>
-                                          {" "}
-                                          / {node?.projectComponent?.heading}
-                                        </span>
+                                          {leadImgSrc && (
+                                            <Image
+                                              className={carousel.project_lead}
+                                              placeholder="blur"
+                                              blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                                                shimmer(500, 500)
+                                              )}`}
+                                              src={leadImgSrc}
+                                              alt="project-lead"
+                                              fill
+                                              priority
+                                            />
+                                          )}
+                                        </div>
+                                        <span className="thumbnail-gif"></span>
                                       </span>
+                                      {node?.id === id[i + 1] && (
+                                        // console.log('trye'),
+                                        <span
+                                          className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}
+                                        >
+                                          new
+                                        </span>
+                                      )}
                                     </Link>
                                   </div>
+                                  <Link
+                                    href={`/projects/${node.slug}`}
+                                    prefetch={true}
+                                  >
+                                    <span className={carousel.projectTitle}>
+                                      {client}
+                                      <span className={carousel.grey__color}>
+                                        {" "}
+                                        / {node?.projectComponent?.heading}
+                                      </span>
+                                    </span>
+                                  </Link>
                                 </div>
-                              </>
+                              </div>
                             )
                           )
                         )}

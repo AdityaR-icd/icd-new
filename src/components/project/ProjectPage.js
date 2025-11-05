@@ -18,16 +18,22 @@ export default function ProjectPage({ project, oProjects }) {
   const pathname = usePathname();
   const [showModal, setShowModal] = useState(false);
   const [showShareIcons, setShowShareIcons] = useState(false);
-  const [seeAll, setSeeAll] = useState("see all");
+  const [seeAll, setSeeAll] = useState(false);
 
   const location = "https://www.icdindia.com";
   const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${location}${pathname}`;
   const twitterUrl = `https://twitter.com/intent/tweet?text="${project?.title}"&url=${location}${pathname}`;
   const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url="${location}${pathname}"&title=${project?.title}`;
+
   const seo = project ? project?.seo ?? {} : {};
   const uri = project ? project?.uri ?? {} : {};
 
   useEffect(() => {
+    const loader = document.querySelector(".loader");
+    if (loader) {
+      console.log("loader found 2");
+      loader.classList.add("hideLoader");
+    }
     const handleKeyDown = (e) => {
       if (e.keyCode === 27) {
         setShowModal(false);
@@ -49,24 +55,26 @@ export default function ProjectPage({ project, oProjects }) {
         <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
     </svg>`;
 
-  const other_projects = oProjects?.edges;
+  let other_projects =
+    oProjects?.edges?.[0]?.node?.projectTypes?.edges?.[0]?.node?.projects
+      ?.edges ?? [];
   const other_projects_slider = other_projects
     ?.map(({ node }) => {
       const leadImgSrc = node?.featuredImage?.node?.sourceUrl;
       const client = node?.clients?.edges[0]?.node.name;
       return (
-        <div className="project__item resultItem-cont" key={node?.id}>
+        <div
+          className="project__item resultItem-cont project-carousel-item"
+          key={node?.id}
+        >
           <div
             className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}
           >
             <div
               className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}
             >
-              <Link prefetch={false} href={`/projects/${node?.slug}`}>
-                <span
-                  className={`${carousel.projectThumbnail} fade-in`}
-                  style={{ width: "100%" }}
-                >
+              <Link prefetch={true} href={`/projects/${node?.slug}`}>
+                <span className={`${carousel.projectThumbnail} fade-in`}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
                       <img
@@ -81,7 +89,7 @@ export default function ProjectPage({ project, oProjects }) {
                 </span>
               </Link>
             </div>
-            <Link prefetch={false} href={`/projects/${node?.slug}`}>
+            <Link prefetch={true} href={`/projects/${node?.slug}`}>
               <span className={carousel.projectTitle}>
                 {node?.projectComponent?.heading}
                 <span className={carousel.grey__color}> / {client}</span>
@@ -94,7 +102,7 @@ export default function ProjectPage({ project, oProjects }) {
     .slice(1);
 
   const toggleSeeAll = () => {
-    setSeeAll(seeAll === "see all" ? "see less" : "see all");
+    setSeeAll(!seeAll);
   };
 
   const title = project?.title;
@@ -130,14 +138,11 @@ export default function ProjectPage({ project, oProjects }) {
             <div
               className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}
             >
-              <Link prefetch={false} href={url}>
-                <span
-                  className={`${carousel?.projectThumbnail} fade-in`}
-                  style={{ width: "100%" }}
-                >
+              <Link prefetch={true} href={url}>
+                <span className={`${carousel?.projectThumbnail} fade-in`}>
                   <div className={`${carousel.full_thumb} full-thumb`}>
                     <img
-                      priority={true}
+                      priority
                       unoptimized
                       className={carousel?.project_lead}
                       src={
@@ -153,7 +158,7 @@ export default function ProjectPage({ project, oProjects }) {
                 </span>
               </Link>
             </div>
-            <Link prefetch={false} href={url}>
+            <Link prefetch={true} href={url}>
               <span className={carousel?.projectTitle}>
                 {node?.projectComponent?.heading || node?.title}
                 <span className={carousel.grey__color}>
@@ -186,7 +191,7 @@ export default function ProjectPage({ project, oProjects }) {
 
   const awardImgMobile = project?.projectComponent?.awardsImageMobile && (
     <Image
-      priority={true}
+      priority
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
       className={` ${carousel.project_lead} d-block d-md-none `}
@@ -331,7 +336,7 @@ export default function ProjectPage({ project, oProjects }) {
             <div className={style.images_loaded_container}>
               <Image
                 src={leadComponent}
-                priority={true}
+                priority
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(500, 500)
@@ -344,7 +349,7 @@ export default function ProjectPage({ project, oProjects }) {
               />
               <Image
                 src={leadComponentMobile}
-                priority={true}
+                priority
                 placeholder="blur"
                 blurDataURL={`data:image/svg+xml;base64,${toBase64(
                   shimmer(500, 500)
@@ -512,19 +517,20 @@ export default function ProjectPage({ project, oProjects }) {
             <div className={style.team__block}>
               <span className={style.team}>team</span>
               <div
-                className={`team__content ${
-                  seeAll === "see less" && style.ellipsis
+                className={`team__content ${style.team__content} ${
+                  seeAll ? style.ellipsis : ""
                 }`}
               >
                 <div className={style.team__detail}>{team && parse(team)}</div>
               </div>
+
               <a
                 className={style.team__seeAll}
                 rel="noopener"
                 aria-label="icd"
                 onClick={toggleSeeAll}
               >
-                {seeAll}
+                {seeAll ? "see less" : "see all"}
               </a>
               {addDisclaimer && (
                 <span className={style.disclaimer}>
@@ -542,7 +548,7 @@ export default function ProjectPage({ project, oProjects }) {
             </div>
           </div>
         </div>
-        {/* 
+
         {relatedProjects_slider?.length > 0 && (
           <div
             className={`container slider-container ${style.relatedProjects__container}`}
@@ -556,7 +562,7 @@ export default function ProjectPage({ project, oProjects }) {
                   related
                 </span>
                 <span className={`${style.see_all} see-all`}>
-                  <Link prefetch={false} href={`/projects/type/all`}>
+                  <Link prefetch={true} href={`/projects/type/all`}>
                     see all
                   </Link>
                 </span>
@@ -581,8 +587,8 @@ export default function ProjectPage({ project, oProjects }) {
                 </span>
                 <span className={`${style.see_all} see-all`}>
                   <Link
-                    prefetch={false}
-                    href={` /projects/category/${project?.projectTypes.edges[0]?.node?.slug}`}
+                    prefetch={true}
+                    href={` /projects/category/${other_projects?.slug} `}
                   >
                     see all
                   </Link>
@@ -594,7 +600,7 @@ export default function ProjectPage({ project, oProjects }) {
               </div>
             </div>
           </div>
-        )} */}
+        )}
       </article>
     </>
   );

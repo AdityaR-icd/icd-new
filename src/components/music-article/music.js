@@ -1,3 +1,4 @@
+"use client";
 import $ from "jquery";
 export default function music({ node, music, i, range }) {
   const playAudio = async (audio) => {
@@ -1491,7 +1492,7 @@ export default function music({ node, music, i, range }) {
                 </tspan>
               </text>
             )}
-            <rect x="360" y="485.4" class="st49" width="240" height="34" />
+            <rect x="360" y="485.4" className="st49" width="240" height="34" />
             <g>
               <g onClick={() => playAudio(`p${i + 1}`)}>
                 <rect x="360" y="221.4" class="st1" width="240" height="94" />
@@ -1537,7 +1538,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 405.4263 473.9185)"
                     class="st23 st24 st25"
                   >
-                    {node.music.artistFifth}
+                    {node?.music?.artistFifth}
                   </text>
                 </g>
               </g>
@@ -1613,7 +1614,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 405.4263 440.4022)"
                     class="st23 st24 st25"
                   >
-                    {node.music.artistFourth}
+                    {node?.music?.artistFourth}
                   </text>
                 </g>
               </g>
@@ -1636,7 +1637,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 405.4263 406.7803)"
                     class="st23 st24 st25"
                   >
-                    {node.music.artistThird}
+                    {node?.music?.artistThird}
                   </text>
                 </g>
               </g>
@@ -1667,7 +1668,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 405.4263 371.7575)"
                     class="st23 st24 st25"
                   >
-                    {node.music.artistSecond}
+                    {node?.music?.artistSecond}
                   </text>
                 </g>
               </g>
@@ -1700,7 +1701,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 405.4263 338.0082)"
                     class="st23 st24 st25"
                   >
-                    {node.music.artistFirst}
+                    {node?.music?.artistFirst}
                   </text>
                 </g>
               </g>
@@ -3379,7 +3380,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 86.9078 610.5005)"
                     class="st13 st14 st15"
                   >
-                    {node.music.artistFifth}
+                    {node?.music?.artistFifth}
                   </text>
                 </g>
               </g>
@@ -3452,7 +3453,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 86.9078 576.9842)"
                     class="st13 st14 st15"
                   >
-                    {node.music.artistFourth}
+                    {node?.music?.artistFourth}
                   </text>
                 </g>
               </g>
@@ -3478,7 +3479,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 86.9078 543.3622)"
                     class="st13 st14 st15"
                   >
-                    {node.music.artistThird}
+                    {node?.music?.artistThird}
                   </text>
                 </g>
               </g>
@@ -3506,7 +3507,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 86.9078 508.3395)"
                     class="st13 st14 st15"
                   >
-                    {node.music.artistSecond}
+                    {node?.music?.artistSecond}
                   </text>
                 </g>
               </g>
@@ -3536,7 +3537,7 @@ export default function music({ node, music, i, range }) {
                     transform="matrix(1 0 0 1 86.9078 474.5901)"
                     class="st13 st14 st15"
                   >
-                    {node.music.artistFirst}
+                    {node?.music?.artistFirst}
                   </text>
                 </g>
               </g>

@@ -48,6 +48,7 @@ export default function ProjectCategoryPage({ project, latestProject }) {
             !allProject ? style.active : ""
           }`}
           key={`${index}-project-category`}
+          prefetch={true}
         >
           {item?.node?.name}
         </Link>

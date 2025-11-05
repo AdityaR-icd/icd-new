@@ -120,6 +120,7 @@ const Header = (props) => {
           <div className="row">
             <div className="col-10 col-md-2 logo-container">
               <Link
+                prefetch={true}
                 href="/"
                 aria-label="logo"
                 className="logo d-none d-lg-block"
@@ -139,6 +140,7 @@ const Header = (props) => {
                 />
               </Link>
               <Link
+                prefetch={true}
                 href="/"
                 aria-label="logo"
                 className="logo d-block d-lg-none"
@@ -197,12 +199,15 @@ const Header = (props) => {
                         className="mobile__menu--items"
                         onClick={hamburgerClose} // Changed from hamburgerToggle
                       >
-                        <Link href="/">home</Link>
+                        <Link prefetch={true} href="/">
+                          home
+                        </Link>
                       </li>
                       <li onClick={hamburgerClose}>
                         {" "}
                         {/* Changed from hamburgerToggle */}
                         <Link
+                          prefetch={true}
                           href="/projects/type/all"
                           className={
                             pathname.startsWith("/projects") ? "active" : ""
@@ -215,6 +220,7 @@ const Header = (props) => {
                         {" "}
                         {/* Changed from hamburgerToggle */}
                         <Link
+                          prefetch={true}
                           href="/clients"
                           className={
                             pathname.startsWith("/clients") ? "active" : ""
@@ -227,6 +233,7 @@ const Header = (props) => {
                         {" "}
                         {/* Changed from hamburgerToggle */}
                         <Link
+                          prefetch={true}
                           href="/services"
                           className={pathname === "/services" ? "active" : ""}
                         >
@@ -237,6 +244,7 @@ const Header = (props) => {
                         {" "}
                         {/* Changed from hamburgerToggle */}
                         <Link
+                          prefetch={true}
                           href="/posts"
                           className={
                             pathname.startsWith("/posts") ? "active" : ""
@@ -249,6 +257,7 @@ const Header = (props) => {
                         {" "}
                         {/* Changed from hamburgerToggle */}
                         <Link
+                          prefetch={true}
                           href="/contact"
                           className={pathname === "/contact" ? "active" : ""}
                         >
@@ -259,13 +268,17 @@ const Header = (props) => {
                         className="mobile__menu--items"
                         onClick={hamburgerClose} // Changed from hamburgerToggle
                       >
-                        <Link href="/our-team">team</Link>
+                        <Link prefetch={true} href="/our-team">
+                          team
+                        </Link>
                       </li>
                       <li
                         className="mobile__menu--items"
                         onClick={hamburgerClose} // Changed from hamburgerToggle
                       >
-                        <Link href="/careers">careers</Link>
+                        <Link prefetch={true} href="/careers">
+                          careers
+                        </Link>
                       </li>
                       <li className="copyright">
                         © 1990-2019 itu chaudhuri design pvt ltd | all rights

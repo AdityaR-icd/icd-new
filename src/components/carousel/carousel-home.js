@@ -89,7 +89,11 @@ export default function Carousel({ edges }) {
 
     return (
       <div className={styles.lead_video_cont} key={node.id}>
-        <Link className="project_link" href={`/projects/${node?.slug}`}>
+        <Link
+          className="project_link"
+          href={`/projects/${node?.slug}`}
+          prefetch={true}
+        >
           <div className={styles.project___section}>
             {projectVideo && (
               <div className="d-none d-lg-block">
@@ -177,7 +181,7 @@ export default function Carousel({ edges }) {
       <div className={styles.homelead_thumbnail}>
         <Slider {...settings}>
           <div className={`${styles.lead_video_cont} lead_carousel_video`}>
-            <Link className="project_link" href={`/services`}>
+            <Link className="project_link" href={`/services`} prefetch={true}>
               <div className={styles.project__section}>
                 <h1 className="offset-md-2">
                   ICD serves marketing, branding and editorial functions, on

@@ -33,7 +33,10 @@ export default function NotFound() {
           <span className={style.error_search} onClick={searchToggle}>
             Search
           </span>{" "}
-          or go to <Link href="/">Home</Link>
+          or go to{" "}
+          <Link href="/" prefetch={true}>
+            Home
+          </Link>
         </span>
       </div>
     </div>

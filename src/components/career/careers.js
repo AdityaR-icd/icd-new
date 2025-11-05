@@ -30,12 +30,14 @@ export default function Career({ meta, jobs }) {
               <Link
                 href={`/our-team`}
                 className={`${style.project__filter} project__filter marginRight`}
+                prefetch={true}
               >
                 team
               </Link>
               <Link
                 href={`/careers`}
                 className={`${style.project__filter} project__filter marginRight ${style.active} `}
+                prefetch={true}
               >
                 careers
               </Link>

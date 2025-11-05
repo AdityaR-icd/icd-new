@@ -68,12 +68,14 @@ export default function Clients({ meta, edges }) {
               <Link
                 href="/clients"
                 className={`project__filter ${category.project__filter} ${category.filter__active} filter__active`}
+                prefetch={true}
               >
                 alphabetically
               </Link>
               <Link
                 href="/clients/industry"
                 className="project__filter marginRight"
+                prefetch={true}
               >
                 industry
               </Link>
@@ -106,7 +108,7 @@ export default function Clients({ meta, edges }) {
                       <p
                         className={`${style.client_name} ${alphabet.client_name}`}
                       >
-                        <Link href={`projects/${ProjectLink}`}>
+                        <Link href={`projects/${ProjectLink}`} prefetch={true}>
                           {client.name}
                         </Link>
                       </p>

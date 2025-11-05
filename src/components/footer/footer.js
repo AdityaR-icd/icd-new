@@ -118,17 +118,23 @@ export default async function Navbar() {
                 <span className="footerHead text-right">quickly</span>
                 <span className="footerText">
                   <p>
-                    <Link href="/contact">contact</Link>
+                    <Link prefetch={true} href="/contact">
+                      contact
+                    </Link>
                   </p>
                 </span>
                 <span className="footerText">
                   <p>
-                    <Link href="/our-team">team</Link>
+                    <Link prefetch={true} href="/our-team">
+                      team
+                    </Link>
                   </p>
                 </span>
                 <span className="footerText">
                   <p>
-                    <Link href="/careers">careers</Link>
+                    <Link prefetch={true} href="/careers">
+                      careers
+                    </Link>
                   </p>
                 </span>
               </div>
