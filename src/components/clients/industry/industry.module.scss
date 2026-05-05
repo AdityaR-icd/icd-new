@@ -1,0 +1,102 @@
+@use "../../../assets/scss/variables.scss" as *;
+.services__title{
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.industry_type_cont{
+
+    .project__category__seeAll {
+        float: right;
+    }
+    
+    .expand_btn{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 10px;
+        position: relative;
+        bottom: -3px;  
+        cursor: pointer;
+
+        float: right;
+        margin-left: 10px;
+
+        &:before,
+        &:after{
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: $color-black;
+            top: 50%;
+            transform: translate(0 , -50%);
+            transition: ease all 0.5s;
+        }
+        &:after{
+            transform: translate(0 , -50%) rotate(90deg);
+        }
+    }
+
+    .m-expand{
+        .see-all{
+            float: left;
+        }
+    }
+    
+    .project__tile {
+        max-height: 0;
+        overflow: hidden;
+        transition: ease all 1s;
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3){
+            height: auto;
+            max-height: 700px;
+        }
+
+        @include for-phone-only {
+            &:nth-child(2),
+            &:nth-child(3){ 
+                max-height: 0;
+            }
+        }
+        
+        @include for-tablet-portrait-only {
+            max-width: 50%;
+            width: 50%;
+            flex: 0 0 50%;
+
+            &:nth-child(3)  {
+                height: auto;
+                max-height: 0px;
+            }
+        }
+
+    }
+}
+
+.projects_expanded{
+    // max-height: 2000px;
+    transition: ease all 1s;
+    
+    .expand_btn{
+        &:before{
+            transform: translate(0 , -50%) rotate(180deg);
+        }
+        &:after{
+            transform: translate(0 , -50%) rotate(0deg);
+        }
+    }
+    .project__tile {
+        height: auto;
+        max-height: 700px;
+        transition: ease all 1s;
+        @include for-tablet-portrait-only {
+            &:nth-child(3)  {
+                height: auto;
+                max-height: 700px;
+            }
+        }
+    }
+}

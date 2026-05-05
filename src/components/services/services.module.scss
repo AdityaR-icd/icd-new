@@ -1,0 +1,236 @@
+@use "../../assets/scss/variables.scss" as *;
+
+.servicesIntro_cont{
+    .textContent{
+        // margin: 0 0 150px;
+    }
+}
+
+.servicesPage{
+    font-family: $akz-bold;
+
+    p {
+        font-family: $akz-light;
+        font-size: 20px;
+        word-spacing: -0.05em;
+        letter-spacing: -0.01em;
+        line-height: 28px;
+    }
+    .servicesIntro {
+        margin-bottom: 135px;
+        @include for-upto-tablet-portrait {    
+            margin-bottom: 60px;
+        }
+    }
+
+    .servicesCategory{
+        font-size: 46px;
+        line-height: 56px;
+        letter-spacing: -2.9px;
+        color: $color-brown-grey;
+        margin-bottom: 26px;
+        display: block;
+
+        @include for-upto-tablet-portrait {    
+            font-size: 36px;
+            line-height: 1;
+            margin-bottom: 40px;
+            margin-top: 80px;
+        }
+    }
+
+    .rightPadding{
+        padding-right: 0;
+    }
+
+    .moreProjects{
+        font-family: $akz-light;
+        font-size: 56px;
+        line-height: 64px;
+        letter-spacing: -2.33px;
+        color: $color-light-black;
+        padding-left: 53px;
+        display: block;
+        position: relative;
+        padding-right: 30px;
+        a{
+            &:after{
+                position: absolute;
+                content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj4gICAgPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS1saW5lam9pbj0iYmV2ZWwiIHN0cm9rZS13aWR0aD0iNCI+ICAgICAgICA8cGF0aCBkPSJNMTEgMTguNGw5LjE5OSAxMC44TDI5IDE4LjRNMjAuMTUgMTAuM3YxNy40Ii8+ICAgIDwvZz48L3N2Zz4=);
+                width: 40px;
+                height: 60px;
+                bottom: 0;
+                right: 0;
+                transform: rotate(-90deg);
+            }
+            &:hover{
+                &:after{
+                    filter: invert(.5);
+                }
+            }
+        } 
+        
+    }
+
+    .borderLine{
+        border-bottom: 2px solid $color-black;
+        display: block;
+        padding-top: 35px;
+    }
+
+    .serviceLogo {
+        width: 100%;
+        height: auto;
+        background-color: $color-silver;
+        display: block;
+        overflow: hidden;
+        height: 0;
+        width: 100%;
+        padding-top: 74.93%;
+        background-size: cover;
+        position: relative;
+        
+        .serviceLogo__anim {
+            display: none;
+        }
+
+        img {
+            // top: 50%;
+            // left: 50%;
+            // position: absolute;
+            // height: 100%;
+            // width: 100%;
+            // transform: translate(-50%, -50%);
+            position: absolute;
+            top: 0;
+        }
+
+        @include for-upto-tablet-portrait {
+        }
+
+    }
+    
+    .serviceHeader {
+        font-family: $akz-bold;
+        font-size: 36px;
+        letter-spacing: -0.3px;
+        line-height: 38px;
+        color: $color-black;
+        display: block;
+        margin: 30px 0 12px 0;
+        text-transform: lowercase;
+
+        padding: 0 40px 0 0;
+        word-spacing: -0.08em;
+        letter-spacing: -0.04em;
+        // margin-bottom: 12px;
+
+        @include for-upto-tablet-portrait {    
+            margin: 10px 0 12px 0;
+            font-size: 28px;
+            line-height: 1.14;
+        }
+    }
+
+    .aboutService {
+        font-family: $akz-light;
+        font-size: 20px;
+        line-height: 32px;
+        color: $color-black;
+        display: block;
+        margin-bottom: 30px;
+        // padding: 0 25px 0 0;
+        padding: 0 40px 0 0;
+
+        @include for-upto-tablet-portrait {
+            font-size: 22px;
+            line-height: 30px;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+    }
+    
+    .servicesButton{
+        display: block;
+        margin-bottom: 150px;
+        
+        @include for-upto-tablet-portrait {
+            margin-bottom: 60px;
+        }
+    }
+
+    .brand-expression {
+        .serviceLogo {
+            // background: $color-yellow;
+        }
+    }
+
+    .servicesItem {
+        text-transform: lowercase;
+        &:hover {
+            .serviceLogo__static {
+                display: none !important;
+            }
+
+            .serviceLogo__anim {
+                display: none !important;
+            }
+        }
+
+        &:hover .serviceLogo__anim {
+            display: block !important;
+        }
+    }
+
+    .textContent{
+        padding: 0;
+        margin: 0 auto 50px;
+        max-width: 860px;
+        @include for-upto-tablet-portrait{
+            padding: 45px 0 50px;
+        }
+        p{
+            font-family: $tundra-light;
+            font-size: 36px;
+            line-height: 46px;
+            letter-spacing: -1.13px;
+            word-spacing: 1.5px;
+            margin: 0;
+
+            @include for-upto-tablet-portrait {
+                font-size: 22px;
+                line-height: 32px;
+                letter-spacing: -0.7px;
+                max-width: 550px;
+            }
+        }
+    }
+
+    .brand-strategy-cont{
+
+        @include for-phone-only{
+            margin-right: -6px;
+            margin-left: -6px;
+        }
+
+        .brand-strategy {
+
+            @include for-phone-only{
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+    
+            .serviceHeader{
+                font-size: 26px;
+                line-height: 32px;
+            }
+    
+            p{
+                font-size: 16px;
+                line-height: 23px;
+            }
+        }
+    }
+    
+}

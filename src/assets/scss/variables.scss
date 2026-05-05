@@ -1,0 +1,520 @@
+/* Global functions include */
+@function rem-calc($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+}
+
+/* Rock Salt self-hosted via next/font/google in layout.js */
+/* Global Fonts */
+
+// $bh-regular: 'Berthold Akzidenz Grotesk', sans-serif;
+// $bh-bold: 'Berthold Akzidenz Grotesk Bold', sans-serif;
+// $bh-light: 'Berthold Akzidenz Grotesk Light', sans-serif;
+$akz-regular: 'Berthold Akzidenz Grotesk', sans-serif;
+$akz-bold: 'Berthold Akzidenz Grotesk Bold', sans-serif;
+$akz-light: 'Berthold Akzidenz Grotesk Light', sans-serif;
+$tundra-light: 'TundraOT Light', sans-serif;
+$tundra-mediumitalic: 'TundraOT Medium Italic', sans-serif;
+
+/* Global Colors */
+
+$color-yellow: #FFE300;
+$color-grey: #a9a9a9;
+$color-white: #ffffff;
+$color-red: #ec1d24;
+$color-dark-red: #d8232a;
+// $color-light-black: #4A4A4A; 
+$color-light-black: #191919; // changed on 13feb20
+$color-black: #000000;
+$color-brown-grey: #9b9b9b;
+$color-ash : #cdcdcd;
+$color-gun-metal : #e1e1e1;
+$color-silver : #f3f3f3;
+$color-dark-black : #231f20;
+
+
+$color-grey-border : #979797;
+$border-color-gun-metal: rgba(225,225,225,0.9);
+$border-color-black: rgba(0, 0, 0, 0.3);
+
+$box-shadow: 0px 2px 12px 2px rgba(0,0,0,0.05);
+$overlaybg-color: rgba(31,31,31,0.5);
+
+// global breakpoints
+// $mobile-max : 767px;
+// $tablet-vertical-max: 1023px;
+// $tablet-horizontal-max: 1279px;
+// $small-laptop-max: 1365px;
+// $fullHD-min: 1920px;
+
+// $breakpoints: (phone: 640px, 
+//                tab-vertical: 768px, 
+//                tab-horizontal: 1024px,
+//                small-laptop: 1280px,
+//                windows-laptop: 1366px,
+//                mac-laptop: 1440px,
+//                hd-desktop: 1920px,
+//                extra-large: 2156px) !default;
+
+@mixin for-phone-only {
+    @media (max-width: 767px) { @content; }
+}
+
+@mixin for-tablet-portrait-only {
+    @media (min-width: 768px) and (max-width: 991px) { @content; }
+}
+
+@mixin for-upto-tablet-portrait {
+    @media (max-width: 991px) { @content; }
+}
+
+@mixin for-upto-tablet-landscape {
+    @media (max-width: 1365px) { @content; }
+}
+
+@mixin for-tablet-horizontal {
+    @media (min-width: 992px) and (max-width: 1199px) { @content; }
+}
+
+@mixin for-low-end-laptop {
+    @media (min-width: 1366px) and (max-width: 1439px) { @content; }
+}
+
+@mixin for-tablet-horizontal-to-laptop {
+    @media (min-width: 992px) and (max-width: 1365px) { @content; }
+}
+
+@mixin for-tablet-to-laptop{
+    @media (min-width: 768px) and (max-width: 1365px) { @content; }
+}
+
+
+@mixin for-tablet-portrait-up {
+    @media (min-width: 992px) { @content; }
+}
+@mixin for-tablet-landscape-up {
+    @media (min-width: 1024px) { @content; }
+}
+@mixin for-desktop-up {
+    @media (min-width: 1280px) { @content; }
+}
+@mixin for-big-desktop-up {
+    @media (min-width: 1600px) { @content; }
+}
+
+
+
+// // for container width 1920px and 80px padding on sides
+// @mixin for-extra-large-desktop-up {
+//     @media (min-width: 2080px) { @content; }
+// }
+
+
+// changes to be cleaned 13-feb-2020
+// header .nav-menu li a {
+//     color: #191919;
+//     font-size: 20px;
+//   }
+  
+//   header .logo {
+//     margin: 28px 0 13.5px;
+//   }
+  
+//   .project__tag {
+//     letter-spacing: 0;
+//   }
+  
+//   .textContent p {
+//     font-size: 42px; 
+//     line-height: 56px;
+//   }
+
+//   .cards__box .card__text p {
+//     font-size: 30px;
+//     line-height: 32px;
+// }
+
+// footer .footerHead {
+//     color: #191919 !important;
+// }
+
+// .subscribe__field input[type=text] {
+
+//     width: 29.87% !important;
+// }
+
+// .textContent.introText.homeLeadText, 
+// .textContent.blackText.homeLeadText {
+//     margin-top: 100px !important;
+// }
+
+// .home__section--cards {
+//     margin-bottom: 220px;
+// }
+
+
+
+// footer .copyright {
+//     font-family: "Berthold Akzidenz Grotesk Light", sans-serif !important;
+// }
+
+// .bottom__border {
+//     border-bottom: 1px solid #4a4a4a29;
+//     margin-bottom: 85px;
+// }
+
+// .mT__260 {
+//     margin-top: 150px !important;
+// }
+
+// h1 {
+//     font-size: 56px;
+
+//     line-height: 75px;
+// }
+
+// .filter__active, .category-names span.active {
+//     border-bottom: 4px solid #191919;
+//     color: #191919;
+//     padding-bottom: 13px !important;
+//     margin-bottom: -2px !important;
+// }
+
+// .project__filter {
+//     font-size: 20px;
+//     margin-bottom: 15px;
+//     color: #9b9b9b57;
+// }
+
+// .filter__active, .category-names span.active {
+//     color: #191919;
+// }
+
+// .page__header h1 {
+//     margin: 0;
+// }
+
+// .industry__filter .project__category {
+    // font-size: 42px;
+// }
+
+// .see-all {
+//     font-size: 16px;
+// }
+
+// .industry__filter .projectCarousel {
+//     margin-top: 11px;
+// }
+
+// .projectCarousel .projectThumbnail {
+//     margin: 5px 0 8px 0 !important;
+// }
+
+// .industry__filter {
+    // margin: 15px 0;
+// }
+
+// footer {
+//     margin: 100px 0 0 0;
+// }
+
+// .textContent {
+//     margin: 0 0 10px;
+// }
+
+// .project-type-cont .back-cta {
+//     display: block;  // to be tested
+// }
+
+
+// .paddingLeft.footer__connect--wrapper {
+//     padding-left: 19%;
+// }
+
+// .singleProjectLeadCont .leadImage {
+//     margin-top: 100px;
+// }
+
+// .singleProject .project__Title {
+//     font-size: 56px;
+//     line-height: 60px;
+// }
+
+// .singleProject {
+//     padding-top: 80px;
+// }
+
+
+
+// .singleProject .category {
+//     letter-spacing: -0.3px !important;
+// }
+
+// .singleProject .project__summary p {
+//     font-size: 20px;
+//     line-height: 30px;
+
+//     padding-right: 130px;
+// }
+
+// .singleProject .section-text {
+//     font-size: 20px;
+//     line-height: 30px;
+// }
+
+// .singleProject .team__block p {
+
+//     font-size: 20px;
+//     line-height: 30px;
+//     word-spacing: -0.05em;
+//     letter-spacing: -0.01em;
+// }
+
+// .singleProject .team__block a {
+
+//     font-size: 20px;
+//     line-height: 30px;
+//     word-spacing: -0.05em;
+//     letter-spacing: -0.01em;
+// }
+
+// .singleProject .team__block {
+//     margin: 130px 0 250px 0;
+//     padding-right: 290px;
+// }
+
+
+// .social__media span.icon .icon-img {
+//     width: 28px;
+//     padding-right: 13px;
+// }
+
+// .social__media span.icon.like-btn .icon-img {
+//     width: 32px;
+// }
+
+// .social__media {
+//     margin: 0;
+// }
+
+
+// .singleProject .more__projects-head {
+//     font-size: 56px;
+// }
+
+// .singleProject .more-cont {
+//     margin: 0 0 9px 0;
+// }
+
+// .video-container {
+//     margin-bottom: 20px;
+// }
+
+
+// .singleProject .project-details-modal h2 {
+//     font-size: 28px;
+//     letter-spacing: -0.04em;
+//     margin: 50px 0 8px 0;
+//     text-transform: lowercase;
+// }
+
+// .singleProject .project-details-modal p {
+//     font-size: 20px;
+//     line-height: 30px;
+// }
+
+// .singleProject .projectMeta__cont {
+//     font-size: 16px !important;
+//     line-height: 24px !important;
+//     padding-right: 210px;
+// }
+
+// .singleProject .project-details-modal .category__title, 
+// .singleProject .project-details-modal .category {
+//     font-size: inherit;
+//     line-height: inherit;
+
+//     word-spacing: -0.08em;
+//     letter-spacing: -0.04em;
+//     display: block;
+//     float: left;
+// }
+
+
+// .singleProject .project-details-modal span.modal-project-title {
+//     font-size: 40px;
+//     line-height: 48px;
+//     text-transform: lowercase;
+// }
+
+// .singleProject .project-details-modal .projectMeta__cont {
+//     padding: 0 !important;
+// }
+
+// .singleProject h2 {
+//     font-size: 48px;
+//     line-height: 48px;
+// }
+
+
+
+
+// .team {
+//     margin-top: 80px;
+// }
+
+
+// // services
+// .servicesPage p,
+// .team .profile .about {
+//     font-size: 20px;
+//     word-spacing: -0.05em;
+//     letter-spacing: -0.01em;
+//     line-height: 28px;
+// }
+
+
+// .team .profile .about {
+//     padding: 0 40px 0 0;
+
+//     font-size: 18px !important;
+//     line-height: 26px !important;
+// }
+
+// .servicesPage .serviceHeader {
+//     word-spacing: -0.08em;
+//     letter-spacing: -0.04em;
+//     margin-bottom: 12px;
+// }
+
+// .serviceHeader, .servicesPage .aboutService {
+//     padding: 0 40px 0 0;
+// }
+
+
+
+// .projectCarousel .projectTitle {
+//     font-size: 18px !important;
+//     line-height: 22px !important;
+//     margin-top: 7px;
+// }
+
+
+
+// .designation span.hover-text {
+//     display: none;
+// }
+
+// .profile:hover .designation span.hover-text {
+//     font-size: 19px !important;
+//     color: #e30a23;
+//     font-family: rock salt;
+//     margin-bottom: 25px;
+//     display: block;
+// }
+
+// .profile:hover .designation {
+//     font-size: 0 !important;
+// }
+
+
+
+// .project-type-cont h1 {
+//     display: inline-block;
+//     font-size: 42px;
+//     line-height: 58px;
+//     color: $color-grey;
+// }
+
+// .project-type-cont.mT__260 {
+//     margin-top: 160px !important;
+// }
+
+// .project-type-cont .backBtn {
+//     top: 19px !important;
+// }
+
+
+
+
+
+
+
+// posts
+
+// .postsItems .postTitle {
+//     word-spacing: -0.08em;
+//     letter-spacing: -0.04em;
+//     margin: 27px 0 10px;
+// }
+
+// .postsItems .postInfo {
+//     font-size: 20px;
+//     line-height: 30px;
+//     word-spacing: -0.05em;
+//     letter-spacing: -0.01em;
+//     margin: 20px 0 40px;
+// }
+
+// .postsItems .postBy {
+//     margin: 0px;
+// }
+
+
+// .page__header--subNav ul li {
+//     font-size: 20px;
+//     letter-spacing: -0.01em;
+//     word-spacing: -0.05em;
+// }
+
+// .page__header--subNav .tags-cont {
+//     margin-top: 10px;
+// }
+
+// .page__header--subNav ul {
+//     margin: 0;
+// }
+
+
+// .singlePost h1 {
+//     letter-spacing: -0.04em;
+//     word-spacing: -0.08em;
+//     font-size: 48px;
+// }
+
+// .singlePost .post__author {
+//     font-size: 16px;
+// }
+
+// .singlePost .postContent p {
+//     font-size: 20px;
+//     line-height: 34px;
+//     letter-spacing: -0.01em;
+//     word-spacing: -0.05em;
+// }
+
+// .singlePost .postContent blockquote {
+//     font-size: 28px;
+//     line-height: 34px;
+// }
+
+// .twitter-icon {
+//     background-size: 15px;
+// }
+
+// .fb-icon, 
+// .linkedin-icon, 
+// .twitter-icon {
+// }
+
+// .fb-icon {
+//     background-size: 9px;
+// }
+
+// .singlePost .postContent img {
+//     margin-top: 50px;
+// }
+
+// .singlePost .postContent p .blog-img-caption {
+//     margin-bottom: 40px;
+// }

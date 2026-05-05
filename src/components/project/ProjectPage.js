@@ -1,0 +1,593 @@
+"use client";
+
+import parse from "html-react-parser";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Slider from "react-slick";
+
+import Share from "../../assets/images/post-buttons/share.svg";
+
+import carousel from "../../components/project-categories/all/all.module.scss";
+import type from "../../components/project-categories/type/type.module.scss";
+import style from "../../styles/singleProject.module.scss";
+import Like from "../like";
+
+export default function ProjectPage({ project, oProjects }) {
+  const pathname = usePathname();
+  const [showModal, setShowModal] = useState(false);
+  const [showShareIcons, setShowShareIcons] = useState(false);
+  const [seeAll, setSeeAll] = useState(false);
+
+  const location = "https://www.icdindia.com";
+  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${location}${pathname}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text="${project?.title}"&url=${location}${pathname}`;
+  const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url="${location}${pathname}"&title=${project?.title}`;
+
+  const seo = project ? (project?.seo ?? {}) : {};
+  const uri = project ? (project?.uri ?? {}) : {};
+
+  useEffect(() => {
+    const loader = document.querySelector(".loader");
+    if (loader) {
+      console.log("loader found 2");
+      loader.classList.add("hideLoader");
+    }
+    const handleKeyDown = (e) => {
+      if (e.keyCode === 27) {
+        setShowModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const toBase64 = (str) =>
+    typeof window === "undefined"
+      ? Buffer.from(str).toString("base64")
+      : window.btoa(str);
+
+  const shimmer = (w, h) => `
+    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs><linearGradient id="g"><stop stop-color="#f6f6f6" offset="20%" /><stop stop-color="#f0f0f0" offset="50%" /><stop stop-color="#f6f6f6" offset="70%" /></linearGradient></defs><rect width="${w}" height="${h}" fill="#F6F6F6" /><rect id="r" width="${w}" height="${h}" fill="url(#g)" /><animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+    </svg>`;
+
+  let other_projects =
+    oProjects?.edges?.[0]?.node?.projectTypes?.edges?.[0]?.node?.projects
+      ?.edges ?? [];
+  const other_projects_slider = other_projects
+    ?.map(({ node }) => {
+      const leadImgSrc = node?.featuredImage?.node?.sourceUrl;
+      const client = node?.clients?.edges[0]?.node.name;
+      return (
+        <div
+          className="project__item resultItem-cont project-carousel-item"
+          key={node?.id}
+        >
+          <div
+            className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}
+          >
+            <div
+              className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}
+            >
+              <Link prefetch={true} href={`/projects/${node?.slug}`}>
+                <span className={`${carousel.projectThumbnail} fade-in`}>
+                  <div className={`${carousel?.full_thumb} full-thumb`}>
+                    {leadImgSrc && (
+                      <Image
+                        className={carousel?.project_lead}
+                        src={leadImgSrc}
+                        alt={node?.projectComponent?.heading || "project"}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    )}
+                  </div>
+                  <span className="thumbnail-gif"></span>
+                </span>
+              </Link>
+            </div>
+            <Link prefetch={true} href={`/projects/${node?.slug}`}>
+              <span className={carousel.projectTitle}>
+                {node?.projectComponent?.heading}
+                <span className={carousel.grey__color}> / {client}</span>
+              </span>
+            </Link>
+          </div>
+        </div>
+      );
+    })
+    .slice(1);
+
+  const toggleSeeAll = () => {
+    setSeeAll(!seeAll);
+  };
+
+  const title = project?.title;
+  const heading = project?.projectComponent?.heading;
+  const description = project?.projectComponent?.description;
+  const shortDesc = project?.shortDescription?.shortDesc;
+  const projectLink = project?.shortDescription?.siteLink;
+  const clients = project?.clients?.edges[0]?.node?.name;
+  const allclients = project?.clients?.edges.length;
+  const leadComponent = project?.projectComponent?.leadComponent?.sourceUrl;
+  const leadComponentMobile =
+    project?.projectComponent?.leadComponentMobile?.sourceUrl;
+  const content = project?.content;
+  const team = project?.projectComponent?.details;
+  const category = project?.projectTypes?.edges[0]?.node?.name;
+  const awards = project?.projectComponent?.awardsReceived;
+  const awardName = project?.projectComponent?.nameOfTheAwardEgC;
+  const relatedProjects = project?.projectComponent?.relatedprojects ?? [];
+  const addDisclaimer = project?.addDisclaimer?.addDisclaimer;
+
+  const relatedProjects_slider = relatedProjects
+    ?.map((node) => {
+      const leadImgSrc = node?.featuredImage?.node?.sourceUrl;
+      const client = node?.clients?.edges[0]?.node.name;
+      const categories = node?.categories?.edges[0]?.node.name;
+      const url = node?.uri ? `/projects/${node?.slug}` : `/posts/${node.slug}`;
+
+      return (
+        <div className="project__item resultItem-cont" key={node?.id}>
+          <div
+            className={`${carousel.projectCarousel} ${style.postsItems} ${type.projectCarousel}`}
+          >
+            <div
+              className={`${carousel.thumbnail_cont} ${style.postLeadImage}`}
+            >
+              <Link prefetch={true} href={url}>
+                <span className={`${carousel?.projectThumbnail} fade-in`}>
+                  <div className={`${carousel.full_thumb} full-thumb`}>
+                    <Image
+                      className={carousel?.project_lead}
+                      src={leadImgSrc || "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"}
+                      alt={node?.projectComponent?.heading || node?.title || "project"}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <span className="thumbnail-gif"></span>
+                </span>
+              </Link>
+            </div>
+            <Link prefetch={true} href={url}>
+              <span className={carousel?.projectTitle}>
+                {node?.projectComponent?.heading || node?.title}
+                <span className={carousel.grey__color}>
+                  {" "}
+                  / {client || categories}
+                </span>
+              </span>
+            </Link>
+          </div>
+        </div>
+      );
+    })
+    .slice(0, 3);
+
+  const awardImg = awards && (
+    <Image
+      placeholder="blur"
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+      className={`${carousel.project_lead} d-none d-md-block`}
+      src={project?.projectComponent?.awardsImage?.sourceUrl || "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"}
+      alt={awardName || "award"}
+      fill
+      sizes="100vw"
+    />
+  );
+
+  const awardImgMobile = project?.projectComponent?.awardsImageMobile && (
+    <Image
+      priority
+      placeholder="blur"
+      blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+      className={` ${carousel.project_lead} d-block d-md-none `}
+      src={
+        project?.projectComponent?.awardsImageMobile?.sourceUrl ||
+        "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"
+      }
+      alt="project-lead"
+      fill
+      sizes="100vw"
+    />
+  );
+
+  const leadVideo =
+    project?.projectComponent?.leadVideo &&
+    project?.projectComponent?.video?.mediaItemUrl;
+  const leadVideo_mobile =
+    project?.projectComponent?.leadVideo &&
+    project?.projectComponent?.videoMobile?.mediaItemUrl;
+
+  const shareBtn = (
+    <div className={`${style.social__media} social__media`}>
+      <span className={`icon share-icon ${!showShareIcons && "icons-hide"}`}>
+        <a
+          href={linkedinUrl}
+          rel="noopener"
+          aria-label="icd"
+          className="linkedin-icon"
+          target="_blank"
+        ></a>
+      </span>
+      <span className={`icon share-icon ${!showShareIcons && "icons-hide"}`}>
+        <a
+          href={twitterUrl}
+          rel="noopener"
+          aria-label="icd"
+          className="twitter-icon"
+          target="_blank"
+        ></a>
+      </span>
+      <span className={`icon share-icon ${!showShareIcons && "icons-hide"}`}>
+        <a
+          href={fbUrl}
+          rel="noopener"
+          aria-label="icd"
+          className="fb-icon"
+          target="_blank"
+        ></a>
+      </span>
+      <span className="icon" onClick={() => setShowShareIcons(!showShareIcons)}>
+        <Image
+          src={Share}
+          alt="share"
+          width={20}
+          height={20}
+          className="icon-img shareIcon--main"
+        />
+        share
+      </span>
+      <Like count={project?.likes?.likes} id={project?.id} type={"project"} />
+    </div>
+  );
+
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    <button
+      {...props}
+      className={`slick-prev slick-arrow${
+        currentSlide === 0 ? " slick-disabled" : ""
+      }`}
+      aria-hidden="true"
+      aria-disabled={currentSlide === 0 ? true : false}
+      type="button"
+    >
+      Previous
+    </button>
+  );
+
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <button
+      {...props}
+      className={`slick-next slick-arrow${
+        currentSlide === slideCount - 3 ? " slick-disabled" : ""
+      }`}
+      aria-hidden="true"
+      aria-disabled={currentSlide === slideCount - 3 ? true : false}
+      type="button"
+    >
+      Next
+    </button>
+  );
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
+    responsive: [
+      {
+        breakpoint: 1023,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 2.1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 567,
+        settings: {
+          slidesToShow: 1.8,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <>
+      {/* <Seo seo={seo} uri={uri} /> */}
+
+      {leadComponent && (
+        <section className={style.singleProjectLeadCont}>
+          <div className={style.leadImage}>
+            <div className={style.images_loaded_container}>
+              <Image
+                src={leadComponent}
+                priority
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                alt={heading || title || "project"}
+                fill
+                className="d-none d-md-block"
+                sizes="100vw"
+              />
+              {leadComponentMobile && (
+                <Image
+                  src={leadComponentMobile}
+                  priority
+                  placeholder="blur"
+                  blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                  alt={heading || title || "project"}
+                  fill
+                  className="d-block d-md-none"
+                  sizes="100vw"
+                />
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {leadVideo && (
+        <section className={style.singleProjectLeadCont}>
+          <div className={style.leadImage}>
+            <div>
+              <video
+                src={leadVideo}
+                className={`${style.video} d-none d-md-block`}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+              <video
+                src={leadVideo_mobile}
+                className={`${style.video} d-block d-md-none`}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
+      <article
+        className={` ${style.singleProject} ${
+          awards && style.winnerTag
+        } singleProject`}
+      >
+        {showModal && (
+          <div
+            className={`project_details_modal ${style.project_details_modal}`}
+          >
+            <div className="container">
+              <div className="row">
+                <span
+                  className={`close-button ${style.close_button}`}
+                  onClick={() => setShowModal(false)}
+                ></span>
+                <div className="col-lg-5 col-xl-4">
+                  <span className={style.modal_project_title}>
+                    {title}
+                    {awards && <span className="project__tag">Winner</span>}
+                  </span>
+                  <div className={style.projectMeta__cont}>
+                    <span className={style.category__title}>project</span>
+                    <span className={style.category}>{heading}</span>
+                  </div>
+                  <div className={style.projectMeta__cont}>
+                    <span className={style.category__title}>client</span>
+                    <span className={style.category}>{clients}</span>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-xl-7">
+                  <div>{description && parse(description)}</div>
+                  <div className={style.projectContent__footer}>
+                    <button onClick={() => setShowModal(false)}>close</button>
+                    {shareBtn}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className={`container ${style.projectHeading}`}>
+          <div className="row">
+            <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+              <div className={style.titlePadding}>
+                <h1 className={style.project__Title}>
+                  {title}
+                  {awards && (
+                    <span className={`${style.project__tag} project__tag`}>
+                      Winner
+                    </span>
+                  )}
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+              <div className={style.projectMeta__cont}>
+                <span className={style.category__title}>project</span>
+                <span className={style.category}>{heading}</span>
+              </div>
+              <div className={style.projectMeta__cont}>
+                <span className={style.category__title}>client</span>
+                <span className={style.category}>
+                  {project?.clients?.edges?.map((data, i) =>
+                    allclients === i + 1
+                      ? data?.node?.name
+                      : `${data?.node?.name}, `,
+                  )}
+                </span>
+              </div>
+              {projectLink && (
+                <div className={style.projectMeta__cont}>
+                  <span className={style.category__title}>view</span>
+                  <span className={style.category}>
+                    <a
+                      href={projectLink?.url}
+                      rel="noopener"
+                      aria-label="icd"
+                      target="_blank"
+                    >
+                      {projectLink?.title}
+                    </a>
+                  </span>
+                </div>
+              )}
+              {project?.projectComponent?.awardsReceived > "" && (
+                <div className={style.projectMeta__cont}>
+                  <span className={style.category__title}>awards</span>
+                  <span className={style.category}>{awardName}</span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+              <div className={style.project__summary}>
+                <div className={style.intro_para}>
+                  <div>{shortDesc && parse(shortDesc)}</div>
+                </div>
+                <button
+                  className={style.collapse__btn}
+                  onClick={() => setShowModal(true)}
+                >
+                  project detail
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={`container ${style.projectWordpress}`}>
+          {awardImg && (
+            <div className="col-md-12">
+              <span className="awardImg-cont">
+                {awardImg}
+                {awardImgMobile}
+              </span>
+            </div>
+          )}
+          {content && parse(content)}
+          {shareBtn}
+        </div>
+        <div className="container">
+          <div className="col-12 offset-md-3 col-md-8 col-xl-8 offset-xl-4">
+            <div className={style.team__block}>
+              <span className={style.team}>team</span>
+              <div
+                className={`team__content ${style.team__content} ${
+                  seeAll ? style.ellipsis : ""
+                }`}
+              >
+                <div className={style.team__detail}>{team && parse(team)}</div>
+              </div>
+
+              <a
+                className={style.team__seeAll}
+                rel="noopener"
+                aria-label="icd"
+                onClick={toggleSeeAll}
+              >
+                {seeAll ? "see less" : "see all"}
+              </a>
+              {addDisclaimer && (
+                <span className={style.disclaimer}>
+                  Fonts and stock images, if used, are for representation
+                  purposes. The rights of commercial usage have not been
+                  purchased.
+                </span>
+              )}
+              <button
+                className="collapse__btn"
+                onClick={() => setShowModal(true)}
+              >
+                project detail
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {relatedProjects_slider?.length > 0 && (
+          <div
+            className={`container slider-container ${style.relatedProjects__container}`}
+          >
+            <div className={style.more__projects_block}>
+              <div className={`more_cont ${style["more_cont"]}`}>
+                <span
+                  className={style.more__projects_head}
+                  id="more-projectTitle"
+                >
+                  related
+                </span>
+                <span className={`${style.see_all} see-all`}>
+                  <Link prefetch={true} href={`/projects/type/all`}>
+                    see all
+                  </Link>
+                </span>
+              </div>
+              <span className="bottom__border"></span>
+              <div className="more-projectsCarousel">
+                <Slider {...settings}>{relatedProjects_slider}</Slider>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {other_projects?.length > 0 && (
+          <div className="container slider-container">
+            <div className={style.more__projects_block}>
+              <div className={`more_cont ${style["more_cont"]}`}>
+                <span
+                  className={style.more__projects_head}
+                  id="more-projectTitle"
+                >
+                  more {category}
+                </span>
+                <span className={`${style.see_all} see-all`}>
+                  <Link
+                    prefetch={true}
+                    href={` /projects/category/${other_projects?.slug} `}
+                  >
+                    see all
+                  </Link>
+                </span>
+              </div>
+              <span className="bottom__border"></span>
+              <div className="more-projectsCarousel">
+                <Slider {...settings}>{other_projects_slider}</Slider>
+              </div>
+            </div>
+          </div>
+        )}
+      </article>
+    </>
+  );
+}

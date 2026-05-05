@@ -1,0 +1,3020 @@
+// src/lib/contentfulApi.js
+import { unstable_cache } from "next/cache";
+
+let queryCount = 0;
+
+const API_URL = "https://digital.icdindia.com/graphql";
+
+async function fetchData(query, variables) {
+  queryCount++;
+
+  const headers = {
+    Accept: "*/*",
+    "Content-Type": "application/json",
+    "User-Agent": "*",
+    Authorization: `Bearer ${process.env.WORDPRESS_JWT_TOKEN || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGlnaXRhbC5pY2RpbmRpYS5jb20iLCJpYXQiOjE2ODI5NDYwNTcsIm5iZiI6MTY4Mjk0NjA1NywiZXhwIjozMzIxODk0NjA1NywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.6wxGqOWTXA6S39lYkOBPdt53iSAz0_XOh36sbInE7X8"}`,
+  };
+
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ query, variables }),
+    });
+  } catch (err) {
+    console.error("[API] Fetch failed", variables, err?.message);
+    return null;
+  }
+
+  const contentType = res.headers.get("content-type") ?? "";
+  if (!res.ok || !contentType.includes("application/json")) {
+    console.error(
+      `[API] Non-JSON response (${res.status}) for query`,
+      variables,
+    );
+    return null;
+  }
+
+  let json;
+  try {
+    json = await res.json();
+  } catch (err) {
+    console.error("[API] JSON parse failed", variables, err?.message);
+    return null;
+  }
+
+  if (json.errors) {
+    console.error("[API] GraphQL errors", json.errors);
+    return null;
+  }
+  return json.data;
+}
+
+const stableStringify = (v) =>
+  typeof v === "string"
+    ? v
+    : JSON.stringify(v || {}, Object.keys(v || {}).sort());
+
+async function fetchAPI(
+  query,
+  { variables = {}, revalidate = 60 * 60 * 24 * 7, tags = [] } = {}, // default 7d
+  { key = "unnamed" } = {},
+) {
+  let executed = false;
+
+  const cachedCall = unstable_cache(
+    async (q, v) => {
+      executed = true; // inner ran => MISS
+      // if (!isProd) {
+      //   console.log(`[Contentful] 💾 CACHE MISS (key=${key})`, {
+      //     variables: v,
+      //     tags,
+      //   });
+      // }
+      return fetchData(q, v);
+    },
+    ["cf", key, stableStringify(variables)], // cache key for this call signature
+    { revalidate, tags },
+  );
+
+  const result = await cachedCall(query, variables);
+
+  if (!executed) {
+    // inner did not run => HIT
+    console.log(`[DATA] ✅ CACHE HIT  (key=${key})`, { variables, tags });
+  }
+
+  return result;
+
+  // Set up some headers to tell the fetch call
+  // that this is an application/json type
+  // const headers = {
+  //   Accept: "*/*",
+  //   "Content-Type": "application/json",
+  //   "User-Agent": "*",
+  //   Authorization:
+  //     "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGlnaXRhbC5pY2RpbmRpYS5jb20iLCJpYXQiOjE2ODI5NDYwNTcsIm5iZiI6MTY4Mjk0NjA1NywiZXhwIjozMzIxODk0NjA1NywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.6wxGqOWTXA6S39lYkOBPdt53iSAz0_XOh36sbInE7X8",
+  // };
+
+  // if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
+  //   headers[
+  //     'Authorization'
+  //   ] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`
+  // }
+
+  // build out the fetch() call using the API_URL
+  // environment variable pulled in at the start
+  // Note the merging of the query and variables
+  // const res = await fetch(API_URL, {
+  //   method: "POST",
+  //   headers,
+  //   body: JSON.stringify({
+  //     query,
+  //     variables,
+  //   }),
+  // });
+
+  // error handling work
+  // const json = await res.json();
+  // if (json.errors) {
+  //   console.log(json.errors);
+  //   console.log("error details", query, variables);
+  //   throw new Error("Failed to fetch API");
+  // }
+  // return json.data;
+}
+
+async function fetchCommentnAPI(
+  query,
+  { variables = {}, revalidate = 60 * 60 * 24 * 7, tags = [] } = {}, // default 7d
+  { key = "unnamed" } = {},
+) {
+  let executed = false;
+
+  const cachedCall = unstable_cache(
+    async (q, v) => {
+      executed = true; // inner ran => MISS
+      const headers = {
+        Accept: "*/*",
+        "Content-Type": "application/json",
+        "User-Agent": "*",
+      };
+      let res;
+      try {
+        res = await fetch(API_URL, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ query: q, variables: v }),
+        });
+      } catch (err) {
+        console.error("[API] Fetch failed", v, err?.message);
+        return null;
+      }
+
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!res.ok || !contentType.includes("application/json")) {
+        console.error(`[API] Non-JSON response (${res.status}) for query`, v);
+        return null;
+      }
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (err) {
+        console.error("[API] JSON parse failed", v, err?.message);
+        return null;
+      }
+
+      if (json.errors) {
+        console.error("[API] GraphQL errors", json.errors);
+        return null;
+      }
+      return json.data;
+    },
+    ["cf", key, stableStringify(variables)],
+    { revalidate, tags },
+  );
+
+  const result = await cachedCall(query, variables);
+
+  if (!executed) {
+    console.log(`[DATA] ✅ CACHE HIT  (key=${key})`, { variables, tags });
+  }
+
+  return result;
+}
+
+export async function getPreviewPost(id, idType = "DATABASE_ID") {
+  const data = await fetchAPI(
+    `
+    query PreviewPost($id: ID!, $idType: PostIdType!) {
+      post(id: $id, idType: $idType) {
+        databaseId
+        slug
+        status
+      }
+    }`,
+    { variables: { id, idType }, tags: ["posts", "preview"] },
+    { key: "getPreviewPost" },
+  );
+  return data?.posts;
+}
+export async function getPostPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "posts"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }    
+    `,
+    { tags: ["pages", "posts"] },
+    { key: "getPostPage" },
+  );
+  return data;
+}
+
+export async function getPostCategories() {
+  const data = await fetchAPI(
+    `
+    {
+      categories(where: {orderby: TERM_ID}){
+        edges {
+          node {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }   
+    `,
+    { tags: ["categories"] },
+    { key: "getPostCategories" },
+  );
+  return data;
+}
+
+export async function getAllPostsForHome(preview) {
+  const data = await fetchCommentnAPI(
+    `
+    fragment SeoFragment on PostTypeSEO {
+      breadcrumbs {
+        text
+        url
+      }
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+      opengraphAuthor
+      opengraphDescription
+      schema {
+        raw
+      }
+      opengraphImage{
+        sourceUrl
+      }
+      opengraphSiteName
+      opengraphPublishedTime
+      opengraphModifiedTime
+    }
+    query AllPosts {
+      posts( where: { orderby: { field: DATE, order: DESC } },first:200) {
+        edges {
+          node {
+            title
+            seo {
+              ...SeoFragment
+            }
+            excerpt
+            slug
+            date
+            content
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            author {
+              node {
+                name
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: { onlyEnabled: !preview, preview },
+      tags: ["posts", "home"],
+    },
+    { key: "getAllPostsForHome" },
+  );
+}
+
+export async function comment(value, value2, value3, value4) {
+  const data = await fetchCommentnAPI(
+    `
+    mutation CREATE_COMMENT {
+      createComment(input: {commentOn: ${value2}, content: "${value}", author: "${value3}" , authorEmail: "${value4}"}) {
+        success
+        comment {
+          id
+          content
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    `,
+  );
+
+  return data;
+}
+
+export async function getPostAndMorePosts(slug, preview, previewData) {
+  const postPreview = preview && previewData?.post;
+  // The slug may be the id of an unpublished post
+  const isId = Number.isInteger(Number(slug));
+  const isSamePost = isId
+    ? Number(slug) === postPreview.id
+    : slug === postPreview.slug;
+  const isDraft = isSamePost && postPreview?.status === "draft";
+  const isRevision = isSamePost && postPreview?.status === "publish";
+  const data = await fetchAPI(
+    `
+    fragment SeoFragment on PostTypeSEO{
+      breadcrumbs{
+        text
+        url
+      }
+      title
+      metaDesc
+      metaRobotsNoindex
+        metaRobotsNofollow
+      opengraphAuthor
+      opengraphDescription
+      schema {
+        raw
+      }
+      opengraphImage{
+        sourceUrl
+      }
+      twitterImage {
+        sourceUrl
+      }
+      opengraphSiteName
+      opengraphPublishedTime
+      opengraphModifiedTime
+    }
+    fragment PostFields on Post {
+      title
+      excerpt
+      slug
+      date
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      musicArticle {
+        interactive
+      }
+      categories {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+      tags {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+
+    query PostBySlug($id: ID!, $idType: PostIdType!) {
+      post(id: $id, idType: $idType) {
+        ...PostFields
+        next{
+          title
+          slug
+          featuredImage{
+            node{
+              sourceUrl
+            }
+          }
+        }
+        previous{
+          title
+          slug
+          featuredImage{
+            node{
+              sourceUrl
+            }
+          }
+        }
+        relatedPost {
+          relatedProject {
+            ... on Project {
+              id
+              slug
+              projectComponent {
+                heading
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+            }
+          }
+          relatedBlog {
+            ... on Post {
+              id
+              slug
+              title
+              excerpt
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              content
+              likes {
+                likes
+              }
+              date
+              categories {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+              tags {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+        id
+        content
+        leadComponentPost {
+          leadComponent {
+            sourceUrl
+          }
+        }
+        postAuthor {
+          postAuthor {
+            ... on Team {
+              title
+              profileImage {
+                profileImage {
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+        likes {
+          likes
+        }
+        postId
+        seo {
+          ...SeoFragment
+        }
+     
+        ${
+          // Only some of the fields of a revision are considered as there are some inconsistencies
+          isRevision
+            ? `
+        revisions(first: 1, where: { orderby: { field: MODIFIED, order: DESC } }) {
+          edges {
+            node {
+              postId
+              title
+              excerpt
+              content
+              author {
+                node {
+                  ...AuthorFields
+                }
+              }
+            }
+          }
+        }
+        `
+            : ""
+        }
+      }
+      posts(first: 3, where: { orderby: { field: DATE, order: DESC } }) {
+        edges {
+          node {
+            ...PostFields
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        id: isDraft ? postPreview.id : slug,
+        idType: isDraft ? "DATABASE_ID" : "SLUG",
+      },
+      tags: ["posts", "postDetail"],
+    },
+    { key: "getPostAndMorePosts" },
+  );
+
+  if (!data) return null;
+
+  // Draft posts may not have an slug
+  if (isDraft && data.post) data.post.slug = postPreview.id;
+  // Apply a revision (changes in a published post)
+  if (isRevision && data.post?.revisions) {
+    const revision = data.post.revisions.edges[0]?.node;
+    if (revision) Object.assign(data.post, revision);
+    delete data.post.revisions;
+  }
+
+  // Filter out the main post
+  if (data.posts?.edges) {
+    data.posts.edges = data.posts.edges.filter(
+      ({ node }) => node.slug !== slug,
+    );
+    if (data.posts.edges.length > 2) data.posts.edges.pop();
+  }
+
+  return data;
+}
+
+export async function getAllProjectsForHome(preview) {
+  const data = await fetchCommentnAPI(
+    `
+    query Allprojects {
+      projects(first: 500) {
+        edges {
+          node {
+            id
+            slug
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            clients {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            projectComponent {
+              heading
+              awardsReceived
+            }
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: { onlyEnabled: !preview, preview },
+      revalidate: 86400,
+      tags: ["projects", "home"],
+    },
+    { key: "getAllProjectsForHome" },
+  );
+  return data?.projects;
+}
+
+export async function getAllProjectsWithSlug() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      projects(first:120) {
+        edges {
+          node {
+            slug
+            id
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["projects", "slugs"] },
+    { key: "getAllProjectsWithSlug" },
+  );
+  return data?.projects;
+}
+
+export async function getAllProjects() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      projects(first:500) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["projects"] },
+    { key: "getAllProjects" },
+  );
+  return data?.projects;
+}
+
+export async function getAllPostsSlug() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      posts(first:500) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["posts", "slugs"] },
+    { key: "getAllPostsSlug" },
+  );
+  return data?.posts;
+}
+
+export async function getLatestProject() {
+  const data = await fetchAPI(
+    `
+    {
+      projects(where: {orderby: {order: DESC, field: DATE}} , first: 3) {
+        edges {
+          node {
+           id
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["projects", "latest"] },
+    { key: "getLatestProject" },
+  );
+  return data?.projects;
+}
+
+export async function getAllProjectsNotIn(categorySlug) {
+  const data = await fetchAPI(
+    `
+    {
+      projects(where: {nameIn: "${categorySlug}"} , first: 1) {
+            edges {
+          node {
+            projectTypes {
+              edges {
+                node {
+                  name
+                  projects {
+                    edges {
+                      node {
+                        id
+                        slug
+                        projectComponent {
+                          heading
+                          awardsReceived
+                          leadVideo
+                          video {
+                            mediaItemUrl
+                          }
+                          videoMobile {
+                            mediaItemUrl
+                          }
+                          nameOfTheAwardEgC
+                          awardsImage {
+                            sourceUrl
+                          }
+                          awardsImageMobile {
+                            sourceUrl
+                          }
+                        }
+                        featuredImage {
+                          node {
+                            sourceUrl
+                          }
+                        }
+                        clients {
+                          edges {
+                            node {
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  );
+  return data?.projects;
+}
+
+export async function getAllOtherProjects(id) {
+  const data = await fetchAPI(
+    `
+    {
+      projectTypes(where: {exclude: "${id}", parent: 0}) {
+        edges {
+          node {
+            projects {
+              edges {
+                node {
+                  id
+                  slug
+                  uri
+                  projectComponent {
+                    heading
+                    awardsReceived
+                    leadVideo
+                    video{
+                      mediaItemUrl
+                    }
+                    videoMobile{
+                      mediaItemUrl
+                    }
+                    nameOfTheAwardEgC
+                    awardsImage{
+                      sourceUrl
+                    }
+                    awardsImageMobile{
+                      sourceUrl
+                    }
+                  }
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  clients {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+     
+  `,
+    { tags: ["projectTypes", "projects"] },
+    { key: "getAllOtherProjects" },
+  );
+  return data?.projectTypes;
+}
+
+export async function getProject(slug) {
+  const data = await fetchAPI(
+    `
+    fragment ProjectFields on Project {
+      title
+      slug
+      date
+      databaseId
+    }
+    fragment SeoFragment on PostTypeSEO {
+      breadcrumbs {
+        text
+        url
+      }
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+      opengraphAuthor
+      opengraphDescription
+      schema {
+        raw
+      }
+      opengraphImage{
+        sourceUrl
+      }
+      opengraphSiteName
+      opengraphPublishedTime
+      opengraphModifiedTime
+    }
+    query ProjectBySlug($id: ID!, $idType: ProjectIdType!) {
+      project(id: $id, idType: $idType) {
+        ...ProjectFields
+        seo {
+          ...SeoFragment
+        }
+        id
+        uri
+        slug
+        projectId
+        databaseId
+        slug
+        addDisclaimer {
+          addDisclaimer
+        }
+        projectComponent {
+          heading
+          awardsReceived
+          leadVideo
+          video{
+            mediaItemUrl
+          }
+          videoMobile{
+            mediaItemUrl
+          }
+          nameOfTheAwardEgC
+          awardsImage{
+            sourceUrl
+          }
+          awardsImageMobile{
+            sourceUrl
+          }
+          leadComponent{
+            sourceUrl
+          }
+          leadComponentMobile{
+            sourceUrl
+          }
+        }
+        projectTypes(where: {parent: 0 , orderby: TERM_ID }) {
+          edges {
+            node {
+              name
+              slug
+              databaseId
+            }
+          }
+        }
+        likes {
+          likes
+        }
+        content
+        clients {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        projectComponent {
+          description
+          details
+          relatedprojects {
+            ... on Project {
+              id
+              uri
+              slug
+              projectComponent {
+                heading
+                awardsReceived
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+            ... on Post{
+              id
+              slug
+              title
+              categories {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+              featuredImage{
+                node{
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+        shortDescription {
+          shortDesc
+          siteLink {
+            target
+            title
+            url
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        id: slug,
+        idType: "URI",
+      },
+    },
+    { tags: ["projects", "projectDetail"] },
+    { key: "getProject" },
+  );
+  return data;
+}
+
+export async function getHighlightedProject() {
+  const data = await fetchAPI(
+    `
+    query highlightedProject {
+      projects(where: {highlighted: true, orderby: {field: MENU_ORDER, order: ASC}}) {
+        edges {
+          node {
+            id
+            title
+            slug
+            content(format: RENDERED)
+            date
+            projectComponent {
+              heading
+              awardsReceived
+              leadVideo
+              video{
+                mediaItemUrl
+              }
+              videoMobile{
+                mediaItemUrl
+              }
+              nameOfTheAwardEgC
+              awardsImage{
+                sourceUrl
+              }
+              awardsImageMobile{
+                sourceUrl
+              }
+            }
+            clients {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            projectTypes {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            projectSubTypes {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            highlightedImage {
+              highlightedThumbnail {
+                sourceUrl
+              }
+              highlightedThumbnailMobile {
+                sourceUrl
+              }
+              videoForDesktop {
+                mediaItemUrl
+              }
+              videoForMobile {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+  }    
+  `,
+    { tags: ["projects", "highlighted"] },
+    { key: "getHighlightedProject" },
+  );
+  return data?.projects;
+}
+
+export async function getLogo() {
+  const data = await fetchAPI(
+    `{
+        siteLogo {
+          sourceUrl
+          altText
+        }
+      }
+      `,
+    { tags: ["site", "logo"] },
+    { key: "getLogo" },
+  );
+  return data.siteLogo;
+}
+
+export async function getMenus() {
+  const data = await fetchAPI(
+    `{
+        menuItems {
+          nodes {
+            label
+            path
+          }
+        }
+      }
+      `,
+    { tags: ["site", "menus"] },
+    { key: "getMenus" },
+  );
+  return data?.menuItems;
+}
+
+export async function getClients() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+       clients(first: 100, where: {excludeTree: [146,826,497,140,141]}) {
+        edges {
+          node {
+            name
+            projects {
+              nodes {
+                title
+                slug
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+    { tags: ["clients"] },
+    { key: "getClients" },
+  );
+  return data?.clients;
+}
+
+export async function getIndustries() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      industries(first: 20, where: {orderby: TERM_ORDER}) {
+        nodes {
+          name
+          slug
+          id
+          projects(first: 50) {
+            edges {
+              node {
+                id
+                slug
+                title
+                projectComponent {
+                  heading
+                  awardsReceived
+                  nameOfTheAwardEgC
+                  awardsImage {
+                    sourceUrl
+                  }
+                  awardsImageMobile {
+                    sourceUrl
+                  }
+                }
+                featuredImage {
+                  node {
+                    sourceUrl
+                  }
+                }
+                clients {
+                  edges {
+                    node {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+    { tags: ["industries"] },
+    { key: "getIndustries" },
+  );
+  return data?.industries;
+}
+
+export async function getProjectTypes() {
+  const data = await fetchAPI(
+    `
+{
+  projectTypes(where: {parent: 0, orderby: TERM_ID}) {
+    nodes {
+      name
+      slug
+      projects {
+        edges {
+          node {
+            id
+            slug
+            title
+            projectComponent {
+              heading
+              awardsReceived
+            }
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            projectTypes(where: {parent: 0, orderby: TERM_ID}, first: 1) {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            clients {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}   
+    `,
+    { tags: ["projectTypes"] },
+    { key: "getProjectTypes" },
+  );
+  return data?.projectTypes;
+}
+
+export async function updateTokken() {
+  const data = await fetchAPI(
+    `
+    mutation MyMutation {
+      login(input: {password: "icd123", username: "admin"}) {
+        authToken
+        refreshToken
+      }
+    }
+    `,
+  );
+
+  return data;
+}
+
+export async function updateProjectLikes(id, likes) {
+  const data = await fetchAPI(
+    `
+    mutation updateLikes {
+      updateProject(input: {id: "${id}", likes: ${likes}}) {
+        project {
+          title
+          likes {
+            likes
+          }
+        }
+      }
+    }
+    `,
+  );
+
+  return data;
+}
+
+export async function updatePostLikes(id, likes, authToken) {
+  const data = await fetchAPI(
+    `
+    mutation updateLikes {
+      updatePost(input: {id: "${id}", likes: ${likes} }) {
+        post {
+          title
+          likes {
+            likes
+          }
+        }
+      }
+    }`,
+  );
+
+  return data;
+}
+
+export async function updatekabirLikes(id, likes, authToken) {
+  const data = await fetchAPI(
+    `
+    mutation updateLikes {
+      updateKabir(input: {id: "${id}", likes: ${likes} }) {
+        kabir {
+          title
+          likes {
+            likes
+          }
+        }
+      }
+    }`,
+  );
+
+  return data;
+}
+
+export async function getPages() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "services"}) {
+        edges {
+          node {
+            servicesSection2Text {
+              text
+            }
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }  
+    `,
+  );
+  return data;
+}
+
+export async function getHome() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "home"}) {
+        edges {
+          node {
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+            featuredtext {
+              content
+            }
+            homePage {
+              featuredCards {
+                ... on Card {
+                  id
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  content
+                  cardCategories {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  designOptions {
+                    darkBg
+                    yellowBg
+                    link {
+                  title
+                  url
+                }
+                  }
+                }
+              }
+            }
+            projects {
+              highlightedProjects {
+                ... on Project {
+                  id
+                  title
+                  slug
+                  clients {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  projectComponent{
+                    awardsReceived
+                  }
+                  highlightedImage {
+                    highlightedThumbnail {
+                      sourceUrl
+                    }
+                    highlightedThumbnailMobile {
+                      sourceUrl
+                    }
+                    videoForDesktop {
+                      mediaItemUrl
+                    }
+                    videoForMobile {
+                      sourceUrl
+                    }
+                  }
+                }
+              }
+              carouselProjects {
+                ... on Project {
+                  id
+                  title
+                  slug
+                  clients {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  projectComponent{
+                    carouselImage{
+                      sourceUrl
+                    }
+                    carouselImageMobile{
+                      sourceUrl
+                    }
+                    carouselVideoMobile{
+                      mediaItemUrl
+                    }
+                    carouselVideoDesktop{
+                      mediaItemUrl
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }
+    
+    
+    
+    `,
+  );
+  return data;
+}
+
+export async function getProjectPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "projects"} ) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }    
+    `,
+  );
+  return data;
+}
+
+export async function getClientsPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "clients"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    } 
+    `,
+  );
+  return data;
+}
+
+export async function getService() {
+  const data = await fetchAPI(
+    `
+    {
+      servicesCategories(where: {slug: "brand-expression"}) {
+        edges {
+          node {
+            services(where: {orderby: {field: MENU_ORDER, order: ASC}}) {
+              edges {
+                node {
+                  title
+                  content
+                  featuredImage {
+                    backgroundImg {
+                      sourceUrl
+                    }
+                    gifAnimationImg {
+                      sourceUrl
+                    }
+                  }
+                  projectLink {
+                    linkProject {
+                      ... on Project {
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+  );
+  return data?.servicesCategories;
+}
+
+export async function getOtherService() {
+  const data = await fetchAPI(
+    `
+    {
+      servicesCategories(where: {slug: "brand-strategy"}) {
+        edges {
+          node {
+            services(where: {orderby: {field: MENU_ORDER, order: ASC}}) {
+              edges {
+                node {
+                  title
+                  content
+                  featuredImage {
+                    backgroundImg {
+                      sourceUrl
+                    }
+                    gifAnimationImg {
+                      sourceUrl
+                    }
+                  }
+                  projectLink {
+                    linkProject {
+                      ... on Project {
+                        slug
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+  );
+  return data?.servicesCategories;
+}
+
+export async function Contact(
+  firstName,
+  lastName,
+  enquiryAbout,
+  email,
+  number,
+  linkedin,
+  designation,
+  company,
+  message,
+  companyWebsite,
+) {
+  const data = await fetchAPI(
+    `
+    mutation CREATE_CONTACT {
+      contactForm(
+        input: {firstName: "${firstName}", lastName: "${lastName}", enquiryAbout: "${enquiryAbout}", email: "${email}", number: "${number}", linkedin: "${linkedin}", designation: "${designation}", company: "${company}", message: "${message}", companyWebsite: "${companyWebsite}"}
+      ) {
+        data
+        success
+      }
+    }
+    `,
+  );
+
+  return data;
+}
+
+export async function getCareerPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "careers"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }  
+    `,
+  );
+  return data;
+}
+
+export async function getOurteamPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "icd"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }  
+    `,
+  );
+  return data;
+}
+
+export async function getJobs() {
+  const data = await fetchAPI(
+    `
+    {
+      jobs {
+        edges {
+          node {
+            id
+            title
+            content
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            user {
+              user
+            }
+          }
+        }
+      }
+    }
+    `,
+  );
+  return data?.jobs;
+}
+
+export async function getTeam() {
+  const data = await fetchAPI(
+    `
+    {
+       teams(first: 20, where: {orderby: {field: MENU_ORDER, order: ASC}}) {
+        edges {
+          node {
+            title
+            id
+            content
+            teamorder {
+              teamorder
+            }
+            music {
+              artistFirst
+              musicFirst
+              artistSecond
+              musicSecond
+              artistThird
+              musicThird
+              artistFourth
+              musicFourth
+              artistFifth
+              musicFifth
+              playlistUrl
+            }
+            positions {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            profileImage {
+              profileImage {
+                sourceUrl
+              }
+              profileImageOnHover {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+  );
+  return data?.teams;
+}
+
+export async function careerContact(
+  enquiryAbout,
+  firstName,
+  lastName,
+  qualification,
+  experience,
+  number,
+  city,
+  email,
+  Website,
+) {
+  const data = await fetchAPI(
+    `
+    mutation CREATE_CONTACT {
+      careerContactForm(
+        input: {enquiryAbout: "${enquiryAbout}", firstName: "${firstName}", lastName: "${lastName}", educationalQualification: "${qualification}", experience: "${experience}", number: "${number}", city: "${city}", email: "${email}", website: "${Website}"}
+      ) {
+        data
+        success
+      }
+    }
+    `,
+  );
+
+  return data;
+}
+
+export async function getYellowEnvelope() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "yellow-envelope"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }    
+    `,
+  );
+  return data;
+}
+
+export async function getAllNewsletterWithSlug() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      newsletters(first: 100) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `,
+  );
+  return data?.newsletters;
+}
+
+export async function getArticle(slug) {
+  const data = await fetchAPI(
+    `  
+  query NewsletterBySlug($id: ID!, $idType: NewsletterIdType! ) {
+    newsletter(id: $id, idType: $idType) {
+      id
+      slug
+      title
+      content
+      seo {
+        ...SeoFragment
+      }
+      yellowEnvelope {
+        newsletterArticles {
+          ... on Article {
+            id
+            title
+            excerpt
+            seo{
+              title
+            }
+            content
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            linkTo {
+              link {
+                ... on Post {
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  fragment SeoFragment on PostTypeSEO {
+    breadcrumbs {
+      text
+      url
+    }
+    title
+    metaDesc
+    metaRobotsNoindex
+    metaRobotsNofollow
+    opengraphAuthor
+    opengraphDescription
+    schema {
+      raw
+    }
+    opengraphSiteName
+    opengraphPublishedTime
+    opengraphModifiedTime
+  }
+  `,
+    {
+      variables: {
+        id: slug,
+        idType: "URI",
+      },
+    },
+  );
+  return data;
+}
+
+export async function getAllArticleForHome(preview) {
+  const data = await fetchAPI(
+    `
+     {
+      newsletters(first:200) {
+        edges {
+          node {
+            date
+            id
+            slug
+            title
+            content
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        onlyEnabled: !preview,
+        preview,
+      },
+    },
+  );
+  return data?.newsletters;
+}
+
+export async function getAllPostsByCategory() {
+  const data = await fetchAPI(
+    `
+    {
+      categories {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `,
+  );
+  return data?.categories;
+}
+
+export async function getAllTags() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      tags(first:500) {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+    }
+  `,
+  );
+  return data?.tags;
+}
+
+export async function getAllPostsByCategorySlug(slug) {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      categories(where: {slug: "${slug}"}) {
+        edges {
+          node {
+            name
+            slug
+            posts(first: 500 ,where: {orderby: {field: DATE, order: DESC}}) {
+              edges {
+                node {
+                  id
+                  slug
+                  title
+                  excerpt
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  content
+                  likes {
+                    likes
+                  }
+                  date
+                  categories {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  tags {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  `,
+  );
+  return data?.categories;
+}
+
+export async function getAllPosts() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      posts(where: {orderby: {field: DATE, order: DESC}}, first: 500) {
+        edges {
+          node {
+            id
+            slug
+            title
+            excerpt
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            likes {
+              likes
+            }
+            date
+            categories {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            tags {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  );
+  return data?.posts;
+}
+
+export async function getFooter() {
+  const data = await fetchAPI(
+    `
+    {
+      generalSettingSettings {
+        behance
+        call
+        email
+        facebook
+        instagram
+        job
+        linkedin
+        twitter
+        vimeo
+        theme
+      }
+    }
+    `,
+    { tags: ["site", "footer"] },
+    { key: "getFooter" },
+  );
+  return data?.generalSettingSettings;
+}
+
+export async function getAllProjectsTypes() {
+  const data = await fetchAPI(
+    `
+    {
+      projectTypes(where: {parent: 0, orderby: TERM_ID }) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["projectTypes"] },
+    { key: "getAllProjectsTypes" },
+  );
+  return data?.projectTypes;
+}
+
+export async function getAllProjectsSubTypes() {
+  const data = await fetchAPI(
+    `
+    {
+      projectTypes(where: {parent: 0 , orderby: TERM_ID }) {
+        edges {
+          node {
+            slug
+            children {
+              edges {
+                node {
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    { tags: ["projectTypes", "subtypes"] },
+    { key: "getAllProjectsSubTypes" },
+  );
+  return data?.projectTypes;
+}
+
+export async function getProjectByTypes(slug) {
+  const data = await fetchAPI(
+    `
+    {
+      projectTypes(where: {slug: "${slug}", parent: 0 , orderby: TERM_ID }) {
+        edges {
+          node {
+            children(where: {orderby: TERM_ORDER}) {
+              edges {
+                node {
+                  slug
+                  name
+                  projects(first: 100) {
+                    edges {
+                      node {
+                        id
+                        slug
+                        projectComponent {
+                          heading
+                          awardsReceived
+                          leadVideo
+                          video{
+                            mediaItemUrl
+                          }
+                          videoMobile{
+                            mediaItemUrl
+                          }
+                          nameOfTheAwardEgC
+                          awardsImage{
+                            sourceUrl
+                          }
+                          awardsImageMobile{
+                            sourceUrl
+                          }
+                        }
+                        featuredImage {
+                          node {
+                            sourceUrl
+                          }
+                        }
+                        projectSubTypes {
+                          edges {
+                            node {
+                              name
+                              slug
+                            }
+                          }
+                        }
+                        clients {
+                          edges {
+                            node {
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            seo {
+              opengraphDescription
+            }
+            name
+            slug
+            description
+            projects(first: 100) {
+              edges {
+                node {
+                  id
+                  slug
+                  projectComponent {
+                    heading
+                  }
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  projectSubTypes {
+                    edges {
+                      node {
+                        name
+                        slug
+                      }
+                    }
+                  }
+                  clients {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }    
+  `,
+    { tags: ["projectTypes", "projects"] },
+    { key: "getProjectByTypes" },
+  );
+  return data;
+}
+
+export async function getProjectSubTypes(slug, sub_slug) {
+  const data = await fetchAPI(
+    `
+    {
+      projectTypes(where: {slug: "${slug}" , parent: 0 ,orderby: TERM_ID }) {
+        edges {
+          node {
+            slug
+            children(where: {slug: "${sub_slug}"}) {
+              edges {
+                node {
+                  projects(first: 100){
+                    edges {
+                      node {
+                        id
+                        slug
+                        projectComponent {
+                          heading
+                          awardsReceived
+                          leadVideo
+                          video{
+                            mediaItemUrl
+                          }
+                          videoMobile{
+                            mediaItemUrl
+                          }
+                          nameOfTheAwardEgC
+                          awardsImage{
+                            sourceUrl
+                          }
+                          awardsImageMobile{
+                            sourceUrl
+                          }
+                        }
+                        featuredImage {
+                          node {
+                            sourceUrl
+                          }
+                        }
+                        clients {
+                          edges {
+                            node {
+                              name
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+  `,
+    { tags: ["projectTypes", "projects"] },
+    { key: "getProjectSubTypes" },
+  );
+  return data;
+}
+
+export async function getContactPage() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "contact"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            contactEmail {
+              contactEMail
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    
+    }    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }    
+    `,
+  );
+  return data;
+}
+
+export async function getProjects() {
+  const data = await fetchAPI(
+    `
+    {
+      projects {
+        edges {
+          node {
+            title
+            slug
+            clients {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            projectComponent {
+              heading
+              awardsReceived
+              leadVideo
+              video{
+                mediaItemUrl
+              }
+              videoMobile{
+                mediaItemUrl
+              }
+              nameOfTheAwardEgC
+              awardsImage{
+                sourceUrl
+              }
+              awardsImageMobile{
+                sourceUrl
+              }
+            }
+            industries {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            projectTypes(where: {parent: 0, orderby: TERM_ID}) {
+              edges {
+                node {
+                  name
+                  children(where: {orderby: TERM_ORDER}) {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+    { tags: ["projects"] },
+    { key: "getProjects" },
+  );
+  return data?.projects;
+}
+
+export async function getPosts() {
+  const data = await fetchAPI(
+    `
+    {
+      posts {
+        edges {
+          node {
+            title
+            slug
+            categories {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+    { tags: ["posts"] },
+    { key: "getPosts" },
+  );
+  return data?.posts;
+}
+
+export async function getSearchPosts(search) {
+  const data = await fetchAPI(
+    `
+    {
+      posts(where: {search: "${search}"}) {
+        edges {
+          node {
+            id
+            slug
+            title
+            excerpt
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            likes {
+              likes
+            }
+            date
+            categories {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+            tags {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+    { tags: ["posts", "search"] },
+    { key: "getSearchPosts" },
+  );
+  return data?.posts;
+}
+
+export async function getSearchPostsByCategory(slug, search) {
+  const data = await fetchAPI(
+    `
+    {
+      categories(where: {slug: "${slug}"}) {
+        edges {
+          node {
+            name
+            slug
+            posts(where: {orderby: {field: DATE, order: DESC} , search: "${search}"}) {
+              edges {
+                node {
+                  id
+                  slug
+                  title
+                  excerpt
+                  featuredImage {
+                    node {
+                      sourceUrl
+                    }
+                  }
+                  content
+                  likes {
+                    likes
+                  }
+                  date
+                  categories {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  tags {
+                    edges {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    `,
+    { tags: ["posts", "search", "category"] },
+    { key: "getSearchPostsByCategory" },
+  );
+  return data?.categories;
+}
+
+export async function getFilters() {
+  const data = await fetchCommentnAPI(
+    `
+    {
+      clients(first: 100) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      industries(first: 30) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      projectTypes(first: 30) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      keywords(first: 500) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      categories(first: 100) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+      tags(first: 400) {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+    }
+    `,
+    { tags: ["filters"] },
+    { key: "getFilters" },
+  );
+  return data;
+}
+
+export async function getFiltersBySlug(slug) {
+  const data = await fetchAPI(
+    `
+{
+  clients(where: {search: "${slug}"}) {
+    edges {
+      node {
+        id
+        name
+        projects(first:20) {
+          edges {
+            node {
+              id
+              slug
+              date
+              projectComponent {
+                heading
+                awardsReceived
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  industries(where: {search: "${slug}"}) {
+    edges {
+      node {
+        id
+        name
+        projects(first:20) {
+          edges {
+            node {
+              id
+              slug
+              date
+              projectComponent {
+                heading
+                awardsReceived
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  projectTypes(where: {search: "${slug}"}) {
+    edges {
+      node {
+        name
+        id
+        projects(first:20) {
+          edges {
+            node {
+              id
+              slug
+              date
+              projectComponent {
+                heading
+                awardsReceived
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  projects(where: {search: "${slug}"}) {
+    edges {
+      node {
+        id
+        slug
+        date
+        projectComponent {
+          heading
+          awardsReceived
+        }
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        clients {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+  posts(where: {search: "${slug}"}) {
+    edges {
+      node {
+        id
+        slug
+        title
+        date
+        featuredImage {
+          node {
+            sourceUrl
+          }
+        }
+        categories {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+  keywords(where: {search: "${slug}"}) {
+    edges {
+      node {
+        id
+        name
+        projects(first:20) {
+          edges {
+            node {
+              id
+              slug
+              date
+              projectComponent {
+                heading
+                awardsReceived
+              }
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              clients {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  categories(where: {search: "${slug}"}) {
+    edges {
+      node {
+        name
+        posts(where: {orderby: {field: DATE, order: DESC}},first:20) {
+          edges {
+            node {
+              id
+              slug
+              title
+              date
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  tags(where: {search: "${slug}"}) {
+    edges {
+      node {
+        name
+        posts(where: {orderby: {field: DATE, order: DESC}},first:20) {
+          edges {
+            node {
+              id
+              slug
+              title
+              date
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              categories {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`,
+    { tags: ["filters", "search"] },
+    { key: "getFiltersBySlug" },
+  );
+  return data;
+}
+
+export async function getkabirPostsForHome(preview) {
+  const data = await fetchAPI(
+    `    
+      {
+        kabirs {
+          edges {
+            node {
+              date
+              id
+              slug
+              title
+              content
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              likes {
+                likes
+              }
+            }
+          }
+        }
+      }    
+    `,
+    {
+      variables: {
+        onlyEnabled: !preview,
+        preview,
+      },
+      tags: ["kabir", "home"],
+    },
+    { key: "getkabirPostsForHome" },
+  );
+  return data?.kabirs;
+}
+
+export async function getkabir() {
+  const data = await fetchAPI(
+    `
+    {
+      pages(where: {title: "kabir"}) {
+        edges {
+          node {
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            content
+            seo {
+              ...SeoFragment
+            }
+          }
+        }
+      }
+    }
+    
+    fragment SeoFragment on PostTypeSEO {
+      title
+      metaDesc
+      metaRobotsNoindex
+      metaRobotsNofollow
+    }    
+    `,
+    { tags: ["pages", "kabir"] },
+    { key: "getkabir" },
+  );
+  return data;
+}
+
+export async function getAllkabirWithSlug() {
+  const data = await fetchAPI(
+    `
+      {
+        kabirs(first: 500) {
+          edges {
+            node {
+              slug
+            }
+          }
+        }
+      }
+    `,
+    { tags: ["kabir", "slugs"] },
+    { key: "getAllkabirWithSlug" },
+  );
+  return data?.kabirs;
+}
+
+export async function kabirArticle(slug) {
+  const data = await fetchAPI(
+    `  
+  query kabirBySlug($id: ID!, $idType: KabirIdType! ) {
+    kabir(id: $id, idType: $idType) {
+      id
+      slug
+      title
+      date
+      content
+      featuredImage {
+        node {
+          sourceUrl
+        }
+      }
+      likes {
+        likes
+      }
+      seo {
+        ...SeoFragment
+      }
+      
+    }
+  }
+  fragment SeoFragment on PostTypeSEO {
+    breadcrumbs {
+      text
+      url
+    }
+    title
+    metaDesc
+    metaRobotsNoindex
+    metaRobotsNofollow
+    opengraphAuthor
+    opengraphDescription
+    schema {
+      raw
+    }
+    opengraphImage{
+      sourceUrl
+    }
+    opengraphSiteName
+    opengraphPublishedTime
+    opengraphModifiedTime
+  }
+  `,
+    {
+      variables: {
+        id: slug,
+        idType: "URI",
+      },
+      tags: ["kabir", "article"],
+    },
+    { key: "kabirArticle" },
+  );
+  return data;
+}
+
+export async function getPolicyPage() {
+  const data = await fetchAPI(
+    `
+      {
+        pages(where: {title: "policy"}) {
+          edges {
+            node {
+              title
+              featuredImage {
+                node {
+                  sourceUrl
+                }
+              }
+              content
+              seo {
+                ...SeoFragment
+              }
+            }
+          }
+        }
+      }
+
+      fragment SeoFragment on PostTypeSEO {
+          title
+          metaDesc
+          metaRobotsNoindex
+          metaRobotsNofollow
+        }
+      `,
+    { tags: ["pages", "policy"] },
+    { key: "getPolicyPage" },
+  );
+  return data;
+}

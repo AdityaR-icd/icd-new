@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'TundraOT Medium Italic';
+  src: local('TundraOT Medium Italic'),
+    url('../assets/fonts/tundra/TundraOT-MediumItalic.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF;
+}
+
+@font-face {
+  font-family: 'Berthold Akzidenz Grotesk Bold';
+  src: url("../assets/fonts/berthold/berthold-bold.woff2") format("woff2"),
+    url("../assets/fonts/berthold/berthold-bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Berthold Akzidenz Grotesk Light";
+  src: url("../assets/fonts/berthold/berthold-light.woff2") format("woff2"),
+    url("../assets/fonts/berthold/berthold-light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Berthold Akzidenz Grotesk";
+  src: url("../assets/fonts/berthold/berthold-regular.woff2") format("woff2"),
+    url("../assets/fonts/berthold/berthold-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TundraOT Light";
+  src: url("../assets/fonts/tundra/TundraOT-Light.woff2") format("woff2"),
+    url("../assets/fonts/tundra/TundraOT-Light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: optional;
+}
+
+
+@font-face {
+  font-family: "Intelo Bold";
+  src: url("../assets/fonts/intelo/Intelo Bold.eot"), /* IE9 Compat Modes */
+    url("../assets/fonts/intelo/Intelo Bold.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../assets/fonts/intelo/Intelo Bold.svg") format("woff"), /* Modern Browsers */
+    url("../assets/fonts/intelo/Intelo Bold.woff") format("woff"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intelo Regular";
+  src: url("../assets/fonts/intelo/Intelo Regular.eot"), /* IE9 Compat Modes */
+    url("../assets/fonts/intelo/Intelo Regular.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../assets/fonts/intelo/Intelo Regular.svg") format("woff"), /* Modern Browsers */
+    url("../assets/fonts/intelo/Intelo Regular.woff") format("woff"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ozone";
+  src: url("../assets/fonts/Ozone/Ozone.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../assets/fonts/Ozone/Ozone.svg") format("woff"), /* Modern Browsers */
+    url("../assets/fonts/Ozone/Ozone.woff") format("woff"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
