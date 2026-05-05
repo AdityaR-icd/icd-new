@@ -25,7 +25,7 @@
     "lodash": "^4.17.21",
     "magic-snowflakes": "^4.1.6",
     "net-browserify": "^0.2.4",
-    "next": "15.5.2",
+    "next": "15.5.9",
     "next-optimized-images": "^2.6.2",
     "next-seo": "^4.26.0",
     "nodemailer": "^6.9.1",
