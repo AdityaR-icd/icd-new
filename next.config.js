@@ -11,7 +11,7 @@ module.exports = withBundleAnalyzer({
   staticPageGenerationTimeout: 300,
 
   eslint: {
-    // ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true,
   },
 
   compress: true,

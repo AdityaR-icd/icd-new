@@ -9,7 +9,7 @@ import carousel from "@/components/project-categories/all/all.module.scss";
 import type from "@/components/project-categories/type/type.module.scss";
 import style from "@/styles/singlePost.module.scss";
 
-export default function SearchResults({ slug, filter, data, filters, latestProject }) {
+export default function SearchResults({ slug, filter, latestProject }) {
   const pathname = usePathname();
 
   useEffect(() => {

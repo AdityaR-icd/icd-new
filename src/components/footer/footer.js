@@ -1,8 +1,6 @@
 import Subscribe from "../subscribe/subscribe";
 import Link from "next/link";
-import { getFooter } from "../../lib/api";
-export default async function Navbar() {
-  const data = await getFooter();
+export default async function Navbar({ footer: data }) {
   return (
     <>
       <footer>

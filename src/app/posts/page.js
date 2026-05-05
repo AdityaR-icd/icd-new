@@ -2,8 +2,6 @@ import {
   getAllPosts,
   getPostCategories,
   getPostPage,
-  getFooter,
-  getFilters,
 } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo-utils";
 import Layout from "../../components/posts/posts";
@@ -17,12 +15,10 @@ export async function generateMetadata() {
 }
 
 export default async function BlogsPage() {
-  const [posts, data, meta, categories, filters] = await Promise.all([
+  const [posts, meta, categories] = await Promise.all([
     getAllPosts(),
-    getFooter(),
     getPostPage(),
     getPostCategories(),
-    getFilters(),
   ]);
 
   const edges = posts?.edges || [];
@@ -33,8 +29,6 @@ export default async function BlogsPage() {
       meta={meta_data}
       categories={categories}
       edges={edges}
-      data={data}
-      filters={filters}
     />
   );
 }

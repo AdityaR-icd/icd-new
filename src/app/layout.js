@@ -91,7 +91,7 @@ export default async function RootLayout({ children }) {
         <Loader />
         <Nav />
         {children}
-        <Navbar />
+        <Navbar footer={footer} />
       </body>
     </html>
   );
