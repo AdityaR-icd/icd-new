@@ -10,7 +10,7 @@
 # How to use
 
 Install all the dependencies required by the Next to do that just run the command\
-``` sudo yarn install ```
+``` sudo yarn ```
 
 To run the Next Application in development mode run the command\
 ``` sudo yarn run dev ```
