@@ -27,6 +27,7 @@ const Layout = ({ children }) => {
     } else {
       document.body.classList.remove("bg-yellow");
     }
+    console.log("pathname in layout", router.pathname);
   });
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Layout = ({ children }) => {
     } else {
       console.log("removing search-page from layout");
       $("body").removeClass(
-        "search-page showSearch ignore-react-onclickoutside"
+        "search-page showSearch ignore-react-onclickoutside",
       );
       console.log("removed search-page from layout");
     }

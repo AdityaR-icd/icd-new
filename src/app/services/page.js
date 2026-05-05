@@ -1,23 +1,31 @@
+import { notFound } from "next/navigation";
 import { getPages, getService, getOtherService } from "@/lib/api";
-
+import { buildMetadata } from "@/lib/seo-utils";
 import Layout from "@/components/services/services";
 
-export default async function Page() {
-  const meta = await getPages();
-  const service = await getService();
-  const otherService = await getOtherService();
+export const revalidate = 86400;
 
-  const meta_data = meta.pages.edges[0].node;
-  const other_service = otherService.edges;
+export async function generateMetadata() {
+  const meta = await getPages();
+  const seo = meta?.pages?.edges?.[0]?.node?.seo;
+  return buildMetadata(seo, { title: "Services", description: "Brand expression and strategy services by ICD India." });
+}
+
+export default async function Page() {
+  const [meta, service, otherService] = await Promise.all([
+    getPages(),
+    getService(),
+    getOtherService(),
+  ]);
+
+  const meta_data = meta?.pages?.edges?.[0]?.node;
+  if (!meta_data) return notFound();
 
   return (
     <Layout
       meta={meta_data}
-      edges={service.edges}
-      other_service={other_service}
+      edges={service?.edges ?? []}
+      other_service={otherService?.edges ?? []}
     />
   );
 }
-
-// Optional: ISR equivalent
-export const revalidate = 86400; // same as getStaticProps revalidate

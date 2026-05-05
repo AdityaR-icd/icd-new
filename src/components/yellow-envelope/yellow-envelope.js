@@ -1,38 +1,31 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import parse from "html-react-parser";
 import Link from "next/link";
-
-// const FetchNewsletter = dynamic (() => import("./fetch-newsletter/newsletter"));
-
-import $ from "jquery";
 
 import style from "../posts/posts.module.scss";
 
 export default function YellowEnvelop({ meta, edges }) {
-  const router = useRouter();
+  const sectionRef = useRef(null);
+  const inputRef = useRef(null);
 
-  const backButton = () => {
-    window.history.back();
-  };
+  const backButton = () => window.history.back();
 
   const postsearch = () => {
-    $(".posts__page").toggleClass(style.post_search__open);
-    if ($(".posts__page").hasClass(style.post_search__open)) {
-      $(".sb-search-input").focus();
+    const isOpen = sectionRef.current?.classList.toggle(style.post_search__open);
+    if (isOpen) {
+      inputRef.current?.focus();
     } else {
-      $(".sb-search-input").val("");
+      if (inputRef.current) inputRef.current.value = "";
     }
   };
 
-  var htmlString = "";
-  var stripedHtml = "";
-  var content = "";
   return (
     <>
       <section
-        className={`${style.posts__page} mT__260 page__header posts__page `}
+        ref={sectionRef}
+        className={`${style.posts__page} mT__260 page__header posts__page`}
       >
         <div className="container page__header--container">
           <div className="row">
@@ -43,13 +36,11 @@ export default function YellowEnvelop({ meta, edges }) {
               </div>
             </div>
             <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
-              <div className={style.filter_menu_cont}>
-                {/* {common}
-                        {slug} */}
-              </div>
+              <div className={style.filter_menu_cont}></div>
               <div id="sb-search" className={style.sb_search}>
                 <input
-                  className={` sb-search-input ${style.sb_search_input}`}
+                  ref={inputRef}
+                  className={`sb-search-input ${style.sb_search_input}`}
                   placeholder="Type a term to search"
                   type="search"
                   name="post-search"
@@ -58,7 +49,7 @@ export default function YellowEnvelop({ meta, edges }) {
                 />
                 <span
                   className={`${style.sb_icon_search} ${style.magic_icon_search}`}
-                  onClick={() => postsearch()}
+                  onClick={postsearch}
                 ></span>
               </div>
             </div>
@@ -71,33 +62,29 @@ export default function YellowEnvelop({ meta, edges }) {
         <div className="container">
           <div className="row infinite-grid">
             {edges.map(({ node }) => {
-              // <FetchNewsletter data={node} key={node.id}/>
-              var date = new Date(node.date).toLocaleDateString("en-IN", {
+              const date = new Date(node.date).toLocaleDateString("en-IN", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               });
-              htmlString = node?.content;
-              if (htmlString) {
-                var stripedHtml = htmlString?.replace(/<[^>]+>/g, " ");
-                var content = stripedHtml?.substr(0, 500);
-              } else {
-                content = "....";
-              }
+              const htmlString = node?.content ?? "";
+              const content = htmlString
+                ? htmlString.replace(/<[^>]+>/g, " ").substring(0, 500)
+                : "....";
+
               return (
                 <div className="col-md-4 col-lg- grid-item" key={node.id}>
-                  <div className={`${style.postsItems} animateItems}`}>
-                    <Link href={`/yellow-envelope/${node.slug}`}>
+                  <div className={`${style.postsItems} animateItems`}>
+                    <Link href={`/yellow-envelope/${node.slug}`} prefetch={true}>
                       <h2 className={style.postTitle}>{node.title}</h2>
                       <span className={style.postBy}> {date} </span>
                       <div className={style.postInfo}>
-                        {" "}
-                        <p> {parse(content)} </p>{" "}
+                        <p>{parse(content)}</p>
                       </div>
                     </Link>
                     <div className="row">
                       <div className="col-6">
-                        <Link href={`/yellow-envelope/${node.slug}`}>
+                        <Link href={`/yellow-envelope/${node.slug}`} prefetch={true}>
                           <button>read letter</button>
                         </Link>
                       </div>

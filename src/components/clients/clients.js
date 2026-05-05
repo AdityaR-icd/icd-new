@@ -121,7 +121,7 @@ export default function Clients({ meta, edges }) {
                           )}`}
                           src={leadImgSrc}
                           alt="project-lead"
-                          layout="fill"
+                          fill
                         />
                       </div>
                     </React.Fragment>

@@ -1,4 +1,4 @@
-@import "../../../assets/scss/variables.scss";
+@use "../../../assets/scss/variables.scss" as *;
 .industry__filter {
     // max-height: 440px;
     overflow: hidden;  // to fix overflow scroll on mobile

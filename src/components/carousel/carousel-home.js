@@ -3,24 +3,56 @@
 import styles from "./carousel.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Slider from "react-slick";
-import $ from "jquery";
+
+const toBase64 = (str) =>
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
+    : window.btoa(str);
+
+const shimmer = (w, h) => `
+  <svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g">
+        <stop stop-color="#f6f6f6" offset="20%" />
+        <stop stop-color="#f0f0f0" offset="50%" />
+        <stop stop-color="#f6f6f6" offset="70%" />
+      </linearGradient>
+    </defs>
+    <rect width="${w}" height="${h}" fill="#F6F6F6" />
+    <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+    <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite" />
+  </svg>`;
+
+const blurUrl = `data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`;
+
+function playActiveVideos(sliderEl) {
+  if (!sliderEl) return;
+  sliderEl.querySelectorAll(".slick-slide video").forEach((v) => {
+    v.pause();
+    v.currentTime = 0;
+  });
+  sliderEl.querySelectorAll(".slick-active video").forEach((v) => {
+    v.play().catch(() => {});
+  });
+}
+
+const SlickArrowLeft = ({ ...props }) => (
+  <button {...props} className="slick-prev slick-arrow" type="button">
+    Previous
+  </button>
+);
+
+const SlickArrowRight = ({ ...props }) => (
+  <button {...props} className="slick-next slick-arrow" type="button">
+    Next
+  </button>
+);
 
 export default function Carousel({ edges }) {
-  const SlickArrowLeft = ({ ...props }) => (
-    <button {...props} className="slick-prev slick-arrow" type="button">
-      Previous
-    </button>
-  );
-
-  const SlickArrowRight = ({ ...props }) => (
-    <button {...props} className="slick-next slick-arrow" type="button">
-      Next
-    </button>
-  );
-
   const [currentSlide, setCurrentSlide] = useState(1);
+  const sliderContainerRef = useRef(null);
 
   const settings = {
     dots: false,
@@ -44,39 +76,14 @@ export default function Carousel({ edges }) {
     ],
     onInit: () => {
       if (typeof window !== "undefined") {
-        $(".slick-active").find("video")?.get(0)?.play();
-        $(".slick-active").find("video")?.get(1)?.play();
+        setTimeout(() => playActiveVideos(sliderContainerRef.current), 100);
       }
     },
     afterChange: (slide) => {
-      $(".slick-slide video").each((_, el) => {
-        el.pause();
-        el.currentTime = 0;
-      });
+      playActiveVideos(sliderContainerRef.current);
       setCurrentSlide(slide + 1);
-      $(".slick-active").find("video")?.get(0)?.play();
-      $(".slick-active").find("video")?.get(1)?.play();
     },
   };
-
-  const toBase64 = (str) =>
-    typeof window === "undefined"
-      ? Buffer.from(str).toString("base64")
-      : window.btoa(str);
-
-  const shimmer = (w, h) => `
-    <svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="g">
-          <stop stop-color="#f6f6f6" offset="20%" />
-          <stop stop-color="#f0f0f0" offset="50%" />
-          <stop stop-color="#f6f6f6" offset="70%" />
-        </linearGradient>
-      </defs>
-      <rect width="${w}" height="${h}" fill="#F6F6F6" />
-      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite" />
-    </svg>`;
 
   const otherProjectsSlider = edges.map((node, j, { length }) => {
     const projectVideo =
@@ -102,9 +109,7 @@ export default function Carousel({ edges }) {
                   playsInline
                   loop
                   muted
-                  poster={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(500, 500)
-                  )}`}
+                  poster={blurUrl}
                 />
               </div>
             )}
@@ -116,9 +121,7 @@ export default function Carousel({ edges }) {
                   playsInline
                   loop
                   muted
-                  poster={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(500, 500)
-                  )}`}
+                  poster={blurUrl}
                 />
               </div>
             )}
@@ -126,12 +129,9 @@ export default function Carousel({ edges }) {
             {projectThumbnailMobile && (
               <div className="d-lg-none">
                 <Image
-                  unoptimized
-                  priority
+                  priority={j === 0}
                   placeholder="blur"
-                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(500, 500)
-                  )}`}
+                  blurDataURL={blurUrl}
                   src={projectThumbnailMobile}
                   alt="project-lead"
                   fill
@@ -143,16 +143,13 @@ export default function Carousel({ edges }) {
             {projectThumbnail && (
               <div className="d-none d-lg-block">
                 <Image
-                  unoptimized
-                  priority
+                  priority={j === 0}
                   placeholder="blur"
-                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                    shimmer(500, 500)
-                  )}`}
+                  blurDataURL={blurUrl}
                   src={projectThumbnail}
                   alt="project-lead"
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 991px) 100vw, 100vw"
                 />
               </div>
             )}
@@ -178,7 +175,7 @@ export default function Carousel({ edges }) {
 
   return (
     <section className={`${styles.heroCarousel} hero-carousel mB__150`}>
-      <div className={styles.homelead_thumbnail}>
+      <div className={styles.homelead_thumbnail} ref={sliderContainerRef}>
         <Slider {...settings}>
           <div className={`${styles.lead_video_cont} lead_carousel_video`}>
             <Link className="project_link" href={`/services`} prefetch={true}>
@@ -194,7 +191,7 @@ export default function Carousel({ edges }) {
                   <div className="col-md-2" />
                   <div className="project-title-container offset-md-2">
                     <div className="wrapper">
-                      <h1 className="project-title">let’s talk</h1>
+                      <h1 className="project-title">let&apos;s talk</h1>
                       <span className="slide-count d-none d-md-block">
                         {currentSlide}/{edges.length + 1}
                       </span>

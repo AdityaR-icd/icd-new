@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 .projects__page{
     // margin-top: 160px;
     h1{

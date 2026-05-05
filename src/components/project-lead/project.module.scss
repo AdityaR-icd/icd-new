@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 .projectlead{
     font-family: $akz-bold;
     margin-bottom: 150px;

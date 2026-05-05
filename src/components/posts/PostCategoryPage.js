@@ -33,7 +33,7 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
   const filteredPosts = useMemo(() => {
     if (!searchValue) return allPosts;
     return allPosts.filter((post) =>
-      post.node.title.toLowerCase().includes(searchValue.toLowerCase())
+      post.node.title.toLowerCase().includes(searchValue.toLowerCase()),
     );
   }, [searchValue, allPosts]);
 
@@ -58,7 +58,7 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
   const visiblePosts = seeAll
     ? filteredPosts
     : filteredPosts.filter((post) =>
-        post.node.tags.edges.some((t) => t.node.name === selectedTag)
+        post.node.tags.edges.some((t) => t.node.name === selectedTag),
       );
 
   return (
@@ -85,6 +85,7 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
                 <Link
                   href="/posts"
                   className={`${categoryStyle.project__filter} project__filter marginRight`}
+                  prefetch={true}
                 >
                   all
                 </Link>

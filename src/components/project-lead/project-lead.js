@@ -101,7 +101,7 @@ export default function projectLead({ edges, latestProject }) {
                     <div className="row">
                       <div className="col-md-12">
                         <Link
-                          prefetch={false}
+                          prefetch={true}
                           className="project_link"
                           href={`/projects/${projects[j].slug}`}
                         >
@@ -133,11 +133,11 @@ export default function projectLead({ edges, latestProject }) {
                                         priority={true}
                                         placeholder="blur"
                                         blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                                          shimmer(500, 500)
+                                          shimmer(500, 500),
                                         )}`}
                                         src={project_thumbnail}
                                         alt="project-lead"
-                                        layout="fill"
+                                        fill
                                         sizes="100vw"
                                       />
                                     </div>
@@ -151,11 +151,11 @@ export default function projectLead({ edges, latestProject }) {
                                     priority={true}
                                     placeholder="blur"
                                     blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                                      shimmer(500, 500)
+                                      shimmer(500, 500),
                                     )}`}
                                     src={project_thumbnail_mobile}
                                     alt="project-lead"
-                                    layout="fill"
+                                    fill
                                     sizes="100vw"
                                   />
                                 </div>
@@ -195,7 +195,7 @@ export default function projectLead({ edges, latestProject }) {
               </>
             </div>
           )
-        )
+        ),
       )}
     </>
   );

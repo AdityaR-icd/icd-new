@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 .clients_alpha_cont{
     margin: 55px 0 150px;
     position: relative;

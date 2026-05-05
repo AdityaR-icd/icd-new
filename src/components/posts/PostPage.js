@@ -23,8 +23,8 @@ export default function PostPage({ post, teamData }) {
   const [range, setRange] = useState(0);
   const audioRefs = useRef([]);
 
-  const seo = post ? post?.seo ?? {} : {};
-  const uri = post ? post?.uri ?? {} : {};
+  const seo = post ? (post?.seo ?? {}) : {};
+  const uri = post ? (post?.uri ?? {}) : {};
 
   const featuredImage = post?.leadComponentPost?.leadComponent?.sourceUrl;
   const categories = post?.categories?.edges[0]?.node?.name;
@@ -33,7 +33,7 @@ export default function PostPage({ post, teamData }) {
   const checkrelatedproject = post?.relatedPost?.relatedProject;
 
   const [interactionArticle, setinteractionArticle] = useState(
-    post?.musicArticle?.interactive
+    post?.musicArticle?.interactive,
   );
 
   const toBase64 = (str) =>
@@ -90,11 +90,11 @@ export default function PostPage({ post, teamData }) {
                     placeholder="blur"
                     priority={true}
                     blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                      shimmer(500, 500)
+                      shimmer(500, 500),
                     )}`}
                     src={leadImgSrc}
                     alt="project-lead"
-                    layout="fill"
+                    fill
                     sizes="100vw"
                   />
                 </div>
@@ -124,10 +124,10 @@ export default function PostPage({ post, teamData }) {
           priority={true}
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(
-            shimmer(500, 500)
+            shimmer(500, 500),
           )}`}
           alt="post-lead"
-          layout="fill"
+          fill
           sizes="100vw"
         />
       </span>
@@ -141,7 +141,7 @@ export default function PostPage({ post, teamData }) {
           className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}
         >
           <div className={carousel.thumbnail_cont}>
-            <Link href={`/posts/${data.slug}`}>
+            <Link prefetch={true} href={`/posts/${data.slug}`}>
               <span
                 className={`${carousel.projectThumbnail} fade-in`}
                 style={{ width: "100%" }}

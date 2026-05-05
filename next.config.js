@@ -4,34 +4,35 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
-
-  swcMinify: true, // Optional: Ensure SWC is enabled for minification
-
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
 
-  staticPageGenerationTimeout: 1000,
+  staticPageGenerationTimeout: 300,
 
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
+    // ignoreDuringBuilds: true,
   },
 
-  optimizeFonts: true,
+  compress: true,
   reactStrictMode: true,
 
   images: {
-    domains: ["res.cloudinary.com", "digital.icdindia.com"],
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "digital.icdindia.com",
+      },
+    ],
   },
 
   env: {
-    REVALIDATION_TOKEN: "randomsecrettoken",
+    REVALIDATION_TOKEN: process.env.REVALIDATION_TOKEN || "randomsecrettoken",
   },
 
   async headers() {
@@ -41,20 +42,8 @@ module.exports = withBundleAnalyzer({
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=365d, stale-while-revalidate=180",
+            value: "public, max-age=31536000, stale-while-revalidate=15552000",
           },
-          { key: "Access-Control-Allow-Origin", value: "*" },
-          {
-            key: "Access-Control-Allow-Headers",
-            value:
-              "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-          },
-        ],
-      },
-      {
-        source: "/pages/(.*)",
-        headers: [
-          { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
           {
             key: "Access-Control-Allow-Headers",

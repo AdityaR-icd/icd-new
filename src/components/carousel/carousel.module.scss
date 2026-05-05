@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 .heroCarousel {
     position: relative;
     max-width: 100vw;

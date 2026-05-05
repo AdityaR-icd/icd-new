@@ -25,8 +25,8 @@ export default function ProjectPage({ project, oProjects }) {
   const twitterUrl = `https://twitter.com/intent/tweet?text="${project?.title}"&url=${location}${pathname}`;
   const linkedinUrl = `https://www.linkedin.com/shareArticle?mini=true&url="${location}${pathname}"&title=${project?.title}`;
 
-  const seo = project ? project?.seo ?? {} : {};
-  const uri = project ? project?.uri ?? {} : {};
+  const seo = project ? (project?.seo ?? {}) : {};
+  const uri = project ? (project?.uri ?? {}) : {};
 
   useEffect(() => {
     const loader = document.querySelector(".loader");
@@ -77,11 +77,12 @@ export default function ProjectPage({ project, oProjects }) {
                 <span className={`${carousel.projectThumbnail} fade-in`}>
                   <div className={`${carousel?.full_thumb} full-thumb`}>
                     {leadImgSrc && (
-                      <img
+                      <Image
                         className={carousel?.project_lead}
                         src={leadImgSrc}
-                        alt="project-lead"
-                        layout="fill"
+                        alt={node?.projectComponent?.heading || "project"}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     )}
                   </div>
@@ -141,17 +142,12 @@ export default function ProjectPage({ project, oProjects }) {
               <Link prefetch={true} href={url}>
                 <span className={`${carousel?.projectThumbnail} fade-in`}>
                   <div className={`${carousel.full_thumb} full-thumb`}>
-                    <img
-                      priority
-                      unoptimized
+                    <Image
                       className={carousel?.project_lead}
-                      src={
-                        leadImgSrc ||
-                        "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"
-                      }
-                      alt="project-lead"
-                      layout="fill"
-                      sizes="100vw"
+                      src={leadImgSrc || "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"}
+                      alt={node?.projectComponent?.heading || node?.title || "project"}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </div>
                   <span className="thumbnail-gif"></span>
@@ -175,16 +171,12 @@ export default function ProjectPage({ project, oProjects }) {
 
   const awardImg = awards && (
     <Image
-      unoptimized
       placeholder="blur"
       blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
-      className={` ${carousel.project_lead} d-none d-md-block `}
-      src={
-        project?.projectComponent?.awardsImage?.sourceUrl ||
-        "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"
-      }
-      alt="project-lead"
-      layout="fill"
+      className={`${carousel.project_lead} d-none d-md-block`}
+      src={project?.projectComponent?.awardsImage?.sourceUrl || "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"}
+      alt={awardName || "award"}
+      fill
       sizes="100vw"
     />
   );
@@ -200,7 +192,7 @@ export default function ProjectPage({ project, oProjects }) {
         "https://digital.icdindia.com/wp-content/uploads/2023/04/Jack-Daniels-Gentleman-Jack-Components2-2048x1280.jpg"
       }
       alt="project-lead"
-      layout="fill"
+      fill
       sizes="100vw"
     />
   );
@@ -242,13 +234,11 @@ export default function ProjectPage({ project, oProjects }) {
         ></a>
       </span>
       <span className="icon" onClick={() => setShowShareIcons(!showShareIcons)}>
-        <img
-          loading="lazy"
-          alt="icd"
-          decoding="async"
-          src={Share.src}
-          width="20"
-          height="20"
+        <Image
+          src={Share}
+          alt="share"
+          width={20}
+          height={20}
           className="icon-img shareIcon--main"
         />
         share
@@ -338,28 +328,24 @@ export default function ProjectPage({ project, oProjects }) {
                 src={leadComponent}
                 priority
                 placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(500, 500)
-                )}`}
-                alt="project-lead"
-                layout="fill"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                alt={heading || title || "project"}
+                fill
                 className="d-none d-md-block"
-                unoptimized
                 sizes="100vw"
               />
-              <Image
-                src={leadComponentMobile}
-                priority
-                placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(500, 500)
-                )}`}
-                alt="project-lead"
-                layout="fill"
-                className="d-block d-md-none"
-                unoptimized
-                sizes="100vw"
-              />
+              {leadComponentMobile && (
+                <Image
+                  src={leadComponentMobile}
+                  priority
+                  placeholder="blur"
+                  blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+                  alt={heading || title || "project"}
+                  fill
+                  className="d-block d-md-none"
+                  sizes="100vw"
+                />
+              )}
             </div>
           </div>
         </section>
@@ -457,7 +443,7 @@ export default function ProjectPage({ project, oProjects }) {
                   {project?.clients?.edges?.map((data, i) =>
                     allclients === i + 1
                       ? data?.node?.name
-                      : `${data?.node?.name}, `
+                      : `${data?.node?.name}, `,
                   )}
                 </span>
               </div>

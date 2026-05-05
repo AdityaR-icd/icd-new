@@ -71,7 +71,7 @@ export default function allproject({ edges, latestProject }) {
                   // console.log(id[i] , node?.id),
 
                   (client = node?.clients?.edges[0]?.node?.name),
-                  (leadImgSrc = (node?.featuredImage?.node?.sourceUrl).replace(
+                  (leadImgSrc = (node?.featuredImage?.node?.sourceUrl ?? "").replace(
                     "gif",
                     "mp4"
                   )), // console.log(leadImgSrc),
@@ -105,7 +105,7 @@ export default function allproject({ edges, latestProject }) {
                                       className={carousel.project_lead}
                                       src={leadImgSrc}
                                       alt="project-lead"
-                                      layout="fill"
+                                      fill
                                     />
                                   )}
                                   {leadImgSrc.includes("mp4") && (

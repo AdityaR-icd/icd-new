@@ -1,17 +1,13 @@
-// app/clients/industry/page.js
-import {
-  getIndustries,
-  getClientsPage,
-  getFooter,
-  getFilters,
-} from "@/lib/api";
+import { getIndustries, getClientsPage, getFilters } from "@/lib/api";
 import Layout from "@/components/clients/industry/industry";
 
+export const revalidate = 3600;
+
 export default async function IndustryPage() {
-  const meta = await getClientsPage();
-  const industries = await getIndustries();
-  const data = await getFooter();
-  const filters = await getFilters();
+  const [meta, industries] = await Promise.all([
+    getClientsPage(),
+    getIndustries(),
+  ]);
 
   const meta_data = meta?.pages?.edges?.[0]?.node;
 

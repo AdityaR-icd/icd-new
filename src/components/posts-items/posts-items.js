@@ -42,7 +42,7 @@ export default function postItem({ data, ids }) {
           src={featuredImage}
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(
-            shimmer(500, 500)
+            shimmer(500, 500),
           )}`}
           alt="post-lead"
           fill
@@ -64,13 +64,11 @@ export default function postItem({ data, ids }) {
   return (
     <div className="col-md-6 col-lg-6 grid-item">
       <div className={`${style.postsItems} animateItems`}>
-        <Link href={`/posts/${data.slug}`} prefetch={false}>
+        <Link href={`/posts/${data.slug}`} prefetch={true}>
           <div className={style.postLeadImage}>
             <div className="images-loaded-container">{imageData}</div>
             <span className={style.postCategory}>{categories}</span>
           </div>
-          {/* </Link>
-                <Link href={`/posts/${data.slug}`} > */}
           <h2 className={style.postTitle}>{data.title}</h2>
           <span className={style.postBy}> {date} </span>
           <div className={style.postInfo}>
@@ -80,12 +78,10 @@ export default function postItem({ data, ids }) {
             <span>{categories}</span>
             {postsTags}
           </div>
-          {/* </Link> */}
+
           <div className="row">
             <div className="col-6">
-              {/* <Link href={`/posts/${data.slug}`} > */}
               <button>keep reading</button>
-              {/* </Link> */}
             </div>
             <div className="col-6 text-right">
               <Like count={data?.likes?.likes} id={data.id} type={"post"} />

@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 // intro-text.scss
 .textContent{
     font-family: 'TundraOT Light';

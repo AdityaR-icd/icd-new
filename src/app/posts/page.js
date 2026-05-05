@@ -5,14 +5,25 @@ import {
   getFooter,
   getFilters,
 } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo-utils";
 import Layout from "../../components/posts/posts";
 
-export default async function BlogsPage() {
-  const posts = await getAllPosts();
-  const data = await getFooter();
+export const revalidate = 3600;
+
+export async function generateMetadata() {
   const meta = await getPostPage();
-  const categories = await getPostCategories();
-  const filters = await getFilters();
+  const seo = meta?.pages?.edges?.[0]?.node?.seo;
+  return buildMetadata(seo, { title: "Posts", description: "Insights and stories from ICD India." });
+}
+
+export default async function BlogsPage() {
+  const [posts, data, meta, categories, filters] = await Promise.all([
+    getAllPosts(),
+    getFooter(),
+    getPostPage(),
+    getPostCategories(),
+    getFilters(),
+  ]);
 
   const edges = posts?.edges || [];
   const meta_data = meta?.pages?.edges?.[0]?.node;

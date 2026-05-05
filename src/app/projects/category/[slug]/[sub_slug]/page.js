@@ -1,24 +1,33 @@
-// app/projects/category/[slug]/[sub_slug]/page.tsx
 import { notFound } from "next/navigation";
-
 import {
   getProjectSubTypes,
   getProjectByTypes,
-  getFooter,
-  getFilters,
   getLatestProject,
+  getAllProjectsSubTypes,
 } from "@/lib/api";
 import ProjectSubCategoryPage from "@/components/project/ProjectSubCategoryPage";
 
-export default async function SubProjectPage({ params }) {
-  const gProject = await getProjectByTypes(params.slug);
-  const subTypeProjects = await getProjectSubTypes(
-    params.slug,
-    params.sub_slug
+export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const types = await getAllProjectsSubTypes();
+  return (types?.edges ?? []).flatMap(({ node }) =>
+    (node.children?.edges ?? []).map(({ node: child }) => ({
+      slug: node.slug,
+      sub_slug: child.slug,
+    }))
   );
-  const latestProject = await getLatestProject();
-  await getFooter();
-  await getFilters();
+}
+
+export default async function SubProjectPage({ params }) {
+  const { slug, sub_slug } = await params;
+
+  const [gProject, subTypeProjects, latestProject] = await Promise.all([
+    getProjectByTypes(slug),
+    getProjectSubTypes(slug, sub_slug),
+    getLatestProject(),
+  ]);
 
   const pageData = gProject?.projectTypes?.edges?.[0]?.node;
   if (!pageData) return notFound();

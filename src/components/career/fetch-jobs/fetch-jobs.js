@@ -36,7 +36,7 @@ export default function fetchJobs({ data }) {
               )}`}
               src={profileImage}
               alt={data.title}
-              layout="fill"
+              fill
               unoptimized
               sizes="100vw"
             />

@@ -1,183 +1,121 @@
 "use client";
 
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import PostItem from "../posts-items/posts-items";
-import $ from "jquery";
 
 import style from "./posts.module.scss";
 import categoryStyle from "../project/category.module.scss";
 
-export default function posts({ meta, categories, edges }) {
+export default function Posts({ meta, categories, edges }) {
   const router = useRouter();
+  const sectionRef = useRef(null);
+  const inputRef = useRef(null);
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [filter, setFilter] = useState("");
+  const [seeAll, setSeeAll] = useState(true);
 
-  const backButton = () => {
-    window.history.back();
-  };
-
-  const [seeAll, setseeAll] = useState(true);
-  const seeAllProject = () => {
-    setseeAll(false);
-  };
-
-  const [searchValue, setsearchValue] = useState("");
-  //  const [search, setSearch] = useState('')
+  const backButton = () => window.history.back();
 
   const postsearch = () => {
-    $(".posts__page").toggleClass(style.post_search__open);
-    if ($(".posts__page").hasClass(style.post_search__open)) {
-      $(".sb-search-input").focus();
+    const isOpen = sectionRef.current?.classList.toggle(style.post_search__open);
+    if (isOpen) {
+      inputRef.current?.focus();
     } else {
-      $(".infinite-grid .grid-item").show();
-      $(".sb-search-input").val("");
-      $(".allPosts").removeClass("d-none");
+      setFilter("");
+      if (inputRef.current) inputRef.current.value = "";
     }
   };
 
-  // const handleSubmit = async (evt) => {
-  //     evt.preventDefault();
-  //     setSearch(await getSearchPosts (searchValue))
+  const filteredEdges = filter
+    ? edges.filter(({ node }) =>
+        (node.title + " " + (node.content ?? "")).toLowerCase().includes(filter.toLowerCase())
+      )
+    : edges;
 
-  //     $('.allPosts').addClass('d-none')
-  // }
+  const category = categories?.categories?.edges;
 
-  useEffect(() => {
-    $(document).ready(function () {
-      $("#postsearch").keyup(function () {
-        // Retrieve the input field text and reset the count to zero
-        var filter = $(this).val(),
-          count = 0;
-
-        // Loop through the comment list
-        $(".infinite-grid .grid-item").each(function () {
-          // If the list item does not contain the text phrase fade it out
-          if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-            $(this).fadeOut();
-
-            // Show the list item if the phrase matches and increase the count by 1
-          } else {
-            $(this).show();
-            count++;
-          }
-        });
-      });
-    });
-  });
-
-  var category = categories?.categories?.edges;
-  var common = (
+  const common = (
     <Link
-      href={`/posts`}
+      href="/posts" prefetch={true}
       className={`${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.active}`}
-      onClick={seeAllProject}
-      prefetch={true}
+      onClick={() => setSeeAll(true)}
     >
       all
     </Link>
   );
 
-  var slug = category?.map((item) => {
-    if (item?.node?.slug == router?.query?.slug) {
-      var activeClass = `${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.filter__active}`;
-    } else {
-      activeClass = `project__filter ${style.project__filter}`;
-    }
+  const slug = category?.map((item) => {
+    const activeClass =
+      item?.node?.slug === router?.query?.slug
+        ? `${categoryStyle.project__filter} project__filter marginRight ${categoryStyle.filter__active}`
+        : `project__filter ${style.project__filter}`;
 
     return (
       <Link
-        href={`/posts/category/${item?.node?.slug}`}
+        href={`/posts/category/${item?.node?.slug}`} prefetch={true}
         key={item?.node?.id}
         className={activeClass}
-        prefetch={true}
       >
-        {" "}
-        {item?.node?.name}{" "}
+        {item?.node?.name}
       </Link>
     );
   });
 
   return (
     <>
-      {mounted && (
-        <>
-          <section
-            className={`${style.posts__page} mT__260 page__header posts__page `}
-          >
-            <div className="container page__header--container">
-              <div className="row">
-                <div className="col-12 col-md-4 page__header--title">
-                  <div className="back-cta" onClick={backButton}>
-                    <span className="backBtn"></span>
-                    <h1>{meta?.title}</h1>
-                  </div>
-                </div>
-                <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
-                  <div className={style.filter_menu_cont}>
-                    {common}
-                    {slug}
-                  </div>
-                  <div id="sb-search" className={style.sb_search}>
-                    <form>
-                      <input
-                        className={` sb-search-input ${style.sb_search_input}`}
-                        placeholder="Type a term to search"
-                        onChange={(e) => setsearchValue(e.target.value)}
-                        type="search"
-                        name="post-search"
-                        id="postsearch"
-                        autoComplete="off"
-                      />
-                      <span
-                        className={`${style.sb_icon_search} ${style.magic_icon_search}`}
-                        onClick={postsearch}
-                      ></span>
-                    </form>
-                  </div>
-                </div>
+      <section
+        ref={sectionRef}
+        className={`${style.posts__page} mT__260 page__header posts__page`}
+      >
+        <div className="container page__header--container">
+          <div className="row">
+            <div className="col-12 col-md-4 page__header--title">
+              <div className="back-cta" onClick={backButton}>
+                <span className="backBtn"></span>
+                <h1>{meta?.title}</h1>
               </div>
-              <span className="bottom__border"></span>
             </div>
-          </section>
-          <section>
-            <div className="container allPosts">
-              <div className="row infinite-grid">
-                {edges.map(({ node }) => (
-                  <PostItem
-                    data={node}
-                    ids={node?.id}
-                    key={"posts - " + node?.id}
+            <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage tags-menu category-names">
+              <div className={style.filter_menu_cont}>
+                {common}
+                {slug}
+              </div>
+              <div id="sb-search" className={style.sb_search}>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <input
+                    ref={inputRef}
+                    className={`sb-search-input ${style.sb_search_input}`}
+                    placeholder="Type a term to search"
+                    onChange={(e) => setFilter(e.target.value)}
+                    type="search"
+                    name="post-search"
+                    id="postsearch"
+                    autoComplete="off"
                   />
-                ))}
+                  <span
+                    className={`${style.sb_icon_search} ${style.magic_icon_search}`}
+                    onClick={postsearch}
+                  ></span>
+                </form>
               </div>
             </div>
+          </div>
+          <span className="bottom__border"></span>
+        </div>
+      </section>
 
-            {/* {(
-
-                            <>
-                                {search  && (
-                                    <>
-                                    <div className="container">
-                                        <div className="row infinite-grid">
-                                        {search.edges.map(({ node }) => (
-                                            <PostItem data={node} ids={node.id} />
-                                        ))}
-                                        </div>
-                                    </div>
-                                    </>
-                                )}
-                            </>
-                        )} */}
-          </section>
-        </>
-      )}
+      <section>
+        <div className="container allPosts">
+          <div className="row infinite-grid">
+            {filteredEdges.map(({ node }) => (
+              <PostItem data={node} ids={node?.id} key={"posts-" + node?.id} />
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

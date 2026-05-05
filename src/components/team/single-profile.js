@@ -38,7 +38,7 @@ export default function singleProfile({ data }) {
                         className={` ${Ourteam?.profileImg__main} full-lead-img`}
                         src={profileImage}
                         alt={data?.title}
-                        layout="fill"
+                        fill
                         sizes="100vw" />
                     <Image
                      unoptimized
@@ -47,7 +47,7 @@ export default function singleProfile({ data }) {
                         className={` ${Ourteam?.profileImg__hover} full-lead-img`}
                         src={profileImageOnHover}
                         alt={data?.title}
-                        layout="fill"
+                        fill
                         sizes="100vw" />
                 </div>
                 <div className="team-info">

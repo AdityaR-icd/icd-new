@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables.scss";
+@use "../../assets/scss/variables.scss" as *;
 .home__section__cards {
     margin-bottom: 220px;
     // margin-bottom: 150px;

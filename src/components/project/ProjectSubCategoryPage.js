@@ -30,6 +30,7 @@ export default function ProjectSubCategoryPage({
               {projectSubTypes.length > 0 && (
                 <Link
                   href={`/projects/category/${pageData?.slug}`}
+                  prefetch={true}
                   className="project__filter marginRight"
                 >
                   all
@@ -51,6 +52,7 @@ export default function ProjectSubCategoryPage({
                         ? `${style.project__filter} project__filter marginRight ${style.filter__active} ${style.active}`
                         : "project__filter marginRight"
                     }
+                    prefetch={true}
                   >
                     {node.name}
                   </Link>

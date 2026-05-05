@@ -3,8 +3,7 @@
   $remSize: $size / 16;
   @return #{$remSize}rem;
 }
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Rajdhani&display=swap");
-// rock salt font
+/* Inter + Rajdhani self-hosted via next/font/google in layout.js */
 
 /* Global Fonts */
 

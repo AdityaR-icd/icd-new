@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "./variables.scss" as *;
 .error_404{
     text-align: center;
     padding-top: 125px;

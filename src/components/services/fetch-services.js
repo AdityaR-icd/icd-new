@@ -11,13 +11,13 @@ export default function fetchServices({ data }) {
 
   if (projectLink) {
     var projecturl = (
-      <Link href={` /projects/${projectLink}`}>
+      <Link href={`/projects/${projectLink}`} prefetch={true}>
         <button>view project</button>
       </Link>
     );
   } else {
     projecturl = (
-      <Link href={` /contact`}>
+      <Link href={`/contact`} prefetch={true}>
         <button>enquire</button>
       </Link>
     );
@@ -50,7 +50,7 @@ export default function fetchServices({ data }) {
             unoptimized
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(500, 500)
+              shimmer(500, 500),
             )}`}
             className={style.serviceLogo__anim}
             src={cardGifImgSrc}
@@ -61,7 +61,7 @@ export default function fetchServices({ data }) {
             unoptimized
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(500, 500)
+              shimmer(500, 500),
             )}`}
             className={style.serviceLogo__static}
             src={cardImgSrc}

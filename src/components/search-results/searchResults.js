@@ -1,26 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect } from "react";
-import $ from "jquery";
+import { usePathname } from "next/navigation";
 
 import carousel from "@/components/project-categories/all/all.module.scss";
 import type from "@/components/project-categories/type/type.module.scss";
 import style from "@/styles/singlePost.module.scss";
-import { usePathname } from "next/navigation";
 
-export default function SearchResults({
-  slug,
-  filter,
-  data,
-  filters,
-  latestProject,
-}) {
+export default function SearchResults({ slug, filter, data, filters, latestProject }) {
   const pathname = usePathname();
-  console.log("pathname", pathname, pathname.startsWith("/search"));
+
   useEffect(() => {
     if (pathname.startsWith("/search")) {
-      $("body").addClass("search-page showSearch ignore-react-onclickoutside");
+      document.body.classList.add("search-page", "showSearch", "ignore-react-onclickoutside");
+      return () => {
+        document.body.classList.remove("search-page", "showSearch", "ignore-react-onclickoutside");
+      };
     }
   }, [pathname]);
 
@@ -35,83 +32,45 @@ export default function SearchResults({
 
   if (filter?.clients?.edges?.length) {
     const clientsprojects = filter?.clients?.edges[0]?.node?.projects;
-    if (clientsprojects?.edges?.length) {
-      clients = clientsprojects.edges.map(({ node }) => node);
-    }
+    if (clientsprojects?.edges?.length) clients = clientsprojects.edges.map(({ node }) => node);
   }
-
   if (filter?.industries?.edges?.length) {
     const industriesprojects = filter?.industries?.edges[0]?.node?.projects;
-    if (industriesprojects?.edges?.length) {
-      industry = industriesprojects.edges.map(({ node }) => node);
-    }
+    if (industriesprojects?.edges?.length) industry = industriesprojects.edges.map(({ node }) => node);
   }
-
   if (filter?.projectTypes?.edges?.length) {
-    const projectSubTypesprojects =
-      filter?.projectTypes?.edges[0]?.node?.projects;
-    if (projectSubTypesprojects?.edges?.length) {
-      projectTypes = projectSubTypesprojects.edges.map(({ node }) => node);
-    }
+    const projectSubTypesprojects = filter?.projectTypes?.edges[0]?.node?.projects;
+    if (projectSubTypesprojects?.edges?.length) projectTypes = projectSubTypesprojects.edges.map(({ node }) => node);
   }
-
   if (filter?.keywords?.edges?.length) {
     const keywordsprojects = filter?.keywords?.edges[0]?.node?.projects;
-    if (keywordsprojects?.edges?.length) {
-      keyword = keywordsprojects.edges.map(({ node }) => node);
-    }
+    if (keywordsprojects?.edges?.length) keyword = keywordsprojects.edges.map(({ node }) => node);
   }
-
   if (filter?.categories?.edges?.length) {
     const postsCat = filter?.categories?.edges[0]?.node?.posts;
-    if (postsCat?.edges?.length) {
-      categories = postsCat.edges.map((data) => data);
-    }
+    if (postsCat?.edges?.length) categories = postsCat.edges.map((data) => data);
   }
-
   if (filter?.tags?.edges?.length) {
     const poststags = filter?.tags?.edges[0]?.node?.posts;
-    if (poststags?.edges?.length) {
-      tags = poststags.edges.map((data) => data);
-    }
+    if (poststags?.edges?.length) tags = poststags.edges.map((data) => data);
   }
+  if (filter?.projects?.edges?.length) projects = filter?.projects.edges.map(({ node }) => node);
+  if (filter?.posts?.edges?.length) posts = filter?.posts.edges.map((data) => data);
 
-  if (filter?.projects?.edges?.length) {
-    projects = filter?.projects.edges.map(({ node }) => node);
-  }
-
-  if (filter?.posts?.edges?.length) {
-    posts = filter?.posts.edges.map((data) => data);
-  }
-
-  const Allprojects = [
-    ...new Set([
-      ...clients,
-      ...industry,
-      ...projectTypes,
-      ...keyword,
-      ...categories,
-      ...projects,
-    ]),
-  ];
+  const Allprojects = [...new Set([...clients, ...industry, ...projectTypes, ...keyword, ...categories, ...projects])];
   const allposts = [...new Set([...categories, ...tags, ...posts])];
 
   const uniqueProjects = Array.from(new Set(Allprojects.map((a) => a.id))).map(
     (id) => Allprojects.find((a) => a.id === id)
   );
-
   const uniquePosts = Array.from(new Set(allposts.map((a) => a?.node?.id))).map(
     (id) => allposts.find((a) => a?.node?.id === id)
   );
 
   const resultCount = uniqueProjects.length + uniquePosts.length;
-  const resultText =
-    resultCount > 0 ? `${resultCount} results` : "no results found";
+  const resultText = resultCount > 0 ? `${resultCount} results` : "no results found";
 
-  let latestIds = [];
-  if (latestProject?.edges) {
-    latestIds = latestProject.edges.map(({ node }) => node.id);
-  }
+  const latestIds = latestProject?.edges?.map(({ node }) => node.id) ?? [];
 
   return (
     <section className="search-results-cont">
@@ -133,57 +92,40 @@ export default function SearchResults({
             .map((node) => {
               const leadImgSrc = node?.featuredImage?.node?.sourceUrl;
               const newtag = latestIds.includes(node?.id) ? (
-                <span
-                  className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}
-                >
-                  new
-                </span>
-              ) : (
-                ""
-              );
+                <span className={`${carousel.project__tag} ${carousel.new_tag} project__tag`}>new</span>
+              ) : null;
 
               return (
-                <div
-                  className="col-md-4 project__item resultItem-cont"
-                  key={node.id}
-                >
-                  <div
-                    className={`${carousel.projectCarousel} ${type.projectCarousel}`}
-                  >
+                <div className="col-md-4 project__item resultItem-cont" key={node.id}>
+                  <div className={`${carousel.projectCarousel} ${type.projectCarousel}`}>
                     <div className={carousel.thumbnail_cont}>
-                      <Link href={`/projects/${node.slug}`}>
-                        <span
-                          className={`${carousel.projectThumbnail} fade-in`}
-                          style={{ width: "100%" }}
-                        >
+                      <Link href={`/projects/${node.slug}`} prefetch={true}>
+                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ width: "100%" }}>
                           <div className={`${carousel.full_thumb} full-thumb`}>
                             {leadImgSrc && (
-                              <img
-                                className={carousel.project_lead}
-                                src={leadImgSrc}
-                                alt="project-lead"
-                              />
+                              <div className={carousel.project_lead} style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+                                <Image
+                                  src={leadImgSrc}
+                                  alt={node?.projectComponent?.heading || "project"}
+                                  fill
+                                  sizes="(max-width: 768px) 100vw, 33vw"
+                                  style={{ objectFit: "cover" }}
+                                />
+                              </div>
                             )}
                           </div>
                           <span className="thumbnail-gif"></span>
                         </span>
                         {node?.projectComponent?.awardsReceived !== null && (
-                          <span
-                            className={`${carousel.project__tag} project__tag`}
-                          >
-                            winner
-                          </span>
+                          <span className={`${carousel.project__tag} project__tag`}>winner</span>
                         )}
                         {newtag}
                       </Link>
                     </div>
-                    <Link href={`/projects/${node.slug}`}>
+                    <Link href={`/projects/${node.slug}`} prefetch={true}>
                       <span className={carousel.projectTitle}>
                         {node.projectComponent?.heading}
-                        <span className={carousel.grey__color}>
-                          {" "}
-                          / {node?.clients?.edges[0]?.node?.name}
-                        </span>
+                        <span className={carousel.grey__color}> / {node?.clients?.edges[0]?.node?.name}</span>
                       </span>
                     </Link>
                   </div>
@@ -197,37 +139,31 @@ export default function SearchResults({
               const categories = data?.node?.categories.edges[0]?.node?.name;
               const featuredImage = data?.node?.featuredImage?.node?.sourceUrl;
 
-              const imageData = featuredImage ? (
-                <span className={`${carousel.full_thumb} full-thumb`}>
-                  <img src={featuredImage} alt="post-lead" />
-                </span>
-              ) : (
-                <span className={`${carousel.full_thumb} full-thumb`}></span>
-              );
-
               return (
-                <div
-                  className="col-md-4 project__item resultItem-cont"
-                  key={data.node.id}
-                >
-                  <div
-                    className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}
-                  >
+                <div className="col-md-4 project__item resultItem-cont" key={data.node.id}>
+                  <div className={`${carousel.projectCarousel} ${type.projectCarousel} ${style.projectCarousel}`}>
                     <div className={carousel.thumbnail_cont}>
-                      <Link href={`/posts/${data.node.slug}`}>
-                        <span
-                          className={`${carousel.projectThumbnail} fade-in`}
-                          style={{ width: "100%" }}
-                        >
-                          {imageData}
+                      <Link href={`/posts/${data.node.slug}`} prefetch={true}>
+                        <span className={`${carousel.projectThumbnail} fade-in`} style={{ width: "100%" }}>
+                          {featuredImage ? (
+                            <span className={`${carousel.full_thumb} full-thumb`} style={{ position: "relative", display: "block", aspectRatio: "16/9" }}>
+                              <Image
+                                src={featuredImage}
+                                alt={data.node.title || "post"}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 33vw"
+                                style={{ objectFit: "cover" }}
+                              />
+                            </span>
+                          ) : (
+                            <span className={`${carousel.full_thumb} full-thumb`}></span>
+                          )}
                         </span>
                         <span className="postCategory">{categories}</span>
                       </Link>
                     </div>
-                    <Link href={`/posts/${data.node.slug}`}>
-                      <span className={carousel.projectTitle}>
-                        {data.node.title}
-                      </span>
+                    <Link href={`/posts/${data.node.slug}`} prefetch={true}>
+                      <span className={carousel.projectTitle}>{data.node.title}</span>
                     </Link>
                   </div>
                 </div>

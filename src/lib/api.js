@@ -7,34 +7,46 @@ const API_URL = "https://digital.icdindia.com/graphql";
 
 async function fetchData(query, variables) {
   queryCount++;
-  // if (!isProd) {
-  //   console.log(`[Contentful] ❌ MISS (#${queryCount})`, {
-  //     head: query.trim().slice(0, 40),
-  //     variables,
-  //   });
-  // }
+
   const headers = {
     Accept: "*/*",
     "Content-Type": "application/json",
     "User-Agent": "*",
-    Authorization:
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGlnaXRhbC5pY2RpbmRpYS5jb20iLCJpYXQiOjE2ODI5NDYwNTcsIm5iZiI6MTY4Mjk0NjA1NywiZXhwIjozMzIxODk0NjA1NywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.6wxGqOWTXA6S39lYkOBPdt53iSAz0_XOh36sbInE7X8",
+    Authorization: `Bearer ${process.env.WORDPRESS_JWT_TOKEN || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGlnaXRhbC5pY2RpbmRpYS5jb20iLCJpYXQiOjE2ODI5NDYwNTcsIm5iZiI6MTY4Mjk0NjA1NywiZXhwIjozMzIxODk0NjA1NywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.6wxGqOWTXA6S39lYkOBPdt53iSAz0_XOh36sbInE7X8"}`,
   };
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ query, variables }),
+    });
+  } catch (err) {
+    console.error("[API] Fetch failed", variables, err?.message);
+    return null;
+  }
 
-  const json = await res.json();
+  const contentType = res.headers.get("content-type") ?? "";
+  if (!res.ok || !contentType.includes("application/json")) {
+    console.error(
+      `[API] Non-JSON response (${res.status}) for query`,
+      variables,
+    );
+    return null;
+  }
+
+  let json;
+  try {
+    json = await res.json();
+  } catch (err) {
+    console.error("[API] JSON parse failed", variables, err?.message);
+    return null;
+  }
+
   if (json.errors) {
-    console.log(json.errors);
-    console.log("error details", query, variables);
-    throw new Error("Failed to fetch API");
+    console.error("[API] GraphQL errors", json.errors);
+    return null;
   }
   return json.data;
 }
@@ -47,7 +59,7 @@ const stableStringify = (v) =>
 async function fetchAPI(
   query,
   { variables = {}, revalidate = 60 * 60 * 24 * 7, tags = [] } = {}, // default 7d
-  { key = "unnamed" } = {}
+  { key = "unnamed" } = {},
 ) {
   let executed = false;
 
@@ -63,7 +75,7 @@ async function fetchAPI(
       return fetchData(q, v);
     },
     ["cf", key, stableStringify(variables)], // cache key for this call signature
-    { revalidate, tags }
+    { revalidate, tags },
   );
 
   const result = await cachedCall(query, variables);
@@ -116,7 +128,7 @@ async function fetchAPI(
 async function fetchCommentnAPI(
   query,
   { variables = {}, revalidate = 60 * 60 * 24 * 7, tags = [] } = {}, // default 7d
-  { key = "unnamed" } = {}
+  { key = "unnamed" } = {},
 ) {
   let executed = false;
 
@@ -128,25 +140,40 @@ async function fetchCommentnAPI(
         "Content-Type": "application/json",
         "User-Agent": "*",
       };
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          query: q,
-          variables: v,
-        }),
-      });
+      let res;
+      try {
+        res = await fetch(API_URL, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ query: q, variables: v }),
+        });
+      } catch (err) {
+        console.error("[API] Fetch failed", v, err?.message);
+        return null;
+      }
 
-      const json = await res.json();
+      const contentType = res.headers.get("content-type") ?? "";
+      if (!res.ok || !contentType.includes("application/json")) {
+        console.error(`[API] Non-JSON response (${res.status}) for query`, v);
+        return null;
+      }
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (err) {
+        console.error("[API] JSON parse failed", v, err?.message);
+        return null;
+      }
+
       if (json.errors) {
-        console.log(json.errors);
-        console.log("error details", q, v);
-        throw new Error("Failed to fetch API");
+        console.error("[API] GraphQL errors", json.errors);
+        return null;
       }
       return json.data;
     },
     ["cf", key, stableStringify(variables)],
-    { revalidate, tags }
+    { revalidate, tags },
   );
 
   const result = await cachedCall(query, variables);
@@ -170,8 +197,6 @@ export async function getPreviewPost(id, idType = "DATABASE_ID") {
     }`,
     { variables: { id, idType }, tags: ["posts", "preview"] },
     { key: "getPreviewPost" },
-    { tags: ["posts", "preview"] },
-    { key: "getPreviewPost" }
   );
   return data?.posts;
 }
@@ -205,8 +230,6 @@ export async function getPostPage() {
     `,
     { tags: ["pages", "posts"] },
     { key: "getPostPage" },
-    { tags: ["pages", "posts"] },
-    { key: "getPostPage" }
   );
   return data;
 }
@@ -228,8 +251,6 @@ export async function getPostCategories() {
     `,
     { tags: ["categories"] },
     { key: "getPostCategories" },
-    { tags: ["categories"] },
-    { key: "getPostCategories" }
   );
   return data;
 }
@@ -291,13 +312,10 @@ export async function getAllPostsForHome(preview) {
     }
   `,
     {
-      variables: {
-        onlyEnabled: !preview,
-        preview,
-      },
+      variables: { onlyEnabled: !preview, preview },
+      tags: ["posts", "home"],
     },
-    { variables: { onlyEnabled: !preview, preview }, tags: ["posts", "home"] },
-    { key: "getAllPostsForHome" }
+    { key: "getAllPostsForHome" },
   );
 }
 
@@ -318,7 +336,7 @@ export async function comment(value, value2, value3, value4) {
         }
       }
     }
-    `
+    `,
   );
 
   return data;
@@ -528,25 +546,29 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         id: isDraft ? postPreview.id : slug,
         idType: isDraft ? "DATABASE_ID" : "SLUG",
       },
+      tags: ["posts", "postDetail"],
     },
-    { tags: ["posts", "postDetail"] },
-    { key: "getPostAndMorePosts" }
+    { key: "getPostAndMorePosts" },
   );
 
-  // Draft posts may not have an slug
-  if (isDraft) data.post.slug = postPreview.id;
-  // Apply a revision (changes in a published post)
-  if (isRevision && data.post.revisions) {
-    const revision = data.post.revisions.edges[0]?.node;
+  if (!data) return null;
 
+  // Draft posts may not have an slug
+  if (isDraft && data.post) data.post.slug = postPreview.id;
+  // Apply a revision (changes in a published post)
+  if (isRevision && data.post?.revisions) {
+    const revision = data.post.revisions.edges[0]?.node;
     if (revision) Object.assign(data.post, revision);
     delete data.post.revisions;
   }
 
   // Filter out the main post
-  data.posts.edges = data.posts.edges.filter(({ node }) => node.slug !== slug);
-  // If there are still 3 posts, remove the last one
-  if (data.posts.edges.length > 2) data.posts.edges.pop();
+  if (data.posts?.edges) {
+    data.posts.edges = data.posts.edges.filter(
+      ({ node }) => node.slug !== slug,
+    );
+    if (data.posts.edges.length > 2) data.posts.edges.pop();
+  }
 
   return data;
 }
@@ -587,7 +609,7 @@ export async function getAllProjectsForHome(preview) {
       revalidate: 86400,
       tags: ["projects", "home"],
     },
-    { key: "getAllProjectsForHome" }
+    { key: "getAllProjectsForHome" },
   );
   return data?.projects;
 }
@@ -607,7 +629,7 @@ export async function getAllProjectsWithSlug() {
     }
   `,
     { tags: ["projects", "slugs"] },
-    { key: "getAllProjectsWithSlug" }
+    { key: "getAllProjectsWithSlug" },
   );
   return data?.projects;
 }
@@ -626,7 +648,7 @@ export async function getAllProjects() {
     }
   `,
     { tags: ["projects"] },
-    { key: "getAllProjects" }
+    { key: "getAllProjects" },
   );
   return data?.projects;
 }
@@ -645,7 +667,7 @@ export async function getAllPostsSlug() {
     }
   `,
     { tags: ["posts", "slugs"] },
-    { key: "getAllPostsSlug" }
+    { key: "getAllPostsSlug" },
   );
   return data?.posts;
 }
@@ -664,7 +686,7 @@ export async function getLatestProject() {
     }
   `,
     { tags: ["projects", "latest"] },
-    { key: "getLatestProject" }
+    { key: "getLatestProject" },
   );
   return data?.projects;
 }
@@ -725,7 +747,7 @@ export async function getAllProjectsNotIn(categorySlug) {
         }
       }
     }
-  `
+  `,
   );
   return data?.projects;
 }
@@ -784,7 +806,7 @@ export async function getAllOtherProjects(id) {
      
   `,
     { tags: ["projectTypes", "projects"] },
-    { key: "getAllOtherProjects" }
+    { key: "getAllOtherProjects" },
   );
   return data?.projectTypes;
 }
@@ -940,7 +962,7 @@ export async function getProject(slug) {
       },
     },
     { tags: ["projects", "projectDetail"] },
-    { key: "getProject" }
+    { key: "getProject" },
   );
   return data;
 }
@@ -1016,7 +1038,7 @@ export async function getHighlightedProject() {
   }    
   `,
     { tags: ["projects", "highlighted"] },
-    { key: "getHighlightedProject" }
+    { key: "getHighlightedProject" },
   );
   return data?.projects;
 }
@@ -1031,7 +1053,7 @@ export async function getLogo() {
       }
       `,
     { tags: ["site", "logo"] },
-    { key: "getLogo" }
+    { key: "getLogo" },
   );
   return data.siteLogo;
 }
@@ -1048,7 +1070,7 @@ export async function getMenus() {
       }
       `,
     { tags: ["site", "menus"] },
-    { key: "getMenus" }
+    { key: "getMenus" },
   );
   return data?.menuItems;
 }
@@ -1078,7 +1100,7 @@ export async function getClients() {
     }
     `,
     { tags: ["clients"] },
-    { key: "getClients" }
+    { key: "getClients" },
   );
   return data?.clients;
 }
@@ -1129,7 +1151,7 @@ export async function getIndustries() {
     }
     `,
     { tags: ["industries"] },
-    { key: "getIndustries" }
+    { key: "getIndustries" },
   );
   return data?.industries;
 }
@@ -1179,7 +1201,7 @@ export async function getProjectTypes() {
 }   
     `,
     { tags: ["projectTypes"] },
-    { key: "getProjectTypes" }
+    { key: "getProjectTypes" },
   );
   return data?.projectTypes;
 }
@@ -1193,7 +1215,7 @@ export async function updateTokken() {
         refreshToken
       }
     }
-    `
+    `,
   );
 
   return data;
@@ -1212,7 +1234,7 @@ export async function updateProjectLikes(id, likes) {
         }
       }
     }
-    `
+    `,
   );
 
   return data;
@@ -1230,7 +1252,7 @@ export async function updatePostLikes(id, likes, authToken) {
           }
         }
       }
-    }`
+    }`,
   );
 
   return data;
@@ -1248,7 +1270,7 @@ export async function updatekabirLikes(id, likes, authToken) {
           }
         }
       }
-    }`
+    }`,
   );
 
   return data;
@@ -1285,7 +1307,7 @@ export async function getPages() {
       metaRobotsNoindex
       metaRobotsNofollow
     }  
-    `
+    `,
   );
   return data;
 }
@@ -1412,7 +1434,7 @@ export async function getHome() {
     
     
     
-    `
+    `,
   );
   return data;
 }
@@ -1445,7 +1467,7 @@ export async function getProjectPage() {
       metaRobotsNoindex
       metaRobotsNofollow
     }    
-    `
+    `,
   );
   return data;
 }
@@ -1477,7 +1499,7 @@ export async function getClientsPage() {
       metaRobotsNoindex
       metaRobotsNofollow
     } 
-    `
+    `,
   );
   return data;
 }
@@ -1516,7 +1538,7 @@ export async function getService() {
         }
       }
     }
-    `
+    `,
   );
   return data?.servicesCategories;
 }
@@ -1556,7 +1578,7 @@ export async function getOtherService() {
       }
     }
     
-    `
+    `,
   );
   return data?.servicesCategories;
 }
@@ -1571,7 +1593,7 @@ export async function Contact(
   designation,
   company,
   message,
-  companyWebsite
+  companyWebsite,
 ) {
   const data = await fetchAPI(
     `
@@ -1583,7 +1605,7 @@ export async function Contact(
         success
       }
     }
-    `
+    `,
   );
 
   return data;
@@ -1617,7 +1639,7 @@ export async function getCareerPage() {
       metaRobotsNoindex
       metaRobotsNofollow
     }  
-    `
+    `,
   );
   return data;
 }
@@ -1650,7 +1672,7 @@ export async function getOurteamPage() {
       metaRobotsNoindex
       metaRobotsNofollow
     }  
-    `
+    `,
   );
   return data;
 }
@@ -1677,7 +1699,7 @@ export async function getJobs() {
         }
       }
     }
-    `
+    `,
   );
   return data?.jobs;
 }
@@ -1728,7 +1750,7 @@ export async function getTeam() {
       }
     }
     
-    `
+    `,
   );
   return data?.teams;
 }
@@ -1742,7 +1764,7 @@ export async function careerContact(
   number,
   city,
   email,
-  Website
+  Website,
 ) {
   const data = await fetchAPI(
     `
@@ -1754,7 +1776,7 @@ export async function careerContact(
         success
       }
     }
-    `
+    `,
   );
 
   return data;
@@ -1788,7 +1810,7 @@ export async function getYellowEnvelope() {
       metaRobotsNoindex
       metaRobotsNofollow
     }    
-    `
+    `,
   );
   return data;
 }
@@ -1805,7 +1827,7 @@ export async function getAllNewsletterWithSlug() {
         }
       }
     }
-  `
+  `,
   );
   return data?.newsletters;
 }
@@ -1873,7 +1895,7 @@ export async function getArticle(slug) {
         id: slug,
         idType: "URI",
       },
-    }
+    },
   );
   return data;
 }
@@ -1900,7 +1922,7 @@ export async function getAllArticleForHome(preview) {
         onlyEnabled: !preview,
         preview,
       },
-    }
+    },
   );
   return data?.newsletters;
 }
@@ -1917,7 +1939,7 @@ export async function getAllPostsByCategory() {
         }
       }
     }
-  `
+  `,
   );
   return data?.categories;
 }
@@ -1934,7 +1956,7 @@ export async function getAllTags() {
         }
       }
     }
-  `
+  `,
   );
   return data?.tags;
 }
@@ -1987,7 +2009,7 @@ export async function getAllPostsByCategorySlug(slug) {
       }
     }
     
-  `
+  `,
   );
   return data?.categories;
 }
@@ -2031,7 +2053,7 @@ export async function getAllPosts() {
         }
       }
     }
-  `
+  `,
   );
   return data?.posts;
 }
@@ -2055,7 +2077,7 @@ export async function getFooter() {
     }
     `,
     { tags: ["site", "footer"] },
-    { key: "getFooter" }
+    { key: "getFooter" },
   );
   return data?.generalSettingSettings;
 }
@@ -2074,7 +2096,7 @@ export async function getAllProjectsTypes() {
     }
   `,
     { tags: ["projectTypes"] },
-    { key: "getAllProjectsTypes" }
+    { key: "getAllProjectsTypes" },
   );
   return data?.projectTypes;
 }
@@ -2100,7 +2122,7 @@ export async function getAllProjectsSubTypes() {
     }
   `,
     { tags: ["projectTypes", "subtypes"] },
-    { key: "getAllProjectsSubTypes" }
+    { key: "getAllProjectsSubTypes" },
   );
   return data?.projectTypes;
 }
@@ -2209,7 +2231,7 @@ export async function getProjectByTypes(slug) {
     }    
   `,
     { tags: ["projectTypes", "projects"] },
-    { key: "getProjectByTypes" }
+    { key: "getProjectByTypes" },
   );
   return data;
 }
@@ -2273,7 +2295,7 @@ export async function getProjectSubTypes(slug, sub_slug) {
     
   `,
     { tags: ["projectTypes", "projects"] },
-    { key: "getProjectSubTypes" }
+    { key: "getProjectSubTypes" },
   );
   return data;
 }
@@ -2309,7 +2331,7 @@ export async function getContactPage() {
       metaRobotsNoindex
       metaRobotsNofollow
     }    
-    `
+    `,
   );
   return data;
 }
@@ -2376,7 +2398,7 @@ export async function getProjects() {
     
     `,
     { tags: ["projects"] },
-    { key: "getProjects" }
+    { key: "getProjects" },
   );
   return data?.projects;
 }
@@ -2404,7 +2426,7 @@ export async function getPosts() {
     
     `,
     { tags: ["posts"] },
-    { key: "getPosts" }
+    { key: "getPosts" },
   );
   return data?.posts;
 }
@@ -2451,7 +2473,7 @@ export async function getSearchPosts(search) {
     
     `,
     { tags: ["posts", "search"] },
-    { key: "getSearchPosts" }
+    { key: "getSearchPosts" },
   );
   return data?.posts;
 }
@@ -2506,7 +2528,7 @@ export async function getSearchPostsByCategory(slug, search) {
     
     `,
     { tags: ["posts", "search", "category"] },
-    { key: "getSearchPostsByCategory" }
+    { key: "getSearchPostsByCategory" },
   );
   return data?.categories;
 }
@@ -2566,7 +2588,7 @@ export async function getFilters() {
     }
     `,
     { tags: ["filters"] },
-    { key: "getFilters" }
+    { key: "getFilters" },
   );
   return data;
 }
@@ -2808,7 +2830,7 @@ export async function getFiltersBySlug(slug) {
 }
 `,
     { tags: ["filters", "search"] },
-    { key: "getFiltersBySlug" }
+    { key: "getFiltersBySlug" },
   );
   return data;
 }
@@ -2845,7 +2867,7 @@ export async function getkabirPostsForHome(preview) {
       },
       tags: ["kabir", "home"],
     },
-    { key: "getkabirPostsForHome" }
+    { key: "getkabirPostsForHome" },
   );
   return data?.kabirs;
 }
@@ -2880,7 +2902,7 @@ export async function getkabir() {
     }    
     `,
     { tags: ["pages", "kabir"] },
-    { key: "getkabir" }
+    { key: "getkabir" },
   );
   return data;
 }
@@ -2899,7 +2921,7 @@ export async function getAllkabirWithSlug() {
       }
     `,
     { tags: ["kabir", "slugs"] },
-    { key: "getAllkabirWithSlug" }
+    { key: "getAllkabirWithSlug" },
   );
   return data?.kabirs;
 }
@@ -2957,7 +2979,7 @@ export async function kabirArticle(slug) {
       },
       tags: ["kabir", "article"],
     },
-    { key: "kabirArticle" }
+    { key: "kabirArticle" },
   );
   return data;
 }
@@ -2992,7 +3014,7 @@ export async function getPolicyPage() {
         }
       `,
     { tags: ["pages", "policy"] },
-    { key: "getPolicyPage" }
+    { key: "getPolicyPage" },
   );
   return data;
 }

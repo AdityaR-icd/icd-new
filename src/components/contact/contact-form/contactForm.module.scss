@@ -1,4 +1,4 @@
-@import "../../../assets/scss/variables.scss";
+@use "../../../assets/scss/variables.scss" as *;
 .jobForm__container{
     .font__red{
         select{
