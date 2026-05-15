@@ -21,7 +21,7 @@ To run the Next Application in Production mode run the command\
 
 1. To create new pages in your application go to create pages inside /pages folder
 
-2. In /lib/api.js change api url and bearer token with your api and token to get access
+2. In /lib/api.js change api url and bearer token with your api and token to get access 
 
 3. open wordpress admin with 
     username : admin
