@@ -23,7 +23,7 @@ export default async function Page() {
     getProjectTypes(),
   ]);
 
-  const meta_data = meta.pages.edges[0].node;
+  const meta_data = meta?.pages?.edges?.[0]?.node;
 
   return (
     <Layout

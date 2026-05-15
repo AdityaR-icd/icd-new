@@ -6,12 +6,9 @@ import All from "../project-categories/all/all";
 import project from "./projects.module.scss";
 import category from "./category.module.scss";
 import Link from "next/link";
-export default function Index({
-  AllProjects: { edges },
-  meta,
-  projectsTypes: { nodes },
-  latest,
-}) {
+export default function Index({ AllProjects, meta, projectsTypes, latest }) {
+  const edges = AllProjects?.edges ?? [];
+  const nodes = projectsTypes?.nodes ?? [];
   const router = useRouter();
   const backButton = () => {
     window.history.back();
@@ -42,15 +39,15 @@ export default function Index({
       <Head>
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={meta.seo.title} />
-        <meta name="twitter:description" content={meta.seo.metaDesc} />
+        <meta name="twitter:title" content={meta?.seo?.title} />
+        <meta name="twitter:description" content={meta?.seo?.metaDesc} />
         <meta
           name="twitter:url"
           content={`https://www.icdindia.com${router.route}`}
         />
         <meta
           name="twitter:image"
-          content={meta.featuredImage?.node.sourceUrl}
+          content={meta?.featuredImage?.node?.sourceUrl}
         />
         {/* end of Twitter Cards */}
       </Head>
@@ -61,7 +58,7 @@ export default function Index({
               <div className="col-12 col-md-4 page__header--title">
                 <div className="back-cta" onClick={backButton}>
                   <span className="backBtn"></span>
-                  <h1>{meta.title}</h1>
+                  <h1>{meta?.title}</h1>
                 </div>
               </div>
               <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">

@@ -27,11 +27,11 @@ export default function allproject({ edges, latestProject }) {
     projects?.edges.map(({ node }) => {
       id.push(node?.id);
     });
-
-    edges.map(({ node }) => {
-      project_id.push(node?.id);
-    });
   }
+
+  (edges ?? []).map(({ node }) => {
+    project_id.push(node?.id);
+  });
 
   for (var i = 0; i < id.length; i++) {
     if (id[i] == project_id[i]) {
@@ -66,7 +66,7 @@ export default function allproject({ edges, latestProject }) {
         <div className="container">
           <div className="project__scroll">
             <div className="row project__row">
-              {edges.map(
+              {(edges ?? []).map(
                 ({ node }, i) => (
                   // console.log(id[i] , node?.id),
 
