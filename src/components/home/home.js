@@ -2,10 +2,11 @@ import Crousel from "../carousel/carousel-home";
 import ProjectLead from "../project-lead/project-lead";
 import Cards from "../cards/cards";
 
-export default function Index({ home: { pages }, latest }) {
-  const data = pages?.edges[0]?.node;
-  const featuredata = pages?.edges;
-  const carouselProjects = pages?.edges[0]?.node?.projects?.carouselProjects;
+export default function Index({ home, latest }) {
+  const pages = home?.pages;
+  const data = pages?.edges?.[0]?.node;
+  const featuredata = pages?.edges ?? [];
+  const carouselProjects = pages?.edges?.[0]?.node?.projects?.carouselProjects;
 
   return (
     <>

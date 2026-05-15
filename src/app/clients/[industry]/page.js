@@ -1,4 +1,4 @@
-import { getIndustries, getClientsPage, getFilters } from "@/lib/api";
+import { getIndustries, getClientsPage } from "@/lib/api";
 import Layout from "@/components/clients/industry/industry";
 
 export const revalidate = 3600;

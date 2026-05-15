@@ -11,7 +11,8 @@ export async function generateMetadata() {
 }
 
 export default async function Clients() {
-  const [meta, { edges }] = await Promise.all([getClientsPage(), getClients()]);
-  const meta_data = meta?.pages?.edges[0]?.node;
+  const [meta, clients] = await Promise.all([getClientsPage(), getClients()]);
+  const meta_data = meta?.pages?.edges?.[0]?.node;
+  const edges = clients?.edges ?? [];
   return <ClientsComponent meta={meta_data} edges={edges} />;
 }

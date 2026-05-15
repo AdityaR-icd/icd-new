@@ -35,5 +35,5 @@ export default async function PostCategory(props) {
 
 export async function generateStaticParams() {
   const allPosts = await getAllPostsByCategory();
-  return allPosts.edges.map(({ node }) => ({ slug: node.slug }));
+  return (allPosts?.edges ?? []).map(({ node }) => ({ slug: node?.slug })).filter(Boolean);
 }

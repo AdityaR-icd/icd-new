@@ -1,8 +1,6 @@
 import Header from "./header";
-import { getFilters } from "../../lib/api";
 
-export default async function HeaderWrapper() {
-  const filters = await getFilters();
+export default async function HeaderWrapper({ filters }) {
   return (
     <>
       <Header filters={filters} />

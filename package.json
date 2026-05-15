@@ -8,8 +8,7 @@
     "start": "NODE_OPTIONS=--openssl-legacy-provider next start",
     "lint": "next lint",
     "export": "NODE_OPTIONS=--openssl-legacy-provider next export",
-    "analyze": "NODE_OPTIONS=--openssl-legacy-provider ANALYZE=true next build",
-    "postinstall": "patch-package"
+    "analyze": "NODE_OPTIONS=--openssl-legacy-provider ANALYZE=true next build"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -52,8 +51,6 @@
     "eslint": "7.32.0",
     "eslint-config-next": "15.5.2",
     "next-pwa": "^5.4.1",
-    "patch-package": "^8.0.0",
-    "postinstall-postinstall": "^2.1.0",
     "webpack-bundle-analyzer": "^4.8.0"
   },
   "overrides": {

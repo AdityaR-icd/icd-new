@@ -85,7 +85,7 @@ export default function Carousel({ edges }) {
     },
   };
 
-  const otherProjectsSlider = edges.map((node, j, { length }) => {
+  const otherProjectsSlider = (edges ?? []).map((node, j, { length }) => {
     const projectVideo =
       node?.projectComponent?.carouselVideoDesktop?.mediaItemUrl;
     const projectVideoMobile =
@@ -193,7 +193,7 @@ export default function Carousel({ edges }) {
                     <div className="wrapper">
                       <h1 className="project-title">let&apos;s talk</h1>
                       <span className="slide-count d-none d-md-block">
-                        {currentSlide}/{edges.length + 1}
+                        {currentSlide}/{(edges?.length ?? 0) + 1}
                       </span>
                     </div>
                   </div>
@@ -217,7 +217,7 @@ export default function Carousel({ edges }) {
       </div>
 
       <span className="slide-count mobile-only d-block d-lg-none">
-        {currentSlide}/{edges.length + 1}
+        {currentSlide}/{(edges?.length ?? 0) + 1}
       </span>
     </section>
   );

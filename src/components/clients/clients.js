@@ -61,7 +61,7 @@ export default function Clients({ meta, edges }) {
             <div className="col-12 col-md-4 page__header--title">
               <div className="back-cta" onClick={backButton}>
                 <span className="backBtn"></span>
-                <h1>{meta.title}</h1>
+                <h1>{meta?.title}</h1>
               </div>
             </div>
             <div className="col-12 col-md-8 page__header--nav bottom__align nav__subPage">

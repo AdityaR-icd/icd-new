@@ -12,7 +12,6 @@ async function fetchData(query, variables) {
     Accept: "*/*",
     "Content-Type": "application/json",
     "User-Agent": "*",
-    Authorization: `Bearer ${process.env.WORDPRESS_JWT_TOKEN || "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGlnaXRhbC5pY2RpbmRpYS5jb20iLCJpYXQiOjE2ODI5NDYwNTcsIm5iZiI6MTY4Mjk0NjA1NywiZXhwIjozMzIxODk0NjA1NywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.6wxGqOWTXA6S39lYkOBPdt53iSAz0_XOh36sbInE7X8"}`,
   };
 
   let res;
@@ -317,29 +316,6 @@ export async function getAllPostsForHome(preview) {
     },
     { key: "getAllPostsForHome" },
   );
-}
-
-export async function comment(value, value2, value3, value4) {
-  const data = await fetchCommentnAPI(
-    `
-    mutation CREATE_COMMENT {
-      createComment(input: {commentOn: ${value2}, content: "${value}", author: "${value3}" , authorEmail: "${value4}"}) {
-        success
-        comment {
-          id
-          content
-          author {
-            node {
-              name
-            }
-          }
-        }
-      }
-    }
-    `,
-  );
-
-  return data;
 }
 
 export async function getPostAndMorePosts(slug, preview, previewData) {
@@ -1055,7 +1031,7 @@ export async function getLogo() {
     { tags: ["site", "logo"] },
     { key: "getLogo" },
   );
-  return data.siteLogo;
+  return data?.siteLogo ?? null;
 }
 
 export async function getMenus() {
@@ -1206,75 +1182,60 @@ export async function getProjectTypes() {
   return data?.projectTypes;
 }
 
-export async function updateTokken() {
-  const data = await fetchAPI(
-    `
-    mutation MyMutation {
-      login(input: {password: "icd123", username: "admin"}) {
-        authToken
-        refreshToken
-      }
-    }
-    `,
-  );
+// export async function updateProjectLikes(id, likes) {
+//   const data = await fetchAPI(
+//     `
+//     mutation updateLikes {
+//       updateProject(input: {id: "${id}", likes: ${likes}}) {
+//         project {
+//           title
+//           likes {
+//             likes
+//           }
+//         }
+//       }
+//     }
+//     `,
+//   );
 
-  return data;
-}
+//   return data;
+// }
 
-export async function updateProjectLikes(id, likes) {
-  const data = await fetchAPI(
-    `
-    mutation updateLikes {
-      updateProject(input: {id: "${id}", likes: ${likes}}) {
-        project {
-          title
-          likes {
-            likes
-          }
-        }
-      }
-    }
-    `,
-  );
+// export async function updatePostLikes(id, likes, authToken) {
+//   const data = await fetchAPI(
+//     `
+//     mutation updateLikes {
+//       updatePost(input: {id: "${id}", likes: ${likes} }) {
+//         post {
+//           title
+//           likes {
+//             likes
+//           }
+//         }
+//       }
+//     }`,
+//   );
 
-  return data;
-}
+//   return data;
+// }
 
-export async function updatePostLikes(id, likes, authToken) {
-  const data = await fetchAPI(
-    `
-    mutation updateLikes {
-      updatePost(input: {id: "${id}", likes: ${likes} }) {
-        post {
-          title
-          likes {
-            likes
-          }
-        }
-      }
-    }`,
-  );
+// export async function updatekabirLikes(id, likes, authToken) {
+//   const data = await fetchAPI(
+//     `
+//     mutation updateLikes {
+//       updateKabir(input: {id: "${id}", likes: ${likes} }) {
+//         kabir {
+//           title
+//           likes {
+//             likes
+//           }
+//         }
+//       }
+//     }`,
+//   );
 
-  return data;
-}
-
-export async function updatekabirLikes(id, likes, authToken) {
-  const data = await fetchAPI(
-    `
-    mutation updateLikes {
-      updateKabir(input: {id: "${id}", likes: ${likes} }) {
-        kabir {
-          title
-          likes {
-            likes
-          }
-        }
-      }
-    }`,
-  );
-
-  return data;
-}
+//   return data;
+// }
 
 export async function getPages() {
   const data = await fetchAPI(
@@ -1583,33 +1544,33 @@ export async function getOtherService() {
   return data?.servicesCategories;
 }
 
-export async function Contact(
-  firstName,
-  lastName,
-  enquiryAbout,
-  email,
-  number,
-  linkedin,
-  designation,
-  company,
-  message,
-  companyWebsite,
-) {
-  const data = await fetchAPI(
-    `
-    mutation CREATE_CONTACT {
-      contactForm(
-        input: {firstName: "${firstName}", lastName: "${lastName}", enquiryAbout: "${enquiryAbout}", email: "${email}", number: "${number}", linkedin: "${linkedin}", designation: "${designation}", company: "${company}", message: "${message}", companyWebsite: "${companyWebsite}"}
-      ) {
-        data
-        success
-      }
-    }
-    `,
-  );
+// export async function Contact(
+//   firstName,
+//   lastName,
+//   enquiryAbout,
+//   email,
+//   number,
+//   linkedin,
+//   designation,
+//   company,
+//   message,
+//   companyWebsite,
+// ) {
+//   const data = await fetchAPI(
+//     `
+//     mutation CREATE_CONTACT {
+//       contactForm(
+//         input: {firstName: "${firstName}", lastName: "${lastName}", enquiryAbout: "${enquiryAbout}", email: "${email}", number: "${number}", linkedin: "${linkedin}", designation: "${designation}", company: "${company}", message: "${message}", companyWebsite: "${companyWebsite}"}
+//       ) {
+//         data
+//         success
+//       }
+//     }
+//     `,
+//   );
 
-  return data;
-}
+//   return data;
+// }
 
 export async function getCareerPage() {
   const data = await fetchAPI(

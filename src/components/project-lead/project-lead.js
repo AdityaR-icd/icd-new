@@ -14,7 +14,7 @@ export default function projectLead({ edges, latestProject }) {
   let j = 0;
   let text = "";
   var common;
-  const projects = edges[0].node.projects.highlightedProjects;
+  const projects = edges?.[0]?.node?.projects?.highlightedProjects ?? [];
   const project = latestProject;
 
   var id = [];
@@ -62,7 +62,7 @@ export default function projectLead({ edges, latestProject }) {
             highlightedImage?.highlightedThumbnail?.sourceUrl),
           (project_thumbnail_mobile =
             highlightedImage?.highlightedThumbnailMobile?.sourceUrl),
-          (client = clients.edges[0].node.name),
+          (client = clients?.edges?.[0]?.node?.name ?? ""),
           (
             // console.log(projects[j]?.id , '.............' ,common),
             // console.log(project_video),

@@ -20,28 +20,28 @@ const Header = (props) => {
   var tags = [];
   var keywords = [];
 
-  filters?.clients?.edges.map((item) => {
-    clients.push(item.node.slug);
+  filters?.clients?.edges?.map((item) => {
+    clients.push(item?.node?.slug ?? "");
   });
 
-  filters?.industries.edges.map((item) => {
-    industries.push(item.node.slug);
+  filters?.industries?.edges?.map((item) => {
+    industries.push(item?.node?.slug ?? "");
   });
 
-  filters?.projectTypes.edges.map((item) => {
-    projectTypes.push(item.node.slug);
+  filters?.projectTypes?.edges?.map((item) => {
+    projectTypes.push(item?.node?.slug ?? "");
   });
 
-  filters?.keywords.edges.map((item) => {
-    keywords.push(item.node.slug);
+  filters?.keywords?.edges?.map((item) => {
+    keywords.push(item?.node?.slug ?? "");
   });
 
-  filters?.categories.edges.map((item) => {
-    categories.push(item.node.slug);
+  filters?.categories?.edges?.map((item) => {
+    categories.push(item?.node?.slug ?? "");
   });
 
-  filters?.tags.edges.map((item) => {
-    tags.push(item.node.slug);
+  filters?.tags?.edges?.map((item) => {
+    tags.push(item?.node?.slug ?? "");
   });
 
   var allFilters = [

@@ -26,8 +26,8 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
 
   const tagsContainerRef = useRef(null);
 
-  const metaData = meta.pages?.edges[0]?.node;
-  const allPosts = posts.edges[0]?.node?.posts?.edges || [];
+  const metaData = meta?.pages?.edges?.[0]?.node;
+  const allPosts = posts?.edges?.[0]?.node?.posts?.edges ?? [];
 
   // Filter posts by search
   const filteredPosts = useMemo(() => {
@@ -89,7 +89,7 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
                 >
                   all
                 </Link>
-                {categories?.categories.edges.map((item) => (
+                {categories?.categories?.edges?.map((item) => (
                   <Link
                     href={`/posts/category/${item.node.slug}`}
                     key={item.node.id}
@@ -141,7 +141,7 @@ export default function PostCategoryPage({ posts, meta, categories, tags }) {
                   onClick={() => sideScroll("left", 5, 220, 10)}
                 />
                 <ul className="tags-menu" id="tags-id" ref={tagsContainerRef}>
-                  {tags.edges.map(({ node }, index) => (
+                  {(tags?.edges ?? []).map(({ node }, index) => (
                     <li
                       key={index + "post-tag"}
                       className={`${slugify(node.name)} ${

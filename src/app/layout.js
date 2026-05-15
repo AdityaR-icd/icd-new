@@ -11,7 +11,7 @@ import { Inter, Rajdhani, Rock_Salt } from "next/font/google";
 import Nav from "../components/header/headerWrapper";
 import Navbar from "../components/footer/footer";
 import Loader from "../components/loader/loader";
-import { getFooter } from "../lib/api";
+import { getFooter, getFilters } from "../lib/api";
 import { buildOrganizationSchema } from "../lib/seo-utils";
 
 const inter = Inter({
@@ -66,7 +66,7 @@ export const viewport = {
 };
 
 export default async function RootLayout({ children }) {
-  const footer = await getFooter();
+  const [footer, filters] = await Promise.all([getFooter(), getFilters()]);
   const orgSchema = buildOrganizationSchema({
     email: footer?.email,
     call: footer?.call,
@@ -89,7 +89,7 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
         <Loader />
-        <Nav />
+        <Nav filters={filters} />
         {children}
         <Navbar footer={footer} />
       </body>
