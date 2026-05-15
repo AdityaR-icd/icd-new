@@ -1,10 +1,7 @@
 "use client";
-import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { comment } from "../../lib/api";
 import parse from "html-react-parser";
-import { data } from "jquery";
 
 export default function Contact({ postId, comment_data }) {
   const id = postId;
@@ -19,13 +16,8 @@ export default function Contact({ postId, comment_data }) {
 
   var all_comments = comment_s.nodes;
 
-  const handleSubmit = async (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    const data = await comment(message, post_id, name, email);
-
-    if (data) {
-      window.location.reload(false);
-    }
   };
 
   return (

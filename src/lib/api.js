@@ -1716,32 +1716,31 @@ export async function getTeam() {
   return data?.teams;
 }
 
-export async function careerContact(
-  enquiryAbout,
-  firstName,
-  lastName,
-  qualification,
-  experience,
-  number,
-  city,
-  email,
-  Website,
-) {
-  const data = await fetchAPI(
-    `
-    mutation CREATE_CONTACT {
-      careerContactForm(
-        input: {enquiryAbout: "${enquiryAbout}", firstName: "${firstName}", lastName: "${lastName}", educationalQualification: "${qualification}", experience: "${experience}", number: "${number}", city: "${city}", email: "${email}", website: "${Website}"}
-      ) {
-        data
-        success
-      }
-    }
-    `,
-  );
-
-  return data;
-}
+// export async function careerContact(
+//   enquiryAbout,
+//   firstName,
+//   lastName,
+//   qualification,
+//   experience,
+//   number,
+//   city,
+//   email,
+//   Website,
+// ) {
+//   const data = await fetchAPI(
+//     `
+//     mutation CREATE_CONTACT {
+//       careerContactForm(
+//         input: {enquiryAbout: "${enquiryAbout}", firstName: "${firstName}", lastName: "${lastName}", educationalQualification: "${qualification}", experience: "${experience}", number: "${number}", city: "${city}", email: "${email}", website: "${Website}"}
+//       ) {
+//         data
+//         success
+//       }
+//     }
+//     `,
+//   );
+//   return data;
+// }
 
 export async function getYellowEnvelope() {
   const data = await fetchAPI(
